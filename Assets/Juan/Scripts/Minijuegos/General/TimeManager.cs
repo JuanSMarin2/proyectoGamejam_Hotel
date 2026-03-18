@@ -43,7 +43,12 @@ public class TimeManager : MonoBehaviour
             timer = 0f;
             hasFinished = true;
             UpdateBar();
-            ResultManager.instance.WinMinigame();
+
+            if(!MinigameManager.instance.LosesWithTime)
+                ResultManager.instance.WinMinigame();
+            else
+                ResultManager.instance.LoseMinigame();
+
             return;
         }
 

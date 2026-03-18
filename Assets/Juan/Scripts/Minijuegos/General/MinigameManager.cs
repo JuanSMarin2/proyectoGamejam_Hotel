@@ -6,8 +6,11 @@ public class MinigameManager : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] private float speed = 1f;
+    [SerializeField] private bool losesWithTime = false;
 
-    // Encapsulación
+
+    public bool LosesWithTime => losesWithTime;
+
     public float Speed
     {
         get => speed;
