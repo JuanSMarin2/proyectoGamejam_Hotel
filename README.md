@@ -9,193 +9,194 @@ Sofia Caraballo
 Juliana Monroy
 Jacobo Rodríguez
 
-🎮 Sistema de Minijuegos – Diseño General
-🧩 Descripción General
+# 🎮 Sistema de Minijuegos – Diseño General
+
+## 🧩 Descripción General
 
 El juego consiste en una serie de minijuegos cortos conectados entre sí mediante una progresión lineal (modo historia) o repetitiva con dificultad creciente (modo infinito).
 
 Todos los minijuegos comparten las siguientes características:
 
-⏱ Tienen un límite de tiempo
+- ⏱ Tienen un **límite de tiempo**
+- ✅ Se pueden **ganar o perder**
+- 💸 Perder implica una **penalización económica**, variable según el minijuego
+- 🎬 Incluyen una **animación corta de transición** antes de pasar al siguiente
+- 🖱 Interacciones simples:
+  - Click
+  - Click sostenido
+  - Movimiento básico
 
-✅ Se pueden ganar o perder
+---
 
-💸 Perder implica una penalización económica, variable según el minijuego
+## 🎮 Modos de Juego
 
-🎬 Incluyen una animación corta de transición antes de pasar al siguiente
+### 🧭 Modo Historia
+- Secuencia lineal de minijuegos
+- Cada minijuego se juega **una única vez**
+- Progresión narrativa definida
 
-🖱 Interacciones simples:
+### ♾️ Modo Infinito
+- Repetición de los minijuegos en el mismo orden
+- Incremento progresivo de la **velocidad/dificultad**
 
-Click
+**Justificación narrativa:**
 
-Click sostenido
+> 🚢 El jugador está en un **crucero (hotel móvil)** que viaja entre costas.  
+> Si falla, el crucero puede continuar sin él → pérdida.
 
-Movimiento básico
+---
 
-🎮 Modos de Juego
-🧭 Modo Historia
+## 🧳 Sistema de Progresión
 
-Secuencia lineal de minijuegos
+- Al finalizar la partida:
+  - 🛍 Se accede a una **tienda**
+  - Se puede gastar el dinero restante del viaje
+  - Permite **reintentar con un personaje personalizado**
 
-Cada minijuego se juega una única vez
+---
 
-Progresión narrativa definida
+## 🎯 Minijuegos
 
-♾️ Modo Infinito
+### 🚗 1. Carretera Infinita
+- Conducción en carretera infinita
+- Objetivo: sobrevivir hasta que termine el timer
 
-Repetición de los minijuegos en el mismo orden
+**Transición:**
+- Llegada a aeropuerto (fade in)
+- Animación del personaje saludando
 
-Incremento progresivo de la velocidad/dificultad
+---
 
-Basado en la justificación narrativa:
+### ✈️ 2. Aeropuerto (Salida)
+- Personaje corre en un entorno infinito
 
-🚢 El jugador está en un crucero (hotel móvil) que viaja entre costas.
-Si falla, el crucero puede continuar sin él → pérdida.
+**Mecánica:**
+- Saltar obstáculos (maletas)
+- Input: click o tecla
 
-🧳 Sistema de Progresión
+**Objetivo:**
+- No perder el vuelo
 
-Al finalizar la partida:
+**Final:**
+- Animación de despegue del avión
 
-🛍 Se accede a una tienda
+---
 
-Se puede gastar el dinero restante del viaje
+### 🛄 3. Equipaje (Llegada)
+- Seleccionar tu maleta entre varias en movimiento
+- Algunas maletas son similares
 
-Permite reintentar con un personaje personalizado
+**Mecánica:**
+- Observación + memoria visual
 
-🎯 Minijuegos
-🚗 1. Carretera Infinita
+---
 
-Conducción en carretera infinita
+### 🏨 4. Identificar al Host del Hotel
+- El jugador memoriza un logo/imagen del host
+- Luego debe identificarlo entre varias personas
 
-Objetivo: sobrevivir hasta que termine el timer
+**Variantes:**
+- 👁 “Encuentra a Wally” (selección directa)
+- 🖐 Drag & Drop (recomendado):
+  - Mover personajes/objetos
+  - El host está oculto detrás
 
-Transición:
+---
 
-Llegada a aeropuerto (fade in)
+### 🛎 5. Check-in del Hotel
+- El recepcionista se distrae con el celular
 
-Animación del personaje saludando
+**Mecánica:**
+- Presionar la campana cuando se distrae
 
-✈️ 2. Aeropuerto (Salida)
+**Tipo:**
+- Timing-based
 
-Personaje corre en un entorno infinito
+---
 
-Mecánica:
+## 🌴 Minijuegos Opcionales / Aleatorios (Playa)
 
-Saltar obstáculos (maletas)
+### 🛍 6. Compras en la Playa
+- Vendedores ofrecen productos:
+  - Sombrillas
+  - Cocos
+  - Gafas
+  - Souvenirs
 
-Input: click o tecla
+**Mecánica:**
+- Comparación de precios
+- Elegir la opción más barata
 
-Objetivo: no perder el vuelo
+⚠️ **Riesgos:**
+- Sed
+- Insolación
+- Distracción
+- Masajes → Game Over
 
-Final:
+---
 
-Animación de despegue del avión
+### ☀️ 7. Evitar el Sol
+- El jugador debe moverse entre zonas de sombra
 
-🛄 3. Equipaje (Llegada)
+**Restricción:**
+- No permanecer más de **X segundos al sol**
 
-Seleccionar tu maleta entre varias en movimiento
+**Mecánica:**
+- Movimiento simple
 
-Algunas maletas son similares
+---
 
-Mecánica:
+## 🔁 Flujo General del Juego
 
-Observación + memoria visual
+1. Inicio  
+2. Secuencia de minijuegos  
+3. Transiciones animadas entre cada uno  
+4. Resultado final:
+   - Dinero restante
+   - Acceso a tienda  
+5. Reintento (loop)
 
-🏨 4. Identificar al Host del Hotel
+---
 
-El jugador memoriza un logo/imagen del host
+## 🧠 Notas de Diseño
 
-Luego debe identificarlo entre varias personas
+- Se prioriza:
+  - Simplicidad mecánica
+  - Ritmo rápido
+  - Claridad visual
 
-Variantes:
+- Referencia:
+  - Gameplay tipo *WarioWare*
 
-👁 “Encuentra a Wally” (selección directa)
+---
 
-🖐 Drag & Drop (recomendado):
+## 🔍 Feedback y Validación
 
-Mover personajes/objetos
+### 📌 Estructura aplicada
+- Agrupación por sistemas (modos, mecánicas, minijuegos)
+- Separación entre intención y ejecución
+- Jerarquía de información clara
 
-El host está oculto detrás
+### ⚠️ Supuestos
+- Todos los minijuegos comparten sistema económico
+- El orden de minijuegos es fijo
+- Las animaciones son transiciones, no gameplay activo
 
-🛎 5. Check-in del Hotel
+### 🚨 Riesgos de diseño
+- Monotonía en modo infinito si solo aumenta velocidad
+- Desbalance económico (castigos excesivos)
+- Minijuegos de memoria percibidos como injustos
 
-El recepcionista se distrae con el celular
+### 💡 Recomendaciones
+- Añadir variaciones dentro de cada minijuego
+- Mejorar feedback visual/sonoro
+- Ajustar curva de dificultad progresiva
 
-Mecánica:
+### 🧪 Validación
+- Prototipo rápido en Unity (graybox)
+- Playtesting con 3–5 usuarios
 
-Presionar la campana cuando se distrae
-
-Timing-based
-
-🌴 Minijuegos Opcionales / Aleatorios (Playa)
-🛍 6. Compras en la Playa
-
-Vendedores ofrecen productos:
-
-Sombrillas
-
-Cocos
-
-Gafas
-
-Souvenirs
-
-Mecánica:
-
-Comparación de precios
-
-Elegir la opción más barata
-
-⚠️ Riesgos:
-
-Sed
-
-Insolación
-
-Distracción
-
-Masajes → Game Over
-
-☀️ 7. Evitar el Sol
-
-El jugador debe moverse entre zonas de sombra
-
-Restricción:
-
-No permanecer más de X segundos al sol
-
-Mecánica:
-
-Movimiento simple
-
-🔁 Flujo General del Juego
-
-Inicio
-
-Secuencia de minijuegos
-
-Transiciones animadas entre cada uno
-
-Resultado final:
-
-Dinero restante
-
-Acceso a tienda
-
-Reintento (loop)
-
-🧠 Notas de Diseño
-
-Se prioriza:
-
-Simplicidad mecánica
-
-Ritmo rápido
-
-Claridad visual
-
-Ideal para:
-
-Experiencias casuales
-
-Gameplay tipo WarioWare
+**Métricas clave:**
+- % de éxito por minijuego
+- Tiempo de reacción promedio
+- Puntos de abandono del jugador
