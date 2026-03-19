@@ -30,7 +30,7 @@ public class MinigameResultsUI : MonoBehaviour
 
     
         moneyText.text = startMoney.ToString();
-        changeText.text = change == 0 ? "+0" : change.ToString();
+        changeText.text = change == 0 ? "-0" : change.ToString();
 
         changeText.color = change < 0 ? Color.red : Color.green;
 
