@@ -22,6 +22,8 @@ public class ResultManager : MonoBehaviour
 
     private bool hasFinished = false;
 
+
+
     private void Awake()
     {
         if (instance == null) instance = this;

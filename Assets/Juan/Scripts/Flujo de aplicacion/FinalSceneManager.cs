@@ -1,0 +1,82 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
+
+public class FinalSceneManager : MonoBehaviour
+{
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI currentMoneyText;
+    [SerializeField] private TextMeshProUGUI globalMoneyText;
+    [SerializeField] private TextMeshProUGUI resultText;
+
+    [Header("Buttons")]
+    [SerializeField] private GameObject homeButton;
+    [SerializeField] private GameObject shopButton;
+
+    [Header("Timing")]
+    [SerializeField] private float startDelay = 0.5f;
+    [SerializeField] private float transferDuration = 2f;
+
+    private void Start()
+    {
+        StartCoroutine(TransferMoney());
+    }
+
+    private IEnumerator TransferMoney()
+    {
+        int roundMoney = RoundData.instance.Money;
+        int globalMoney = GameData.instance.Money;
+
+        int startRoundMoney = roundMoney;
+        int startGlobalMoney = globalMoney;
+
+
+        currentMoneyText.text = startRoundMoney.ToString();
+        globalMoneyText.text = startGlobalMoney.ToString();
+
+        homeButton.SetActive(false);
+        shopButton.SetActive(false);
+        resultText.gameObject.SetActive(false);
+
+   
+        yield return new WaitForSeconds(startDelay);
+
+        float elapsed = 0f;
+
+        while (elapsed < transferDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / transferDuration;
+
+            int current = Mathf.RoundToInt(Mathf.Lerp(startRoundMoney, 0, t));
+            int global = Mathf.RoundToInt(Mathf.Lerp(startGlobalMoney, startGlobalMoney + startRoundMoney, t));
+
+            currentMoneyText.text = current.ToString();
+            globalMoneyText.text = global.ToString();
+
+            yield return null;
+        }
+
+ 
+        currentMoneyText.text = "0";
+        globalMoneyText.text = (startGlobalMoney + startRoundMoney).ToString();
+
+ 
+        GameData.instance.Money += startRoundMoney;
+
+    
+        resultText.gameObject.SetActive(true);
+        resultText.text = "Conservaste " + startRoundMoney + "$";
+
+   
+        homeButton.SetActive(true);
+        shopButton.SetActive(true);
+    }
+
+ 
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+}
