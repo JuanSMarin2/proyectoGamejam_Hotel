@@ -1,0 +1,1183 @@
+fileFormatVersion: 2
+guid: 7acdf12caf5c64a4e9af42d59567b36a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4458941372188015893
+    second: Lineas_amarillas_horizontal_0
+  - first:
+      213: -5180031839995556107
+    second: Lineas_amarillas_horizontal_1
+  - first:
+      213: -1246840144306441211
+    second: Lineas_amarillas_horizontal_2
+  - first:
+      213: -9072871429490664048
+    second: Lineas_amarillas_horizontal_3
+  - first:
+      213: -1440226078650590978
+    second: Lineas_amarillas_horizontal_4
+  - first:
+      213: -7220788624873066636
+    second: Lineas_amarillas_horizontal_5
+  - first:
+      213: 7513105919534481262
+    second: Lineas_amarillas_horizontal_6
+  - first:
+      213: 3042665699046963147
+    second: Lineas_amarillas_horizontal_7
+  - first:
+      213: 207093748268130984
+    second: Lineas_amarillas_horizontal_8
+  - first:
+      213: -3812647072144474152
+    second: Lineas_amarillas_horizontal_9
+  - first:
+      213: -1096636243058796124
+    second: Lineas_amarillas_horizontal_10
+  - first:
+      213: -3358853105453256584
+    second: Lineas_amarillas_horizontal_11
+  - first:
+      213: 7517325829024554499
+    second: Lineas_amarillas_horizontal_12
+  - first:
+      213: 509240412588314421
+    second: Lineas_amarillas_horizontal_13
+  - first:
+      213: -7326940341824000565
+    second: Lineas_amarillas_horizontal_14
+  - first:
+      213: -456628992908882903
+    second: Lineas_amarillas_horizontal_15
+  - first:
+      213: -4710031989362042796
+    second: Lineas_amarillas_horizontal_16
+  - first:
+      213: 1857599640568943710
+    second: Lineas_amarillas_horizontal_17
+  - first:
+      213: 6939252003967981093
+    second: Lineas_amarillas_horizontal_18
+  - first:
+      213: 1840604417130234670
+    second: Lineas_amarillas_horizontal_19
+  - first:
+      213: 5762465103208650228
+    second: Lineas_amarillas_horizontal_20
+  - first:
+      213: -2237847950754023578
+    second: Lineas_amarillas_horizontal_21
+  - first:
+      213: -2281240698748811574
+    second: Lineas_amarillas_horizontal_22
+  - first:
+      213: 3934824335140665564
+    second: Lineas_amarillas_horizontal_23
+  - first:
+      213: 2258315740868420415
+    second: Lineas_amarillas_horizontal_24
+  - first:
+      213: 7042574751612768376
+    second: Lineas_amarillas_horizontal_25
+  - first:
+      213: 4230383904897006485
+    second: Lineas_amarillas_horizontal_26
+  - first:
+      213: 3274041537410220774
+    second: Lineas_amarillas_horizontal_27
+  - first:
+      213: 6237081348819782414
+    second: Lineas_amarillas_horizontal_28
+  - first:
+      213: -4888660115112342096
+    second: Lineas_amarillas_horizontal_29
+  - first:
+      213: -956890920947136421
+    second: Lineas_amarillas_horizontal_30
+  - first:
+      213: 3061725807101996797
+    second: Lineas_amarillas_horizontal_31
+  - first:
+      213: -8164970073006662914
+    second: Lineas_amarillas_horizontal_32
+  - first:
+      213: 1608521314498212429
+    second: Lineas_amarillas_horizontal_33
+  - first:
+      213: -7808914577317048914
+    second: Lineas_amarillas_horizontal_34
+  - first:
+      213: -1725208134366489883
+    second: Lineas_amarillas_horizontal_35
+  - first:
+      213: 6045392062791117677
+    second: Lineas_amarillas_horizontal_36
+  - first:
+      213: 4321883485295165909
+    second: Lineas_amarillas_horizontal_37
+  - first:
+      213: 8666262678549706720
+    second: Lineas_amarillas_horizontal_38
+  - first:
+      213: 6520660517627582067
+    second: Lineas_amarillas_horizontal_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 660
+        width: 6
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d3f83bd8751ed30800000000000000
+      internalID: 4458941372188015893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fe0adb8c74dc18b0800000000000000
+      internalID: -5180031839995556107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504faeaae7552bee0800000000000000
+      internalID: -1246840144306441211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_3
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d1b68418fa61280800000000000000
+      internalID: -9072871429490664048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_4
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef817c9130a430ce0800000000000000
+      internalID: -1440226078650590978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_5
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47f6248c00b9acb90800000000000000
+      internalID: -7220788624873066636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_6
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6fbcb5170ae34860800000000000000
+      internalID: 7513105919534481262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_7
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc7b5f12558b93a20800000000000000
+      internalID: 3042665699046963147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_8
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 660
+        width: 53
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a2e9b4baaebfd200800000000000000
+      internalID: 207093748268130984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_9
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df35ea20b1c61bc0800000000000000
+      internalID: -3812647072144474152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_10
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a959aca527f7c0f0800000000000000
+      internalID: -1096636243058796124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_11
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 870bdb485e4f261d0800000000000000
+      internalID: -3358853105453256584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_12
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30e90e35308e25860800000000000000
+      internalID: 7517325829024554499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_13
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f8999057f211700800000000000000
+      internalID: 509240412588314421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_14
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcde913349a715a90800000000000000
+      internalID: -7326940341824000565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_15
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 660
+        width: 53
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92c858ba95ab9a9f0800000000000000
+      internalID: -456628992908882903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_16
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45859594cda92aeb0800000000000000
+      internalID: -4710031989362042796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_17
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e545107f70587c910800000000000000
+      internalID: 1857599640568943710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_18
+      rect:
+        serializedVersion: 2
+        x: 1739
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 526dd6f8eec2d4060800000000000000
+      internalID: 6939252003967981093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_19
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 660
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e23001727f32b8910800000000000000
+      internalID: 1840604417130234670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 403
+        width: 6
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f516530b7368ff40800000000000000
+      internalID: 5762465103208650228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_21
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66778f9352191f0e0800000000000000
+      internalID: -2237847950754023578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac6c9e7cba76750e0800000000000000
+      internalID: -2281240698748811574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_23
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd83f9d92ed4b9630800000000000000
+      internalID: 3934824335140665564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_24
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f33a2258336275f10800000000000000
+      internalID: 2258315740868420415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_25
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87093066c604cb160800000000000000
+      internalID: 7042574751612768376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_26
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59b7aea7fb755ba30800000000000000
+      internalID: 4230383904897006485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_27
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e2c5318e6bbf6d20800000000000000
+      internalID: 3274041537410220774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_28
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 403
+        width: 53
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0b0e97f0709e8650800000000000000
+      internalID: 6237081348819782414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_29
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdcb1bc68df72cb0800000000000000
+      internalID: -4888660115112342096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_30
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b584628f6c078b2f0800000000000000
+      internalID: -956890920947136421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_31
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfee5fb566f6d7a20800000000000000
+      internalID: 3061725807101996797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_32
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efa1ebc7af230be80800000000000000
+      internalID: -8164970073006662914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_33
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d427f4cfc9d925610800000000000000
+      internalID: 1608521314498212429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_34
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eadc5a9b09921a390800000000000000
+      internalID: -7808914577317048914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_35
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 403
+        width: 53
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e29873a754de08e0800000000000000
+      internalID: -1725208134366489883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_36
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b61ae1d0c85e350800000000000000
+      internalID: 6045392062791117677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_37
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d145ada12a6afb30800000000000000
+      internalID: 4321883485295165909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_38
+      rect:
+        serializedVersion: 2
+        x: 1739
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e73e258dffb44870800000000000000
+      internalID: 8666262678549706720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas_amarillas_horizontal_39
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 403
+        width: 54
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3765b1e513a0e7a50800000000000000
+      internalID: 6520660517627582067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lineas_amarillas_horizontal_0: 4458941372188015893
+      Lineas_amarillas_horizontal_1: -5180031839995556107
+      Lineas_amarillas_horizontal_10: -1096636243058796124
+      Lineas_amarillas_horizontal_11: -3358853105453256584
+      Lineas_amarillas_horizontal_12: 7517325829024554499
+      Lineas_amarillas_horizontal_13: 509240412588314421
+      Lineas_amarillas_horizontal_14: -7326940341824000565
+      Lineas_amarillas_horizontal_15: -456628992908882903
+      Lineas_amarillas_horizontal_16: -4710031989362042796
+      Lineas_amarillas_horizontal_17: 1857599640568943710
+      Lineas_amarillas_horizontal_18: 6939252003967981093
+      Lineas_amarillas_horizontal_19: 1840604417130234670
+      Lineas_amarillas_horizontal_2: -1246840144306441211
+      Lineas_amarillas_horizontal_20: 5762465103208650228
+      Lineas_amarillas_horizontal_21: -2237847950754023578
+      Lineas_amarillas_horizontal_22: -2281240698748811574
+      Lineas_amarillas_horizontal_23: 3934824335140665564
+      Lineas_amarillas_horizontal_24: 2258315740868420415
+      Lineas_amarillas_horizontal_25: 7042574751612768376
+      Lineas_amarillas_horizontal_26: 4230383904897006485
+      Lineas_amarillas_horizontal_27: 3274041537410220774
+      Lineas_amarillas_horizontal_28: 6237081348819782414
+      Lineas_amarillas_horizontal_29: -4888660115112342096
+      Lineas_amarillas_horizontal_3: -9072871429490664048
+      Lineas_amarillas_horizontal_30: -956890920947136421
+      Lineas_amarillas_horizontal_31: 3061725807101996797
+      Lineas_amarillas_horizontal_32: -8164970073006662914
+      Lineas_amarillas_horizontal_33: 1608521314498212429
+      Lineas_amarillas_horizontal_34: -7808914577317048914
+      Lineas_amarillas_horizontal_35: -1725208134366489883
+      Lineas_amarillas_horizontal_36: 6045392062791117677
+      Lineas_amarillas_horizontal_37: 4321883485295165909
+      Lineas_amarillas_horizontal_38: 8666262678549706720
+      Lineas_amarillas_horizontal_39: 6520660517627582067
+      Lineas_amarillas_horizontal_4: -1440226078650590978
+      Lineas_amarillas_horizontal_5: -7220788624873066636
+      Lineas_amarillas_horizontal_6: 7513105919534481262
+      Lineas_amarillas_horizontal_7: 3042665699046963147
+      Lineas_amarillas_horizontal_8: 207093748268130984
+      Lineas_amarillas_horizontal_9: -3812647072144474152
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
