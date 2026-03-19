@@ -1,16 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 using System.Collections;
 
 public class EndAnimationManager : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private Animator endingAnimator;
-
-    [Header("Triggers")]
-    [SerializeField] private string goodTrigger = "Good";
-    [SerializeField] private string neutralTrigger = "Neutral";
-    [SerializeField] private string badTrigger = "Bad";
+    [Header("Directors")]
+    [SerializeField] private GameObject goodDirector;
+    [SerializeField] private GameObject neutralDirector;
+    [SerializeField] private GameObject badDirector;
 
     [Header("Scene")]
     [SerializeField] private string finalSceneName = "FinalScene";
@@ -25,26 +23,42 @@ public class EndAnimationManager : MonoBehaviour
         int money = RoundData.instance.Money;
         int startMoney = RoundData.instance.StartMoney;
 
-
+        GameObject activeDirectorObject;
         if (money >= startMoney)
-        {
-            endingAnimator.SetTrigger(goodTrigger);
-        }
+            activeDirectorObject = goodDirector;
         else if (money > 0)
+            activeDirectorObject = neutralDirector;
+        else
+            activeDirectorObject = badDirector;
+
+        if (goodDirector != null) goodDirector.SetActive(false);
+        if (neutralDirector != null) neutralDirector.SetActive(false);
+        if (badDirector != null) badDirector.SetActive(false);
+
+        PlayableDirector director = null;
+        if (activeDirectorObject != null)
         {
-            endingAnimator.SetTrigger(neutralTrigger);
+            activeDirectorObject.SetActive(true);
+            director = activeDirectorObject.GetComponent<PlayableDirector>();
+            if (director == null)
+                director = activeDirectorObject.GetComponentInChildren<PlayableDirector>(true);
+        }
+
+        if (director != null)
+        {
+            director.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
+            director.Play();
+
+            yield return null;
+
+            while (director.state == PlayState.Playing)
+                yield return null;
         }
         else
         {
-            endingAnimator.SetTrigger(badTrigger);
+            Debug.LogWarning("EndAnimationManager: Director no asignado/no encontrado; cargando escena sin esperar.");
+            yield return null;
         }
-
-   
-        yield return null;
-
-      
-        float animLength = endingAnimator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSecondsRealtime(animLength);
 
         SceneManager.LoadScene(finalSceneName);
     }

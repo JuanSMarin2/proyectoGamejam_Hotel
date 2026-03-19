@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 using System.Collections;
 
 public class ResultManager : MonoBehaviour
@@ -8,14 +9,13 @@ public class ResultManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject resultPanel;
-    [SerializeField] private Animator resultAnimator;
-
-    [Header("Animation")]
-    [SerializeField] private string winTrigger = "Win";
-    [SerializeField] private string loseTrigger = "Lose";
+    
+    [Header("Directors")]
+    [SerializeField] private GameObject winDirector;
+    [SerializeField] private GameObject loseDirector;
 
     [Header("Timing")]
-    [SerializeField] private float loseDelay = 1.5f;
+    [SerializeField] private float loseDelay = 0f;
 
     [Header("Scene")]
     [SerializeField] private string nextSceneName = "MinigameResults";
@@ -75,18 +75,36 @@ public class ResultManager : MonoBehaviour
     
         resultPanel.SetActive(true);
 
-   
-        if (won)
-            resultAnimator.SetTrigger(winTrigger);
+        GameObject activeDirectorObject = won ? winDirector : loseDirector;
+        GameObject inactiveDirectorObject = won ? loseDirector : winDirector;
+
+        if (inactiveDirectorObject != null)
+            inactiveDirectorObject.SetActive(false);
+
+        PlayableDirector director = null;
+        if (activeDirectorObject != null)
+        {
+            activeDirectorObject.SetActive(true);
+            director = activeDirectorObject.GetComponent<PlayableDirector>();
+            if (director == null)
+                director = activeDirectorObject.GetComponentInChildren<PlayableDirector>(true);
+        }
+
+        if (director != null)
+        {
+            director.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
+            director.Play();
+
+            yield return null;
+
+            while (director.state == PlayState.Playing)
+                yield return null;
+        }
         else
-            resultAnimator.SetTrigger(loseTrigger);
-
-     
-        yield return null;
-
- 
-        float animLength = resultAnimator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSecondsRealtime(animLength);
+        {
+            Debug.LogWarning("ResultManager: Director no asignado/no encontrado; continuando sin esperar secuencia.");
+            yield return null;
+        }
 
    
         RoundData.instance.MinigameResult(won);
