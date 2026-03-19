@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 905783212554586037}
   - component: {fileID: 5942119945755860387}
   - component: {fileID: 2373482110076460899}
-  - component: {fileID: -5147593865398888952}
   m_Layer: 0
   m_Name: MaletaPrefab
   m_TagString: Untagged
@@ -75,10 +74,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 395388525
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5168312036764958947, guid: 6c7d6d665e981a84391095fedc1ae35f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c7d6d665e981a84391095fedc1ae35f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,28 +103,3 @@ MonoBehaviour:
   type: 0
   winner: 0
   waypointReachDistance: 0.05
---- !u!114 &-5147593865398888952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613677256006925530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb658d7b3ec9e14c8c3047d9d267e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetRenderer: {fileID: 5942119945755860387}
-  largeSprites:
-  - {fileID: -5168312036764958947, guid: 6c7d6d665e981a84391095fedc1ae35f, type: 3}
-  - {fileID: 21300000, guid: 31e9d03db785f6348b264f844a72c499, type: 3}
-  - {fileID: 21300000, guid: 31e9d03db785f6348b264f844a72c499, type: 3}
-  mediumSprites:
-  - {fileID: 9139330975122868335, guid: 5212b1d6b814d374c9c51af0f77d1d87, type: 3}
-  - {fileID: 21300000, guid: 9b770f96408ba3e4dacb340faebf2e65, type: 3}
-  - {fileID: 21300000, guid: 9b770f96408ba3e4dacb340faebf2e65, type: 3}
-  smallSprites:
-  - {fileID: -1891107646604127584, guid: 02008c1f51ca398428c565b54337e4ba, type: 3}
-  - {fileID: 21300000, guid: fa07ba52ec74fe944a9fb50f15ebb4f3, type: 3}
-  - {fileID: 21300000, guid: fa07ba52ec74fe944a9fb50f15ebb4f3, type: 3}

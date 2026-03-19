@@ -359,6 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346053602}
   - component: {fileID: 346053600}
+  - component: {fileID: 346053603}
   m_Layer: 0
   m_Name: MaletaManager
   m_TagString: Untagged
@@ -379,14 +380,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cintaMovement: {fileID: 438655992}
+  spriteSelector: {fileID: 346053603}
   spawnPoint: {fileID: 1990231733}
   despawnPoint: {fileID: 1325968054}
   maletaPool:
   - {fileID: 2373482110076460899, guid: 01dba4db97eac6d46ad1d5725a2ebb9b, type: 3}
-  - {fileID: 2373482110076460899, guid: e806d37441b7447449b09ace579a1b8b, type: 3}
+  - {fileID: 2373482110076460899, guid: 01dba4db97eac6d46ad1d5725a2ebb9b, type: 3}
   - {fileID: 2373482110076460899, guid: f3e5d8aa29ea23f4d86a819c1b62a6d9, type: 3}
-  spawnInterval: 1.2
-  maxAliveMaletas: 8
+  spawnInterval: 1.5
+  maxAliveMaletas: 10
   prewarmPerPrefab: 3
   despawnDistance: 0.25
   winners: 1
@@ -407,6 +409,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &346053603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346053599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb658d7b3ec9e14c8c3047d9d267e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeSprites:
+  - {fileID: 21300000, guid: 6c7d6d665e981a84391095fedc1ae35f, type: 3}
+  - {fileID: 21300000, guid: 31e9d03db785f6348b264f844a72c499, type: 3}
+  - {fileID: 21300000, guid: 31e9d03db785f6348b264f844a72c499, type: 3}
+  mediumSprites:
+  - {fileID: 9139330975122868335, guid: 5212b1d6b814d374c9c51af0f77d1d87, type: 3}
+  - {fileID: 21300000, guid: 9b770f96408ba3e4dacb340faebf2e65, type: 3}
+  - {fileID: 21300000, guid: 9b770f96408ba3e4dacb340faebf2e65, type: 3}
+  smallSprites:
+  - {fileID: -1891107646604127584, guid: 02008c1f51ca398428c565b54337e4ba, type: 3}
+  - {fileID: 21300000, guid: fa07ba52ec74fe944a9fb50f15ebb4f3, type: 3}
+  - {fileID: 21300000, guid: 49ca2ede03f22cf40897dd87fcb660d5, type: 3}
 --- !u!1 &438655991
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,9 +539,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1607420663
+  m_SortingLayer: 1
+  m_SortingOrder: -1000
   m_Sprite: {fileID: -4495407365530625614, guid: 18a1ab015047fc943a9e72643c570e5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1886,7 +1912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543687110f703174690eb0d7ea86c9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 10
+  startTime: 20
   imageTimeBar: {fileID: 332145660}
 --- !u!4 &1827457821
 Transform:

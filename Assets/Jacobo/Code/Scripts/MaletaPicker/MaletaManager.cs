@@ -20,6 +20,7 @@ public class MaletaManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private CintaMovement cintaMovement;
+    [SerializeField] private SpriteSelector spriteSelector;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform despawnPoint;
 
@@ -41,6 +42,7 @@ public class MaletaManager : MonoBehaviour
     private readonly Dictionary<int, Queue<Maleta>> pooledByPoolId = new Dictionary<int, Queue<Maleta>>();
     private readonly List<WinnerTarget> winnerTargets = new List<WinnerTarget>();
     private readonly HashSet<int> collectedWinners = new HashSet<int>();
+    private readonly Dictionary<int, Sprite> winnerSpriteByPoolId = new Dictionary<int, Sprite>();
 
     private float spawnTimer;
     private int poolCursor;
@@ -73,6 +75,10 @@ public class MaletaManager : MonoBehaviour
     {
         winnerTargets.Clear();
         collectedWinners.Clear();
+        winnerSpriteByPoolId.Clear();
+
+        if (spriteSelector != null)
+            spriteSelector.ResetWinnerSpritePool();
 
         if (maletaPool.Count == 0) return;
 
@@ -88,14 +94,16 @@ public class MaletaManager : MonoBehaviour
             int poolIndex = availableIndices[randomIndex];
             availableIndices.RemoveAt(randomIndex);
 
-            Sprite icon = null;
-            if (maletaPool[poolIndex] != null)
+            Sprite winnerSprite = null;
+            Maleta prefab = maletaPool[poolIndex];
+
+            if (spriteSelector != null && prefab != null)
             {
-                SpriteRenderer renderer = maletaPool[poolIndex].GetComponentInChildren<SpriteRenderer>();
-                icon = renderer != null ? renderer.sprite : null;
+                winnerSprite = spriteSelector.TakeWinnerUniqueSprite(prefab.Type);
             }
 
-            winnerTargets.Add(new WinnerTarget(poolIndex, icon));
+            winnerSpriteByPoolId[poolIndex] = winnerSprite;
+            winnerTargets.Add(new WinnerTarget(poolIndex, winnerSprite));
         }
     }
 
@@ -122,14 +130,9 @@ public class MaletaManager : MonoBehaviour
         instance.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
         instance.gameObject.SetActive(true);
 
-        Maleta.MaletaType randomType = (Maleta.MaletaType)UnityEngine.Random.Range(0, 3);
-        instance.SetType(randomType);
-
-        SpriteSelector spriteSelector = instance.GetComponentInChildren<SpriteSelector>();
-        if (spriteSelector != null)
-            spriteSelector.AssignRandomSprite(randomType);
-
         bool isWinner = IsWinnerPoolId(spawnPoolIndex);
+        AssignSpawnSprite(instance, spawnPoolIndex, isWinner);
+
         instance.Initialize(
             cintaMovement.Waypoints,
             cintaMovement.MovementSpeed,
@@ -278,5 +281,30 @@ public class MaletaManager : MonoBehaviour
         }
 
         queue.Enqueue(maleta);
+    }
+
+    private void AssignSpawnSprite(Maleta instance, int poolId, bool isWinner)
+    {
+        if (instance == null || spriteSelector == null) return;
+
+        SpriteRenderer renderer = instance.GetComponentInChildren<SpriteRenderer>();
+        if (renderer == null) return;
+
+        Sprite selected = null;
+
+        if (isWinner)
+        {
+            winnerSpriteByPoolId.TryGetValue(poolId, out selected);
+        }
+        else
+        {
+            selected = spriteSelector.GetRandomReusableSprite(instance.Type);
+        }
+
+        if (selected == null)
+            selected = spriteSelector.GetAnyPreviewSprite();
+
+        if (selected != null)
+            renderer.sprite = selected;
     }
 }
