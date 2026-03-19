@@ -10,6 +10,13 @@ public class TrafficCar : MonoBehaviour
     [SerializeField] private int baseSpeedMin = 3;
     [SerializeField] private int baseSpeedMax = 6;
 
+    [Header("Visual - Sprites")]
+    [Tooltip("Renderer al que se le asignará el sprite. Si está vacío, se intentará encontrar uno en este objeto o en sus hijos.")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Tooltip("Gama de sprites posibles. Al habilitarse el carro, se elige 1 aleatorio.")]
+    [SerializeField] private Sprite[] spriteOptions;
+
     [Header("Steering - Capas")]
     [Tooltip("Capa(s) de obstáculos: paredes, props, etc.")]
     [SerializeField] private LayerMask obstacleLayerMask;
@@ -146,6 +153,13 @@ public class TrafficCar : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
 
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
         preferredDirection = NormalizeOrDefault(preferredDirection, Vector2.up);
         steerCurrentDirection = preferredDirection;
         steerDirectionVelocity = Vector2.zero;
@@ -159,6 +173,7 @@ public class TrafficCar : MonoBehaviour
     protected virtual void OnEnable()
     {
         RerollBaseSpeed();
+        ApplyRandomSprite();
 
         nextObstacleDetectTime = 0f;
         nextSeparationTime = 0f;
@@ -208,6 +223,29 @@ public class TrafficCar : MonoBehaviour
 
         if (obstacleRayAngles == null || obstacleRayAngles.Length == 0)
             obstacleRayAngles = new float[] { 0f };
+
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void ApplyRandomSprite()
+    {
+        if (spriteRenderer == null)
+            return;
+
+        if (spriteOptions == null || spriteOptions.Length == 0)
+            return;
+
+        int tries = 0;
+        Sprite chosen = null;
+        while (chosen == null && tries < spriteOptions.Length)
+        {
+            chosen = spriteOptions[Random.Range(0, spriteOptions.Length)];
+            tries++;
+        }
+
+        if (chosen != null)
+            spriteRenderer.sprite = chosen;
     }
 
     protected virtual void FixedUpdate()
