@@ -891,6 +891,8 @@ PlayableDirector:
     value: {fileID: 1103142993}
   - key: {fileID: 4475490989873589684, guid: 002a86d655bad70408f13146d1611f3c, type: 2}
     value: {fileID: 1103142992}
+  - key: {fileID: -7544076896837975295, guid: 002a86d655bad70408f13146d1611f3c, type: 2}
+    value: {fileID: 1103142993}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1068975609
@@ -1445,7 +1447,7 @@ MonoBehaviour:
   resultPanel: {fileID: 1103142992}
   winDirector: {fileID: 1068975607}
   loseDirector: {fileID: 1763995176}
-  loseDelay: 1.5
+  loseDelay: 0
   nextSceneName: MinigameResults
 --- !u!4 &1734696879
 Transform:
@@ -1629,6 +1631,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -7875796878888927410, guid: a840cf26b4f1d404e996927adf5a6045, type: 2}
     value: {fileID: 1103142993}
+  - key: {fileID: 4961013869456265598, guid: a840cf26b4f1d404e996927adf5a6045, type: 2}
+    value: {fileID: 1103142992}
   m_ExposedReferences:
     m_References:
     - 2ac77d6f0337ea8468dd5205b884ff30: {fileID: 1103142992}

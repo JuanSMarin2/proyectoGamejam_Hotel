@@ -148,9 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43502710522b28847b1ef0504f986569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goodDirector: {fileID: 0}
-  neutralDirector: {fileID: 0}
-  badDirector: {fileID: 0}
+  goodDirector: {fileID: 395252433}
+  neutralDirector: {fileID: 395252433}
+  badDirector: {fileID: 2026569039}
   finalSceneName: FinalScene
 --- !u!4 &255419749
 Transform:
