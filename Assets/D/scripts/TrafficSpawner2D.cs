@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Spawner avanzado de tráfico 2D con distribución natural + pooling.
-/// - Mantiene densidad constante (targetActiveVehicles)
-/// - Evita clusters (minSpawnDistance)
-/// - Evita huecos grandes (maxGapDistance, opcional)
-/// - Variación de spawn (jitter) y ráfagas pequeñas (bursts)
-/// - Reutiliza vehículos desactivados (object pooling)
+/// Spawner de trafico 2D con intervalo fijo y object pooling.
+/// - Spawn por tiempo deterministico (sin probabilidad, burst ni jitter)
+/// - Batch de tamano variable por ciclo (minCarsPerSpawn..maxCarsPerSpawn)
+/// - Validacion de distancia minima para evitar solapamientos
 /// </summary>
 [DisallowMultipleComponent]
 public class TrafficSpawner2D : MonoBehaviour
@@ -16,96 +14,96 @@ public class TrafficSpawner2D : MonoBehaviour
     #region Serialized Fields
 
     [Header("Prefabs")]
-    [Tooltip("Prefabs con TrafficCar (o derivados, ej: CurvedTrafficCar)")]
+    [Tooltip("Prefabs con TrafficCar (o derivados).")]
     [SerializeField] private TrafficCar[] vehiclePrefabs;
 
     [Header("Zonas")]
-    [Tooltip("Zona donde se spawnea el tráfico.")]
+    [Tooltip("Zona de referencia para spawn. Si useSpawnAreaBounds esta activo, se usa para minX/maxX y spawnY.")]
     [SerializeField] private BoxCollider2D spawnArea;
 
-    [Tooltip("Zona donde el vehículo sigue activo. Al salir, se desactiva y vuelve al pool. Si está vacío, se usa spawnArea con padding.")]
+    [Tooltip("Zona donde el vehiculo sigue activo. Al salir, se desactiva y vuelve al pool.")]
     [SerializeField] private BoxCollider2D despawnArea;
 
     [Tooltip("Padding extra para despawn cuando no hay despawnArea (en unidades de mundo).")]
     [Min(0f)]
     [SerializeField] private float despawnPadding = 6f;
 
-    [Header("Densidad")]
+    [Header("Limites")]
     [Min(0)]
     [SerializeField] private int targetActiveVehicles = 12;
 
-    [Header("Distribución")]
-    [Tooltip("Distancia mínima entre posiciones de spawn recientes/vehículos activos.")]
+    [Header("Spawn Fijo")]
+    [Tooltip("Intervalo fijo entre ciclos de spawn.")]
+    [Min(0.01f)]
+    [SerializeField] private float spawnInterval = 0.6f;
+
+    [Tooltip("Minimo de carros por ciclo.")]
+    [Min(1)]
+    [SerializeField] private int minCarsPerSpawn = 1;
+
+    [Tooltip("Maximo de carros por ciclo.")]
+    [Min(1)]
+    [SerializeField] private int maxCarsPerSpawn = 3;
+
+    [Header("Posicion")]
+    [Tooltip("Si esta activo, minX/maxX y spawnY se toman del BoxCollider2D spawnArea.")]
+    [SerializeField] private bool useSpawnAreaBounds = true;
+
+    [Tooltip("Limite minimo de X para spawn cuando useSpawnAreaBounds esta inactivo.")]
+    [SerializeField] private float minX = -5f;
+
+    [Tooltip("Limite maximo de X para spawn cuando useSpawnAreaBounds esta inactivo.")]
+    [SerializeField] private float maxX = 5f;
+
+    [Tooltip("Posicion Y fija de spawn (parte inferior) cuando useSpawnAreaBounds esta inactivo.")]
+    [SerializeField] private float spawnY = -4f;
+
+    [Header("Espaciado")]
+    [Tooltip("Distancia minima entre vehiculos al spawnear.")]
     [Min(0.01f)]
     [SerializeField] private float minSpawnDistance = 1.2f;
 
-    [Tooltip("Si > 0, evita spawns demasiado lejos de todo (reduce huecos grandes).")]
-    [Min(0f)]
-    [SerializeField] private float maxGapDistance = 0f;
-
-    [Tooltip("Cuántas posiciones recientes se recuerdan para evitar clusters.")]
-    [Min(0)]
-    [SerializeField] private int recentPositionsCapacity = 20;
-
-    [Tooltip("Segundos que una posición permanece en la lista de recientes. 0 = no expira por tiempo (solo por capacidad).")]
-    [Min(0f)]
-    [SerializeField] private float recentPositionLifetime = 8f;
-
-    [Tooltip("Cantidad de candidatos por intento (más = mejor distribución, más costo).")]
-    [Range(4, 64)]
-    [SerializeField] private int candidatesPerSpawn = 18;
-
-    [Tooltip("Intentos máximos para encontrar una posición válida.")]
-    [Range(1, 60)]
-    [SerializeField] private int maxAttemptsPerVehicle = 16;
-
-    [Header("Reciclaje (Atascados)")]
-    [Tooltip("Si un vehículo no se mueve más que este delta, cuenta como quieto.")]
-    [Min(0f)]
-    [SerializeField] private float stuckMinMoveDelta = 0.03f;
-
-    [Tooltip("Segundos quieto para reciclar al pool (evita que vehículos trabados bloqueen la densidad).")]
-    [Min(0.1f)]
-    [SerializeField] private float stuckTimeToRecycle = 2.5f;
-
-    [Header("Spawn Dinámico")]
-    [Tooltip("Intervalo base entre spawns (segundos).")]
+    [Tooltip("Separacion horizontal base entre vehiculos del mismo batch.")]
     [Min(0.01f)]
-    [SerializeField] private float baseSpawnInterval = 0.6f;
+    [SerializeField] private float batchSpacingX = 1.4f;
 
-    [Tooltip("Variación aleatoria del intervalo: +- jitter.")]
+    [Tooltip("Validacion extra con OverlapCircle para evitar spawn sobre obstaculos/vehiculos externos.")]
+    [SerializeField] private bool usePhysicsSpawnValidation = true;
+
+    [Tooltip("Capas que bloquean el spawn al usar OverlapCircle.")]
+    [SerializeField] private LayerMask spawnValidationMask;
+
+    [Header("Batch Delay (Opcional)")]
+    [Tooltip("Si esta activo, agrega un delay pequeno entre autos del mismo batch.")]
+    [SerializeField] private bool useBatchSpawnDelay;
+
+    [Tooltip("Delay minimo entre autos del mismo batch.")]
     [Min(0f)]
-    [SerializeField] private float spawnIntervalJitter = 0.25f;
+    [SerializeField] private float batchSpawnDelayMin = 0.05f;
 
-    [Tooltip("Probabilidad de iniciar una pequeña ráfaga cuando falta tráfico.")]
-    [Range(0f, 1f)]
-    [SerializeField] private float burstChance = 0.18f;
-
-    [Tooltip("Cantidad mínima de vehículos en una ráfaga.")]
-    [Min(1)]
-    [SerializeField] private int burstMinCount = 2;
-
-    [Tooltip("Cantidad máxima de vehículos en una ráfaga.")]
-    [Min(1)]
-    [SerializeField] private int burstMaxCount = 4;
-
-    [Tooltip("Separación entre spawns dentro de una ráfaga (segundos).")]
-    [Min(0.01f)]
-    [SerializeField] private float burstSpacing = 0.12f;
+    [Tooltip("Delay maximo entre autos del mismo batch.")]
+    [Min(0f)]
+    [SerializeField] private float batchSpawnDelayMax = 0.2f;
 
     [Header("Pooling")]
     [Min(0)]
     [SerializeField] private int prewarmPerPrefab = 6;
 
     [Header("Compatibilidad Prefabs")]
-    [Tooltip("Si está activo, corrige Rigidbody2D al spawnear (evita prefabs con bodyType Static o FreezePosition).")]
+    [Tooltip("Si esta activo, corrige Rigidbody2D al spawnear (evita prefabs con bodyType Static o FreezePosition).")]
     [SerializeField] private bool fixRigidbodiesOnSpawn = true;
 
-    [Header("Debug")]
-    [Tooltip("Si está activo, loguea Awake/OnEnable/OnDisable/OnDestroy (útil para encontrar quién destruye el spawner al iniciar Play).")]
-    [SerializeField] private bool logLifecycle;
+    [Header("Reciclaje (Atascados)")]
+    [Tooltip("Si un vehiculo no se mueve mas que este delta, cuenta como quieto.")]
+    [Min(0f)]
+    [SerializeField] private float stuckMinMoveDelta = 0.03f;
 
-    [Tooltip("Si está activo, loguea fallos de spawn (cuando no se encuentra posición válida).")]
+    [Tooltip("Segundos quieto para reciclar al pool.")]
+    [Min(0.1f)]
+    [SerializeField] private float stuckTimeToRecycle = 2.5f;
+
+    [Header("Debug")]
+    [SerializeField] private bool logLifecycle;
     [SerializeField] private bool logSpawnFailures;
 
     #endregion
@@ -119,13 +117,7 @@ public class TrafficSpawner2D : MonoBehaviour
     private readonly Dictionary<TrafficCar, Vector2> lastPositionByVehicle = new Dictionary<TrafficCar, Vector2>();
     private readonly Dictionary<TrafficCar, float> stillTimeByVehicle = new Dictionary<TrafficCar, float>();
 
-    private struct RecentSpawn
-    {
-        public Vector2 pos;
-        public float time;
-    }
-
-    private readonly Queue<RecentSpawn> recentSpawnPositions = new Queue<RecentSpawn>();
+    private readonly Collider2D[] spawnValidationBuffer = new Collider2D[16];
 
     private Coroutine spawnRoutine;
 
@@ -168,10 +160,7 @@ public class TrafficSpawner2D : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (!logLifecycle)
-            return;
-
-        if (!Application.isPlaying)
+        if (!logLifecycle || !Application.isPlaying)
             return;
 
         Debug.LogWarning($"[TrafficSpawner2D] OnDestroy: {name} (id={GetInstanceID()}, scene={gameObject.scene.name}, frame={Time.frameCount})\n{System.Environment.StackTrace}", this);
@@ -182,26 +171,30 @@ public class TrafficSpawner2D : MonoBehaviour
         ReclaimDespawnedVehicles();
         ReclaimStuckVehicles(Time.deltaTime);
 
-        // Auto-recuperación: si algo detuvo la coroutine, la re-inicia.
         if (enabled && gameObject.activeInHierarchy && spawnRoutine == null)
             spawnRoutine = StartCoroutine(SpawnLoop());
     }
 
     private void OnValidate()
     {
-        if (burstMaxCount < burstMinCount)
-            burstMaxCount = burstMinCount;
+        minCarsPerSpawn = Mathf.Max(1, minCarsPerSpawn);
+        maxCarsPerSpawn = Mathf.Max(minCarsPerSpawn, maxCarsPerSpawn);
 
-        candidatesPerSpawn = Mathf.Clamp(candidatesPerSpawn, 4, 64);
-        maxAttemptsPerVehicle = Mathf.Clamp(maxAttemptsPerVehicle, 1, 60);
+        if (maxX < minX)
+            maxX = minX;
 
-        if (spawnArea == null)
-            spawnArea = GetComponent<BoxCollider2D>();
+        spawnInterval = Mathf.Max(0.01f, spawnInterval);
+        minSpawnDistance = Mathf.Max(0.01f, minSpawnDistance);
+        batchSpacingX = Mathf.Max(0.01f, batchSpacingX);
 
-        recentPositionLifetime = Mathf.Max(0f, recentPositionLifetime);
+        batchSpawnDelayMin = Mathf.Max(0f, batchSpawnDelayMin);
+        batchSpawnDelayMax = Mathf.Max(batchSpawnDelayMin, batchSpawnDelayMax);
 
         stuckMinMoveDelta = Mathf.Max(0f, stuckMinMoveDelta);
         stuckTimeToRecycle = Mathf.Max(0.1f, stuckTimeToRecycle);
+
+        if (spawnArea == null)
+            spawnArea = GetComponent<BoxCollider2D>();
     }
 
     #endregion
@@ -210,219 +203,231 @@ public class TrafficSpawner2D : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
-        // Arranque suave: deja que la escena inicialice.
         yield return null;
 
         while (enabled)
         {
             CleanupActiveList();
 
-            int deficit = Mathf.Max(0, targetActiveVehicles - activeVehicles.Count);
-            if (deficit > 0)
-            {
-                bool doBurst = (deficit >= 2) && (Random.value < burstChance);
-                int spawnCount = doBurst
-                    ? Mathf.Min(deficit, Random.Range(burstMinCount, burstMaxCount + 1))
-                    : 1;
+            if (activeVehicles.Count < targetActiveVehicles)
+                yield return SpawnBatch();
 
-                for (int i = 0; i < spawnCount; i++)
-                {
-                    if (TrySpawnOne())
-                    {
-                        // Pequeña separación dentro de ráfaga para que no se vea artificial.
-                        if (doBurst && i < spawnCount - 1)
-                            yield return new WaitForSeconds(burstSpacing);
-                    }
-                    else
-                    {
-                        // Si no pudo spawnear, no insistir en ráfaga.
-                        break;
-                    }
-                }
-            }
-
-            float wait = GetNextSpawnInterval();
-            yield return new WaitForSeconds(wait);
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private float GetNextSpawnInterval()
+    private IEnumerator SpawnBatch()
     {
-        float jitter = spawnIntervalJitter;
-        float min = Mathf.Max(0.01f, baseSpawnInterval - jitter);
-        float max = Mathf.Max(min, baseSpawnInterval + jitter);
-        return Random.Range(min, max);
+        int availableSlots = Mathf.Max(0, targetActiveVehicles - activeVehicles.Count);
+        if (availableSlots <= 0)
+            yield break;
+
+        int spawnCount = Mathf.Min(GetSpawnCount(), availableSlots);
+        if (spawnCount <= 0)
+            yield break;
+
+        List<Vector2> spawnedInBatch = new List<Vector2>(spawnCount);
+
+        float cycleMinX;
+        float cycleMaxX;
+        float cycleSpawnY;
+        ResolveSpawnBounds(out cycleMinX, out cycleMaxX, out cycleSpawnY);
+
+        float centerX = Random.Range(cycleMinX, cycleMaxX);
+        float spacing = Mathf.Max(minSpawnDistance, batchSpacingX);
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Vector2 pos = GetRandomSpawnPosition(i, spawnCount, centerX, spacing, cycleMinX, cycleMaxX, cycleSpawnY);
+            if (!IsSpawnValid(pos, spawnedInBatch))
+                continue;
+
+            if (SpawnVehicle(pos))
+                spawnedInBatch.Add(pos);
+
+            if (useBatchSpawnDelay && i < spawnCount - 1)
+            {
+                float delay = Random.Range(batchSpawnDelayMin, batchSpawnDelayMax);
+                if (delay > 0f)
+                    yield return new WaitForSeconds(delay);
+            }
+        }
     }
 
-    private bool TrySpawnOne()
+    private int GetSpawnCount()
+    {
+        int dynamicMaxCarsPerSpawn = GetDynamicMaxCarsPerSpawn();
+        int dynamicMinCarsPerSpawn = Mathf.Min(minCarsPerSpawn, dynamicMaxCarsPerSpawn);
+        return Random.Range(dynamicMinCarsPerSpawn, dynamicMaxCarsPerSpawn + 1);
+    }
+
+    private int GetDynamicMaxCarsPerSpawn()
+    {
+        float speed = GetLevelTrafficSpeed();
+        float carsToSubtract = Mathf.Max(0f, speed - 1f);
+        int adjustedMaxCars = maxCarsPerSpawn - Mathf.FloorToInt(carsToSubtract);
+        return Mathf.Max(1, adjustedMaxCars);
+    }
+
+    private float GetLevelTrafficSpeed()
+    {
+        float maxTrafficSpeed = GetTrafficCarMaxSpeedForLevel();
+
+        if (MinigameManager.instance == null)
+            return maxTrafficSpeed;
+
+        return Mathf.Min(MinigameManager.instance.Speed, maxTrafficSpeed);
+    }
+
+    private float GetTrafficCarMaxSpeedForLevel()
     {
         if (vehiclePrefabs == null || vehiclePrefabs.Length == 0)
-            return false;
+            return 1f;
 
-        if (spawnArea == null)
-            return false;
-
-        for (int attempt = 0; attempt < maxAttemptsPerVehicle; attempt++)
+        float maxSpeed = 1f;
+        for (int i = 0; i < vehiclePrefabs.Length; i++)
         {
-            if (!TryPickSpawnPosition(out Vector2 pos))
+            TrafficCar prefab = vehiclePrefabs[i];
+            if (prefab == null)
                 continue;
 
-            int prefabIndex = Random.Range(0, vehiclePrefabs.Length);
-            TrafficCar vehicle = GetFromPool(prefabIndex);
-            if (vehicle == null)
+            maxSpeed = Mathf.Max(maxSpeed, prefab.GetMaxMinigameSpeedMultiplier());
+        }
+
+        return maxSpeed;
+    }
+
+    private Vector2 GetRandomSpawnPosition(
+        int batchIndex,
+        int batchCount,
+        float centerX,
+        float spacing,
+        float cycleMinX,
+        float cycleMaxX,
+        float cycleSpawnY)
+    {
+        float startX = centerX - (((batchCount - 1) * 0.5f) * spacing);
+        float x = startX + (batchIndex * spacing);
+        x = Mathf.Clamp(x, cycleMinX, cycleMaxX);
+        return new Vector2(x, cycleSpawnY);
+    }
+
+    private bool IsSpawnValid(Vector2 position, List<Vector2> spawnedInBatch)
+    {
+        float minDistSqr = minSpawnDistance * minSpawnDistance;
+
+        for (int i = 0; i < spawnedInBatch.Count; i++)
+        {
+            if ((position - spawnedInBatch[i]).sqrMagnitude < minDistSqr)
                 return false;
-
-            vehicle.transform.SetPositionAndRotation(pos, Quaternion.identity);
-            vehicle.SetDirection(Vector2.up);
-
-            // Asegurar que el script esté habilitado (si el prefab lo tiene apagado, se quedará quieto).
-            vehicle.enabled = true;
-
-            if (!vehicle.gameObject.activeSelf)
-                vehicle.gameObject.SetActive(true);
-
-            // Asegurar simulación física.
-            Rigidbody2D rb = vehicle.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.simulated = true;
-
-                if (fixRigidbodiesOnSpawn)
-                {
-                    if (rb.bodyType == RigidbodyType2D.Static)
-                        rb.bodyType = RigidbodyType2D.Dynamic;
-
-                    // Quitar freezes de posición (mantener freeze rotation si existía)
-                    if ((rb.constraints & (RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY)) != 0)
-                    {
-                        bool keepFreezeRotation = (rb.constraints & RigidbodyConstraints2D.FreezeRotation) != 0;
-                        rb.constraints = keepFreezeRotation ? RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.None;
-                    }
-                }
-
-                rb.WakeUp();
-            }
-
-            // Reset tracking (atascados)
-            lastPositionByVehicle[vehicle] = vehicle.transform.position;
-            stillTimeByVehicle[vehicle] = 0f;
-
-            activeVehicles.Add(vehicle);
-            RememberSpawnPosition(pos);
-            return true;
         }
 
-        if (logSpawnFailures)
-            Debug.LogWarning($"[TrafficSpawner2D] No se encontró posición válida (minSpawnDistance={minSpawnDistance}, activos={activeVehicles.Count}).", this);
-
-        return false;
-    }
-
-    private void RememberSpawnPosition(Vector2 pos)
-    {
-        if (recentPositionsCapacity <= 0)
-            return;
-
-        recentSpawnPositions.Enqueue(new RecentSpawn { pos = pos, time = Time.time });
-        TrimRecentPositions();
-    }
-
-    private void TrimRecentPositions()
-    {
-        // Expirar por tiempo (si aplica)
-        if (recentPositionLifetime > 0f)
-        {
-            float cutoff = Time.time - recentPositionLifetime;
-            while (recentSpawnPositions.Count > 0 && recentSpawnPositions.Peek().time < cutoff)
-                recentSpawnPositions.Dequeue();
-        }
-
-        // Limitar por capacidad
-        while (recentSpawnPositions.Count > recentPositionsCapacity)
-            recentSpawnPositions.Dequeue();
-    }
-
-    #endregion
-
-    #region Distribution
-
-    private bool TryPickSpawnPosition(out Vector2 bestPos)
-    {
-        bestPos = default;
-
-        TrimRecentPositions();
-
-        Rect spawnRect = GetWorldRect(spawnArea);
-
-        float bestScore = float.NegativeInfinity;
-        bool found = false;
-
-        for (int i = 0; i < candidatesPerSpawn; i++)
-        {
-            Vector2 candidate = new Vector2(
-                Random.Range(spawnRect.xMin, spawnRect.xMax),
-                Random.Range(spawnRect.yMin, spawnRect.yMax)
-            );
-
-            if (!IsCandidateValid(candidate, out float nearestDistance))
-                continue;
-
-            // Score: queremos cerca de un “spacing” natural, sin clusters ni huecos enormes.
-            float score = nearestDistance;
-
-            if (maxGapDistance > 0f)
-            {
-                // Penaliza si está demasiado lejos de todo.
-                if (nearestDistance > maxGapDistance)
-                    score -= (nearestDistance - maxGapDistance) * 2f;
-            }
-
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestPos = candidate;
-                found = true;
-            }
-        }
-
-        return found;
-    }
-
-    private bool IsCandidateValid(Vector2 candidate, out float nearestDistance)
-    {
-        nearestDistance = float.PositiveInfinity;
-
-        float minDist = minSpawnDistance;
-        float minDistSqr = minDist * minDist;
-
-        // Comparar con posiciones recientes
-        foreach (RecentSpawn r in recentSpawnPositions)
-        {
-            float dSqr = (candidate - r.pos).sqrMagnitude;
-            if (dSqr < minDistSqr)
-                return false;
-
-            nearestDistance = Mathf.Min(nearestDistance, Mathf.Sqrt(dSqr));
-        }
-
-        // Comparar con vehículos activos
         for (int i = 0; i < activeVehicles.Count; i++)
         {
             TrafficCar v = activeVehicles[i];
             if (v == null || !v.gameObject.activeInHierarchy)
                 continue;
 
-            float dSqr = (candidate - (Vector2)v.transform.position).sqrMagnitude;
-            if (dSqr < minDistSqr)
+            if ((position - (Vector2)v.transform.position).sqrMagnitude < minDistSqr)
                 return false;
-
-            nearestDistance = Mathf.Min(nearestDistance, Mathf.Sqrt(dSqr));
         }
 
-        if (nearestDistance == float.PositiveInfinity)
-            nearestDistance = maxGapDistance > 0f ? maxGapDistance : minSpawnDistance;
+        if (!usePhysicsSpawnValidation)
+            return true;
+
+        ContactFilter2D filter = new ContactFilter2D
+        {
+            useLayerMask = true,
+            layerMask = spawnValidationMask,
+            useTriggers = true
+        };
+
+        int overlapCount = Physics2D.OverlapCircle(
+            position,
+            minSpawnDistance,
+            filter,
+            spawnValidationBuffer
+        );
+
+        for (int i = 0; i < overlapCount; i++)
+        {
+            Collider2D hit = spawnValidationBuffer[i];
+            if (hit == null)
+                continue;
+
+            Rigidbody2D hitRb = hit.attachedRigidbody;
+            if (hitRb != null && hitRb.transform.IsChildOf(transform))
+                continue;
+
+            return false;
+        }
 
         return true;
+    }
+
+    private bool SpawnVehicle(Vector2 position)
+    {
+        if (vehiclePrefabs == null || vehiclePrefabs.Length == 0)
+            return false;
+
+        int prefabIndex = Random.Range(0, vehiclePrefabs.Length);
+        TrafficCar vehicle = GetFromPool(prefabIndex);
+        if (vehicle == null)
+            return false;
+
+        vehicle.transform.SetPositionAndRotation(position, Quaternion.identity);
+        vehicle.SetDirection(Vector2.up);
+        vehicle.enabled = true;
+
+        if (!vehicle.gameObject.activeSelf)
+            vehicle.gameObject.SetActive(true);
+
+        Rigidbody2D rb = vehicle.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.simulated = true;
+
+            if (fixRigidbodiesOnSpawn)
+            {
+                if (rb.bodyType == RigidbodyType2D.Static)
+                    rb.bodyType = RigidbodyType2D.Dynamic;
+
+                if ((rb.constraints & (RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY)) != 0)
+                {
+                    bool keepFreezeRotation = (rb.constraints & RigidbodyConstraints2D.FreezeRotation) != 0;
+                    rb.constraints = keepFreezeRotation ? RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.None;
+                }
+            }
+
+            rb.WakeUp();
+        }
+
+        lastPositionByVehicle[vehicle] = vehicle.transform.position;
+        stillTimeByVehicle[vehicle] = 0f;
+        activeVehicles.Add(vehicle);
+
+        return true;
+    }
+
+    private void ResolveSpawnBounds(out float resolvedMinX, out float resolvedMaxX, out float resolvedSpawnY)
+    {
+        if (useSpawnAreaBounds && spawnArea != null)
+        {
+            Rect r = GetWorldRect(spawnArea);
+            resolvedMinX = r.xMin;
+            resolvedMaxX = r.xMax;
+            resolvedSpawnY = r.yMin;
+            return;
+        }
+
+        resolvedMinX = minX;
+        resolvedMaxX = maxX;
+        resolvedSpawnY = spawnY;
+    }
+
+    public void SetSpawnInterval(float newInterval)
+    {
+        spawnInterval = Mathf.Max(0.01f, newInterval);
     }
 
     #endregion
@@ -530,14 +535,10 @@ public class TrafficSpawner2D : MonoBehaviour
 
     private void ReclaimStuckVehicles(float dt)
     {
-        if (activeVehicles.Count == 0)
+        if (activeVehicles.Count == 0 || stuckTimeToRecycle <= 0f)
             return;
 
-        if (stuckTimeToRecycle <= 0f)
-            return;
-
-        float eps = stuckMinMoveDelta;
-        float epsSqr = eps * eps;
+        float epsSqr = stuckMinMoveDelta * stuckMinMoveDelta;
 
         for (int i = activeVehicles.Count - 1; i >= 0; i--)
         {

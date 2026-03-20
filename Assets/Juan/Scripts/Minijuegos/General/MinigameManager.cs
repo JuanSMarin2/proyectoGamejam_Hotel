@@ -22,4 +22,11 @@ public class MinigameManager : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
+
+    private void Start()
+    {
+        if (RoundData.instance == null) return;
+
+        Speed = RoundData.instance.GetCurrentMinigameSpeed();
+    }
 }
