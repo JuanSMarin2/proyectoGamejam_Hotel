@@ -102,7 +102,9 @@ public class CharacterVisual : MonoBehaviour
     {
         head.SetCategoryAndLabel("Head", label);
 
-        if(headFixer != null)
+        // SpriteResolver de Head fallaba en modelo 3/4 NO TENGO IDEA DE POR QUE
+        // Se fuerza sprite manualmente para evitar inconsistencias
+        if (headFixer != null)
             headFixer.ApplyHead(label);
 
 
