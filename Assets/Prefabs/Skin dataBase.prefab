@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9178578660735847068}
   - component: {fileID: 5299439206039557}
   m_Layer: 0
-  m_Name: ShopDataBase
+  m_Name: Skin dataBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
