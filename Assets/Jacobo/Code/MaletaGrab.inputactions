@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "MaletaGrab",
+    "maps": [
+        {
+            "name": "Character",
+            "id": "dd2e4c29-f176-4079-8d11-c746822a5040",
+            "actions": [
+                {
+                    "name": "GrabMaleta",
+                    "type": "Button",
+                    "id": "d1e298b8-20f7-4780-bc2f-84294daaf15b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e8dd6607-a63f-46fa-9f97-7b0238cba208",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabMaleta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61469ebd-2bc8-4d7f-8d89-58187618023a",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabMaleta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -23,7 +23,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - FondoMaletas
   - 
   - 
   - 
@@ -42,6 +42,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1607420663
+    locked: 0
+  - name: Midground
+    uniqueID: 395388525
+    locked: 0
+  - name: Player
+    uniqueID: 2142460785
     locked: 0
   m_RenderingLayers:
   - Default

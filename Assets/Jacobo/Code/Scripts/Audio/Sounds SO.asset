@@ -1,0 +1,195 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76073d72f37887e48a04290bc9953b78, type: 3}
+  m_Name: Sounds SO
+  m_EditorClassIdentifier: 
+  sounds:
+  - id: AmbientMusic
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Avion
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: ChoqueCarro
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Comprar
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Corriendo
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Electrocutandose
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Equipar
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Equipar
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Frenado
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: MenuMusic
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Motores
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Nadando
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: PjEnojado
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: PjRiendo
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: PjTriste
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Saltando
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Tecleo
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: TimerTicking
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Tropezandose
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
+  - id: Wooshes
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds: []
