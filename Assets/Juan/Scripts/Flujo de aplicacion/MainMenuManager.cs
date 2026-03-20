@@ -9,8 +9,14 @@ public class MainMenuManager : MonoBehaviour
 
         RoundData.instance.SetGameOrder(order);
 
+        RoundData.instance.SetStoryMode(true);
+
 
 
        SceneManager.LoadScene("IntroScene");
+    }
+
+    public void LoadShopScene(){
+        SceneManager.LoadScene("Shop");
     }
 }

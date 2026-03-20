@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using System.Collections;
 
 public class AnimationManager : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [Header("Director")]
+    [SerializeField] private GameObject introDirector;
 
     private bool hasPlayed = false;
     private void Start()
@@ -21,20 +23,35 @@ public class AnimationManager : MonoBehaviour
 
     private IEnumerator WaitForAnimation()
     {
-        if (animator == null)
+        if (introDirector == null)
+        {
+            Debug.LogWarning("AnimationManager: introDirector no asignado; continuando sin esperar.");
+            RoundData.instance.NextMinigame();
             yield break;
+        }
 
+        introDirector.SetActive(true);
+
+        var director = introDirector.GetComponent<PlayableDirector>();
+        if (director == null)
+            director = introDirector.GetComponentInChildren<PlayableDirector>(true);
+
+        if (director == null)
+        {
+            Debug.LogWarning("AnimationManager: No se encontró PlayableDirector en introDirector; continuando sin esperar.");
+            RoundData.instance.NextMinigame();
+            yield break;
+        }
+
+        director.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
+        director.Play();
 
         yield return null;
 
+        while (director.state == PlayState.Playing)
+            yield return null;
 
-        float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
-
-
-        yield return new WaitForSecondsRealtime(animLength);
-
-
-        Debug.Log("Animation finished, loading next minigame...");
+        Debug.Log("Director finished, loading next minigame...");
         RoundData.instance.NextMinigame();
     }
 }
