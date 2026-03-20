@@ -2225,7 +2225,7 @@ MonoBehaviour:
   despawnArea: {fileID: 0}
   despawnPadding: 15
   targetActiveVehicles: 12
-  spawnInterval: 1
+  spawnInterval: 2
   minCarsPerSpawn: 2
   maxCarsPerSpawn: 3
   useSpawnAreaBounds: 1
@@ -2276,7 +2276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f85871c54fe9f64791bf05205532fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  speed: 1
   losesWithTime: 0
 --- !u!4 &1621023154
 Transform:

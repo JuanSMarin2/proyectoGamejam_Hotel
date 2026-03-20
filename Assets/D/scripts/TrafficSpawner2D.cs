@@ -256,7 +256,45 @@ public class TrafficSpawner2D : MonoBehaviour
 
     private int GetSpawnCount()
     {
-        return Random.Range(minCarsPerSpawn, maxCarsPerSpawn + 1);
+        int dynamicMaxCarsPerSpawn = GetDynamicMaxCarsPerSpawn();
+        int dynamicMinCarsPerSpawn = Mathf.Min(minCarsPerSpawn, dynamicMaxCarsPerSpawn);
+        return Random.Range(dynamicMinCarsPerSpawn, dynamicMaxCarsPerSpawn + 1);
+    }
+
+    private int GetDynamicMaxCarsPerSpawn()
+    {
+        float speed = GetLevelTrafficSpeed();
+        float carsToSubtract = Mathf.Max(0f, speed - 1f);
+        int adjustedMaxCars = maxCarsPerSpawn - Mathf.FloorToInt(carsToSubtract);
+        return Mathf.Max(1, adjustedMaxCars);
+    }
+
+    private float GetLevelTrafficSpeed()
+    {
+        float maxTrafficSpeed = GetTrafficCarMaxSpeedForLevel();
+
+        if (MinigameManager.instance == null)
+            return maxTrafficSpeed;
+
+        return Mathf.Min(MinigameManager.instance.Speed, maxTrafficSpeed);
+    }
+
+    private float GetTrafficCarMaxSpeedForLevel()
+    {
+        if (vehiclePrefabs == null || vehiclePrefabs.Length == 0)
+            return 1f;
+
+        float maxSpeed = 1f;
+        for (int i = 0; i < vehiclePrefabs.Length; i++)
+        {
+            TrafficCar prefab = vehiclePrefabs[i];
+            if (prefab == null)
+                continue;
+
+            maxSpeed = Mathf.Max(maxSpeed, prefab.GetMaxMinigameSpeedMultiplier());
+        }
+
+        return maxSpeed;
     }
 
     private Vector2 GetRandomSpawnPosition(

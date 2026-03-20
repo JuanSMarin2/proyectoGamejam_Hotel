@@ -106,6 +106,11 @@ public class TrafficCar : MonoBehaviour
     [Min(0f)]
     [SerializeField] private float maxSteeringMagnitude = 1.0f;
 
+    [Header("Escalado Minijuego")]
+    [Tooltip("Límite máximo del multiplicador de speed tomado desde MinigameManager.")]
+    [Min(0f)]
+    [SerializeField] private float maxMinigameSpeedMultiplier = 10f;
+
     #endregion
 
     #region Private Fields
@@ -211,6 +216,7 @@ public class TrafficCar : MonoBehaviour
         decelerationTime = Mathf.Max(0.001f, decelerationTime);
         directionSmoothTime = Mathf.Max(0.001f, directionSmoothTime);
         maxSteeringMagnitude = Mathf.Max(0f, maxSteeringMagnitude);
+        maxMinigameSpeedMultiplier = Mathf.Max(0f, maxMinigameSpeedMultiplier);
         unstuckSideBias = Mathf.Max(0f, unstuckSideBias);
         preferredDirection = NormalizeOrDefault(preferredDirection, Vector2.up);
 
@@ -583,7 +589,7 @@ public class TrafficCar : MonoBehaviour
         if (MinigameManager.instance == null)
             return 1f;
 
-        return Mathf.Clamp(MinigameManager.instance.Speed, 0f, 2.5f);
+        return Mathf.Clamp(MinigameManager.instance.Speed, 0f, maxMinigameSpeedMultiplier);
     }
 
     #endregion
@@ -625,6 +631,8 @@ public class TrafficCar : MonoBehaviour
     public Vector2 GetDirection() => steerCurrentDirection;
 
     public float GetCurrentSpeed() => currentSpeed;
+
+    public float GetMaxMinigameSpeedMultiplier() => maxMinigameSpeedMultiplier;
 
     #endregion
 
