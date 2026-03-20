@@ -90,13 +90,7 @@ public class CharacterVisual : MonoBehaviour
                 break;
         }
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            head.SetCategoryAndLabel("Head", "Naranja");
-        }
-    }
+  
 
     private void ApplyHead(string label)
     {
