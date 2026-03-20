@@ -715,6 +715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3267601634913097947}
   - component: {fileID: 1220913319472265147}
+  - component: {fileID: 2195750486151557474}
   m_Layer: 0
   m_Name: P3_4
   m_TagString: Untagged
@@ -760,6 +761,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2195750486151557474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250773285692965286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6317ea989f1fc7546b34ac620323cab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 2642078352535431774}
+  chest: {fileID: 2594876822611658821}
+  derarm: {fileID: 6310612626117852502}
+  izqarm: {fileID: 5077207398436565305}
+  izqhand: {fileID: 8154938533922085886}
+  derhand: {fileID: 643705077417207283}
+  izqleg: {fileID: 6673162127827825673}
+  derleg: {fileID: 8903564293565420906}
+  izqfoot: {fileID: 5492689324381621690}
+  derfoot: {fileID: 7724136228740156623}
 --- !u!1 &2102106822934437218
 GameObject:
   m_ObjectHideFlags: 0
