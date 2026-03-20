@@ -257,6 +257,8 @@ GameObject:
   m_Component:
   - component: {fileID: 483335908}
   - component: {fileID: 483335907}
+  - component: {fileID: 483335910}
+  - component: {fileID: 483335909}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -288,7 +290,23 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1080247227}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 13368446-7ac5-4707-8a40-028b557ad16b
+    m_ActionName: 'Character/BuyProduct[/Mouse/leftButton,/Touchscreen/primaryTouch/tap]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Character
@@ -309,6 +327,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &483335909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483335906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81469f19d4296f40922ee5df2700e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputCamera: {fileID: 519420031}
+  ventaManager: {fileID: 1080247228}
+  vendedorLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxRayDistance: 100
+  ignoreInputOverUI: 1
+--- !u!114 &483335910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483335906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051c2a04d15b9bd4a8cd58514100e396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  necesidadHolder: {fileID: 0}
+  necesidadRenderer: {fileID: 0}
+  spriteSed: {fileID: 0}
+  spriteSol: {fileID: 0}
+  spriteDiversion: {fileID: 0}
+  spriteMasajes: {fileID: 0}
+  minWaitBetweenNeeds: 2
+  maxWaitBetweenNeeds: 4
+  solveTime: 4
+  includeMasajesInNeeds: 0
+  autoStart: 1
 --- !u!1 &508425871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1085,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1080247227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1080247229}
+  - component: {fileID: 1080247228}
+  m_Layer: 0
+  m_Name: VentaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1080247228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080247227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10a73525f9796d448ce378428af3376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterNecesidad: {fileID: 483335910}
+  loseOnWrongVendedor: 1
+  loseOnNeedTimeout: 1
+--- !u!4 &1080247229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080247227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 317.63828, y: 185.04303, z: -0.28149313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103142992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,7 +1666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274359acea432ad4aa9d79875b728559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultPanel: {fileID: 1103142992}
   winDirector: {fileID: 1068975607}
   loseDirector: {fileID: 1763995176}
   loseDelay: 0
@@ -1812,6 +1918,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1998219870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998219872}
+  - component: {fileID: 1998219871}
+  m_Layer: 0
+  m_Name: Vendedor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1998219871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998219870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395575e6d66fe4c4f9eebb10e1034e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  necesidadVenta: 0
+  signRenderer: {fileID: 0}
+  spriteSed: {fileID: 0}
+  spriteSol: {fileID: 0}
+  spriteDiversion: {fileID: 0}
+  spriteMasajes: {fileID: 0}
+--- !u!4 &1998219872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998219870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 315.00266, y: 185.65332, z: -0.3841938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2119860204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,4 +2090,6 @@ SceneRoots:
   - {fileID: 1068975609}
   - {fileID: 1763995178}
   - {fileID: 432322174}
+  - {fileID: 1080247229}
   - {fileID: 483335908}
+  - {fileID: 1998219872}

@@ -1,0 +1,22 @@
+public enum SoundType
+{
+    MenuMusic,
+    AmbientMusic,
+    TimerTicking,
+    Wooshes,
+    ChoqueCarro,
+    Motores,
+    Avion,
+    Tecleo,
+    PjEnojado,
+    PjTriste,
+    PjRiendo,
+    Frenado,
+    Nadando,
+    Electrocutandose,
+    Corriendo,
+    Saltando,
+    Tropezandose,
+    Comprar,
+    Equipar
+}
