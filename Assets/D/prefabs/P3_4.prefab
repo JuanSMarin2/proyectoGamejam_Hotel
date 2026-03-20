@@ -577,6 +577,7 @@ GameObject:
   - component: {fileID: 1548081995330135116}
   - component: {fileID: 4921930435987621063}
   - component: {fileID: 2642078352535431774}
+  - component: {fileID: 4901357062278893909}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -696,7 +697,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019770988404791307}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
@@ -705,6 +706,24 @@ MonoBehaviour:
   m_labelHash: 2.275433e-19
   m_SpriteKey: 0
   m_SpriteHash: 510510890
+--- !u!114 &4901357062278893909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019770988404791307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193fbb09aa9c4e4caa115931830c775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headRenderer: {fileID: 2778867294594387021}
+  sprites:
+  - label: Base
+    sprite: {fileID: 5634456141194391138, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
+  - label: Naranja
+    sprite: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
 --- !u!1 &1250773285692965286
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +802,7 @@ MonoBehaviour:
   derleg: {fileID: 8903564293565420906}
   izqfoot: {fileID: 5492689324381621690}
   derfoot: {fileID: 7724136228740156623}
+  headFixer: {fileID: 4901357062278893909}
 --- !u!1 &2102106822934437218
 GameObject:
   m_ObjectHideFlags: 0

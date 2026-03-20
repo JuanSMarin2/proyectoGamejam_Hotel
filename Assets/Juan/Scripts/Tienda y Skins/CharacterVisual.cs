@@ -15,6 +15,8 @@ public class CharacterVisual : MonoBehaviour
     [SerializeField] private SpriteResolver izqfoot;
     [SerializeField] private SpriteResolver derfoot;
 
+    [SerializeField] private HeadFixer headFixer;
+
     private const string BASE_LABEL = "Base";
 
     private void Start()
@@ -99,6 +101,10 @@ public class CharacterVisual : MonoBehaviour
     private void ApplyHead(string label)
     {
         head.SetCategoryAndLabel("Head", label);
+
+        if(headFixer != null)
+            headFixer.ApplyHead(label);
+
 
         derarm.SetCategoryAndLabel("derarm", label);
         izqarm.SetCategoryAndLabel("izqarm", label);
