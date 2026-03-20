@@ -197,6 +197,12 @@ public class MaletaManager : MonoBehaviour
         MaletaPicked?.Invoke(maleta, countedAsWinner, collectedWinners.Count, winnerTargets.Count);
     }
 
+    public void TryPickMaleta(Maleta maleta)
+    {
+        if (gameEnded || maleta == null) return;
+        maleta.TryPick();
+    }
+
     private bool IsWinnerPoolId(int poolId)
     {
         for (int i = 0; i < winnerTargets.Count; i++)
