@@ -27,13 +27,8 @@ MonoBehaviour:
       m_Sprite: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
-    - m_Name: Base_Atras
-      m_Hash: 386262387
-      m_Sprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 3
+    m_EntryOverrideCount: 2
   - m_Name: chest
     m_Hash: 994358199
     m_CategoryList: []
@@ -171,13 +166,13 @@ MonoBehaviour:
       m_Sprite: {fileID: 1957823595967566470, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 1957823595967566470, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
-    - m_Name: Base_Naranja
-      m_Hash: 27359289
+    - m_Name: Naranja
+      m_Hash: 764811941
       m_Sprite: {fileID: 5917330970429472833, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 5917330970429472833, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639095530530206685
+  m_ModificationHash: 639096265198898357
   m_Version: 1

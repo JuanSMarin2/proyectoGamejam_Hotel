@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 2.9092094e-34
-  m_labelHash: 2.1117359e-16
+  m_labelHash: 2.275433e-19
   m_SpriteKey: 0
   m_SpriteHash: 510510890
 --- !u!1 &3841159265412560270
@@ -705,6 +705,7 @@ GameObject:
   - component: {fileID: 631277545205988821}
   - component: {fileID: 7886204037954635055}
   - component: {fileID: 4119289788630149785}
+  - component: {fileID: 1630598677365047788}
   m_Layer: 0
   m_Name: DeFrente
   m_TagString: Untagged
@@ -805,6 +806,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1630598677365047788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3841159265412560270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6317ea989f1fc7546b34ac620323cab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 8387950058203909315}
+  chest: {fileID: 3445918601315198495}
+  derarm: {fileID: 4683917330207538570}
+  izqarm: {fileID: 4635443116619504901}
+  izqhand: {fileID: 6938122116448238387}
+  derhand: {fileID: 8951633233766425280}
+  izqleg: {fileID: 6750390312871680751}
+  derleg: {fileID: 4676072096870082207}
+  izqfoot: {fileID: 3498873423109870351}
+  derfoot: {fileID: 6990507302498940873}
 --- !u!1 &4003898471632134093
 GameObject:
   m_ObjectHideFlags: 0

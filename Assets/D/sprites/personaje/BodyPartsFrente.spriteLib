@@ -27,13 +27,8 @@ MonoBehaviour:
       m_Sprite: {fileID: 484243346335954190, guid: 40706a213d5d9e7429e0149eb99c2ff7, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 484243346335954190, guid: 40706a213d5d9e7429e0149eb99c2ff7, type: 3}
-    - m_Name: Atras
-      m_Hash: 628324209
-      m_Sprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 3
+    m_EntryOverrideCount: 2
   - m_Name: chest
     m_Hash: 994358199
     m_CategoryList: []
@@ -179,5 +174,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639095527042279152
+  m_ModificationHash: 639096257710736996
   m_Version: 1
