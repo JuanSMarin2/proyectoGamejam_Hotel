@@ -17,7 +17,6 @@ public class Maleta : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float waypointReachDistance = 0.08f;
-    [SerializeField] private float rotationLerpSpeed = 10f;
 
     private IReadOnlyList<Transform> waypoints;
     private float movementSpeed;
@@ -41,49 +40,24 @@ public class Maleta : MonoBehaviour
     {
         if (!canMove || waypoints == null || waypoints.Count == 0) return;
 
-        float remainingDistance = movementSpeed * Time.deltaTime;
-        int safety = 0;
-
-        while (remainingDistance > 0f && safety < waypoints.Count + 2)
+        Transform target = waypoints[targetWaypointIndex];
+        if (target == null)
         {
-            Transform target = waypoints[targetWaypointIndex];
-            if (target == null)
-            {
-                NextWaypoint();
-                safety++;
-                continue;
-            }
-
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-            if (distanceToTarget <= waypointReachDistance)
-            {
-                transform.position = target.position;
-                NextWaypoint();
-                safety++;
-                continue;
-            }
-
-            if (remainingDistance >= distanceToTarget)
-            {
-                transform.position = target.position;
-                remainingDistance -= distanceToTarget;
-                NextWaypoint();
-                safety++;
-            }
-            else
-            {
-                Vector3 direction = (target.position - transform.position).normalized;
-                transform.position += direction * remainingDistance;
-                remainingDistance = 0f;
-            }
+            NextWaypoint();
+            return;
         }
 
-        Transform currentTarget = waypoints[targetWaypointIndex];
-        if (currentTarget != null)
+        float lerpFactor = Time.deltaTime * movementSpeed;
+
+        transform.position = Vector3.Lerp(transform.position, target.position, lerpFactor);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, lerpFactor);
+
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance <= waypointReachDistance)
         {
-            float rotationT = Mathf.Clamp01(rotationLerpSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, currentTarget.rotation, rotationT);
+            transform.position = target.position;
+            transform.rotation = target.rotation;
+            NextWaypoint();
         }
     }
 

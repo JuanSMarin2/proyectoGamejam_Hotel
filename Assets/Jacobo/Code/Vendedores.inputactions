@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "Vendedores",
+    "maps": [
+        {
+            "name": "Character",
+            "id": "ac8f7a35-fdf5-4d9f-8c2a-a092d5e960f4",
+            "actions": [
+                {
+                    "name": "BuyProduct",
+                    "type": "Button",
+                    "id": "13368446-7ac5-4707-8a40-028b557ad16b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "71662de7-1bf9-415c-baf9-48f34fdeb7db",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BuyProduct",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1d2cf29-7777-4eb3-ad5d-dd654be0df5c",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BuyProduct",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
