@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6277427418243755789}
   m_Layer: 6
   m_Name: CurvedTraffic
-  m_TagString: Untagged
+  m_TagString: CarroMalo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
     m_Bits: 1152
   carLayerMask:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 64
   preferredDirection: {x: 0, y: 1}
   forwardWeight: 1
   obstacleDetectDistance: 1.6
@@ -130,7 +130,7 @@ MonoBehaviour:
   obstacleDetectInterval: 0.05
   avoidanceWeight: 3
   unstuckSideBias: 0.25
-  separationRadius: 0.9
+  separationRadius: 1
   separationInterval: 0.08
   separationWeight: 1.8
   trafficDetectDistance: 1.42

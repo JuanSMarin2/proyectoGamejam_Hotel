@@ -575,7 +575,15 @@ public class TrafficCar : MonoBehaviour
     /// </summary>
     protected virtual void ApplyMovement(Vector2 finalDirection)
     {
-        rb.linearVelocity = finalDirection * currentSpeed;
+        rb.linearVelocity = finalDirection * currentSpeed * GetMinigameSpeedMultiplier();
+    }
+
+    private float GetMinigameSpeedMultiplier()
+    {
+        if (MinigameManager.instance == null)
+            return 1f;
+
+        return Mathf.Clamp(MinigameManager.instance.Speed, 0f, 2.5f);
     }
 
     #endregion
