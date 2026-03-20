@@ -43,6 +43,19 @@ public class PlayerController : MonoBehaviour
         baseSpriteZ = spriteTransform.localEulerAngles.z;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("CarroMalo"))
+        {
+            ResultManager.instance.LoseMinigame();
+        }
+        else if (other.CompareTag("Obstacle"))
+        {
+            ResultManager.instance.LoseMinigame();
+        }
+        
+    }
+
     private void Update()
     {
         ReadInput();

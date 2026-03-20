@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - CarroMalo
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Carro
   - Pared
   - Generacion
-  - 
+  - Bordes
   - 
   - groundLayer
   - 

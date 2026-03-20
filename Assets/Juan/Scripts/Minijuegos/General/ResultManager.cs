@@ -7,8 +7,7 @@ public class ResultManager : MonoBehaviour
 {
     public static ResultManager instance;
 
-    [Header("UI")]
-    [SerializeField] private GameObject resultPanel;
+    
     
     [Header("Directors")]
     [SerializeField] private GameObject winDirector;
@@ -73,7 +72,7 @@ public class ResultManager : MonoBehaviour
         Time.timeScale = 0f;
 
     
-        resultPanel.SetActive(true);
+        
 
         GameObject activeDirectorObject = won ? winDirector : loseDirector;
         GameObject inactiveDirectorObject = won ? loseDirector : winDirector;
