@@ -12,13 +12,12 @@ public class CharacterNecesidad : MonoBehaviour
     [SerializeField] private Sprite spriteSed;
     [SerializeField] private Sprite spriteSol;
     [SerializeField] private Sprite spriteDiversion;
-    [SerializeField] private Sprite spriteMasajes;
 
     [Header("Timing")]
     [SerializeField] private float minWaitBetweenNeeds = 2f;
     [SerializeField] private float maxWaitBetweenNeeds = 4f;
     [SerializeField] private float solveTime = 4f;
-    [SerializeField] private bool includeMasajesInNeeds = false;
+
     [SerializeField] private bool autoStart = true;
 
     private Coroutine loopRoutine;
@@ -119,12 +118,6 @@ public class CharacterNecesidad : MonoBehaviour
 
     private Necesidad PickRandomNeed()
     {
-        if (includeMasajesInNeeds)
-        {
-            int random = UnityEngine.Random.Range(0, 4);
-            return (Necesidad)random;
-        }
-
         int randomNoMasajes = UnityEngine.Random.Range(0, 3);
         return (Necesidad)randomNoMasajes;
     }
@@ -139,8 +132,6 @@ public class CharacterNecesidad : MonoBehaviour
                 return spriteSol;
             case Necesidad.Diversion:
                 return spriteDiversion;
-            case Necesidad.Masajes:
-                return spriteMasajes;
             default:
                 return null;
         }
