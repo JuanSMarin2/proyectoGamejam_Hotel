@@ -26,13 +26,9 @@ public class RoundData : MonoBehaviour
     private List<string> sceneOrder = new List<string>();
     private int currentIndex = 0;
 
-    [SerializeField] private float storyStartSpeed = 2f;
-    [SerializeField] private float storySpeedIncreasePerMinigame = 0.3f;
-
-    [SerializeField] private float nonStoryStartSpeed = 1f;
-    [SerializeField] private float nonStorySpeedIncreasePerMinigame = 0.3f;
-    [SerializeField] private int nonStoryIncreaseMultiplierEvery = 5;
-    [SerializeField] private float nonStoryIncreaseMultiplier = 1.5f;
+    [SerializeField] private float startSpeed = 1f;
+    [SerializeField] private float speedIncreasePerMinigame = 0.2f;
+    [SerializeField] private float maxMinigameSpeed = 2.5f;
 
     private int currentMinigameIndex = -1;
 
@@ -83,26 +79,8 @@ public class RoundData : MonoBehaviour
     public float GetCurrentMinigameSpeed()
     {
         int minigameIndex = Mathf.Max(0, currentMinigameIndex);
-
-        if (isStoryMode)
-        {
-            return Mathf.Max(0f, storyStartSpeed + (minigameIndex * storySpeedIncreasePerMinigame));
-        }
-
-        if (minigameIndex == 0) return Mathf.Max(0f, nonStoryStartSpeed);
-
-        float speedValue = nonStoryStartSpeed;
-        int every = Mathf.Max(1, nonStoryIncreaseMultiplierEvery);
-
-        for (int t = 0; t < minigameIndex; t++)
-        {
-            int transitionNumber = t + 1;
-            int exponent = transitionNumber / every;
-            float factor = Mathf.Pow(nonStoryIncreaseMultiplier, exponent);
-            speedValue += nonStorySpeedIncreasePerMinigame * factor;
-        }
-
-        return Mathf.Max(0f, speedValue);
+        float speedValue = startSpeed + (minigameIndex * speedIncreasePerMinigame);
+        return Mathf.Clamp(speedValue, 0f, maxMinigameSpeed);
     }
 
     public void NextMinigame()
