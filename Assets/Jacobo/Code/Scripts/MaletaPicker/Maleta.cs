@@ -17,14 +17,17 @@ public class Maleta : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float waypointReachDistance = 0.08f;
+    [SerializeField] private float rotationLerpSpeed = 10f;
 
     private IReadOnlyList<Transform> waypoints;
     private float movementSpeed;
     private int targetWaypointIndex;
     private bool canMove;
     private bool isPicked;
+    private bool routeCompleted;
 
     private Action<Maleta> onPicked;
+    private Action<Maleta> onRouteCompleted;
 
     public MaletaType Type => type;
     public bool Winner => winner;
@@ -38,40 +41,88 @@ public class Maleta : MonoBehaviour
 
     private void Update()
     {
-        if (!canMove || waypoints == null || waypoints.Count == 0) return;
+        if (!canMove || routeCompleted || waypoints == null || waypoints.Count == 0) return;
 
-        Transform target = waypoints[targetWaypointIndex];
-        if (target == null)
+        float remainingDistance = movementSpeed * Time.deltaTime;
+        int safety = 0;
+
+        while (remainingDistance > 0f && safety < waypoints.Count + 2)
         {
-            NextWaypoint();
-            return;
+            Transform target = waypoints[targetWaypointIndex];
+            if (target == null)
+            {
+                NextWaypoint();
+                safety++;
+                continue;
+            }
+
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+            if (distanceToTarget <= waypointReachDistance)
+            {
+                transform.position = target.position;
+                if (IsLastWaypoint())
+                {
+                    CompleteRoute();
+                    return;
+                }
+
+                NextWaypoint();
+                safety++;
+                continue;
+            }
+
+            if (remainingDistance >= distanceToTarget)
+            {
+                transform.position = target.position;
+                remainingDistance -= distanceToTarget;
+
+                if (IsLastWaypoint())
+                {
+                    CompleteRoute();
+                    return;
+                }
+
+                NextWaypoint();
+                safety++;
+            }
+            else
+            {
+                Vector3 direction = (target.position - transform.position).normalized;
+                transform.position += direction * remainingDistance;
+                remainingDistance = 0f;
+            }
         }
 
-        float lerpFactor = Time.deltaTime * movementSpeed;
-
-        transform.position = Vector3.Lerp(transform.position, target.position, lerpFactor);
-        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, lerpFactor);
-
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance <= waypointReachDistance)
+        Transform currentTarget = targetWaypointIndex >= 0 && targetWaypointIndex < waypoints.Count
+            ? waypoints[targetWaypointIndex]
+            : null;
+        if (currentTarget != null)
         {
-            transform.position = target.position;
-            transform.rotation = target.rotation;
-            NextWaypoint();
+            float rotationT = Mathf.Clamp01(rotationLerpSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, currentTarget.rotation, rotationT);
         }
     }
 
-    public void Initialize(IReadOnlyList<Transform> newWaypoints, float newMovementSpeed, bool isWinner, int poolId, Action<Maleta> pickedCallback)
+    public void Initialize(
+        IReadOnlyList<Transform> newWaypoints,
+        float newMovementSpeed,
+        bool isWinner,
+        int poolId,
+        Action<Maleta> pickedCallback,
+        Action<Maleta> routeCompletedCallback = null)
     {
         waypoints = newWaypoints;
         movementSpeed = Mathf.Max(0f, newMovementSpeed);
         winner = isWinner;
         PoolId = poolId;
         onPicked = pickedCallback;
+        onRouteCompleted = routeCompletedCallback;
 
         targetWaypointIndex = 0;
         isPicked = false;
         canMove = true;
+        routeCompleted = false;
     }
 
     public void StopMovement()
@@ -89,14 +140,21 @@ public class Maleta : MonoBehaviour
         onPicked?.Invoke(this);
     }
 
-    private void OnMouseDown()
-    {
-        TryPick();
-    }
-
     private void NextWaypoint()
     {
         if (waypoints == null || waypoints.Count == 0) return;
         targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Count;
+    }
+
+    private bool IsLastWaypoint()
+    {
+        return waypoints != null && waypoints.Count > 0 && targetWaypointIndex >= waypoints.Count - 1;
+    }
+
+    private void CompleteRoute()
+    {
+        routeCompleted = true;
+        canMove = false;
+        onRouteCompleted?.Invoke(this);
     }
 }

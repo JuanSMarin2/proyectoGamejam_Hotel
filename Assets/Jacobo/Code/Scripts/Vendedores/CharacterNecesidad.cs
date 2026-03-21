@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class CharacterNecesidad : MonoBehaviour
 {
-    [Header("Visual")]
-    [SerializeField] private GameObject necesidadHolder;
-    [SerializeField] private SpriteRenderer necesidadRenderer;
-
-    [Header("Sprites")]
-    [SerializeField] private Sprite spriteSed;
-    [SerializeField] private Sprite spriteSol;
-    [SerializeField] private Sprite spriteDiversion;
-    [SerializeField] private Sprite spriteMasajes;
-
     [Header("Timing")]
     [SerializeField] private float minWaitBetweenNeeds = 2f;
     [SerializeField] private float maxWaitBetweenNeeds = 4f;
     [SerializeField] private float solveTime = 4f;
-    [SerializeField] private bool includeMasajesInNeeds = false;
+
     [SerializeField] private bool autoStart = true;
 
     private Coroutine loopRoutine;
 
     public bool HasActiveNeed { get; private set; }
     public Necesidad CurrentNeed { get; private set; }
+    public float SolveTime => solveTime;
 
     public event Action<Necesidad> NeedStarted;
     public event Action NeedResolved;
@@ -32,8 +23,6 @@ public class CharacterNecesidad : MonoBehaviour
 
     private void Start()
     {
-        HideNeedVisual();
-
         if (autoStart)
             StartNeeds();
     }
@@ -51,8 +40,6 @@ public class CharacterNecesidad : MonoBehaviour
 
         loopRoutine = null;
         HasActiveNeed = false;
-
-        HideNeedVisual();
     }
 
     public bool ResolveIfMatches(Necesidad soldNeed)
@@ -61,7 +48,6 @@ public class CharacterNecesidad : MonoBehaviour
         if (soldNeed != CurrentNeed) return false;
 
         HasActiveNeed = false;
-        HideNeedVisual();
 
         NeedResolved?.Invoke();
         return true;
@@ -77,8 +63,6 @@ public class CharacterNecesidad : MonoBehaviour
             CurrentNeed = PickRandomNeed();
             HasActiveNeed = true;
 
-            ShowNeedVisual(GetSpriteByNeed(CurrentNeed));
-
             NeedStarted?.Invoke(CurrentNeed);
 
             float timer = solveTime;
@@ -91,58 +75,15 @@ public class CharacterNecesidad : MonoBehaviour
             if (HasActiveNeed)
             {
                 HasActiveNeed = false;
-                HideNeedVisual();
 
                 NeedFailed?.Invoke(CurrentNeed);
             }
         }
     }
 
-    private void ShowNeedVisual(Sprite sprite)
-    {
-        if (necesidadRenderer != null)
-            necesidadRenderer.sprite = sprite;
-
-        if (necesidadHolder != null)
-            necesidadHolder.SetActive(sprite != null);
-        else if (necesidadRenderer != null)
-            necesidadRenderer.gameObject.SetActive(sprite != null);
-    }
-
-    private void HideNeedVisual()
-    {
-        if (necesidadHolder != null)
-            necesidadHolder.SetActive(false);
-        else if (necesidadRenderer != null)
-            necesidadRenderer.gameObject.SetActive(false);
-    }
-
     private Necesidad PickRandomNeed()
     {
-        if (includeMasajesInNeeds)
-        {
-            int random = UnityEngine.Random.Range(0, 4);
-            return (Necesidad)random;
-        }
-
         int randomNoMasajes = UnityEngine.Random.Range(0, 3);
         return (Necesidad)randomNoMasajes;
-    }
-
-    private Sprite GetSpriteByNeed(Necesidad need)
-    {
-        switch (need)
-        {
-            case Necesidad.Sed:
-                return spriteSed;
-            case Necesidad.Sol:
-                return spriteSol;
-            case Necesidad.Diversion:
-                return spriteDiversion;
-            case Necesidad.Masajes:
-                return spriteMasajes;
-            default:
-                return null;
-        }
     }
 }

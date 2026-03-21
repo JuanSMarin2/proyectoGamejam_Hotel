@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 08cbaba471e3ffb4989bd4549478c003
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6707988007524040183
+    second: Lineas Caminadora Arreglado_0
+  - first:
+      213: 5878618476484107465
+    second: Lineas Caminadora Arreglado_1
+  - first:
+      213: -7098669250242621876
+    second: Lineas Caminadora Arreglado_2
+  - first:
+      213: -8382104817341986254
+    second: Lineas Caminadora Arreglado_3
+  - first:
+      213: 1973693373498846593
+    second: Lineas Caminadora Arreglado_4
+  - first:
+      213: 1342715919158693426
+    second: Lineas Caminadora Arreglado_5
+  - first:
+      213: 7934812923604985128
+    second: Lineas Caminadora Arreglado_6
+  - first:
+      213: 5375096577797984464
+    second: Lineas Caminadora Arreglado_7
+  - first:
+      213: 446324570474000564
+    second: Lineas Caminadora Arreglado_8
+  - first:
+      213: 1930119429649217014
+    second: Lineas Caminadora Arreglado_9
+  - first:
+      213: 4099419246983503818
+    second: Lineas Caminadora Arreglado_10
+  - first:
+      213: -7551289206878178602
+    second: Lineas Caminadora Arreglado_11
+  - first:
+      213: 1295895578051974615
+    second: Lineas Caminadora Arreglado_12
+  - first:
+      213: 6807192709500934233
+    second: Lineas Caminadora Arreglado_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_0
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 938
+        width: 265
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90203f5927078e2a0800000000000000
+      internalID: -6707988007524040183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_1
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 938
+        width: 266
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc12ecab5c059150800000000000000
+      internalID: 5878618476484107465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_2
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 815
+        width: 266
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4ecc416de57c7d90800000000000000
+      internalID: -7098669250242621876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 815
+        width: 266
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23a8d343418ccab80800000000000000
+      internalID: -8382104817341986254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_4
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 676
+        width: 262
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18de0f68aa7f36b10800000000000000
+      internalID: 1973693373498846593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_5
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 676
+        width: 260
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e47b3b30942a210800000000000000
+      internalID: 1342715919158693426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_6
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 508
+        width: 255
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82567a6405e1e1e60800000000000000
+      internalID: 7934812923604985128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_7
+      rect:
+        serializedVersion: 2
+        x: 1549
+        y: 508
+        width: 253
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d01119ebdd289a40800000000000000
+      internalID: 5375096577797984464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_8
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 344
+        width: 241
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0b1a505d9a13600800000000000000
+      internalID: 446324570474000564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_9
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 217
+        width: 179
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f53252256929ca10800000000000000
+      internalID: 1930119429649217014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_10
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 145
+        width: 69
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acfd9d1e51014e830800000000000000
+      internalID: 4099419246983503818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_11
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 145
+        width: 68
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d2f8cb897e643790800000000000000
+      internalID: -7551289206878178602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_12
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 217
+        width: 177
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d599cb8922fbf110800000000000000
+      internalID: 1295895578051974615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lineas Caminadora Arreglado_13
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 344
+        width: 239
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9589e6704b1087e50800000000000000
+      internalID: 6807192709500934233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lineas Caminadora Arreglado_0: -6707988007524040183
+      Lineas Caminadora Arreglado_1: 5878618476484107465
+      Lineas Caminadora Arreglado_10: 4099419246983503818
+      Lineas Caminadora Arreglado_11: -7551289206878178602
+      Lineas Caminadora Arreglado_12: 1295895578051974615
+      Lineas Caminadora Arreglado_13: 6807192709500934233
+      Lineas Caminadora Arreglado_2: -7098669250242621876
+      Lineas Caminadora Arreglado_3: -8382104817341986254
+      Lineas Caminadora Arreglado_4: 1973693373498846593
+      Lineas Caminadora Arreglado_5: 1342715919158693426
+      Lineas Caminadora Arreglado_6: 7934812923604985128
+      Lineas Caminadora Arreglado_7: 5375096577797984464
+      Lineas Caminadora Arreglado_8: 446324570474000564
+      Lineas Caminadora Arreglado_9: 1930119429649217014
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
