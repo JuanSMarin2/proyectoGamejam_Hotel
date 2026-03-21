@@ -1451,6 +1451,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 483335908}
     m_Modifications:
+    - target: {fileID: 931034295458238960, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -654790618908471780, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
+    - target: {fileID: 1237361378821620285, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1360735560380428151, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
     - target: {fileID: 1250773285692965286, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
       propertyPath: m_Name
       value: P3_4
@@ -1463,6 +1471,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 5634456141194391138, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
+    - target: {fileID: 3064450756932180198, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1559519701370425316, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
     - target: {fileID: 3267601634913097947, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.62523
@@ -1514,6 +1526,14 @@ PrefabInstance:
     - target: {fileID: 3267601634913097947, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263351534715246940, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263351534715246940, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2142460785
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2246,6 +2266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f85871c54fe9f64791bf05205532fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDescriptionText: {fileID: 0}
+  gameDescription: 
+  gameDescriptionTime: 3
   speed: 1
   losesWithTime: 0
 --- !u!4 &2119860206

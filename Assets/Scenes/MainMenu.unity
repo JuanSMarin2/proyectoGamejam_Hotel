@@ -1239,7 +1239,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigameOrder:
+  - sceneName: Carritos
   - sceneName: Aeropuerto
+  - sceneName: CheckIn
   - sceneName: Buceo
 --- !u!4 &1276838708
 Transform:
