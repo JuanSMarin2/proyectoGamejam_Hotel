@@ -90,7 +90,7 @@ public class ReceptionistController : MonoBehaviour
     private void WorkingStateInput()
     {
         SetState(ReceptionistState.Angry);
-        ResultManager.instance.LoseMinigame();
+        ResultManager.instance.LoseMinigame(1);
     }
 
     private void MixedStateInput()
@@ -300,7 +300,7 @@ public class ReceptionistController : MonoBehaviour
         if (playingTimer >= playingTimeLimit)
         {
             SetState(ReceptionistState.Angry);
-            ResultManager.instance.LoseMinigame();
+            ResultManager.instance.LoseMinigame(0);
         }
     }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ResultManager : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class ResultManager : MonoBehaviour
     
     
     [Header("Directors")]
-    [SerializeField] private GameObject winDirector;
-    [SerializeField] private GameObject loseDirector;
+    [SerializeField] private List<GameObject> winDirectors = new List<GameObject>();
+    [SerializeField] private List<GameObject> loseDirectors = new List<GameObject>();
+    [SerializeField] private int winDirectorIndex = 0;
+    [SerializeField] private int loseDirectorIndex = 0;
 
     [Header("Timing")]
     [SerializeField] private float loseDelay = 0f;
@@ -35,7 +38,7 @@ public class ResultManager : MonoBehaviour
         if (hasFinished) return;
         hasFinished = true;
 
-        StartCoroutine(HandleResult(true));
+        StartCoroutine(HandleResult(true, 0));
     }
 
    
@@ -54,7 +57,32 @@ public class ResultManager : MonoBehaviour
         if (hasFinished) return;
         hasFinished = true;
 
-        StartCoroutine(HandleResult(false));
+        StartCoroutine(HandleResult(false, loseDirectorIndex));
+    }
+
+    public void WinMinigame(int directorIndex)
+    {
+        if (hasFinished) return;
+        hasFinished = true;
+
+        StartCoroutine(HandleResult(true, directorIndex));
+    }
+
+    public void LoseMinigame(int directorIndex)
+    {
+        if (hasFinished) return;
+        hasFinished = true;
+
+        Debug.Log("Minijuego perdido, delay de " +loseDelay +" segundos");
+        StartCoroutine(LoseWithDelay(directorIndex));
+    }
+
+    public void DirectLose(int directorIndex)
+    {
+        if (hasFinished) return;
+        hasFinished = true;
+
+        StartCoroutine(HandleResult(false, directorIndex));
     }
 
     private IEnumerator LoseWithDelay()
@@ -63,10 +91,19 @@ public class ResultManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(loseDelay);
 
-        yield return HandleResult(false);
+        yield return HandleResult(false, loseDirectorIndex);
     }
 
-    private IEnumerator HandleResult(bool won)
+    private IEnumerator LoseWithDelay(int directorIndex)
+    {
+        Time.timeScale = 0f;
+
+        yield return new WaitForSecondsRealtime(loseDelay);
+
+        yield return HandleResult(false, directorIndex);
+    }
+
+    private IEnumerator HandleResult(bool won, int directorIndex)
     {
     
         Time.timeScale = 0f;
@@ -74,11 +111,9 @@ public class ResultManager : MonoBehaviour
     
         
 
-        GameObject activeDirectorObject = won ? winDirector : loseDirector;
-        GameObject inactiveDirectorObject = won ? loseDirector : winDirector;
+        GameObject activeDirectorObject = GetDirector(won, directorIndex);
 
-        if (inactiveDirectorObject != null)
-            inactiveDirectorObject.SetActive(false);
+        SetDirectorsActive(won, false);
 
         PlayableDirector director = null;
         if (activeDirectorObject != null)
@@ -113,5 +148,34 @@ public class ResultManager : MonoBehaviour
 
    
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    private GameObject GetDirector(bool won, int index)
+    {
+        List<GameObject> list = won ? winDirectors : loseDirectors;
+        if (list == null || list.Count == 0)
+            return null;
+
+        if (index < 0 || index >= list.Count)
+        {
+            Debug.LogWarning("ResultManager: indice de director fuera de rango; usando 0.");
+            index = 0;
+        }
+
+        return list[index];
+    }
+
+    private void SetDirectorsActive(bool won, bool isActive)
+    {
+        List<GameObject> list = won ? winDirectors : loseDirectors;
+        if (list == null)
+            return;
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            GameObject directorObject = list[i];
+            if (directorObject != null)
+                directorObject.SetActive(isActive);
+        }
     }
 }

@@ -1493,8 +1493,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274359acea432ad4aa9d79875b728559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winDirector: {fileID: 392624309}
-  loseDirector: {fileID: 769525686}
+  winDirectors:
+  - {fileID: 392624309}
+  loseDirectors:
+  - {fileID: 769525686}
+  winDirectorIndex: 0
+  loseDirectorIndex: 0
   loseDelay: 0.5
   nextSceneName: MinigameResults
 --- !u!4 &1159018909
