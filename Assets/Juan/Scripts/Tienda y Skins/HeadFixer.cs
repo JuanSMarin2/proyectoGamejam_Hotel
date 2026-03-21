@@ -17,6 +17,7 @@ public class HeadFixer : MonoBehaviour
     [SerializeField] private bool UseBackwardsHead;
 
     private Dictionary<string, HeadSprite> spriteDict;
+    private string currentLabel;
 
     private void Awake()
     {
@@ -33,11 +34,22 @@ public class HeadFixer : MonoBehaviour
     {
         if (spriteDict.TryGetValue(label, out HeadSprite headSprite))
         {
+            currentLabel = label;
             headRenderer.sprite = UseBackwardsHead ? headSprite.backHeadSprite : headSprite.sprite;
         }
         else
         {
             Debug.LogWarning("No sprite para label: " + label);
+        }
+    }
+
+    public void SwapFace()
+    {
+        UseBackwardsHead = !UseBackwardsHead;
+
+        if (!string.IsNullOrEmpty(currentLabel))
+        {
+            ApplyHead(currentLabel);
         }
     }
 }
