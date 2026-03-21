@@ -17,6 +17,7 @@ public class RoundData : MonoBehaviour
 
 
     [SerializeField] private string endSceneName = "EndAnimationScene";
+    [SerializeField] private string infiniteFinalSceneName = "FinalScene";
 
     public int StartMoney => startMoney;
 
@@ -25,6 +26,8 @@ public class RoundData : MonoBehaviour
     [Header("Minigames")]
     private List<string> sceneOrder = new List<string>();
     private int currentIndex = 0;
+    private List<string> infiniteShuffledOrder = new List<string>();
+    private int infiniteOrderIndex = 0;
 
     [SerializeField] private float startSpeed = 1f;
     [SerializeField] private float speedIncreasePerMinigame = 0.2f;
@@ -39,13 +42,24 @@ public class RoundData : MonoBehaviour
 
     private int previousMoney;
     private int lastMoneyChange;
+    private int completedMinigames;
 
 
 
     public int PreviousMoney => previousMoney;
     public int LastMoneyChange => lastMoneyChange;
+    public int CompletedMinigames => completedMinigames;
 
     public int Money => money;
+
+    public static void ResetForMainMenu()
+    {
+        if (instance != null)
+        {
+            Destroy(instance.gameObject);
+            instance = null;
+        }
+    }
 
 
 
@@ -69,6 +83,9 @@ public class RoundData : MonoBehaviour
         sceneOrder = order;
         currentIndex = 0;
         currentMinigameIndex = -1;
+        completedMinigames = 0;
+        infiniteShuffledOrder.Clear();
+        infiniteOrderIndex = 0;
     }
 
     public void SetStoryMode(bool value)
@@ -88,7 +105,27 @@ public class RoundData : MonoBehaviour
       
         if (money <= 0)
         {
+            if (!isStoryMode)
+            {
+                SceneManager.LoadScene(infiniteFinalSceneName);
+                return;
+            }
+
             LoadEndScene();
+            return;
+        }
+
+        if (!isStoryMode)
+        {
+            string nextInfiniteScene = GetNextInfiniteScene();
+            if (string.IsNullOrEmpty(nextInfiniteScene))
+            {
+                SceneManager.LoadScene(infiniteFinalSceneName);
+                return;
+            }
+
+            currentMinigameIndex++;
+            SceneManager.LoadScene(nextInfiniteScene);
             return;
         }
 
@@ -124,9 +161,36 @@ public class RoundData : MonoBehaviour
         else
         {
             lastMoneyChange = 0;
+            completedMinigames++;
         }
 
         Debug.Log("Resultado: " + (won ? "Win" : "Lose") +
                   " | Money: " + money);
+    }
+
+    private string GetNextInfiniteScene()
+    {
+        if (sceneOrder == null || sceneOrder.Count == 0)
+            return null;
+
+        if (infiniteShuffledOrder.Count == 0 || infiniteOrderIndex >= infiniteShuffledOrder.Count)
+        {
+            infiniteShuffledOrder = new List<string>(sceneOrder);
+            ShuffleList(infiniteShuffledOrder);
+            infiniteOrderIndex = 0;
+        }
+
+        string scene = infiniteShuffledOrder[infiniteOrderIndex];
+        infiniteOrderIndex++;
+        return scene;
+    }
+
+    private void ShuffleList(List<string> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+        }
     }
 }

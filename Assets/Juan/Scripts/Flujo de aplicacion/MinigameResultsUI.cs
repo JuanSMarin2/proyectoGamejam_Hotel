@@ -7,6 +7,7 @@ public class MinigameResultsUI : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI changeText;
+    [SerializeField] private TextMeshProUGUI completedText;
 
     [Header("Animation")]
     [SerializeField] private float lerpDuration = 1.5f;
@@ -27,6 +28,16 @@ public class MinigameResultsUI : MonoBehaviour
         int startMoney = RoundData.instance.PreviousMoney;
         int finalMoney = RoundData.instance.Money;
         int change = RoundData.instance.LastMoneyChange;
+
+        if (!RoundData.instance.IsStoryMode && completedText != null)
+        {
+            completedText.gameObject.SetActive(true);
+            completedText.text = "Minijuegos completados: " + RoundData.instance.CompletedMinigames;
+        }
+        else if (completedText != null)
+        {
+            completedText.gameObject.SetActive(false);
+        }
 
     
         moneyText.text = startMoney.ToString();

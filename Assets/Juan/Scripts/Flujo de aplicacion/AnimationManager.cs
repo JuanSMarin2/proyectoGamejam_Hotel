@@ -49,9 +49,25 @@ public class AnimationManager : MonoBehaviour
         yield return null;
 
         while (director.state == PlayState.Playing)
+        {
+            if (SkipRequested())
+            {
+                director.Stop();
+                break;
+            }
+
             yield return null;
+        }
 
         Debug.Log("Director finished, loading next minigame...");
         RoundData.instance.NextMinigame();
+    }
+
+    private bool SkipRequested()
+    {
+        return Input.anyKeyDown ||
+               Input.GetMouseButtonDown(0) ||
+               Input.GetMouseButtonDown(1) ||
+               Input.GetMouseButtonDown(2);
     }
 }

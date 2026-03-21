@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7126472820965146200}
   m_Layer: 0
-  m_Name: root
+  m_Name: B_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8206635337459483519}
   - component: {fileID: 3445918601315198495}
   m_Layer: 0
-  m_Name: PersonajeDeFrente
+  m_Name: S_Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2746015333852343554}
   m_Layer: 0
-  m_Name: izqfoot
+  m_Name: B_izqfoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8617398311915079513}
   m_Layer: 0
-  m_Name: izqarm
+  m_Name: S_izqarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 6548009580678857825}
   - component: {fileID: 3498873423109870351}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_8
+  m_Name: S_Izqfoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 6348653235485029835}
   - component: {fileID: 4683917330207538570}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_3
+  m_Name: S_Derarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,7 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469445273934842362}
   m_Layer: 0
-  m_Name: Head
+  m_Name: B_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 7171253581328913352}
   - component: {fileID: 8387950058203909315}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_0
+  m_Name: S_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8067790889276164095}
   m_Layer: 0
-  m_Name: izqhand
+  m_Name: B_izqhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,7 +870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7610612350570582221}
   m_Layer: 0
-  m_Name: derhand
+  m_Name: B_derhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -901,7 +901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6158231532137755323}
   m_Layer: 0
-  m_Name: chest
+  m_Name: B_chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 4818213929482275279}
   - component: {fileID: 8951633233766425280}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_7
+  m_Name: S_Derhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,7 +1076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1139814054366813164}
   m_Layer: 0
-  m_Name: derfeet
+  m_Name: B_derfeet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8863671018761079781}
   m_Layer: 0
-  m_Name: neck
+  m_Name: B_neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1140,7 +1140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763796382981586460}
   m_Layer: 0
-  m_Name: izqfeet
+  m_Name: B_izqleg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 132656128317435527}
   - component: {fileID: 6750390312871680751}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_5
+  m_Name: S_Izqleg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1313,7 +1313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2708763053916981665}
   m_Layer: 0
-  m_Name: derfoot
+  m_Name: B_derfoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1348,7 +1348,7 @@ GameObject:
   - component: {fileID: 5412325362094389405}
   - component: {fileID: 6938122116448238387}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_4
+  m_Name: S_IzqHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1485,7 +1485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8938555825432510348}
   m_Layer: 0
-  m_Name: derarm
+  m_Name: B_derarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1521,7 +1521,7 @@ GameObject:
   - component: {fileID: 8027109502321361722}
   - component: {fileID: 4676072096870082207}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_6
+  m_Name: S_Derleg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1662,7 +1662,7 @@ GameObject:
   - component: {fileID: 5031702889278244082}
   - component: {fileID: 4635443116619504901}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_1
+  m_Name: S_IzqArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1803,7 +1803,7 @@ GameObject:
   - component: {fileID: 5175863920655747823}
   - component: {fileID: 6990507302498940873}
   m_Layer: 0
-  m_Name: Prota_frente_correccion_9
+  m_Name: S_Derfoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

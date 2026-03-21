@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroScene.unity
     guid: e69f53633868d15419f356c6aab0adfd
   - enabled: 1
+    path: Assets/Scenes/Aeropuerto.unity
+    guid: 05fbd26850a773e439bc0901fe5beb83
+  - enabled: 1
     path: Assets/Scenes/Buceo.unity
     guid: 647c2261a2329e74f809487216c6d23f
   - enabled: 1

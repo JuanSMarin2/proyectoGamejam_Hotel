@@ -25,7 +25,9 @@ public class FinalSceneManager : MonoBehaviour
 
     private IEnumerator TransferMoney()
     {
-        int roundMoney = RoundData.instance.Money;
+        int roundMoney = RoundData.instance.IsStoryMode
+            ? RoundData.instance.Money
+            : RoundData.instance.CompletedMinigames * 100;
         int globalMoney = GameData.instance.Money;
 
         int startRoundMoney = roundMoney;
@@ -67,7 +69,9 @@ public class FinalSceneManager : MonoBehaviour
 
     
         resultText.gameObject.SetActive(true);
-        resultText.text = "Conservaste " + startRoundMoney + "$";
+        resultText.text = RoundData.instance.IsStoryMode
+            ? "Conservaste " + startRoundMoney + "$"
+            : "Conseguiste " + startRoundMoney + "$ por completar " + RoundData.instance.CompletedMinigames + " minijuegos!";
 
    
         homeButton.SetActive(true);
@@ -77,6 +81,11 @@ public class FinalSceneManager : MonoBehaviour
  
     public void LoadScene(string sceneName)
     {
+        if (sceneName == "MainMenu")
+        {
+            RoundData.ResetForMainMenu();
+        }
+
         SceneManager.LoadScene(sceneName);
     }
 }
