@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Vendedor : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class Vendedor : MonoBehaviour
     [Header("Sign")]
     [SerializeField] private SpriteRenderer signRenderer;
     [SerializeField] private VendedorSignSpriteLibrary signSpriteLibrary;
+    [SerializeField] private Animator animator;
+
+    [Header("Bought Visual")]
+    [SerializeField] private string boughtTriggerName = "bought";
+    [SerializeField] private float boughtDelayBeforeFade = 0.15f;
+    [SerializeField] private float boughtFadeDuration = 0.35f;
 
     [Header("Random Stops")]
     [SerializeField] private bool enableRandomStops = true;
@@ -90,6 +97,11 @@ public class Vendedor : MonoBehaviour
         }
     }
 
+    public void PlayBoughtAndFadeOut()
+    {
+        StartCoroutine(BoughtAndFadeRoutine());
+    }
+
     public void SetSortingOrderRecursive(int baseSortingOrder)
     {
         if (cachedRenderers == null || cachedRenderers.Length == 0)
@@ -114,6 +126,9 @@ public class Vendedor : MonoBehaviour
 
         if (signSpriteLibrary == null)
             signSpriteLibrary = GetComponent<VendedorSignSpriteLibrary>();
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
 
         cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);
         cachedColliders3D = GetComponentsInChildren<Collider>(true);
@@ -199,5 +214,45 @@ public class Vendedor : MonoBehaviour
 
         if (signSpriteLibrary.TryGetRandomSprite(necesidadVenta, out Sprite sprite))
             signRenderer.sprite = sprite;
+    }
+
+    private IEnumerator BoughtAndFadeRoutine()
+    {
+        if (animator != null && !string.IsNullOrWhiteSpace(boughtTriggerName))
+            animator.SetTrigger(boughtTriggerName);
+
+        yield return new WaitForSeconds(Mathf.Max(0f, boughtDelayBeforeFade));
+
+        if (cachedRenderers == null || cachedRenderers.Length == 0)
+            cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        float duration = Mathf.Max(0.01f, boughtFadeDuration);
+        float elapsed = 0f;
+
+        Color[] startColors = new Color[cachedRenderers.Length];
+        for (int i = 0; i < cachedRenderers.Length; i++)
+        {
+            if (cachedRenderers[i] != null)
+                startColors[i] = cachedRenderers[i].color;
+        }
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            for (int i = 0; i < cachedRenderers.Length; i++)
+            {
+                if (cachedRenderers[i] == null) continue;
+
+                Color c = startColors[i];
+                c.a = Mathf.Lerp(startColors[i].a, 0f, t);
+                cachedRenderers[i].color = c;
+            }
+
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }

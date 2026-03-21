@@ -47,6 +47,9 @@ public class VentaManager : MonoBehaviour
         OnCompra?.Invoke(vendedor, vendedor.NecesidadVenta, success);
         OnVenta?.Invoke(vendedor, vendedor.NecesidadVenta, success);
 
+        if (success)
+            vendedor.PlayBoughtAndFadeOut();
+
         if (!success && loseOnWrongVendedor)
         {
             gameEnded = true;
