@@ -2287,8 +2287,8 @@ MonoBehaviour:
   despawnPadding: 15
   targetActiveVehicles: 12
   spawnInterval: 2
-  minCarsPerSpawn: 2
-  maxCarsPerSpawn: 3
+  minCarsPerSpawn: 1
+  maxCarsPerSpawn: 4
   useSpawnAreaBounds: 1
   minX: -5
   maxX: 5

@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeedMin: 2
-  baseSpeedMax: 3
+  baseSpeedMax: 4
   spriteRenderer: {fileID: 3985713421007679334}
   spriteOptions:
   - {fileID: 21300000, guid: 31e9d03db785f6348b264f844a72c499, type: 3}
@@ -142,6 +142,7 @@ MonoBehaviour:
   decelerationTime: 0.12
   directionSmoothTime: 0.65
   maxSteeringMagnitude: 1
+  maxMinigameSpeedMultiplier: 10
   curveSource: 0
   curveIntensity: 1.5
   curveFrequency: 1
