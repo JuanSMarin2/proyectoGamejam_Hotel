@@ -8,30 +8,32 @@ public class HeadFixer : MonoBehaviour
     {
         public string label;
         public Sprite sprite;
+        public Sprite backHeadSprite;
     }
 
     [Header("Config")]
     [SerializeField] private SpriteRenderer headRenderer;
     [SerializeField] private List<HeadSprite> sprites;
+    [SerializeField] private bool UseBackwardsHead;
 
-    private Dictionary<string, Sprite> spriteDict;
+    private Dictionary<string, HeadSprite> spriteDict;
 
     private void Awake()
     {
-        spriteDict = new Dictionary<string, Sprite>();
+        spriteDict = new Dictionary<string, HeadSprite>();
 
         foreach (var s in sprites)
         {
             if (!spriteDict.ContainsKey(s.label))
-                spriteDict.Add(s.label, s.sprite);
+                spriteDict.Add(s.label, s);
         }
     }
 
     public void ApplyHead(string label)
     {
-        if (spriteDict.TryGetValue(label, out Sprite sprite))
+        if (spriteDict.TryGetValue(label, out HeadSprite headSprite))
         {
-            headRenderer.sprite = sprite;
+            headRenderer.sprite = UseBackwardsHead ? headSprite.backHeadSprite : headSprite.sprite;
         }
         else
         {

@@ -722,8 +722,11 @@ MonoBehaviour:
   sprites:
   - label: Base
     sprite: {fileID: 5634456141194391138, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
+    backHeadSprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
   - label: Naranja
     sprite: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
+    backHeadSprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
+  UseBackwardsHead: 0
 --- !u!1 &1250773285692965286
 GameObject:
   m_ObjectHideFlags: 0
