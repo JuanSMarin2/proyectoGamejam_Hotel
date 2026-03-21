@@ -1664,6 +1664,9 @@ MonoBehaviour:
   maxSpeed: 2.5
   enemiesAtMinSpeed: 30
   enemiesAtMaxSpeed: 15
+  underWater: 1
+  waterList: []
+  groundList: []
 --- !u!4 &1292172675
 Transform:
   m_ObjectHideFlags: 0
@@ -2489,7 +2492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3495533482532362938, guid: 84c24d15b0d78904d8abbc483ecb0f47, type: 3}
       propertyPath: startSpeed
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3495533482532362938, guid: 84c24d15b0d78904d8abbc483ecb0f47, type: 3}
       propertyPath: storyStartSpeed

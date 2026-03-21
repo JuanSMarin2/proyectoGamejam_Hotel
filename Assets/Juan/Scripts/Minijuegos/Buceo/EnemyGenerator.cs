@@ -20,6 +20,11 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private int enemiesAtMinSpeed = 30;
     [SerializeField] private int enemiesAtMaxSpeed = 15;
 
+    [Header("Sprite Variants")]
+    [SerializeField] private bool underWater = true;
+    [SerializeField] private List<Sprite> waterList = new List<Sprite>();
+    [SerializeField] private List<Sprite> groundList = new List<Sprite>();
+
     private readonly List<Vector3> generatedPositions = new List<Vector3>();
 
     private IEnumerator Start()
@@ -67,9 +72,22 @@ public class EnemyGenerator : MonoBehaviour
                 continue;
             }
 
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform);
+            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform);
+            ApplyRandomSprite(enemy);
             generatedPositions.Add(spawnPosition);
         }
+    }
+
+    private void ApplyRandomSprite(GameObject enemy)
+    {
+        List<Sprite> selectedList = underWater ? waterList : groundList;
+        if (selectedList == null || selectedList.Count == 0) return;
+
+        SpriteRenderer spriteRenderer = enemy.GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer == null) return;
+
+        int randomIndex = Random.Range(0, selectedList.Count);
+        spriteRenderer.sprite = selectedList[randomIndex];
     }
 
     private int GetEnemyCountForCurrentSpeed()
