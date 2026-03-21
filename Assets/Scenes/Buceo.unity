@@ -843,7 +843,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.083687305, y: -0.23849075}
+  m_Offset: {x: 0.083687305, y: -0.06814194}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -853,7 +853,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5562639, y: 1.122712}
+  m_Size: {x: 0.5562639, y: 1.4634097}
   m_EdgeRadius: 0
 --- !u!1 &258652578
 GameObject:
@@ -3566,10 +3566,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 204612398}
     m_Modifications:
+    - target: {fileID: 931034295458238960, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -654790618908471780, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
+    - target: {fileID: 1237361378821620285, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1360735560380428151, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
     - target: {fileID: 1250773285692965286, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
       propertyPath: m_Name
       value: P3_4
       objectReference: {fileID: 0}
+    - target: {fileID: 3064450756932180198, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1559519701370425316, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
     - target: {fileID: 3267601634913097947, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.42
@@ -6023,8 +6035,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274359acea432ad4aa9d79875b728559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winDirector: {fileID: 607983403}
-  loseDirector: {fileID: 831301588}
+  winDirectors:
+  - {fileID: 607983403}
+  loseDirectors:
+  - {fileID: 831301588}
+  winDirectorIndex: 0
+  loseDirectorIndex: 0
   loseDelay: 1.5
   nextSceneName: MinigameResults
 --- !u!4 &1734696879

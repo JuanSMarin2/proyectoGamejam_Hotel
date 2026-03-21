@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5299439206039557, guid: f2a09f580e26a1a4ba91157e84a2d995, type: 3}
+      propertyPath: skins.Array.data[4].id
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299439206039557, guid: f2a09f580e26a1a4ba91157e84a2d995, type: 3}
+      propertyPath: skins.Array.data[4].price
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1138533696069043372, guid: f2a09f580e26a1a4ba91157e84a2d995, type: 3}
       propertyPath: m_Name
       value: ShopDataBase
