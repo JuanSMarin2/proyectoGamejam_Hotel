@@ -24,7 +24,6 @@ public class MaletaGrabInput : MonoBehaviour
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-        Debug.Log("Grab input received: " + context.phase);
         if (!context.performed) return;
         if (Time.time < lastGrabTime + grabCooldown) return;
 
@@ -36,7 +35,6 @@ public class MaletaGrabInput : MonoBehaviour
 
     public void TryGrabMaleta(Maleta maleta)
     {
-        Debug.Log("Attempting to grab maleta: " + maleta.name);
         if (maletaManager == null || maleta == null) return;
         maletaManager.TryPickMaleta(maleta);
     }
