@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8509167870436600629}
   - component: {fileID: -1879337668863848271}
   - component: {fileID: 2596785061044744302}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: VendedorAtras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8913943894755459425}
   - component: {fileID: 6982242967779198946}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406515756870397990}
   - component: {fileID: 7605152421831082675}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: CartelVendedor_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

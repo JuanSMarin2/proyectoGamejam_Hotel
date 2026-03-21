@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5490064035154429582}
   - component: {fileID: 3127253581413627187}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 2284722727921584447}
   - component: {fileID: -5812776847266083074}
   - component: {fileID: -5322597659179726867}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: VendedorAdelante
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1526372469324676807}
   - component: {fileID: 1196835115898344938}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: CartelVendedor_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

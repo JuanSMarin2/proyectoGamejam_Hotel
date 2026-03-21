@@ -40,6 +40,8 @@ public class VentaManager : MonoBehaviour
         if (gameEnded || vendedor == null || characterNecesidad == null) return;
         if (!characterNecesidad.HasActiveNeed) return;
 
+        vendedor.HandleCompraAttemptVisualState();
+
         bool success = characterNecesidad.ResolveIfMatches(vendedor.NecesidadVenta);
 
         OnCompra?.Invoke(vendedor, vendedor.NecesidadVenta, success);

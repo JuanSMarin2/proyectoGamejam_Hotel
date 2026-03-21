@@ -38,6 +38,7 @@ public class SpawnerVendedor : MonoBehaviour
     [Header("Sorting")]
     [SerializeField] private int initialSortingOrder = 0;
     [SerializeField] private int sortingOrderStep = 1;
+    [SerializeField] private int guaranteedNeedSortingOrder = 100;
 
     private readonly List<Vendedor> aliveVendedores = new List<Vendedor>();
     private readonly List<Vendedor> candidatePrefabs = new List<Vendedor>();
@@ -95,8 +96,7 @@ public class SpawnerVendedor : MonoBehaviour
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
         instance.Initialize(direction, speed, despawnX);
-        instance.SetSortingOrderRecursive(nextSortingOrder);
-        nextSortingOrder += Mathf.Max(1, sortingOrderStep);
+        instance.SetSortingOrderRecursive(Mathf.Max(0, guaranteedNeedSortingOrder));
 
         aliveVendedores.Add(instance);
     }

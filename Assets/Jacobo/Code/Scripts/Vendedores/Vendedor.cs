@@ -33,6 +33,8 @@ public class Vendedor : MonoBehaviour
     private float stopAttemptTimer;
     private float stopDurationTimer;
     private SpriteRenderer[] cachedRenderers;
+    private Collider[] cachedColliders3D;
+    private Collider2D[] cachedColliders2D;
 
     public Necesidad NecesidadVenta => necesidadVenta;
     public SpawnPointPreference SpawnPreference => spawnPreference;
@@ -61,6 +63,33 @@ public class Vendedor : MonoBehaviour
         moving = false;
     }
 
+    public void HandleCompraAttemptVisualState()
+    {
+        StopMovement();
+        temporarilyStopped = false;
+        stopDurationTimer = 0f;
+
+        SetSortingOrderRecursive(0);
+
+        if (cachedColliders3D == null)
+            cachedColliders3D = GetComponentsInChildren<Collider>(true);
+
+        if (cachedColliders2D == null)
+            cachedColliders2D = GetComponentsInChildren<Collider2D>(true);
+
+        for (int i = 0; i < cachedColliders3D.Length; i++)
+        {
+            if (cachedColliders3D[i] != null)
+                cachedColliders3D[i].enabled = false;
+        }
+
+        for (int i = 0; i < cachedColliders2D.Length; i++)
+        {
+            if (cachedColliders2D[i] != null)
+                cachedColliders2D[i].enabled = false;
+        }
+    }
+
     public void SetSortingOrderRecursive(int baseSortingOrder)
     {
         if (cachedRenderers == null || cachedRenderers.Length == 0)
@@ -87,6 +116,8 @@ public class Vendedor : MonoBehaviour
             signSpriteLibrary = GetComponent<VendedorSignSpriteLibrary>();
 
         cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        cachedColliders3D = GetComponentsInChildren<Collider>(true);
+        cachedColliders2D = GetComponentsInChildren<Collider2D>(true);
 
         ApplySignSprite();
     }
