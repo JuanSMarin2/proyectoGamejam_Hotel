@@ -22,7 +22,6 @@ public class MaletaManager : MonoBehaviour
     [SerializeField] private CintaMovement cintaMovement;
     [SerializeField] private SpriteSelector spriteSelector;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Transform despawnPoint;
 
     [Header("Maletas Pool")]
     [SerializeField] private List<Maleta> maletaPool = new List<Maleta>();
@@ -31,7 +30,6 @@ public class MaletaManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 1.2f;
     [SerializeField] private int maxAliveMaletas = 8;
     [SerializeField] private int prewarmPerPrefab = 3;
-    [SerializeField] private float despawnDistance = 0.25f;
 
     [Header("Gameplay")]
     [SerializeField, Range(1, 3)] private int winners = 1;
@@ -67,8 +65,6 @@ public class MaletaManager : MonoBehaviour
     {
         if (!gameEnded)
             HandleSpawn();
-
-        HandleDespawn();
     }
 
     private void BuildWinners()
@@ -138,31 +134,19 @@ public class MaletaManager : MonoBehaviour
             cintaMovement.MovementSpeed,
             isWinner,
             spawnPoolIndex,
-            HandleMaletaPicked
+            HandleMaletaPicked,
+            HandleMaletaReachedEnd
         );
 
         aliveMaletas.Add(instance);
     }
 
-    private void HandleDespawn()
+    private void HandleMaletaReachedEnd(Maleta maleta)
     {
-        if (despawnPoint == null || aliveMaletas.Count == 0) return;
+        if (maleta == null) return;
 
-        for (int i = aliveMaletas.Count - 1; i >= 0; i--)
-        {
-            Maleta maleta = aliveMaletas[i];
-            if (maleta == null)
-            {
-                aliveMaletas.RemoveAt(i);
-                continue;
-            }
-
-            if (Vector3.Distance(maleta.transform.position, despawnPoint.position) <= despawnDistance)
-            {
-                aliveMaletas.RemoveAt(i);
-                ReturnToPool(maleta);
-            }
-        }
+        aliveMaletas.Remove(maleta);
+        ReturnToPool(maleta);
     }
 
     private void HandleMaletaPicked(Maleta maleta)
@@ -171,13 +155,17 @@ public class MaletaManager : MonoBehaviour
 
         bool countedAsWinner = false;
 
+        Debug.Log($"[MaletaManager] Pick received: {maleta.name} | winner={maleta.Winner} | poolId={maleta.PoolId}");
+
         if (maleta.Winner)
         {
             countedAsWinner = collectedWinners.Add(maleta.PoolId);
+            Debug.Log($"[MaletaManager] Winner counted={countedAsWinner}. Progress: {collectedWinners.Count}/{winnerTargets.Count}");
 
             if (countedAsWinner && collectedWinners.Count >= winnerTargets.Count)
             {
                 gameEnded = true;
+                Debug.Log("[MaletaManager] All winner maletas collected. Triggering win.");
                 if (winDelay <= 0f)
                 {
                     ResultManager.instance.WinMinigame();

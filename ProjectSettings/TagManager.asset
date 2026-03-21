@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CarroMalo
   - Obstacle
+  - Maleta
   layers:
   - Default
   - TransparentFX
