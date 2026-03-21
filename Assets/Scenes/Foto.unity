@@ -1143,7 +1143,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.8113208, g: 0.48837268, b: 0.026788909, a: 1}
   m_FlipX: 0
@@ -1726,7 +1726,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Toma la foto perfecta
+  m_text: 'Toma la foto perfecta al sol
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1846,8 +1848,8 @@ MonoBehaviour:
   minSpawnInterval: 0.7
   maxSpawnInterval: 1.4
   spawnIntervalMultiplier: 1
-  minEnemiesPerSpawn: 2
-  maxEnemiesPerSpawn: 3
+  minEnemiesPerSpawn: 1
+  maxEnemiesPerSpawn: 2
   minEnemySpeed: 5
   maxEnemySpeed: 8
   fallbackRoundTime: 10
@@ -1857,7 +1859,7 @@ MonoBehaviour:
   minigameMaxSpeed: 2.5
   minLifeTime: 10
   maxLifeTime: 10
-  sunCollider: {fileID: 0}
+  sunCollider: {fileID: 928002228}
 --- !u!4 &1598943431
 Transform:
   m_ObjectHideFlags: 0
@@ -2051,7 +2053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDescriptionText: {fileID: 1527992365}
-  gameDescription: Toma la foto perfecta
+  gameDescription: Toma la foto perfecta al sol
   gameDescriptionTime: 2
   speed: 1
   losesWithTime: 0
