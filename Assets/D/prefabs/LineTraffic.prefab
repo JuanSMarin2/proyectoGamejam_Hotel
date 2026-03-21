@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59cd4ee5f6999fc4987a579178e5c458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeedMin: 1
-  baseSpeedMax: 3
+  baseSpeedMin: 2
+  baseSpeedMax: 4
   spriteRenderer: {fileID: 1081129895337917096}
   spriteOptions:
   - {fileID: 21300000, guid: 31e9d03db785f6348b264f844a72c499, type: 3}
@@ -142,6 +142,7 @@ MonoBehaviour:
   decelerationTime: 0.12
   directionSmoothTime: 0.35
   maxSteeringMagnitude: 1
+  maxMinigameSpeedMultiplier: 10
 --- !u!50 &4143702254421516317
 Rigidbody2D:
   serializedVersion: 5
