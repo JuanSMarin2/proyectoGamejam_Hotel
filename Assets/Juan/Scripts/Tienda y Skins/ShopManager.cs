@@ -184,6 +184,7 @@ public class ShopManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        RoundData.ResetForMainMenu();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: c1dd9542ede638c41809bb5f98155c82
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5882581150803446432
+    second: Peces Fondo_0
+  - first:
+      213: 6868373365478616131
+    second: Peces Fondo_1
+  - first:
+      213: -9087850276530256633
+    second: Peces Fondo_2
+  - first:
+      213: -1831781285148932444
+    second: Peces Fondo_3
+  - first:
+      213: 7800418756186540607
+    second: Peces Fondo_4
+  - first:
+      213: 3939524460714972665
+    second: Peces Fondo_5
+  - first:
+      213: 8075847389522620005
+    second: Peces Fondo_6
+  - first:
+      213: -4586477519945420691
+    second: Peces Fondo_7
+  - first:
+      213: -5281891471955003593
+    second: Peces Fondo_8
+  - first:
+      213: 431628432640268746
+    second: Peces Fondo_9
+  - first:
+      213: -6302073676671051808
+    second: Peces Fondo_10
+  - first:
+      213: -207732711737420225
+    second: Peces Fondo_11
+  - first:
+      213: -2231188755027411333
+    second: Peces Fondo_12
+  - first:
+      213: 1730295997134315092
+    second: Peces Fondo_13
+  - first:
+      213: -1435876728136528949
+    second: Peces Fondo_14
+  - first:
+      213: 8663079967451268158
+    second: Peces Fondo_15
+  - first:
+      213: -3685329396722806040
+    second: Peces Fondo_16
+  - first:
+      213: -549407636714839614
+    second: Peces Fondo_17
+  - first:
+      213: 6599430349834749491
+    second: Peces Fondo_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Peces Fondo_0
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 609
+        width: 80
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 065b3ff4c9fdc5ea0800000000000000
+      internalID: -5882581150803446432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_1
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 521
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34c6b1a8f2d515f50800000000000000
+      internalID: 6868373365478616131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_2
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 528
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7058a7fa25871e180800000000000000
+      internalID: -9087850276530256633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 463
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a64d7850a43496e0800000000000000
+      internalID: -1831781285148932444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_4
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 471
+        width: 80
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3a0bc5c787a04c60800000000000000
+      internalID: 7800418756186540607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_5
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 490
+        width: 73
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f5d0e0ef900ca630800000000000000
+      internalID: 3939524460714972665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_6
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 408
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ee2c0c96c231070800000000000000
+      internalID: 8075847389522620005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_7
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 429
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d60b65deefe8950c0800000000000000
+      internalID: -4586477519945420691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_8
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 354
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 737f4ffd0b3f2b6b0800000000000000
+      internalID: -5281891471955003593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_9
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 340
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac95b7ac5c37df500800000000000000
+      internalID: 431628432640268746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_10
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 329
+        width: 80
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e79ea181698a88a0800000000000000
+      internalID: -6302073676671051808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_11
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 361
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3699a4033cfd1df0800000000000000
+      internalID: -207732711737420225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_12
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 287
+        width: 80
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ebebd06a93901e0800000000000000
+      internalID: -2231188755027411333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_13
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 241
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45e9879ba0f330810800000000000000
+      internalID: 1730295997134315092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_14
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 298
+        width: 80
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb0c2e29bdb21ce0800000000000000
+      internalID: -1435876728136528949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_15
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 202
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e344cb8d451793870800000000000000
+      internalID: 8663079967451268158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_16
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 230
+        width: 132
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2580c70741bdcc0800000000000000
+      internalID: -3685329396722806040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_17
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 142
+        width: 80
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c1a9b05aac1068f0800000000000000
+      internalID: -549407636714839614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peces Fondo_18
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 143
+        width: 73
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33605d910f2e59b50800000000000000
+      internalID: 6599430349834749491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Peces Fondo_0: -5882581150803446432
+      Peces Fondo_1: 6868373365478616131
+      Peces Fondo_10: -6302073676671051808
+      Peces Fondo_11: -207732711737420225
+      Peces Fondo_12: -2231188755027411333
+      Peces Fondo_13: 1730295997134315092
+      Peces Fondo_14: -1435876728136528949
+      Peces Fondo_15: 8663079967451268158
+      Peces Fondo_16: -3685329396722806040
+      Peces Fondo_17: -549407636714839614
+      Peces Fondo_18: 6599430349834749491
+      Peces Fondo_2: -9087850276530256633
+      Peces Fondo_3: -1831781285148932444
+      Peces Fondo_4: 7800418756186540607
+      Peces Fondo_5: 3939524460714972665
+      Peces Fondo_6: 8075847389522620005
+      Peces Fondo_7: -4586477519945420691
+      Peces Fondo_8: -5281891471955003593
+      Peces Fondo_9: 431628432640268746
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

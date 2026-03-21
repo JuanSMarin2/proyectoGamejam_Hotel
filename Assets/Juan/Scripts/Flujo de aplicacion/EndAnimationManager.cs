@@ -52,7 +52,15 @@ public class EndAnimationManager : MonoBehaviour
             yield return null;
 
             while (director.state == PlayState.Playing)
+            {
+                if (SkipRequested())
+                {
+                    director.Stop();
+                    break;
+                }
+
                 yield return null;
+            }
         }
         else
         {
@@ -61,5 +69,13 @@ public class EndAnimationManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(finalSceneName);
+    }
+
+    private bool SkipRequested()
+    {
+        return Input.anyKeyDown ||
+               Input.GetMouseButtonDown(0) ||
+               Input.GetMouseButtonDown(1) ||
+               Input.GetMouseButtonDown(2);
     }
 }

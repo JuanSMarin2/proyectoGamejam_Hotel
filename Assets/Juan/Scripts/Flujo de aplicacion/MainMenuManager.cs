@@ -16,6 +16,16 @@ public class MainMenuManager : MonoBehaviour
        SceneManager.LoadScene("IntroScene");
     }
 
+    public void InfiniteMode()
+    {
+        var order = GameOrderManager.instance.GetSceneOrder();
+
+        RoundData.instance.SetGameOrder(order);
+        RoundData.instance.SetStoryMode(false);
+
+        SceneManager.LoadScene("IntroScene");
+    }
+
     public void LoadShopScene(){
         SceneManager.LoadScene("Shop");
     }

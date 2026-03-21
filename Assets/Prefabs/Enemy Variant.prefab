@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5541941775140824255, guid: 2df39fc43b686e642b09703170e51c21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6633539541756482564, guid: 2df39fc43b686e642b09703170e51c21, type: 3}
       propertyPath: m_Size.x
       value: 1.563808
