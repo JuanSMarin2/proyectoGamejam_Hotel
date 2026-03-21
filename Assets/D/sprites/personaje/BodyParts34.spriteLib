@@ -27,8 +27,18 @@ MonoBehaviour:
       m_Sprite: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
+    - m_Name: New Label
+      m_Hash: 259326342
+      m_Sprite: {fileID: -7666150390031753096, guid: 0842c1bab34499f4d885c9cdc76a9e9f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7666150390031753096, guid: 0842c1bab34499f4d885c9cdc76a9e9f, type: 3}
+    - m_Name: New Label_0
+      m_Hash: 16589798
+      m_Sprite: {fileID: -1758481373898792802, guid: 0842c1bab34499f4d885c9cdc76a9e9f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1758481373898792802, guid: 0842c1bab34499f4d885c9cdc76a9e9f, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 2
+    m_EntryOverrideCount: 4
   - m_Name: chest
     m_Hash: 994358199
     m_CategoryList: []
@@ -43,8 +53,18 @@ MonoBehaviour:
       m_Sprite: {fileID: -7353269316480473138, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -7353269316480473138, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
+    - m_Name: Ropa1
+      m_Hash: 511557231
+      m_Sprite: {fileID: -4505972107455283940, guid: 319b42185b383644bbd16cc9a6c1060c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4505972107455283940, guid: 319b42185b383644bbd16cc9a6c1060c, type: 3}
+    - m_Name: Ropa2
+      m_Hash: 125104085
+      m_Sprite: {fileID: 11680776800346025, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 11680776800346025, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 2
+    m_EntryOverrideCount: 4
   - m_Name: izqarm
     m_Hash: 432498464
     m_CategoryList: []
@@ -123,8 +143,18 @@ MonoBehaviour:
       m_Sprite: {fileID: 2448295930612738845, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 2448295930612738845, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
+    - m_Name: Ropa1
+      m_Hash: 511557231
+      m_Sprite: {fileID: 2192533073038832300, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2192533073038832300, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+    - m_Name: Ropa2
+      m_Hash: 125104085
+      m_Sprite: {fileID: -654790618908471780, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -654790618908471780, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 2
+    m_EntryOverrideCount: 4
   - m_Name: izqfoot
     m_Hash: 92460831
     m_CategoryList: []
@@ -155,8 +185,18 @@ MonoBehaviour:
       m_Sprite: {fileID: -8435124633081601583, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: -8435124633081601583, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
+    - m_Name: Ropa1
+      m_Hash: 511557231
+      m_Sprite: {fileID: 8492852987160986086, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 8492852987160986086, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+    - m_Name: Ropa2
+      m_Hash: 125104085
+      m_Sprite: {fileID: 1559519701370425316, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1559519701370425316, guid: ae37484afd7a27a47bff9085f5bf2ba8, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 2
+    m_EntryOverrideCount: 4
   - m_Name: derfoot
     m_Hash: 292912193
     m_CategoryList: []
@@ -174,5 +214,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639096265198898357
+  m_ModificationHash: 639097008225189028
   m_Version: 1
