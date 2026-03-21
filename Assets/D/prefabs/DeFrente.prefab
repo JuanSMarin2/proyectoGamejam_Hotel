@@ -796,7 +796,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6eaa9863939572f48ae5656da0abbb2e, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -828,6 +828,7 @@ MonoBehaviour:
   derleg: {fileID: 4676072096870082207}
   izqfoot: {fileID: 3498873423109870351}
   derfoot: {fileID: 6990507302498940873}
+  headFixer: {fileID: 0}
 --- !u!1 &4003898471632134093
 GameObject:
   m_ObjectHideFlags: 0

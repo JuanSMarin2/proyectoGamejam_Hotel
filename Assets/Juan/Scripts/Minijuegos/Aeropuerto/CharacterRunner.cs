@@ -3,6 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterRunner : MonoBehaviour
 {
+        [Header("Animations")]
+        [SerializeField] private Animator animator;
+
     [Header("Movement")]
     [SerializeField] private float fallbackSpeed = 2f;
 
@@ -20,6 +23,8 @@ public class CharacterRunner : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float cameraOffsetX = 0f;
 
+    private bool _losed = false;
+
     private Rigidbody2D rb;
 
     private bool isGrounded;
@@ -32,6 +37,14 @@ public class CharacterRunner : MonoBehaviour
         if (cameraTransform == null && Camera.main != null)
         {
             cameraTransform = Camera.main.transform;
+        }
+    }
+
+    private void Start()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Run");
         }
     }
 
@@ -58,6 +71,7 @@ public class CharacterRunner : MonoBehaviour
 
         if (isGrounded)
         {
+            animator.SetTrigger("Run");
             jumpsUsed = 0;
         }
     }
@@ -78,8 +92,9 @@ public class CharacterRunner : MonoBehaviour
             jumpsUsed = 0;
         }
 
-        if (jumpsUsed >= Mathf.Max(1, maxJumps)) return;
+        if (jumpsUsed >= Mathf.Max(1, maxJumps) && !_losed) return;
 
+    animator.SetTrigger("Jump");
         Vector2 vel = rb.linearVelocity;
         vel.y = 0f;
         rb.linearVelocity = vel;
@@ -109,6 +124,8 @@ public class CharacterRunner : MonoBehaviour
     }
         private void OnTriggerEnter2D(Collider2D collision)
     {
+        _losed = true;
+        animator.SetTrigger("PlaneLose");
         ResultManager.instance.LoseMinigame();
     }
 }
