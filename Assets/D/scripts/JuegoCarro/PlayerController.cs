@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float forwardThreshold = 0.1f; // Umbral para considerar que va "hacia adelante" (W)
     [SerializeField] private float sidewaysThreshold = 0.1f; // Umbral para considerar giro izquierda/derecha
 
+    [Header("Audio")]
+    [SerializeField] private float motoresVolume = 1f;
+    [SerializeField] private float choqueVolume = 1f;
+    [SerializeField] private float frenadoVolume = 50f;
+
     #endregion
 
     #region Private Fields
@@ -28,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private float targetTiltZ;
     private float baseSpriteZ;
     private float currentTiltVelocity;
+    private bool wasMovingForward;
 
     #endregion
 
@@ -43,14 +49,21 @@ public class PlayerController : MonoBehaviour
         baseSpriteZ = spriteTransform.localEulerAngles.z;
     }
 
+    public void Start()
+    {
+        SoundManager.PlaySound(SoundType.Motores, null, motoresVolume);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("CarroMalo"))
         {
+            SoundManager.PlaySound(SoundType.ChoqueCarro, null, choqueVolume);
             ResultManager.instance.LoseMinigame();
         }
         else if (other.CompareTag("Obstacle"))
         {
+            SoundManager.PlaySound(SoundType.ChoqueCarro, null, choqueVolume);
             ResultManager.instance.LoseMinigame();
         }
         
@@ -59,6 +72,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         ReadInput();
+        CheckBrakeSound();
         UpdateTargetTilt();
     }
 
@@ -92,6 +106,19 @@ public class PlayerController : MonoBehaviour
 
         // Normalizar para evitar movimiento diagonal más rápido
         moveInput = moveInput.normalized;
+    }
+
+    private void CheckBrakeSound()
+    {
+        bool isMovingForward = moveInput.y > forwardThreshold;
+        bool isMovingBackward = moveInput.y < -forwardThreshold;
+
+        if (wasMovingForward && isMovingBackward)
+        {
+            SoundManager.PlaySound(SoundType.Frenado, null, frenadoVolume);
+        }
+
+        wasMovingForward = isMovingForward;
     }
 
     #endregion

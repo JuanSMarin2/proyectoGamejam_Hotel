@@ -31,6 +31,8 @@ public class ReceptionistController : MonoBehaviour
 
     #region State Management
     private ReceptionistState currentState = ReceptionistState.Working;
+    private bool hasLastHeadFixerFace;
+    private HeadFixer.Face lastHeadFixerFace;
     #endregion
 
     #region Input & Gameplay
@@ -186,7 +188,9 @@ public class ReceptionistController : MonoBehaviour
     {
         if (headFixer != null)
         {
-            headFixer.SwapFace(GetHeadFixerFace());
+            HeadFixer.Face targetFace = GetHeadFixerFace();
+            PlayHeadFixerMoodSoundIfNeeded(targetFace);
+            headFixer.SwapFace(targetFace);
             return;
         }
 
@@ -197,6 +201,28 @@ public class ReceptionistController : MonoBehaviour
 
         string label = GetFaceLabel();
         headSpriteResolver.SetCategoryAndLabel("Head", label);
+    }
+
+    private void PlayHeadFixerMoodSoundIfNeeded(HeadFixer.Face targetFace)
+    {
+        if (!hasLastHeadFixerFace || targetFace != lastHeadFixerFace)
+        {
+            switch (targetFace)
+            {
+                case HeadFixer.Face.Angry:
+                    SoundManager.PlaySound(SoundType.PjEnojado);
+                    break;
+                case HeadFixer.Face.Sad:
+                    SoundManager.PlaySound(SoundType.PjTriste);
+                    break;
+                case HeadFixer.Face.Happy:
+                    SoundManager.PlaySound(SoundType.PjRiendo);
+                    break;
+            }
+
+            lastHeadFixerFace = targetFace;
+            hasLastHeadFixerFace = true;
+        }
     }
 
     private HeadFixer.Face GetHeadFixerFace()
