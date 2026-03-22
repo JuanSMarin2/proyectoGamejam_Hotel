@@ -75,7 +75,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 94873bbb801aa2b4eba289890b893cda, type: 3}
   - id: FootStepSounds
     category: Default
-    volume: 1
+    volume: 0.69
     mixer: {fileID: 0}
     randomVolumeMin: 0.81
     randomVolumeMax: 0.95
@@ -109,7 +109,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c1bd575d805817b479ad0a7d5451c503, type: 3}
   - id: Wooshes
     category: Default
-    volume: 0.646
+    volume: 0.362
     mixer: {fileID: 0}
     randomVolumeMin: 0.6
     randomVolumeMax: 0.84
