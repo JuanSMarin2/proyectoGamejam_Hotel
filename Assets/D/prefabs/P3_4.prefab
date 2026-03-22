@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 1220913319472265147}
   - component: {fileID: 8263351534715246940}
   - component: {fileID: 2195750486151557474}
+  - component: {fileID: 6649484457693903005}
   m_Layer: 0
   m_Name: P3_4
   m_TagString: Untagged
@@ -880,6 +881,19 @@ MonoBehaviour:
   izqfoot: {fileID: 5492689324381621690}
   derfoot: {fileID: 7724136228740156623}
   headFixer: {fileID: 4901357062278893909}
+--- !u!114 &6649484457693903005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250773285692965286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0707d24c02eeb504dbdd7eed8388e21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundId: FootStepSounds
 --- !u!1 &2102106822934437218
 GameObject:
   m_ObjectHideFlags: 0

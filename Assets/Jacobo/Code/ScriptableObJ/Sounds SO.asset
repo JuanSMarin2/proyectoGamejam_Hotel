@@ -97,16 +97,18 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: c1bd575d805817b479ad0a7d5451c503, type: 3}
-  - id: Motores
+  - id: Wooshes
     category: Default
-    volume: 1
+    volume: 0.646
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
+    randomVolumeMin: 0.6
+    randomVolumeMax: 0.84
+    minPitch: 0.7
+    maxPitch: 1.3
     sounds:
-    - {fileID: 8300000, guid: 31bddcd0541f99a45925531fafaf4a1e, type: 3}
+    - {fileID: 8300000, guid: 6a169551015b85c4fad122c4f0886e13, type: 3}
+    - {fileID: 8300000, guid: b4f80e0019e4a1f47b8f67efb35cba4f, type: 3}
+    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
   - id: Musica General
     category: Default
     volume: 0.83
@@ -208,15 +210,13 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 5dd0f0bce58999c4c94ac22296b490d2, type: 3}
-  - id: Wooshes
+  - id: Motores
     category: Default
     volume: 0.646
     mixer: {fileID: 0}
-    randomVolumeMin: 0.6
-    randomVolumeMax: 0.84
-    minPitch: 0.7
-    maxPitch: 1.3
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: 6a169551015b85c4fad122c4f0886e13, type: 3}
-    - {fileID: 8300000, guid: b4f80e0019e4a1f47b8f67efb35cba4f, type: 3}
-    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
+    - {fileID: 8300000, guid: 31bddcd0541f99a45925531fafaf4a1e, type: 3}
