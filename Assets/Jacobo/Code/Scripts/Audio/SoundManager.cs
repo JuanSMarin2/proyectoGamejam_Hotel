@@ -297,6 +297,65 @@ using UnityEngine.SceneManagement;
             PlaySound(sound.ToString(), source, volume);
         }
 
+        public static bool PlayLoopedSound(SoundType sound, AudioSource source, float volume = 1f)
+        {
+            return PlayLoopedSound(sound.ToString(), source, volume);
+        }
+
+        public static bool PlayLoopedSound(string soundId, AudioSource source, float volume = 1f)
+        {
+            if (source == null)
+            {
+                Debug.LogWarning("[SoundManager] Source is null. Cannot play looped sound: " + soundId);
+                return false;
+            }
+
+            if (instance == null)
+            {
+                Debug.LogWarning("[SoundManager] No instance in scene. Cannot play looped sound: " + soundId);
+                return false;
+            }
+
+            if (!instance.TryGetSound(soundId, out SoundList soundList))
+            {
+                Debug.LogWarning("[SoundManager] Sound ID not found: " + soundId);
+                return false;
+            }
+
+            AudioClip randomClip = GetRandomValidClip(soundList.sounds);
+            if (randomClip == null)
+            {
+                Debug.LogWarning("[SoundManager] No valid clips assigned for sound: " + soundId);
+                return false;
+            }
+
+            float randomizedVolumeMultiplier = UnityEngine.Random.Range(
+                Mathf.Min(soundList.randomVolumeMin, soundList.randomVolumeMax),
+                Mathf.Max(soundList.randomVolumeMin, soundList.randomVolumeMax));
+
+            float randomizedPitch = UnityEngine.Random.Range(
+                Mathf.Min(soundList.minPitch, soundList.maxPitch),
+                Mathf.Max(soundList.minPitch, soundList.maxPitch));
+
+            source.outputAudioMixerGroup = soundList.mixer;
+            source.volume = volume * soundList.volume * randomizedVolumeMultiplier * GetEffectiveMusicVolume();
+            source.pitch = randomizedPitch;
+            source.loop = true;
+            source.clip = randomClip;
+            source.Play();
+            return true;
+        }
+
+        public static void StopSound(AudioSource source)
+        {
+            if (source == null)
+                return;
+
+            source.Stop();
+            source.clip = null;
+            source.loop = false;
+        }
+
         public static void PlaySound(string soundId, AudioSource source = null, float volume = 1f)
         {
             if (instance == null)
