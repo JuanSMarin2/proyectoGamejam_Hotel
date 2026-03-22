@@ -868,7 +868,7 @@ MonoBehaviour:
   derleg: {fileID: 4676072096870082207}
   izqfoot: {fileID: 3498873423109870351}
   derfoot: {fileID: 6990507302498940873}
-  headFixer: {fileID: 0}
+  headFixer: {fileID: 875667544184441582}
 --- !u!1 &4003898471632134093
 GameObject:
   m_ObjectHideFlags: 0
