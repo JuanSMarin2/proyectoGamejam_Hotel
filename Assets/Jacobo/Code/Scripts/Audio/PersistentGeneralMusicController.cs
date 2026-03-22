@@ -13,7 +13,6 @@ public class PersistentGeneralMusicController : MonoBehaviour
     [Header("Pause By Scene")]
     [SerializeField] private string[] pauseInScenes = { "Tienda", "Buceo", "Recepcionista" };
     [SerializeField] private bool sceneNameCaseInsensitive = true;
-    [SerializeField] private bool playIfStoppedWhenUnpaused = true;
 
     [Header("Debug")]
     [SerializeField] private bool debugLogs = false;
@@ -106,7 +105,9 @@ public class PersistentGeneralMusicController : MonoBehaviour
 
         if (musicSource.clip != null)
         {
-            if (playIfStoppedWhenUnpaused && !musicSource.isPlaying)
+            // Ensure music actually resumes when scene is not paused by name.
+            // UnPause() does nothing if the source was not paused, so force Play when not playing.
+            if (!musicSource.isPlaying)
                 musicSource.Play();
             else
                 musicSource.UnPause();
