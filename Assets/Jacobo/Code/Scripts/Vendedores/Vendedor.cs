@@ -18,6 +18,14 @@ public class Vendedor : MonoBehaviour
     [SerializeField] private SpriteRenderer signRenderer;
     [SerializeField] private VendedorSignSpriteLibrary signSpriteLibrary;
     [SerializeField] private Animator animator;
+    [SerializeField] private string horizontalSpeedParameter = "speedX";
+
+    [Header("Front/Back Visuals")]
+    [SerializeField] private Vector3 backScale = Vector3.one;
+    [SerializeField] private Vector3 frontScale = Vector3.one;
+    [SerializeField] private bool mirrorFrontOnYAxis = true;
+    [SerializeField] private string backSortingLayerName = "Background";
+    [SerializeField] private string frontSortingLayerName = "Foreground";
 
     [Header("Bought Visual")]
     [SerializeField] private string boughtTriggerName = "bought";
@@ -42,11 +50,17 @@ public class Vendedor : MonoBehaviour
     private SpriteRenderer[] cachedRenderers;
     private Collider[] cachedColliders3D;
     private Collider2D[] cachedColliders2D;
+    private SpawnPointPreference currentSpawnSide = SpawnPointPreference.Any;
 
     public Necesidad NecesidadVenta => necesidadVenta;
     public SpawnPointPreference SpawnPreference => spawnPreference;
 
     public void Initialize(Vector3 direction, float moveSpeed, float despawnLimitX)
+    {
+        Initialize(direction, moveSpeed, despawnLimitX, SpawnPointPreference.Any);
+    }
+
+    public void Initialize(Vector3 direction, float moveSpeed, float despawnLimitX, SpawnPointPreference spawnSide)
     {
         movementDirection = direction.normalized;
         speed = Mathf.Max(0f, moveSpeed);
@@ -55,6 +69,10 @@ public class Vendedor : MonoBehaviour
         temporarilyStopped = false;
         stopDurationTimer = 0f;
         stopAttemptTimer = GetRandomStopAttemptInterval();
+        currentSpawnSide = spawnSide;
+
+        ApplyFrontBackVisuals(currentSpawnSide);
+        UpdateAnimatorHorizontalSpeed(0f);
 
         ApplySignSprite();
     }
@@ -68,6 +86,7 @@ public class Vendedor : MonoBehaviour
     public void StopMovement()
     {
         moving = false;
+        UpdateAnimatorHorizontalSpeed(0f);
     }
 
     public void HandleCompraAttemptVisualState()
@@ -75,6 +94,7 @@ public class Vendedor : MonoBehaviour
         StopMovement();
         temporarilyStopped = false;
         stopDurationTimer = 0f;
+        UpdateAnimatorHorizontalSpeed(0f);
 
         SetSortingOrderRecursive(0);
 
@@ -127,6 +147,9 @@ public class Vendedor : MonoBehaviour
         if (signSpriteLibrary == null)
             signSpriteLibrary = GetComponent<VendedorSignSpriteLibrary>();
 
+        if (signSpriteLibrary == null)
+            signSpriteLibrary = FindFirstObjectByType<VendedorSignSpriteLibrary>();
+
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
 
@@ -139,19 +162,27 @@ public class Vendedor : MonoBehaviour
 
     private void Update()
     {
-        if (!moving) return;
+        float horizontalSpeedThisFrame = 0f;
 
-        HandleRandomStops();
-        if (temporarilyStopped) return;
+        if (moving)
+        {
+            HandleRandomStops();
+            if (!temporarilyStopped)
+                horizontalSpeedThisFrame = Move();
+        }
 
-        Move();
+        UpdateAnimatorHorizontalSpeed(horizontalSpeedThisFrame);
     }
 
-    private void Move()
+    private float Move()
     {
-        if (!moving) return;
+        if (!moving) return 0f;
+
+        Vector3 previousPosition = transform.position;
 
         transform.position += movementDirection * speed * Time.deltaTime;
+
+        float horizontalSpeed = Mathf.Abs(transform.position.x - previousPosition.x) / Mathf.Max(Time.deltaTime, 0.0001f);
 
         bool movingRight = movementDirection.x >= 0f;
         if (movingRight && transform.position.x >= despawnX)
@@ -162,6 +193,8 @@ public class Vendedor : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        return horizontalSpeed;
     }
 
     private void HandleRandomStops()
@@ -214,6 +247,47 @@ public class Vendedor : MonoBehaviour
 
         if (signSpriteLibrary.TryGetRandomSprite(necesidadVenta, out Sprite sprite))
             signRenderer.sprite = sprite;
+    }
+
+    private void ApplyFrontBackVisuals(SpawnPointPreference spawnSide)
+    {
+        bool isFront = spawnSide == SpawnPointPreference.Front;
+
+        Vector3 targetScale = isFront ? frontScale : backScale;
+
+        // Reflect on Y-axis (horizontal flip) for front spawns when enabled.
+        if (isFront && mirrorFrontOnYAxis)
+            targetScale.x = -Mathf.Abs(targetScale.x);
+
+        transform.localScale = targetScale;
+
+        // Force refresh so newly added/activated children are always included.
+        cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        string layerName = isFront ? frontSortingLayerName : backSortingLayerName;
+
+        if (cachedRenderers == null) return;
+        for (int i = 0; i < cachedRenderers.Length; i++)
+        {
+            if (cachedRenderers[i] == null) continue;
+            cachedRenderers[i].sortingLayerName = layerName;
+
+            // Also enforce the same layer for any nested SpriteRenderer under this renderer's subtree.
+            SpriteRenderer[] nestedRenderers = cachedRenderers[i].GetComponentsInChildren<SpriteRenderer>(true);
+            for (int j = 0; j < nestedRenderers.Length; j++)
+            {
+                if (nestedRenderers[j] == null) continue;
+                nestedRenderers[j].sortingLayerName = layerName;
+            }
+        }
+    }
+
+    private void UpdateAnimatorHorizontalSpeed(float horizontalSpeed)
+    {
+        if (animator == null || string.IsNullOrWhiteSpace(horizontalSpeedParameter))
+            return;
+
+        animator.SetFloat(horizontalSpeedParameter, Mathf.Max(0f, horizontalSpeed));
     }
 
     private IEnumerator BoughtAndFadeRoutine()

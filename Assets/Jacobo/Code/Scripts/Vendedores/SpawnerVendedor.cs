@@ -95,7 +95,8 @@ public class SpawnerVendedor : MonoBehaviour
         instance.SetNecesidad(GetRandomNecesidadVenta());
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
-        instance.Initialize(direction, speed, despawnX);
+        instance.Initialize(direction, speed, despawnX,
+            backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
         instance.SetSortingOrderRecursive(Mathf.Max(0, guaranteedNeedSortingOrder));
 
         aliveVendedores.Add(instance);
@@ -172,7 +173,8 @@ public class SpawnerVendedor : MonoBehaviour
         instance.SetNecesidad(need);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
-        instance.Initialize(direction, speed, despawnX);
+        instance.Initialize(direction, speed, despawnX,
+            backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
         instance.SetSortingOrderRecursive(nextSortingOrder);
         nextSortingOrder += Mathf.Max(1, sortingOrderStep);
 
