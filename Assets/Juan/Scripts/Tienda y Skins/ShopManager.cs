@@ -19,6 +19,10 @@ public class ShopManager : MonoBehaviour
 
     [Header("Character")]
     [SerializeField] private CharacterVisual characterVisual;
+    [SerializeField] private Animator characterAnimator;
+
+    private const string EquiparBool = "Equipar";
+    private const string ModelarBool = "Modelar";
 
     private List<Skin> allSkins;
     private List<Skin> currentSkins;
@@ -113,6 +117,7 @@ public class ShopManager : MonoBehaviour
     public void Next()
     {
         currentIndex = (currentIndex + 1) % currentSkins.Count;
+        SetAnimatorBool(ModelarBool, true);
         UpdateUI();
     }
 
@@ -120,6 +125,7 @@ public class ShopManager : MonoBehaviour
     {
         currentIndex--;
         if (currentIndex < 0) currentIndex = currentSkins.Count - 1;
+        SetAnimatorBool(ModelarBool, true);
         UpdateUI();
     }
 
@@ -136,6 +142,7 @@ public class ShopManager : MonoBehaviour
         else if (!GameData.instance.IsEquipped(skin.id, currentCategory))
         {
             GameData.instance.EquipSkin(skin.id, currentCategory);
+            SetAnimatorBool(EquiparBool, true);
         }
 
         UpdateUI();
@@ -180,6 +187,14 @@ public class ShopManager : MonoBehaviour
         Color c = actionButton.image.color;
         c.a = alpha;
         actionButton.image.color = c;
+    }
+
+    private void SetAnimatorBool(string parameter, bool value)
+    {
+        if (characterAnimator == null || string.IsNullOrWhiteSpace(parameter))
+            return;
+
+        characterAnimator.SetBool(parameter, value);
     }
 
     public void ReturnToMenu()
