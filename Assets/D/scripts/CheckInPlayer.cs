@@ -3,6 +3,7 @@ using UnityEngine;
 public class CheckInPlayer : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource campanaSource;
     [SerializeField] private string idleBoolName = "idlecheckin";
     [SerializeField] private string campanaBoolName = "Campana";
     [SerializeField] private string campanaStateName = "Campana";
@@ -15,6 +16,11 @@ public class CheckInPlayer : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponent<Animator>();
+        }
+
+        if (campanaSource == null)
+        {
+            campanaSource = GetComponent<AudioSource>();
         }
 
         if (animator == null)
@@ -33,16 +39,25 @@ public class CheckInPlayer : MonoBehaviour
             return;
         }
 
-        if (!isPlayingCampana && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            isPlayingCampana = true;
-            animator.SetBool(campanaBoolName, true);
-            animator.SetBool(idleBoolName, false);
-
-            if (!string.IsNullOrEmpty(campanaStateName))
+            if (!isPlayingCampana)
             {
-                animator.Play(campanaStateName, campanaLayer, 0f);
+                isPlayingCampana = true;
+                animator.SetBool(campanaBoolName, true);
+                animator.SetBool(idleBoolName, false);
+
+                if (!string.IsNullOrEmpty(campanaStateName))
+                {
+                    animator.Play(campanaStateName, campanaLayer, 0f);
+                }
             }
+            else if (campanaSource != null)
+            {
+                campanaSource.Stop();
+            }
+
+            SoundManager.PlaySound("Campana", campanaSource);
         }
 
         if (!isPlayingCampana)
@@ -57,6 +72,11 @@ public class CheckInPlayer : MonoBehaviour
             isPlayingCampana = false;
             animator.SetBool(campanaBoolName, false);
             animator.SetBool(idleBoolName, true);
+
+            if (campanaSource != null)
+            {
+                campanaSource.Stop();
+            }
         }
     }
 }

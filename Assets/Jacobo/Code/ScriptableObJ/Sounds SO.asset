@@ -23,6 +23,16 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 228b686bc773596489e36ada8f13a82d, type: 3}
+  - id: Campana
+    category: Default
+    volume: 0.074
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: c725738b278d5a94e9dc8c151a3d2b6b, type: 3}
   - id: ChoqueCarro
     category: Default
     volume: 1
