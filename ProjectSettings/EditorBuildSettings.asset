@@ -38,6 +38,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/D/Scenes/CheckIn.unity
     guid: 184ea8bcdc3db4d43b27d048db503997
+  - enabled: 1
+    path: Assets/Scenes/Maletas.unity
+    guid: 44f55341953661f41b67e06aa29b4851
+  - enabled: 1
+    path: Assets/Scenes/Vendedores.unity
+    guid: 7dcb741ce35a8a341a8ffa6b35dd7bf6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

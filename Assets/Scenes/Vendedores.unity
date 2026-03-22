@@ -2895,7 +2895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDescriptionText: {fileID: 1701768465}
-  gameDescription: 
+  gameDescription: Dale click al vendedor que venda lo que necesitas
   gameDescriptionTime: 3
   speed: 1
   losesWithTime: 0
