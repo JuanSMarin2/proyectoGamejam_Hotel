@@ -151,7 +151,7 @@ public class ShopManager : MonoBehaviour
         bool equipped = GameData.instance.IsEquipped(skin.id, currentCategory);
 
         lockImage.SetActive(!owned);
-        costText.text = owned ? "" : skin.price.ToString();
+        costText.text = owned ? "" : "Precio: "+skin.price.ToString();
 
         if (!owned)
         {
