@@ -126,8 +126,23 @@ public class PlayerController : MonoBehaviour
 
     private void ApplySpriteTilt()
     {
+        if (spriteTransform == null)
+        {
+            return;
+        }
+
         float currentZ = spriteTransform.localEulerAngles.z;
         float desiredZ = baseSpriteZ + targetTiltZ;
+
+        if (float.IsNaN(currentZ) || float.IsNaN(desiredZ) || float.IsNaN(currentTiltVelocity) ||
+            float.IsInfinity(currentTiltVelocity))
+        {
+            currentTiltVelocity = 0f;
+            Vector3 resetEuler = spriteTransform.localEulerAngles;
+            resetEuler.z = baseSpriteZ;
+            spriteTransform.localEulerAngles = resetEuler;
+            return;
+        }
 
         float newZ = Mathf.SmoothDampAngle(
             currentZ,
