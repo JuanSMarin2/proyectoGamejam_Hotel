@@ -12,6 +12,7 @@ public class TimeManager : MonoBehaviour
 
     private float timer;
     private bool hasFinished = false;
+    private bool hasPlayedTimerTicking = false;
 
 
     public float StartTime
@@ -28,6 +29,7 @@ public class TimeManager : MonoBehaviour
     private void Start()
     {
         timer = startTime;
+        hasPlayedTimerTicking = false;
         UpdateBar();
     }
 
@@ -37,6 +39,12 @@ public class TimeManager : MonoBehaviour
         if (hasFinished) return;
 
         timer -= Time.deltaTime;
+
+        if (!hasPlayedTimerTicking && timer <= 3f && timer > 0f)
+        {
+            hasPlayedTimerTicking = true;
+            SoundManager.PlaySound(SoundType.TimerTicking);
+        }
 
         if (timer <= 0f)
         {
@@ -79,6 +87,7 @@ public class TimeManager : MonoBehaviour
     {
         timer = startTime;
         hasFinished = false;
+        hasPlayedTimerTicking = false;
         UpdateBar();
     }
 }
