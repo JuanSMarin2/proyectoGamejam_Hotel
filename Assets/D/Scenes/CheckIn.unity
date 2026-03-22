@@ -1037,7 +1037,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDescriptionText: {fileID: 1006717019}
-  gameDescription: Dale al "Espacio" para tocar la campana
+  gameDescription: Presiona "Espacio" para llamar al recepcionista y evitar que se
+    distraiga
   gameDescriptionTime: 3
   speed: 1
   losesWithTime: 0
@@ -7250,7 +7251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dale al "Espacio" para tocar la campana
+  m_text: Presiona "Espacio" para llamar al recepcionista y evitar que se distraiga
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c5b50eb751191d04ab200dae4d0e530b, type: 2}
   m_sharedMaterial: {fileID: 341321257110148476, guid: c5b50eb751191d04ab200dae4d0e530b, type: 2}
