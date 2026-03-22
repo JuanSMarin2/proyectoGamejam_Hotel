@@ -228,3 +228,43 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 848d030a5dc9e06499424226a8045dde, type: 3}
+  - id: ScanerMal
+    category: Default
+    volume: 0.33
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.48
+    randomVolumeMax: 0.59
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: 43b50f7982b4b654399c8293b92e8944, type: 3}
+  - id: ScanerBien
+    category: Default
+    volume: 0.44
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.31
+    randomVolumeMax: 0.45
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: 7b23374e4b7988a4ebd87e295729affd, type: 3}
+  - id: AmbIndustrial
+    category: Default
+    volume: 0.64
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.63
+    randomVolumeMax: 0.71
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: 848d030a5dc9e06499424226a8045dde, type: 3}
+  - id: Campana
+    category: Default
+    volume: 0.64
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.63
+    randomVolumeMax: 0.71
+    minPitch: 0.97
+    maxPitch: 1.17
+    sounds:
+    - {fileID: 8300000, guid: 6045806c5fb963040a40be7b1146c3f3, type: 3}

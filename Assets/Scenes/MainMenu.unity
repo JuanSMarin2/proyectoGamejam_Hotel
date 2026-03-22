@@ -5962,6 +5962,7 @@ GameObject:
   - component: {fileID: 2096566257}
   - component: {fileID: 2096566259}
   - component: {fileID: 2096566260}
+  - component: {fileID: 2096566261}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -6125,6 +6126,26 @@ MonoBehaviour:
   ambienceAssignedVolume: 1
   useMusicVolumeForMusic: 1
   useMusicVolumeForAmbience: 1
+--- !u!114 &2096566261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096566256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581294c173761384ca49f2fadda752e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 2096566259}
+  pauseInScenes:
+  - Tienda
+  - Buceo
+  - Recepcionista
+  sceneNameCaseInsensitive: 1
+  playIfStoppedWhenUnpaused: 1
+  debugLogs: 0
 --- !u!1 &2141698530
 GameObject:
   m_ObjectHideFlags: 0
