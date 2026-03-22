@@ -6,6 +6,8 @@ public class HeadFixerProxy : MonoBehaviour
     [SerializeField] private HeadFixer target;
     [SerializeField] private string animatorBoolName = "sentado";
     private Animator _animator;
+    private readonly HeadFixer.Face neutralFace = HeadFixer.Face.Neutral;
+    private readonly HeadFixer.Face backFace = HeadFixer.Face.Back;
 
     private void Start()
     {
@@ -28,7 +30,10 @@ public class HeadFixerProxy : MonoBehaviour
             target = GetComponentInChildren<HeadFixer>();
 
         if (target != null)
-            target.SwapFace();
+        {
+            HeadFixer.Face nextFace = target.CurrentFace == backFace ? neutralFace : backFace;
+            target.SwapFace(nextFace);
+        }
         else
             Debug.LogWarning("[HeadFixerProxy] No HeadFixer found in children to SwapFace().");
     }

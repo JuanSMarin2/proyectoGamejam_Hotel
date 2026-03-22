@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
+  m_Name: idlecheckin
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -19,7 +19,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -0.906}
+        value: {x: 0, y: 0, z: 33.037}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -27,8 +27,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -0.385}
+        time: 1.2
+        value: {x: 0, y: 0, z: 35.361}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -36,8 +36,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -0.906}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: 33.037}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -47,13 +47,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest/neck
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -46.324}
+        value: {x: 0, y: 0, z: -33.493}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -61,8 +61,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -53.944}
+        time: 1.2
+        value: {x: 0, y: 0, z: -44.901}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -70,8 +70,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -46.324}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: -33.493}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -81,13 +81,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -79.426}
+        value: {x: 0, y: 0, z: 26.887}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -95,8 +95,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -75.139}
+        time: 1.2
+        value: {x: 0, y: 0, z: 20.003}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -104,8 +104,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -79.426}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: 26.887}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -115,13 +115,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
+    path: Chest/root/chest/derarm/derarm
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 5.074}
+        value: {x: 0, y: 0, z: 1.863}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -129,8 +129,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: 10.438}
+        time: 1.2
+        value: {x: 0, y: 0, z: 8.224}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -138,8 +138,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: 5.074}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: 1.863}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -149,13 +149,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest
+    path: Chest/root/chest
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -136.88}
+        value: {x: 0, y: 0, z: -180.52}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -163,8 +163,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -130.569}
+        time: 1.2
+        value: {x: 0, y: 0, z: -177.139}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -172,8 +172,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -136.88}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: -180.52}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -183,13 +183,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest/izqarm/izqarm
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -98.488}
+        value: {x: 0, y: 0, z: 85.186}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -197,8 +197,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -106.604}
+        time: 1.2
+        value: {x: 0, y: 0, z: 74.748}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -206,8 +206,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -98.488}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: 85.186}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -217,13 +217,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/chest/neck/Head/head
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 99.246}
+        value: {x: 0, y: 0, z: 9.783}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -231,8 +231,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: 78.713}
+        time: 1.2
+        value: {x: 0, y: 0, z: 9.783}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -240,8 +240,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: 99.246}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: 9.783}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -251,13 +251,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/chest/neck
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -84.619}
+        value: {x: 0, y: 0, z: -109.724}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -265,8 +265,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -84.619}
+        time: 1.2
+        value: {x: 0, y: 0, z: -109.724}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -274,8 +274,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -84.619}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: -109.724}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -285,13 +285,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
+    path: Chest/root/derleg/derleg
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -90.272}
+        value: {x: 0, y: 0, z: -112.21}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -299,8 +299,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -90.272}
+        time: 1.2
+        value: {x: 0, y: 0, z: -112.21}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -308,8 +308,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -90.272}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: -112.21}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -319,13 +319,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/izqleg/izqleg
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -82.421}
+        value: {x: 0, y: 0, z: 84.238}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -333,8 +333,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -82.421}
+        time: 1.2
+        value: {x: 0, y: 0, z: 84.238}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -342,8 +342,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -82.421}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: 84.238}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -353,13 +353,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -98.959}
+        value: {x: 0, y: 0, z: -86.335}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -367,8 +367,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.53333336
-        value: {x: 0, y: 0, z: -98.959}
+        time: 1.2
+        value: {x: 0, y: 0, z: -86.335}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -376,8 +376,8 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 1.05
-        value: {x: 0, y: 0, z: -98.959}
+        time: 2.6166666
+        value: {x: 0, y: 0, z: -86.335}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -387,7 +387,41 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: {x: 0, y: 0, z: -90.233}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 1.2
+        value: {x: 0, y: 0, z: -90.233}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 2.6166666
+        value: {x: 0, y: 0, z: -90.233}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Chest/root/derleg/derleg/derfoot/derfoot
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -400,7 +434,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2949312846
+      path: 3980121025
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -409,7 +443,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1315799289
+      path: 694449904
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -418,7 +452,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 82766968
+      path: 3644972545
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -427,7 +461,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 281453790
+      path: 4039384603
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -436,7 +470,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1087585255
+      path: 899159696
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -445,7 +479,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 543942909
+      path: 3854847538
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -454,7 +488,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1341382004
+      path: 2701795225
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -463,7 +497,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2258499353
+      path: 3533383485
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -472,7 +506,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1810325634
+      path: 1044574124
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -481,7 +515,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1233181550
+      path: 3500491333
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -490,7 +524,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 936988792
+      path: 3336124079
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 42374046
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -504,7 +547,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.05
+    m_StopTime: 2.6166666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -534,7 +577,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -543,124 +586,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest/neck
-    classID: 4
-    script: {fileID: 0}
-    flags: 16
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.53333336
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.05
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest/neck
-    classID: 4
-    script: {fileID: 0}
-    flags: 16
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -0.906
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.53333336
-        value: -0.385
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.05
-        value: -0.906
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest/neck
-    classID: 4
-    script: {fileID: 0}
-    flags: 16
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.53333336
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -672,7 +598,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -690,7 +616,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -699,7 +625,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -711,7 +637,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -721,7 +647,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -46.324
+        value: 33.037
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -729,8 +655,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -53.944
+        time: 1.2
+        value: 35.361
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -738,8 +664,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -46.324
+        time: 2.6166666
+        value: 33.037
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -750,7 +676,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -768,7 +694,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -777,7 +703,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -789,7 +715,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -807,7 +733,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -816,7 +742,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -828,7 +754,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -838,7 +764,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -79.426
+        value: -33.493
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -846,8 +772,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -75.139
+        time: 1.2
+        value: -44.901
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -855,8 +781,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -79.426
+        time: 2.6166666
+        value: -33.493
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -867,7 +793,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -885,7 +811,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -894,7 +820,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -906,7 +832,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest
+    path: Chest/root/chest/derarm/derarm
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -924,7 +850,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -933,7 +859,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -945,7 +871,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest
+    path: Chest/root/chest/derarm/derarm
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -955,7 +881,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 5.074
+        value: 26.887
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -963,8 +889,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: 10.438
+        time: 1.2
+        value: 20.003
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -972,8 +898,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: 5.074
+        time: 2.6166666
+        value: 26.887
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -984,7 +910,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest
+    path: Chest/root/chest/derarm/derarm
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1002,7 +928,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1011,7 +937,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1023,7 +949,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1041,7 +967,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1050,7 +976,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1062,7 +988,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1072,7 +998,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -136.88
+        value: 1.863
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1080,8 +1006,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -130.569
+        time: 1.2
+        value: 8.224
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1089,8 +1015,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -136.88
+        time: 2.6166666
+        value: 1.863
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1101,7 +1027,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1119,7 +1045,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1128,7 +1054,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1140,7 +1066,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/chest/izqarm/izqarm
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1158,7 +1084,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1167,7 +1093,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1179,7 +1105,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/chest/izqarm/izqarm
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1189,7 +1115,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -98.488
+        value: -180.52
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1197,8 +1123,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -106.604
+        time: 1.2
+        value: -177.139
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1206,8 +1132,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -98.488
+        time: 2.6166666
+        value: -180.52
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1218,7 +1144,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/chest/izqarm/izqarm
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1236,7 +1162,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1245,7 +1171,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1257,7 +1183,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/chest/neck/Head/head
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1275,7 +1201,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1284,7 +1210,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1296,7 +1222,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/chest/neck/Head/head
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1306,7 +1232,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 99.246
+        value: 85.186
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1314,8 +1240,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: 78.713
+        time: 1.2
+        value: 74.748
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1323,8 +1249,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: 99.246
+        time: 2.6166666
+        value: 85.186
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1335,7 +1261,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/chest/neck/Head/head
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1353,7 +1279,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1362,7 +1288,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1374,7 +1300,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
+    path: Chest/root/chest/neck
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1392,7 +1318,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1401,7 +1327,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1413,7 +1339,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
+    path: Chest/root/chest/neck
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1423,7 +1349,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -84.619
+        value: 9.783
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1431,8 +1357,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -84.619
+        time: 1.2
+        value: 9.783
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1440,8 +1366,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -84.619
+        time: 2.6166666
+        value: 9.783
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1452,7 +1378,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
+    path: Chest/root/chest/neck
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1470,7 +1396,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1479,7 +1405,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1491,7 +1417,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/derleg/derleg
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1509,7 +1435,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1518,7 +1444,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1530,7 +1456,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/derleg/derleg
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1540,7 +1466,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -90.272
+        value: -109.724
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1548,8 +1474,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -90.272
+        time: 1.2
+        value: -109.724
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1557,8 +1483,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -90.272
+        time: 2.6166666
+        value: -109.724
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1569,7 +1495,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/derleg/derleg
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1587,7 +1513,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1596,7 +1522,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1608,7 +1534,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root/izqleg/izqleg
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1626,7 +1552,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1635,7 +1561,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1647,7 +1573,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root/izqleg/izqleg
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1657,7 +1583,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -82.421
+        value: -112.21
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1665,8 +1591,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -82.421
+        time: 1.2
+        value: -112.21
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1674,8 +1600,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -82.421
+        time: 2.6166666
+        value: -112.21
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1686,7 +1612,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root/izqleg/izqleg
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1704,7 +1630,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1713,7 +1639,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1725,7 +1651,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
+    path: Chest/root
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1743,7 +1669,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
+        time: 1.2
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1752,7 +1678,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
+        time: 2.6166666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1764,7 +1690,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
+    path: Chest/root
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1774,7 +1700,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -98.959
+        value: 84.238
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1782,8 +1708,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.53333336
-        value: -98.959
+        time: 1.2
+        value: 84.238
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1791,8 +1717,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.05
-        value: -98.959
+        time: 2.6166666
+        value: 84.238
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1803,7 +1729,241 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
+    path: Chest/root
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.6166666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.6166666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -86.335
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2
+        value: -86.335
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.6166666
+        value: -86.335
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.6166666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Chest/root/derleg/derleg/derfoot/derfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.6166666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Chest/root/derleg/derleg/derfoot/derfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -90.233
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.2
+        value: -90.233
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 2.6166666
+        value: -90.233
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Chest/root/derleg/derleg/derfoot/derfoot
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -1816,7 +1976,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/neck/Head/head
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1828,7 +1988,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/neck/Head/head
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1840,7 +2000,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm
+    path: Chest/root/chest/neck/Head/head
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1852,7 +2012,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/derleg/derleg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1864,7 +2024,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/derleg/derleg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1876,7 +2036,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm/Prota_frente_correccion_4/izqhand
+    path: Chest/root/derleg/derleg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1888,7 +2048,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest/neck
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1900,7 +2060,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest/neck
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1912,7 +2072,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest/neck
+    path: Chest/root/chest/izqarm/izqarm/izqhand/izqhand
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1924,7 +2084,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/izqleg/izqleg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1936,7 +2096,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/izqleg/izqleg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1948,7 +2108,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest/neck/Prota_frente_correccion_0/Head
+    path: Chest/root/izqleg/izqleg
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1960,7 +2120,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest/izqarm/izqarm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1972,7 +2132,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest/izqarm/izqarm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1984,7 +2144,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_1/izqarm
+    path: Chest/root/chest/izqarm/izqarm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1996,7 +2156,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
+    path: Chest/root/derleg/derleg/derfoot/derfoot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2008,7 +2168,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
+    path: Chest/root/derleg/derleg/derfoot/derfoot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2020,31 +2180,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest/Prota_frente_correccion_3/derarm/Prota_frente_correccion_7/derhand
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/chest
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/chest
+    path: Chest/root/derleg/derleg/derfoot/derfoot
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2056,19 +2192,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/chest
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/chest/derarm/derarm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2080,7 +2204,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/chest/derarm/derarm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2092,7 +2216,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet
+    path: Chest/root/chest/derarm/derarm
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2104,7 +2228,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2116,7 +2240,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2128,7 +2252,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_5/izqfeet/Prota_frente_correccion_8/izqfoot
+    path: Chest/root/chest/derarm/derarm/derhand/derhand
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2140,7 +2264,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
+    path: Chest/root
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2152,7 +2276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
+    path: Chest/root
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2164,31 +2288,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
+    path: Chest/root
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2200,7 +2300,103 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: PersonajeDeFrente/root/Prota_frente_correccion_6/derfeet/Prota_frente_correccion_9/derfoot
+    path: Chest/root/chest
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Chest/root/chest
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Chest/root/chest
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Chest/root/chest/neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Chest/root/chest/neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Chest/root/chest/neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Chest/root/izqleg/izqleg/izqfoot/izqfoot
     classID: 4
     script: {fileID: 0}
     flags: 0

@@ -81,13 +81,13 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = Vector2.zero;
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             moveInput.y += 1;
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             moveInput.y -= 1;
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             moveInput.x += 1;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             moveInput.x -= 1;
 
         // Normalizar para evitar movimiento diagonal más rápido
@@ -126,8 +126,23 @@ public class PlayerController : MonoBehaviour
 
     private void ApplySpriteTilt()
     {
+        if (spriteTransform == null)
+        {
+            return;
+        }
+
         float currentZ = spriteTransform.localEulerAngles.z;
         float desiredZ = baseSpriteZ + targetTiltZ;
+
+        if (float.IsNaN(currentZ) || float.IsNaN(desiredZ) || float.IsNaN(currentTiltVelocity) ||
+            float.IsInfinity(currentTiltVelocity))
+        {
+            currentTiltVelocity = 0f;
+            Vector3 resetEuler = spriteTransform.localEulerAngles;
+            resetEuler.z = baseSpriteZ;
+            spriteTransform.localEulerAngles = resetEuler;
+            return;
+        }
 
         float newZ = Mathf.SmoothDampAngle(
             currentZ,

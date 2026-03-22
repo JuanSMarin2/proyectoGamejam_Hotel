@@ -9,6 +9,9 @@ public class MinigameResultsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI changeText;
     [SerializeField] private TextMeshProUGUI completedText;
 
+    [Header("Character")]
+    [SerializeField] private HeadFixer headFixer;
+
     [Header("Animation")]
     [SerializeField] private float lerpDuration = 1.5f;
     [SerializeField] private float pulseScale = 1.2f;
@@ -28,6 +31,8 @@ public class MinigameResultsUI : MonoBehaviour
         int startMoney = RoundData.instance.PreviousMoney;
         int finalMoney = RoundData.instance.Money;
         int change = RoundData.instance.LastMoneyChange;
+
+        ApplyResultFace(change);
 
         if (!RoundData.instance.IsStoryMode && completedText != null)
         {
@@ -72,6 +77,22 @@ public class MinigameResultsUI : MonoBehaviour
 
     
         RoundData.instance.NextMinigame();
+    }
+
+    private void ApplyResultFace(int change)
+    {
+        if (headFixer == null)
+        {
+            headFixer = FindObjectOfType<HeadFixer>();
+        }
+
+        if (headFixer == null)
+        {
+            return;
+        }
+
+        HeadFixer.Face resultFace = change < 0 ? HeadFixer.Face.Sad : HeadFixer.Face.Happy;
+        headFixer.SwapFace(resultFace);
     }
 
     private IEnumerator Pulse(Transform target)

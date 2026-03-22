@@ -54,7 +54,7 @@ public class CharacterRunner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) ||
+        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) ||
                Input.GetMouseButtonDown(0))
         {
             jumpBufferTimer = Mathf.Max(0f, jumpInputBufferTime);
@@ -164,7 +164,7 @@ public class CharacterRunner : MonoBehaviour
         private void OnTriggerEnter2D(Collider2D collision)
     {
         _losed = true;
-        animator.SetTrigger("PlaneLose");
-        ResultManager.instance.LoseMinigame();
+        
+        ResultManager.instance.LoseMinigame(0);
     }
 }

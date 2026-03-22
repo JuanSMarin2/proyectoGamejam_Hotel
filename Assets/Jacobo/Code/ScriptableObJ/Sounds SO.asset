@@ -57,7 +57,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 0}
   - id: Electrocutandose
     category: Default
     volume: 1
