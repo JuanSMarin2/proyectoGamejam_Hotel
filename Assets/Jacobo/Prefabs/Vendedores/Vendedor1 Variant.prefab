@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7156468658271061918}
   - component: {fileID: 5463554457746467910}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: SignGorditoCafe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6080414224902446847}
   - component: {fileID: 2163011674882992869}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Hielera Gordito Cafe_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,9 +183,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 864239761545006840, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 991495136211507515, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054907647388036470, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231898721329573538, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641356339290144957, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2363570646871700286, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 2601584350251907693, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
       propertyPath: m_Name
       value: Vendedor1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601584350251907693, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3234319113893694800, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287236247013578433, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3419251362196187333, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264904120669995859, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292069495276322391, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4422457849549653176, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
       propertyPath: m_LocalScale.x
@@ -239,6 +287,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4557304490011816773, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765032849707857787, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063057333094150022, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183593947837104891, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280384536168128225, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863998662631180618, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168472710595829195, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345251709685839156, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453733825374026089, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166568348040126016, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8956818746444271362, guid: dd44d6a7c56a93c4a95695cd4fac0fd0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -282,7 +374,8 @@ MonoBehaviour:
   animator: {fileID: 4126979137488447638}
   horizontalSpeedParameter: speedX
   backScale: {x: 0.54, y: 0.54, z: 0.54}
-  frontScale: {x: 0.9, y: 0.9, z: 0.9}
+  frontScale: {x: 0.7, y: 0.7, z: 0.7}
+  mirrorFrontOnYAxis: 1
   backSortingLayerName: MidGround
   frontSortingLayerName: Foreground
   boughtTriggerName: bought
