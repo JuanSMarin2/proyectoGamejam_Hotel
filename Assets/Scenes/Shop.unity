@@ -1088,6 +1088,7 @@ MonoBehaviour:
   moneyText: {fileID: 1675247083}
   lockImage: {fileID: 2108383480}
   characterVisual: {fileID: 1825666809}
+  characterAnimator: {fileID: 1825666810}
 --- !u!4 &596129836
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,7 +1976,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 47.249, y: -28.415}
+  m_AnchoredPosition: {x: 47.248993, y: -28.415009}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510025578
@@ -2889,6 +2890,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6317ea989f1fc7546b34ac620323cab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1825666810 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4119289788630149785, guid: 8eb0e52b54eafc84b81121c58ef6db09, type: 3}
+  m_PrefabInstance: {fileID: 1825666808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2034077991
 GameObject:
   m_ObjectHideFlags: 0

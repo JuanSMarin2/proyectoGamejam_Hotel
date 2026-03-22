@@ -13,15 +13,6 @@ MonoBehaviour:
   m_Name: Sounds SO
   m_EditorClassIdentifier: 
   sounds:
-  - id: AmbientMusic
-    category: Default
-    volume: 1
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds: []
   - id: Avion
     category: Default
     volume: 1
@@ -30,7 +21,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 228b686bc773596489e36ada8f13a82d, type: 3}
   - id: ChoqueCarro
     category: Default
     volume: 1
@@ -39,7 +31,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 44e75739b7943754181927366f492699, type: 3}
   - id: Comprar
     category: Default
     volume: 1
@@ -48,17 +41,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
-  - id: Corriendo
-    category: Default
-    volume: 1
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: b77c4f560e4dc8d4697002aa9658fc89, type: 3}
   - id: Electrocutandose
     category: Default
     volume: 1
@@ -67,7 +51,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: a8212dc9bfad91e43896eccd0562c762, type: 3}
   - id: Equipar
     category: Default
     volume: 1
@@ -76,16 +61,22 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
-  - id: Equipar
+    sounds:
+    - {fileID: 8300000, guid: 94873bbb801aa2b4eba289890b893cda, type: 3}
+  - id: FootStepSounds
     category: Default
     volume: 1
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds: []
+    randomVolumeMin: 0.81
+    randomVolumeMax: 0.95
+    minPitch: 0.9
+    maxPitch: 1.1
+    sounds:
+    - {fileID: 8300000, guid: bae4ceb3403a584438bdf141f9197b7b, type: 3}
+    - {fileID: 8300000, guid: abb285ad66c69d84ea2df2b6c14cd7ac, type: 3}
+    - {fileID: 8300000, guid: a7b76fe9cbce04b47899e7f2708cdd60, type: 3}
+    - {fileID: 8300000, guid: ad068b7e64fc04047b139c88ffe207b9, type: 3}
+    - {fileID: 8300000, guid: 252be3aca19807543ae0c827007b5bce, type: 3}
   - id: Frenado
     category: Default
     volume: 1
@@ -94,16 +85,18 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 17926b8f040075644ae0a70b9bc4e293, type: 3}
   - id: MenuMusic
     category: Default
-    volume: 1
+    volume: 0.758
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
+    randomVolumeMin: 0.41
+    randomVolumeMax: 0.69
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: c1bd575d805817b479ad0a7d5451c503, type: 3}
   - id: Motores
     category: Default
     volume: 1
@@ -112,16 +105,39 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
-  - id: Nadando
+    sounds:
+    - {fileID: 8300000, guid: 31bddcd0541f99a45925531fafaf4a1e, type: 3}
+  - id: Musica General
     category: Default
-    volume: 1
+    volume: 0.83
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 15e63cd95ea5f5141be8096450803e2d, type: 3}
+  - id: MusicaTienda
+    category: Default
+    volume: 0.53
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.37
+    randomVolumeMax: 0.66
+    minPitch: 0.7
+    maxPitch: 1.3
+    sounds:
+    - {fileID: 8300000, guid: e1350579344da54489cb4fc82e760b05, type: 3}
+  - id: Nadando
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.65
+    randomVolumeMax: 0.82
+    minPitch: 0.91
+    maxPitch: 1.13
+    sounds:
+    - {fileID: 8300000, guid: 6c42922f86f8adc47866d06ac1813a42, type: 3}
+    - {fileID: 8300000, guid: f9a6220c9db843648b28e03194826a84, type: 3}
   - id: PjEnojado
     category: Default
     volume: 1
@@ -130,16 +146,18 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 237186a244f6d034cb16c1b6186fe406, type: 3}
   - id: PjRiendo
     category: Default
-    volume: 1
+    volume: 0.864
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1
     minPitch: 1
-    maxPitch: 1
-    sounds: []
+    maxPitch: 1.14
+    sounds:
+    - {fileID: 8300000, guid: 7df1279ba441ac347abee9e9abcc7ed8, type: 3}
   - id: PjTriste
     category: Default
     volume: 1
@@ -148,7 +166,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: a80d4fdac23c5894d87a211b680d275a, type: 3}
   - id: Saltando
     category: Default
     volume: 1
@@ -157,7 +176,8 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
   - id: Tecleo
     category: Default
     volume: 1
@@ -166,31 +186,37 @@ MonoBehaviour:
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: e54cc24865ee32146a9a449c01c9ac31, type: 3}
   - id: TimerTicking
     category: Default
-    volume: 1
+    volume: 0.713
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
+    randomVolumeMin: 0.7
+    randomVolumeMax: 0.7
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: bb26ba4bd8d17234dabb9eea915a0a54, type: 3}
   - id: Tropezandose
     category: Default
     volume: 1
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
+    randomVolumeMin: 0.51
+    randomVolumeMax: 0.78
     minPitch: 1
     maxPitch: 1
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 5dd0f0bce58999c4c94ac22296b490d2, type: 3}
   - id: Wooshes
     category: Default
-    volume: 1
+    volume: 0.646
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds: []
+    randomVolumeMin: 0.6
+    randomVolumeMax: 0.84
+    minPitch: 0.7
+    maxPitch: 1.3
+    sounds:
+    - {fileID: 8300000, guid: 6a169551015b85c4fad122c4f0886e13, type: 3}
+    - {fileID: 8300000, guid: b4f80e0019e4a1f47b8f67efb35cba4f, type: 3}
+    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
