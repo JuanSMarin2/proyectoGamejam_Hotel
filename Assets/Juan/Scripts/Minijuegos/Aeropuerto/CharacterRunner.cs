@@ -164,7 +164,7 @@ public class CharacterRunner : MonoBehaviour
         private void OnTriggerEnter2D(Collider2D collision)
     {
         _losed = true;
-        animator.SetTrigger("PlaneLose");
-        ResultManager.instance.LoseMinigame();
+        
+        ResultManager.instance.LoseMinigame(0);
     }
 }
