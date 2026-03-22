@@ -20,6 +20,7 @@ public class MinigameResultsUI : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private float startDelay = 0.5f;
     [SerializeField] private float endDelay = 1.0f;
+    [SerializeField] private float resultSoundDelay = 0.5f;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class MinigameResultsUI : MonoBehaviour
         int change = RoundData.instance.LastMoneyChange;
 
         ApplyResultFace(change);
+        StartCoroutine(PlayResultSoundDelayed(change));
 
         if (!RoundData.instance.IsStoryMode && completedText != null)
         {
@@ -79,8 +81,27 @@ public class MinigameResultsUI : MonoBehaviour
         RoundData.instance.NextMinigame();
     }
 
+    private IEnumerator PlayResultSoundDelayed(int change)
+    {
+        yield return new WaitForSeconds(resultSoundDelay);
+        PlayResultSound(change);
+    }
+
+    private void PlayResultSound(int change)
+    {
+        if (change < 0)
+        {
+            SoundManager.PlaySound("PjEnojado");
+            return;
+        }
+
+        SoundManager.PlaySound("PjRiendo");
+    }
+
     private void ApplyResultFace(int change)
     {
+        
+
         if (headFixer == null)
         {
             headFixer = FindObjectOfType<HeadFixer>();
