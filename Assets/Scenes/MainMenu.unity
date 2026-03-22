@@ -3548,7 +3548,9 @@ MonoBehaviour:
   minigameOrder:
   - sceneName: Carritos
   - sceneName: Aeropuerto
+  - sceneName: Maletas
   - sceneName: CheckIn
+  - sceneName: Vendedores
   - sceneName: Buceo
 --- !u!4 &1276838708
 Transform:
