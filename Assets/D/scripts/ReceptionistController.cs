@@ -15,13 +15,18 @@ public class ReceptionistController : MonoBehaviour
 
     #region References
     [SerializeField] private SpriteResolver headSpriteResolver;
+    [SerializeField] private HeadFixer headFixer;
     [SerializeField] private SpriteRenderer bubbleSpriteRendererA;
     [SerializeField] private SpriteRenderer bubbleSpriteRendererB;
+    [SerializeField] private SpriteRenderer bubbleContentRendererA;
+    [SerializeField] private SpriteRenderer bubbleContentRendererB;
     [SerializeField] private Sprite[] workBubbleSprites = new Sprite[2]; // A/B
     [SerializeField] private Sprite[] playingBubbleSprites = new Sprite[2]; // A/B (cartas)
     [SerializeField] private ParticleSystem angryParticles;
     [SerializeField] private float workingMinTime = 1f;
     [SerializeField] private float workingMaxTime = 3f;
+    [SerializeField] private Color32 workBubbleColor = new Color32(0x79, 0xD7, 0x51, 0xFF);
+    [SerializeField] private Color32 playingBubbleColor = new Color32(0xF8, 0x47, 0x47, 0xFF);
     #endregion
 
     #region State Management
@@ -179,8 +184,36 @@ public class ReceptionistController : MonoBehaviour
     #region Visual Updates
     private void UpdateFace()
     {
+        if (headFixer != null)
+        {
+            headFixer.SwapFace(GetHeadFixerFace());
+            return;
+        }
+
+        if (headSpriteResolver == null)
+        {
+            return;
+        }
+
         string label = GetFaceLabel();
         headSpriteResolver.SetCategoryAndLabel("Head", label);
+    }
+
+    private HeadFixer.Face GetHeadFixerFace()
+    {
+        switch (currentState)
+        {
+            case ReceptionistState.Working:
+                return HeadFixer.Face.Happy;
+            case ReceptionistState.Mixed:
+                return HeadFixer.Face.Angry;
+            case ReceptionistState.Playing:
+                return HeadFixer.Face.Angry;
+            case ReceptionistState.Angry:
+                return HeadFixer.Face.Sad;
+            default:
+                return HeadFixer.Face.Neutral;
+        }
     }
 
     private string GetFaceLabel()
@@ -227,7 +260,7 @@ public class ReceptionistController : MonoBehaviour
             return;
         }
 
-        if (currentState == ReceptionistState.Angry)
+        if (currentState == ReceptionistState.Working || currentState == ReceptionistState.Mixed)
         {
             if (!angryParticles.gameObject.activeSelf)
             {
@@ -247,20 +280,26 @@ public class ReceptionistController : MonoBehaviour
 
     private void ShowWorkingBubbles()
     {
-        SetBubbleSprite(bubbleSpriteRendererA, workBubbleSprites);
-        SetBubbleSprite(bubbleSpriteRendererB, workBubbleSprites);
+        SetBubbleSprite(bubbleContentRendererA, workBubbleSprites);
+        SetBubbleSprite(bubbleContentRendererB, workBubbleSprites);
+        SetBubbleColor(bubbleSpriteRendererA, workBubbleColor);
+        SetBubbleColor(bubbleSpriteRendererB, workBubbleColor);
     }
 
     private void ShowPlayingBubbles()
     {
-        SetBubbleSprite(bubbleSpriteRendererA, playingBubbleSprites);
-        SetBubbleSprite(bubbleSpriteRendererB, playingBubbleSprites);
+        SetBubbleSprite(bubbleContentRendererA, playingBubbleSprites);
+        SetBubbleSprite(bubbleContentRendererB, playingBubbleSprites);
+        SetBubbleColor(bubbleSpriteRendererA, playingBubbleColor);
+        SetBubbleColor(bubbleSpriteRendererB, playingBubbleColor);
     }
 
     private void ShowMixedBubbles()
     {
-        SetBubbleSprite(bubbleSpriteRendererA, workBubbleSprites);
-        SetBubbleSprite(bubbleSpriteRendererB, playingBubbleSprites);
+        SetBubbleSprite(bubbleContentRendererA, workBubbleSprites);
+        SetBubbleSprite(bubbleContentRendererB, playingBubbleSprites);
+        SetBubbleColor(bubbleSpriteRendererA, workBubbleColor);
+        SetBubbleColor(bubbleSpriteRendererB, playingBubbleColor);
     }
 
     private void HideBubble()
@@ -273,6 +312,14 @@ public class ReceptionistController : MonoBehaviour
         {
             bubbleSpriteRendererB.enabled = false;
         }
+        if (bubbleContentRendererA != null)
+        {
+            bubbleContentRendererA.enabled = false;
+        }
+        if (bubbleContentRendererB != null)
+        {
+            bubbleContentRendererB.enabled = false;
+        }
     }
 
     private void SetBubbleSprite(SpriteRenderer target, Sprite[] options)
@@ -283,6 +330,17 @@ public class ReceptionistController : MonoBehaviour
         }
         int randomIndex = Random.Range(0, options.Length);
         target.sprite = options[randomIndex];
+        target.enabled = true;
+    }
+
+    private void SetBubbleColor(SpriteRenderer target, Color32 color)
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        target.color = color;
         target.enabled = true;
     }
     #endregion
