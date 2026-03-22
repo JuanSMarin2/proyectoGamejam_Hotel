@@ -54,7 +54,7 @@ public class CharacterRunner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) ||
+        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) ||
                Input.GetMouseButtonDown(0))
         {
             jumpBufferTimer = Mathf.Max(0f, jumpInputBufferTime);

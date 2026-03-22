@@ -353,7 +353,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -5
   m_Sprite: {fileID: 4301237128665813485, guid: 5df9d301b1c1dc44f9a084cda6bd18be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -943,12 +943,10 @@ MonoBehaviour:
   headRenderer: {fileID: 572418939}
   sprites:
   - label: Base
-    sprite: {fileID: 5634456141194391138, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
-    backHeadSprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
+    faceSprites: []
   - label: Naranja
-    sprite: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
-    backHeadSprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
-  UseBackwardsHead: 0
+    faceSprites: []
+  startFace: 0
 --- !u!212 &572418939 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8919278118341953269, guid: 8eb0e52b54eafc84b81121c58ef6db09, type: 3}
@@ -4269,6 +4267,10 @@ PrefabInstance:
     - target: {fileID: 7743228780755519977, guid: 1e8c08d1725dee049820e3c5984276d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913095565587840249, guid: 1e8c08d1725dee049820e3c5984276d1, type: 3}
+      propertyPath: m_SortingOrder
+      value: -4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

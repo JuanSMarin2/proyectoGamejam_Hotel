@@ -47,7 +47,8 @@ public class SwimController : MonoBehaviour
 
     private bool SwimInput()
     {
-        return Input.GetKeyDown(KeyCode.Space) ||
+         return Input.GetKeyDown(KeyCode.Space) ||
+             Input.GetKeyDown(KeyCode.W) ||
                Input.GetKeyDown(KeyCode.UpArrow) ||
                Input.GetMouseButtonDown(0) ||
                (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);

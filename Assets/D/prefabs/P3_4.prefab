@@ -743,7 +743,7 @@ MonoBehaviour:
     - face: 3
       sprite: {fileID: 6049085729135883027, guid: 262b89747f203b3479ed93e30412938d, type: 3}
     - face: 4
-      sprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
+      sprite: {fileID: -7330072072084751997, guid: f9b179fa5e6d3dd4fbf04e4c7884962a, type: 3}
   startFace: 0
 --- !u!1 &1250773285692965286
 GameObject:
