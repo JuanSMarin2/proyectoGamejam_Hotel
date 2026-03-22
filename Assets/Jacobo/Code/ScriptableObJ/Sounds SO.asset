@@ -23,16 +23,16 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 228b686bc773596489e36ada8f13a82d, type: 3}
-  - id: Campana
+  - id: BeachMusic
     category: Default
-    volume: 0.074
+    volume: 0.69
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
+    randomVolumeMin: 0.41
+    randomVolumeMax: 0.69
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: c725738b278d5a94e9dc8c151a3d2b6b, type: 3}
+    - {fileID: 8300000, guid: c1bd575d805817b479ad0a7d5451c503, type: 3}
   - id: ChoqueCarro
     category: Default
     volume: 1
@@ -97,30 +97,18 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 17926b8f040075644ae0a70b9bc4e293, type: 3}
-  - id: MenuMusic
+  - id: Motores
     category: Default
-    volume: 0.758
+    volume: 1
     mixer: {fileID: 0}
-    randomVolumeMin: 0.41
-    randomVolumeMax: 0.69
+    randomVolumeMin: 1
+    randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: c1bd575d805817b479ad0a7d5451c503, type: 3}
-  - id: Wooshes
-    category: Default
-    volume: 0.646
-    mixer: {fileID: 0}
-    randomVolumeMin: 0.6
-    randomVolumeMax: 0.84
-    minPitch: 0.7
-    maxPitch: 1.3
-    sounds:
-    - {fileID: 8300000, guid: 6a169551015b85c4fad122c4f0886e13, type: 3}
-    - {fileID: 8300000, guid: b4f80e0019e4a1f47b8f67efb35cba4f, type: 3}
-    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
-  - id: Musica General
-    category: Default
+    - {fileID: 8300000, guid: 31bddcd0541f99a45925531fafaf4a1e, type: 3}
+  - id: MusicaGeneral
+    category: Musica
     volume: 0.83
     mixer: {fileID: 0}
     randomVolumeMin: 1
@@ -220,23 +208,23 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 5dd0f0bce58999c4c94ac22296b490d2, type: 3}
-  - id: Motores
+  - id: AmbPlaya
     category: Default
-    volume: 0.646
+    volume: 0.78
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
+    randomVolumeMin: 0.51
+    randomVolumeMax: 0.78
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: 31bddcd0541f99a45925531fafaf4a1e, type: 3}
-  - id: Moneda
+    - {fileID: 8300000, guid: 9f4c5c866d8a3d34290f1c19f743c4da, type: 3}
+  - id: AmbGente
     category: Default
-    volume: 0.646
+    volume: 0.64
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
+    randomVolumeMin: 0.63
+    randomVolumeMax: 0.71
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: bc9405daa31c23c4a88d0fb17001f6da, type: 3}
+    - {fileID: 8300000, guid: 848d030a5dc9e06499424226a8045dde, type: 3}

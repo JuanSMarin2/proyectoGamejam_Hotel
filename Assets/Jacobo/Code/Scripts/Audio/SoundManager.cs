@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
     {
         [SerializeField] private SoundsSO SO;
         private static SoundManager instance = null;
+        public static event Action VolumeSettingsChanged;
         private AudioSource audioSource;
 
         private const string PrefSfxVolume = "audio.sfx.volume";
@@ -40,7 +41,15 @@ using UnityEngine.SceneManagement;
 
         private void Awake()
         {
+            if (instance != null && instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             instance = this;
+            DontDestroyOnLoad(gameObject);
+
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -216,6 +225,7 @@ using UnityEngine.SceneManagement;
 
             SavePrefs();
             RefreshSyncedSceneSfxAudioSources();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void SetMusicVolume(float value01)
@@ -227,6 +237,7 @@ using UnityEngine.SceneManagement;
                 musicLastNonZeroVolume = musicUserVolume;
 
             SavePrefs();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void MuteSfx()
@@ -239,6 +250,7 @@ using UnityEngine.SceneManagement;
             sfxUserVolume = 0f;
             SavePrefs();
             RefreshSyncedSceneSfxAudioSources();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void UnmuteSfxRestore()
@@ -251,6 +263,7 @@ using UnityEngine.SceneManagement;
             sfxUserVolume = Mathf.Clamp01(Mathf.Max(0.01f, sfxLastNonZeroVolume));
             SavePrefs();
             RefreshSyncedSceneSfxAudioSources();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void MuteMusic()
@@ -262,6 +275,7 @@ using UnityEngine.SceneManagement;
 
             musicUserVolume = 0f;
             SavePrefs();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void UnmuteMusicRestore()
@@ -273,12 +287,14 @@ using UnityEngine.SceneManagement;
 
             musicUserVolume = Mathf.Clamp01(Mathf.Max(0.01f, musicLastNonZeroVolume));
             SavePrefs();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void SetGlobalVolume(float value01)
         {
             pauseDucking = Mathf.Clamp01(value01);
             RefreshSyncedSceneSfxAudioSources();
+            NotifyVolumeSettingsChanged();
         }
 
         public static void LowerGlobalVolume(float value01 = 0.25f)
@@ -388,7 +404,7 @@ using UnityEngine.SceneManagement;
             if(source)
             {
                 source.outputAudioMixerGroup = soundList.mixer;
-                source.volume = volume * soundList.volume * randomizedVolumeMultiplier * GetEffectiveSfxVolume();
+                source.volume = ComposeFinalVolume(soundList.volume, volume * randomizedVolumeMultiplier, false);
                 source.pitch = randomizedPitch;
 
                 // Permite solapar sonidos en el mismo AudioSource.
@@ -400,11 +416,24 @@ using UnityEngine.SceneManagement;
                 if (sfx == null) return;
 
                 sfx.outputAudioMixerGroup = soundList.mixer;
-                sfx.volume = volume * soundList.volume * randomizedVolumeMultiplier * GetEffectiveSfxVolume();
+                sfx.volume = ComposeFinalVolume(soundList.volume, volume * randomizedVolumeMultiplier, false);
                 sfx.pitch = randomizedPitch;
                 sfx.clip = randomClip;
                 sfx.Play();
             }
+        }
+
+        public static float ComposeFinalVolume(float soCustomVolume, float assignedVolume = 1f, bool useMusicChannel = false)
+        {
+            float channelVolume = useMusicChannel ? GetEffectiveMusicVolume() : GetEffectiveSfxVolume();
+            float baseVolume = Mathf.Max(0f, soCustomVolume);
+            float assigned = Mathf.Max(0f, assignedVolume);
+            return baseVolume * assigned * channelVolume;
+        }
+
+        private static void NotifyVolumeSettingsChanged()
+        {
+            VolumeSettingsChanged?.Invoke();
         }
 
         private void BuildSoundLookup()
