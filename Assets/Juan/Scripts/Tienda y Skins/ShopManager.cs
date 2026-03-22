@@ -23,11 +23,13 @@ public class ShopManager : MonoBehaviour
 
     private const string EquiparBool = "Equipar";
     private const string ModelarBool = "Modelar";
+    private const string ShopMusicId = "MusicaTienda";
 
     private List<Skin> allSkins;
     private List<Skin> currentSkins;
     private int currentIndex;
     private SkinCategory currentCategory;
+    private AudioSource shopMusicSource;
 
     private void Start()
     {
@@ -38,7 +40,13 @@ public class ShopManager : MonoBehaviour
         sectionPanel.SetActive(true);
         shopPanel.SetActive(false);
 
+        EnsureShopMusic();
         UpdateEquippedVisual();
+    }
+
+    private void OnDestroy()
+    {
+        SoundManager.StopSound(shopMusicSource);
     }
 
     private void Update()
@@ -134,18 +142,43 @@ public class ShopManager : MonoBehaviour
     public void OnAction()
     {
         Skin skin = GetSelectedSkin();
+        bool wasOwned = GameData.instance.IsOwned(skin.id);
+        bool wasEquipped = GameData.instance.IsEquipped(skin.id, currentCategory);
 
-        if (!GameData.instance.IsOwned(skin.id))
+        if (!wasOwned)
         {
             GameData.instance.BuySkin(skin.id, skin.price);
+
+            if (GameData.instance.IsOwned(skin.id))
+            {
+                SoundManager.PlaySound(SoundType.Comprar);
+            }
         }
-        else if (!GameData.instance.IsEquipped(skin.id, currentCategory))
+        else if (!wasEquipped)
         {
             GameData.instance.EquipSkin(skin.id, currentCategory);
-            SetAnimatorBool(EquiparBool, true);
+
+            if (GameData.instance.IsEquipped(skin.id, currentCategory))
+            {
+                SoundManager.PlaySound(SoundType.Equipar);
+                SetAnimatorBool(EquiparBool, true);
+            }
         }
 
         UpdateUI();
+    }
+
+    private void EnsureShopMusic()
+    {
+        shopMusicSource = GetComponent<AudioSource>();
+        if (shopMusicSource == null)
+        {
+            shopMusicSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        shopMusicSource.playOnAwake = false;
+
+        SoundManager.PlayLoopedSound(ShopMusicId, shopMusicSource);
     }
 
     // ===== UI =====

@@ -12,6 +12,7 @@ public class TimeManager : MonoBehaviour
 
     private float timer;
     private bool hasFinished = false;
+    private bool hasPlayedTimerTicking = false;
 
 
     public float StartTime
@@ -28,6 +29,7 @@ public class TimeManager : MonoBehaviour
     private void Start()
     {
         timer = startTime;
+        hasPlayedTimerTicking = false;
         UpdateBar();
     }
 
@@ -38,6 +40,12 @@ public class TimeManager : MonoBehaviour
 
         timer -= Time.deltaTime;
 
+        if (!hasPlayedTimerTicking && timer <= 3f && timer > 0f)
+        {
+            hasPlayedTimerTicking = true;
+            SoundManager.PlaySound(SoundType.TimerTicking);
+        }
+
         if (timer <= 0f)
         {
             timer = 0f;
@@ -45,7 +53,19 @@ public class TimeManager : MonoBehaviour
             UpdateBar();
 
             if(!MinigameManager.instance.LosesWithTime)
+            {
+                if (CharacterRunner.IsRunnerSceneActive())
+                {
+                    SoundManager.PlaySound(SoundType.Avion);
+                }
+
+                if (SwimController.IsSwimSceneActive())
+                {
+                    SoundManager.PlaySound(SoundType.PjRiendo);
+                }
+
                 ResultManager.instance.WinMinigame();
+            }
             else
                 ResultManager.instance.LoseMinigame();
 
@@ -67,6 +87,7 @@ public class TimeManager : MonoBehaviour
     {
         timer = startTime;
         hasFinished = false;
+        hasPlayedTimerTicking = false;
         UpdateBar();
     }
 }

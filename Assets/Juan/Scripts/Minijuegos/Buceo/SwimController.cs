@@ -18,6 +18,11 @@ public class SwimController : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public static bool IsSwimSceneActive()
+    {
+        return FindObjectOfType<SwimController>() != null;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,6 +40,7 @@ public class SwimController : MonoBehaviour
         if (SwimInput() && !_losed)
         {
             Swim();
+            SoundManager.PlaySound(SoundType.Nadando);
             animator.SetTrigger("SwimAction");
         }
     }
@@ -87,7 +93,10 @@ public class SwimController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_losed) return;
+
         _losed = true;
+        SoundManager.PlaySound(SoundType.Electrocutandose);
         animator.SetTrigger("SwimLose");
         ResultManager.instance.LoseMinigame();
     }

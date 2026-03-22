@@ -438,6 +438,7 @@ MonoBehaviour:
   shopButton: {fileID: 585205552}
   startDelay: 0.5
   transferDuration: 2
+  coinSoundStep: 10
 --- !u!4 &698619543
 Transform:
   m_ObjectHideFlags: 0
@@ -637,6 +638,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931001385}
   m_CullTransparentMesh: 1
+--- !u!1 &1047833708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1047833710}
+  - component: {fileID: 1047833709}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1047833709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047833708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c3b0da23c85c54b88b7a43f8401c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SO: {fileID: 11400000, guid: 2cb596b99e57efa459f5d6d93b94e68d, type: 2}
+  initialPoolSize: 10
+  expandPoolIfNeeded: 1
+  maxPoolSize: 33
+  allowVoiceStealing: 1
+  debugSceneAudioSync: 0
+--- !u!4 &1047833710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047833708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2117403, y: 1.7474906, z: -0.04827141}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375920285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,3 +1685,4 @@ SceneRoots:
   - {fileID: 719721140}
   - {fileID: 1533247811}
   - {fileID: 698619543}
+  - {fileID: 1047833710}

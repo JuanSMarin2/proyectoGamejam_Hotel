@@ -18,6 +18,9 @@ public class FinalSceneManager : MonoBehaviour
     [SerializeField] private float startDelay = 0.5f;
     [SerializeField] private float transferDuration = 2f;
 
+    [Header("Audio")]
+    [SerializeField] private int coinSoundStep = 10;
+
     private void Start()
     {
         StartCoroutine(TransferMoney());
@@ -32,6 +35,7 @@ public class FinalSceneManager : MonoBehaviour
 
         int startRoundMoney = roundMoney;
         int startGlobalMoney = globalMoney;
+        int lastCoinStepPlayed = 0;
 
 
         currentMoneyText.text = startRoundMoney.ToString();
@@ -56,6 +60,15 @@ public class FinalSceneManager : MonoBehaviour
 
             currentMoneyText.text = current.ToString();
             globalMoneyText.text = global.ToString();
+
+            int transferred = startRoundMoney - current;
+            int coinStep = Mathf.Max(1, coinSoundStep);
+            int currentCoinStep = transferred / coinStep;
+            while (lastCoinStepPlayed < currentCoinStep)
+            {
+                lastCoinStepPlayed++;
+                SoundManager.PlaySound("Moneda");
+            }
 
             yield return null;
         }
