@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: d4930c5b988931f4285973f124c64ff9
+guid: 23892bf20bc60b844ba30688941a10df
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5402442702903929887
-    second: textbuttontemplate_0
+      213: 7085886321004245100
+    second: mute2_0
   - first:
-      213: -2261546855176787130
-    second: textbuttontemplate_1
+      213: -7094875102403978569
+    second: mute2_1
   - first:
-      213: 4206409519748774748
-    second: textbuttontemplate_2
+      213: 1988137077069718950
+    second: mute2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -132,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: textbuttontemplate_0
+      name: mute2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1941
-        height: 625
+        width: 605
+        height: 545
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1c6df1d30559fa40800000000000000
-      internalID: 5402442702903929887
+      spriteID: c60f14af010265260800000000000000
+      internalID: 7085886321004245100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: textbuttontemplate_1
+      name: mute2_1
       rect:
         serializedVersion: 2
         x: 105
         y: 0
-        width: 10
-        height: 10
+        width: 12
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 64b294e0e1f5d90e0800000000000000
-      internalID: -2261546855176787130
+      spriteID: 7ba92734fa0f98d90800000000000000
+      internalID: -7094875102403978569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: textbuttontemplate_2
+      name: mute2_2
       rect:
         serializedVersion: 2
-        x: 157
+        x: 184
         y: 0
-        width: 9
-        height: 6
+        width: 6
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,8 +191,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c5b7274fb2b206a30800000000000000
-      internalID: 4206409519748774748
+      spriteID: 6a526835328479b10800000000000000
+      internalID: 1988137077069718950
       vertices: []
       indices: 
       edges: []
@@ -201,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -211,9 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      textbuttontemplate_0: 5402442702903929887
-      textbuttontemplate_1: -2261546855176787130
-      textbuttontemplate_2: 4206409519748774748
+      mute2_0: 7085886321004245100
+      mute2_1: -7094875102403978569
+      mute2_2: 1988137077069718950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
