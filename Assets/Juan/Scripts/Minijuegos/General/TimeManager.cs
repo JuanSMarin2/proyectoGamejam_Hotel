@@ -45,7 +45,19 @@ public class TimeManager : MonoBehaviour
             UpdateBar();
 
             if(!MinigameManager.instance.LosesWithTime)
+            {
+                if (CharacterRunner.IsRunnerSceneActive())
+                {
+                    SoundManager.PlaySound(SoundType.Avion);
+                }
+
+                if (SwimController.IsSwimSceneActive())
+                {
+                    SoundManager.PlaySound(SoundType.PjRiendo);
+                }
+
                 ResultManager.instance.WinMinigame();
+            }
             else
                 ResultManager.instance.LoseMinigame();
 

@@ -91,6 +91,12 @@ public class ResultManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(loseDelay);
 
+        if (SwimController.IsSwimSceneActive())
+        {
+            SoundManager.PlaySound(SoundType.Frenado);
+            SoundManager.PlaySound(SoundType.Motores);
+        }
+
         yield return HandleResult(false, loseDirectorIndex);
     }
 
@@ -99,6 +105,12 @@ public class ResultManager : MonoBehaviour
         Time.timeScale = 0f;
 
         yield return new WaitForSecondsRealtime(loseDelay);
+
+        if (SwimController.IsSwimSceneActive())
+        {
+            SoundManager.PlaySound(SoundType.Frenado);
+            SoundManager.PlaySound(SoundType.Motores);
+        }
 
         yield return HandleResult(false, directorIndex);
     }

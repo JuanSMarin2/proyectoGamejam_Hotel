@@ -34,6 +34,11 @@ public class CharacterRunner : MonoBehaviour
     private int groundRecheckFramesRemaining;
     private float jumpBufferTimer;
 
+    public static bool IsRunnerSceneActive()
+    {
+        return FindObjectOfType<CharacterRunner>() != null;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -122,6 +127,7 @@ public class CharacterRunner : MonoBehaviour
         rb.linearVelocity = vel;
 
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        SoundManager.PlaySound(SoundType.Saltando);
         jumpsUsed++;
         isGrounded = false;
         groundRecheckFramesRemaining = Mathf.Max(0, groundRecheckDelayFrames);
@@ -163,7 +169,11 @@ public class CharacterRunner : MonoBehaviour
 
         private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_losed) return;
+
         _losed = true;
+        SoundManager.PlaySound(SoundType.Tropezandose);
+        SoundManager.PlaySound(SoundType.Avion);
         
         ResultManager.instance.LoseMinigame(0);
     }
