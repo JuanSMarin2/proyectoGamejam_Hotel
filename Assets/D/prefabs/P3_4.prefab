@@ -721,12 +721,30 @@ MonoBehaviour:
   headRenderer: {fileID: 2778867294594387021}
   sprites:
   - label: Base
-    sprite: {fileID: 5634456141194391138, guid: ae8b90690fc1fad4295b3512b0b9d5bd, type: 3}
-    backHeadSprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
+    faceSprites:
+    - face: 1
+      sprite: {fileID: -4224198181217036011, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 0
+      sprite: {fileID: 8686659213586817991, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 2
+      sprite: {fileID: 8271255141572583443, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 3
+      sprite: {fileID: -3819603689240352573, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 4
+      sprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
   - label: Naranja
-    sprite: {fileID: -7066801412319700004, guid: 3ed716201aed7e042beeb96ae3164d11, type: 3}
-    backHeadSprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
-  UseBackwardsHead: 0
+    faceSprites:
+    - face: 1
+      sprite: {fileID: -4899244009689833465, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 0
+      sprite: {fileID: -2389762378862582496, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 2
+      sprite: {fileID: 7561083210960737476, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 3
+      sprite: {fileID: 6049085729135883027, guid: 262b89747f203b3479ed93e30412938d, type: 3}
+    - face: 4
+      sprite: {fileID: 2353347815797831771, guid: 091c5d800871d8c49a6ee2580c2fa8c6, type: 3}
+  startFace: 0
 --- !u!1 &1250773285692965286
 GameObject:
   m_ObjectHideFlags: 0

@@ -1648,8 +1648,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274359acea432ad4aa9d79875b728559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winDirector: {fileID: 1068975607}
-  loseDirector: {fileID: 1763995176}
+  winDirectors: []
+  loseDirectors: []
+  winDirectorIndex: 0
+  loseDirectorIndex: 0
   loseDelay: 0.1
   nextSceneName: MinigameResults
 --- !u!4 &1734696879
@@ -1842,7 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1815714484}
   fallbackSpeed: 2
-  maxJumps: 2
+  maxJumps: 1
   jumpForce: 10
   groundRecheckDelayFrames: 4
   jumpInputBufferTime: 0.12
