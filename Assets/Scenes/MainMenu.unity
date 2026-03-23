@@ -4222,9 +4222,6 @@ MonoBehaviour:
   - sceneName: Vendedores
   - sceneName: Foto
   - sceneName: Buceo
-  - sceneName: Carritos
-  - sceneName: Aeropuerto
-  - sceneName: Maletas
 --- !u!4 &1276838708
 Transform:
   m_ObjectHideFlags: 0

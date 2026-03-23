@@ -1665,8 +1665,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 190.9, y: -94}
-  m_SizeDelta: {x: 260.27, y: 36.05}
+  m_AnchoredPosition: {x: 180.04, y: -100.62}
+  m_SizeDelta: {x: 291.34, y: 29.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1978408470
 MonoBehaviour:
@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Minijuego completado
+  m_text: 'Minijuegos completados: 15'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d0c8603e5fb0aae4d8ea5e3e65bfde87, type: 2}
   m_sharedMaterial: {fileID: -2205269855181461880, guid: d0c8603e5fb0aae4d8ea5e3e65bfde87, type: 2}
@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1774802895513883531, guid: 8c4860de812b26a4bb9af15b06a42871, type: 3}
+  m_Sprite: {fileID: 1774802895513883531, guid: c70120881c41a3a4891c9d9d28463594, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

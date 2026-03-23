@@ -43,7 +43,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource photoAudioSource;
     [SerializeField] private string footstepLoopSoundId = "FootStepSounds";
-    [SerializeField] private string photoShotSoundId = "Foto";
+    [SerializeField] private AudioClip photoShotClip;
     [SerializeField] private float footstepLoopVolume = 1f;
     [SerializeField] private float photoShotVolume = 1f;
 
@@ -555,12 +555,13 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
     private void PlayPhotoShotSound()
     {
-        if (string.IsNullOrWhiteSpace(photoShotSoundId))
+        if (photoShotClip == null)
         {
             return;
         }
 
-        SoundManager.PlaySound(photoShotSoundId, null, photoShotVolume);
+        EnsureAudioSource();
+        photoAudioSource.PlayOneShot(photoShotClip, photoShotVolume);
     }
 }
 
