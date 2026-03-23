@@ -221,15 +221,15 @@ RectTransform:
   m_GameObject: {fileID: 472431239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 839992063}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3.7979736, y: 17.051025}
+  m_SizeDelta: {x: 4.469, y: 149.889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &472431241
 MonoBehaviour:
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1235,8 +1235,8 @@ Transform:
   m_GameObject: {fileID: 928002224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
-  m_LocalScale: {x: 3.1, y: 3.1, z: 1}
+  m_LocalPosition: {x: 0.2143, y: 1.1, z: 0}
+  m_LocalScale: {x: 5.5595474, y: 3.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1275,7 +1275,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0017916858, y: -0.15521944}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1285,7 +1285,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.95341676, y: 1.3104388}
   m_EdgeRadius: 0
 --- !u!114 &928002228
 MonoBehaviour:
@@ -1776,8 +1776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 403.3302, y: -83.992325}
-  m_SizeDelta: {x: 766.6096, y: 81.6027}
+  m_AnchoredPosition: {x: 403.3302, y: -74.91394}
+  m_SizeDelta: {x: 766.61, y: 63.446}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1527992365
 MonoBehaviour:
@@ -1828,8 +1828,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 31.3
+  m_fontSizeBase: 31.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2005,7 +2005,7 @@ MonoBehaviour:
   toRight: {fileID: 998020845}
   toLeft: {fileID: 787006397}
   photoArea: {fileID: 928002226}
-  photoAreaSize: {x: 2.94, y: 2.57}
+  photoAreaSize: {x: 6.25, y: 5.07}
   photoSpaceSize: {x: 18.06, y: 1.62}
   blocker: {fileID: 520181571}
   blockerMoveSpeed: 3
@@ -2013,7 +2013,7 @@ MonoBehaviour:
   maxSpawnInterval: 1.4
   spawnIntervalMultiplier: 1
   minEnemiesPerSpawn: 1
-  maxEnemiesPerSpawn: 2
+  maxEnemiesPerSpawn: 1
   minEnemySpeed: 5
   maxEnemySpeed: 8
   fallbackRoundTime: 10
