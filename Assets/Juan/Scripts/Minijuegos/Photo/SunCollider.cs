@@ -1,12 +1,24 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SunCollider : MonoBehaviour
 {
 
     public bool isBlocked = false;
+    [SerializeField] private Image backlighting;
+    [SerializeField] private float fadeDuration = 0.25f;
+
+    private const float MaxBacklightingAlpha = 175f / 255f;
+
     private readonly HashSet<Collider2D> collidersInside = new HashSet<Collider2D>();
     private readonly Dictionary<PhotoParticleActiver, int> activersInside = new Dictionary<PhotoParticleActiver, int>();
+    private Coroutine backlightingFadeCoroutine;
+
+    private void Awake()
+    {
+        SetBacklightingAlpha(0f);
+    }
 
  private void OnTriggerEnter2D(Collider2D other)
     {
@@ -24,6 +36,8 @@ public class SunCollider : MonoBehaviour
 
             activersInside[activer]++;
         }
+
+        UpdateBacklightingState();
         
     }
 
@@ -44,6 +58,8 @@ public class SunCollider : MonoBehaviour
             else
                 activersInside[activer] = count;
         }
+
+        UpdateBacklightingState();
         
     }
 
@@ -57,5 +73,57 @@ public class SunCollider : MonoBehaviour
 
             activer.ActivateAngryParticle();
         }
+    }
+
+    private void UpdateBacklightingState()
+    {
+        float targetAlpha = isBlocked ? MaxBacklightingAlpha : 0f;
+        StartBacklightingFade(targetAlpha);
+    }
+
+    private void StartBacklightingFade(float targetAlpha)
+    {
+        if (backlighting == null)
+            return;
+
+        if (backlightingFadeCoroutine != null)
+            StopCoroutine(backlightingFadeCoroutine);
+
+        backlightingFadeCoroutine = StartCoroutine(FadeBacklightingAlpha(targetAlpha));
+    }
+
+    private System.Collections.IEnumerator FadeBacklightingAlpha(float targetAlpha)
+    {
+        Color color = backlighting.color;
+        float startAlpha = color.a;
+        float elapsed = 0f;
+
+        if (Mathf.Approximately(fadeDuration, 0f))
+        {
+            SetBacklightingAlpha(targetAlpha);
+            backlightingFadeCoroutine = null;
+            yield break;
+        }
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / fadeDuration);
+            SetBacklightingAlpha(Mathf.Lerp(startAlpha, targetAlpha, t));
+            yield return null;
+        }
+
+        SetBacklightingAlpha(targetAlpha);
+        backlightingFadeCoroutine = null;
+    }
+
+    private void SetBacklightingAlpha(float alpha)
+    {
+        if (backlighting == null)
+            return;
+
+        Color color = backlighting.color;
+        color.a = alpha;
+        backlighting.color = color;
     }
 }

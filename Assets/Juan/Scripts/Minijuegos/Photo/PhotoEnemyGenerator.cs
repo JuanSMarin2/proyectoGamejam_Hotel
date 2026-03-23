@@ -63,6 +63,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
     private bool blockerTriggered;
     private int blockerDirection;
     private bool photoTaken;
+    private Coroutine footstepRoutine;
 
     private float AreaMinX => GetPhotoAreaCenter().x - (photoAreaSize.x * 0.5f);
     private float AreaMaxX => GetPhotoAreaCenter().x + (photoAreaSize.x * 0.5f);
@@ -510,17 +511,46 @@ public class PhotoEnemyGenerator : MonoBehaviour
         }
 
         EnsureAudioSource();
-        SoundManager.PlayLoopedSound(footstepLoopSoundId, photoAudioSource, footstepLoopVolume);
+
+        if (footstepRoutine != null)
+        {
+            return;
+        }
+
+        footstepRoutine = StartCoroutine(FootstepRoutine());
     }
 
     private void StopFootstepLoop()
     {
+        if (footstepRoutine != null)
+        {
+            StopCoroutine(footstepRoutine);
+            footstepRoutine = null;
+        }
+
         if (photoAudioSource == null)
         {
             return;
         }
 
         SoundManager.StopSound(photoAudioSource);
+    }
+
+    private IEnumerator FootstepRoutine()
+    {
+        while (isActiveAndEnabled)
+        {
+            SoundManager.PlaySound(footstepLoopSoundId, photoAudioSource, footstepLoopVolume);
+
+            while (photoAudioSource != null && photoAudioSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            yield return null;
+        }
+
+        footstepRoutine = null;
     }
 
     private void PlayPhotoShotSound()

@@ -173,7 +173,7 @@ public class ReceptionistController : MonoBehaviour
     private void InitializePlayingState()
     {
         // Generar número aleatorio entre 3 y 5
-        requiredClicksPlaying = Random.Range(3, 6);
+        requiredClicksPlaying = Random.Range(1, 4);
         playingTimeLimit = 4.5f;
     }
 
