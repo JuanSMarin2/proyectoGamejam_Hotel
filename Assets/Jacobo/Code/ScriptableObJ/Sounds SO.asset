@@ -268,3 +268,13 @@ MonoBehaviour:
     maxPitch: 1.17
     sounds:
     - {fileID: 8300000, guid: 6045806c5fb963040a40be7b1146c3f3, type: 3}
+  - id: Moneda
+    category: Default
+    volume: 0.64
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.63
+    randomVolumeMax: 0.71
+    minPitch: 0.97
+    maxPitch: 1.17
+    sounds:
+    - {fileID: 8300000, guid: bc9405daa31c23c4a88d0fb17001f6da, type: 3}

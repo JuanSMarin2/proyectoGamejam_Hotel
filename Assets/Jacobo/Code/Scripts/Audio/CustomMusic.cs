@@ -24,10 +24,10 @@ public class CustomMusic : MonoBehaviour
     [SerializeField] private bool useMusicChannelForMusic = true;
     [SerializeField] private bool useMusicChannelForAmbience = true;
 
-    [Header("Behavior")]
-    [SerializeField] private bool pauseGeneralMusicWhileActive = true;
+    [Header("Debug")]
+    [SerializeField] private bool debugLogs = false;
 
-    private bool _requestedPause;
+    public bool PlayMusicEnabled => playMusic;
 
     private void Awake()
     {
@@ -42,11 +42,8 @@ public class CustomMusic : MonoBehaviour
     {
         SoundManager.VolumeSettingsChanged += HandleVolumeSettingsChanged;
 
-        if (pauseGeneralMusicWhileActive)
-        {
-            PersistentGeneralMusicController.RequestExternalPause();
-            _requestedPause = true;
-        }
+        if (debugLogs)
+            Debug.Log($"[CustomMusic] Enabled on '{gameObject.scene.name}'. playMusic={playMusic}, playAmbience={playAmbience}", this);
 
         PlayConfigured();
     }
@@ -54,12 +51,6 @@ public class CustomMusic : MonoBehaviour
     private void OnDisable()
     {
         SoundManager.VolumeSettingsChanged -= HandleVolumeSettingsChanged;
-
-        if (_requestedPause)
-        {
-            PersistentGeneralMusicController.ReleaseExternalPause();
-            _requestedPause = false;
-        }
     }
 
     private void PlayConfigured()
@@ -75,6 +66,9 @@ public class CustomMusic : MonoBehaviour
 
     private void HandleVolumeSettingsChanged()
     {
+        if (debugLogs)
+            Debug.Log("[CustomMusic] Volume settings changed. Refreshing active source volumes.", this);
+
         RefreshActiveVolumes();
     }
 
@@ -96,6 +90,9 @@ public class CustomMusic : MonoBehaviour
             return;
 
         source.volume = SoundManager.ComposeFinalVolume(entry.volume, assignedVolume, useMusicChannel);
+
+        if (debugLogs)
+            Debug.Log($"[CustomMusic] Refreshed volume -> source='{source.name}', id='{soundId}', finalVolume={source.volume:F3}", this);
     }
 
     private void ConfigureAndPlay(AudioSource source, string soundId, bool loop, float assignedVolume, bool useMusicChannel)
@@ -123,6 +120,12 @@ public class CustomMusic : MonoBehaviour
         source.volume = SoundManager.ComposeFinalVolume(entry.volume, assignedVolume, useMusicChannel);
 
         source.Play();
+
+        if (debugLogs)
+        {
+            string clipName = source.clip != null ? source.clip.name : "(null clip)";
+            Debug.Log($"[CustomMusic] Playing -> source='{source.name}', id='{soundId}', clip='{clipName}', loop={loop}, finalVolume={source.volume:F3}", this);
+        }
     }
 
     private bool TryGetSoundEntry(string soundId, out SoundList entry)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhotoEnemyGenerator : MonoBehaviour
 {
     [Header("Enemy")]
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
     [SerializeField] private Transform toRight;
     [SerializeField] private Transform toLeft;
 
@@ -120,6 +120,11 @@ public class PhotoEnemyGenerator : MonoBehaviour
         }
 
         bool blocked = sunCollider != null && sunCollider.isBlocked;
+        if (sunCollider != null)
+        {
+            sunCollider.ActivateAngryParticlesInside();
+        }
+
         if (blocked)
         {
             ResultManager.instance.LoseMinigame();
@@ -132,9 +137,9 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        if (enemyPrefab == null)
+        if (enemyPrefabs == null || enemyPrefabs.Count == 0)
         {
-            Debug.LogWarning("PhotoEnemyGenerator: No enemyPrefab assigned.", this);
+            Debug.LogWarning("PhotoEnemyGenerator: No enemy prefabs assigned.", this);
             yield break;
         }
 
@@ -286,8 +291,13 @@ public class PhotoEnemyGenerator : MonoBehaviour
         Vector3 spawnPosition = new Vector3(spawnPoint.position.x, randomY, spawnPoint.position.z);
         int direction = fromRightSpawn ? -1 : 1;
         float lifeTime = Random.Range(minLifeTime, maxLifeTime);
+        GameObject prefab = GetRandomEnemyPrefab();
+        if (prefab == null)
+        {
+            return;
+        }
 
-        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform);
+        GameObject enemy = Instantiate(prefab, spawnPosition, Quaternion.identity, transform);
 
         if (!fromRightSpawn)
         {
@@ -306,11 +316,20 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
     private void FlipSprite(GameObject enemy)
     {
-        SpriteRenderer[] renderers = enemy.GetComponentsInChildren<SpriteRenderer>(true);
-        for (int i = 0; i < renderers.Length; i++)
+        Vector3 localScale = enemy.transform.localScale;
+        localScale.x *= -1f;
+        enemy.transform.localScale = localScale;
+    }
+
+    private GameObject GetRandomEnemyPrefab()
+    {
+        if (enemyPrefabs == null || enemyPrefabs.Count == 0)
         {
-            renderers[i].flipX = true;
+            return null;
         }
+
+        int randomIndex = Random.Range(0, enemyPrefabs.Count);
+        return enemyPrefabs[randomIndex];
     }
 
     private void OnDrawGizmos()

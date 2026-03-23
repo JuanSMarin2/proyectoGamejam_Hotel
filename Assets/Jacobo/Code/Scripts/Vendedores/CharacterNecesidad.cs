@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class CharacterNecesidad : MonoBehaviour
 {
+    [Header("Player")]
+    [SerializeField] private Transform player;
+    [SerializeField] private int playerChildrenSortingOffset = 35;
+
     [Header("Timing")]
     [SerializeField] private float minWaitBetweenNeeds = 2f;
     [SerializeField] private float maxWaitBetweenNeeds = 4f;
-    [SerializeField] private float solveTime = 4f;
+    [SerializeField] private float solveTime = 6f;
 
     [SerializeField] private bool autoStart = true;
 
@@ -23,8 +27,33 @@ public class CharacterNecesidad : MonoBehaviour
 
     private void Start()
     {
+        ApplyPlayerChildrenSortingOffset();
+
         if (autoStart)
             StartNeeds();
+    }
+
+    private void ApplyPlayerChildrenSortingOffset()
+    {
+        if (player == null)
+            return;
+
+        int offset = playerChildrenSortingOffset;
+        if (offset == 0)
+            return;
+
+        SpriteRenderer[] renderers = player.GetComponentsInChildren<SpriteRenderer>(true);
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            SpriteRenderer renderer = renderers[i];
+            if (renderer == null)
+                continue;
+
+            if (renderer.transform == player)
+                continue;
+
+            renderer.sortingOrder += offset;
+        }
     }
 
     public void StartNeeds()

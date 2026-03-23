@@ -5,17 +5,23 @@ using UnityEngine.SceneManagement;
 public class PersistentGeneralMusicController : MonoBehaviour
 {
     private static PersistentGeneralMusicController _instance;
-    private static int _externalPauseRequests;
 
     [Header("References")]
     [SerializeField] private AudioSource musicSource;
 
-    [Header("Pause By Scene")]
-    [SerializeField] private string[] pauseInScenes = { "Tienda", "Buceo", "Recepcionista" };
-    [SerializeField] private bool sceneNameCaseInsensitive = true;
+    [Header("Game Speed Pitch (Optional)")]
+    [SerializeField] private bool useGameSpeedForPitch = false;
+    [SerializeField] private float baseGameSpeed = 1f;
+    [SerializeField] private float pitchAtBaseSpeed = 1f;
+    [SerializeField] private float pitchMultiplier = 0.25f;
+    [SerializeField] private float minPitch = 0.8f;
+    [SerializeField] private float maxPitch = 1.4f;
+    [SerializeField] private float pitchRefreshInterval = 0.15f;
 
     [Header("Debug")]
     [SerializeField] private bool debugLogs = false;
+
+    private float pitchRefreshTimer;
 
     private void Awake()
     {
@@ -44,8 +50,11 @@ public class PersistentGeneralMusicController : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
 
+        pitchRefreshTimer = 0f;
+
         Scene current = SceneManager.GetActiveScene();
-        ApplyPauseStateForScene(current.name);
+        ApplyGeneralMusicStateForScene(current);
+        UpdatePitchFromGameSpeed(true);
     }
 
     private void OnDisable()
@@ -62,7 +71,27 @@ public class PersistentGeneralMusicController : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         TryAttachAsChildOfSoundManager();
-        ApplyPauseStateForScene(scene.name);
+        ApplyGeneralMusicStateForScene(scene);
+        UpdatePitchFromGameSpeed(true);
+    }
+
+    private void Update()
+    {
+        if (musicSource == null)
+            return;
+
+        if (pitchRefreshInterval <= 0f)
+        {
+            UpdatePitchFromGameSpeed(false);
+            return;
+        }
+
+        pitchRefreshTimer -= Time.unscaledDeltaTime;
+        if (pitchRefreshTimer > 0f)
+            return;
+
+        pitchRefreshTimer = pitchRefreshInterval;
+        UpdatePitchFromGameSpeed(false);
     }
 
     private void TryAttachAsChildOfSoundManager()
@@ -82,7 +111,7 @@ public class PersistentGeneralMusicController : MonoBehaviour
         DontDestroyOnLoad(sm.gameObject);
     }
 
-    private void ApplyPauseStateForScene(string sceneName)
+    private void ApplyGeneralMusicStateForScene(Scene scene)
     {
         if (musicSource == null)
         {
@@ -91,65 +120,102 @@ public class PersistentGeneralMusicController : MonoBehaviour
             return;
         }
 
-        bool shouldPause = ShouldPauseInScene(sceneName) || _externalPauseRequests > 0;
+        bool hasActiveCustomMusic = SceneHasActiveCustomMusic(scene, out string customMusicName);
 
-        if (shouldPause)
+        if (hasActiveCustomMusic)
         {
             if (musicSource.isPlaying)
                 musicSource.Pause();
 
             if (debugLogs)
-                Debug.Log($"[PersistentGeneralMusicController] Music paused in scene '{sceneName}'.", this);
+                Debug.Log($"[PersistentGeneralMusicController] General music paused. Active CustomMusic='{customMusicName}' detected in scene '{scene.name}'.", this);
             return;
         }
 
         if (musicSource.clip != null)
         {
-            // Ensure music actually resumes when scene is not paused by name.
-            // UnPause() does nothing if the source was not paused, so force Play when not playing.
+            UpdatePitchFromGameSpeed(true);
             if (!musicSource.isPlaying)
-                musicSource.Play();
-            else
-                musicSource.UnPause();
+            {
+                if (musicSource.time > 0f)
+                    musicSource.UnPause();
+                else
+                    musicSource.Play();
+            }
+
+            if (debugLogs)
+                Debug.Log($"[PersistentGeneralMusicController] General music active (continuous) clip='{musicSource.clip.name}' time={musicSource.time:F2}s volume={musicSource.volume:F3} in scene '{scene.name}'.", this);
+        }
+        else if (debugLogs)
+        {
+            Debug.LogWarning("[PersistentGeneralMusicController] No clip assigned on musicSource.", this);
         }
 
         if (debugLogs)
-            Debug.Log($"[PersistentGeneralMusicController] Music unpaused in scene '{sceneName}'.", this);
+            Debug.Log($"[PersistentGeneralMusicController] General music kept/resumed in scene '{scene.name}' (no active CustomMusic).", this);
     }
 
-    public static void RequestExternalPause()
+    private bool SceneHasActiveCustomMusic(Scene scene, out string customMusicName)
     {
-        _externalPauseRequests++;
-        if (_instance != null)
-            _instance.ApplyPauseStateForScene(SceneManager.GetActiveScene().name);
-    }
+        customMusicName = string.Empty;
 
-    public static void ReleaseExternalPause()
-    {
-        _externalPauseRequests = Mathf.Max(0, _externalPauseRequests - 1);
-        if (_instance != null)
-            _instance.ApplyPauseStateForScene(SceneManager.GetActiveScene().name);
-    }
-
-    private bool ShouldPauseInScene(string sceneName)
-    {
-        if (string.IsNullOrEmpty(sceneName) || pauseInScenes == null || pauseInScenes.Length == 0)
+        if (!scene.IsValid() || !scene.isLoaded)
             return false;
 
-        StringComparison comparison = sceneNameCaseInsensitive
-            ? StringComparison.OrdinalIgnoreCase
-            : StringComparison.Ordinal;
+        GameObject[] roots = scene.GetRootGameObjects();
+        if (roots == null || roots.Length == 0)
+            return false;
 
-        for (int i = 0; i < pauseInScenes.Length; i++)
+        for (int i = 0; i < roots.Length; i++)
         {
-            string blockedScene = pauseInScenes[i];
-            if (string.IsNullOrWhiteSpace(blockedScene))
+            if (roots[i] == null)
                 continue;
 
-            if (string.Equals(sceneName, blockedScene.Trim(), comparison))
+            CustomMusic custom = roots[i].GetComponentInChildren<CustomMusic>(true);
+            if (custom == null)
+                continue;
+
+            // Disabled CustomMusic does NOT count, and playMusic must be enabled to replace general music.
+            if (custom.enabled && custom.gameObject.activeInHierarchy && custom.PlayMusicEnabled)
+            {
+                customMusicName = custom.name;
                 return true;
+            }
+
+            if (debugLogs && custom.enabled && custom.gameObject.activeInHierarchy && !custom.PlayMusicEnabled)
+                Debug.Log($"[PersistentGeneralMusicController] Ignoring CustomMusic='{custom.name}' in scene '{scene.name}' because Play Music is disabled.", custom);
         }
 
         return false;
+    }
+
+    private void UpdatePitchFromGameSpeed(bool force)
+    {
+        if (musicSource == null)
+            return;
+
+        if (!useGameSpeedForPitch)
+        {
+            if (force || !Mathf.Approximately(musicSource.pitch, 1f))
+                musicSource.pitch = 1f;
+            return;
+        }
+
+        float gameSpeed = 1f;
+        if (RoundData.instance != null)
+            gameSpeed = Mathf.Max(0f, RoundData.instance.GetCurrentMinigameSpeed());
+
+        float unclampedPitch = pitchAtBaseSpeed + ((gameSpeed - baseGameSpeed) * pitchMultiplier);
+        float clampedMin = Mathf.Min(minPitch, maxPitch);
+        float clampedMax = Mathf.Max(minPitch, maxPitch);
+        float targetPitch = Mathf.Clamp(unclampedPitch, clampedMin, clampedMax);
+
+        if (!force && Mathf.Abs(musicSource.pitch - targetPitch) < 0.001f)
+            return;
+
+        musicSource.pitch = targetPitch;
+
+        if (debugLogs)
+            Debug.Log($"[PersistentGeneralMusicController] Pitch update -> gameSpeed={gameSpeed:F3}, pitch={targetPitch:F3}, useGameSpeedForPitch={useGameSpeedForPitch}", this);
     }
 }

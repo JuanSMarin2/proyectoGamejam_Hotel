@@ -27,6 +27,7 @@ public class SpawnerVendedor : MonoBehaviour
     [SerializeField] private bool guaranteeMatchingVendorOnNeedStart = true;
     [SerializeField] private bool ignoreMaxAliveForGuaranteedSpawn = true;
     [SerializeField] private bool includeMasajesInRandomVendorNeed = true;
+    [SerializeField] private float guaranteedNeedSpeedMultiplier = 2f;
 
     [Header("Spawn")]
     [SerializeField] private float minSpawnInterval = 0.8f;
@@ -39,6 +40,8 @@ public class SpawnerVendedor : MonoBehaviour
     [SerializeField] private int initialSortingOrder = 0;
     [SerializeField] private int sortingOrderStep = 1;
     [SerializeField] private int guaranteedNeedSortingOrder = 100;
+    [SerializeField] private int rightToLeftSortingOffset = 39;
+    [SerializeField] private int guaranteedNeedAdditionalSortingOffset = 1;
 
     private readonly List<Vendedor> aliveVendedores = new List<Vendedor>();
     private readonly List<Vendedor> candidatePrefabs = new List<Vendedor>();
@@ -98,6 +101,8 @@ public class SpawnerVendedor : MonoBehaviour
         instance.Initialize(direction, speed, despawnX,
             backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
         instance.SetSortingOrderRecursive(Mathf.Max(0, guaranteedNeedSortingOrder));
+        if (!backToFront)
+            instance.AddSortingOrderOffsetRecursive(rightToLeftSortingOffset);
 
         aliveVendedores.Add(instance);
     }
@@ -173,9 +178,13 @@ public class SpawnerVendedor : MonoBehaviour
         instance.SetNecesidad(need);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
+        speed *= Mathf.Max(1f, guaranteedNeedSpeedMultiplier);
         instance.Initialize(direction, speed, despawnX,
             backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
         instance.SetSortingOrderRecursive(nextSortingOrder);
+        if (!backToFront)
+            instance.AddSortingOrderOffsetRecursive(rightToLeftSortingOffset);
+        instance.AddSortingOrderOffsetRecursive(guaranteedNeedAdditionalSortingOffset);
         nextSortingOrder += Mathf.Max(1, sortingOrderStep);
 
         aliveVendedores.Add(instance);
