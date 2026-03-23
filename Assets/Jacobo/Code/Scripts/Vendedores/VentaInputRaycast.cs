@@ -70,49 +70,13 @@ public class VentaInputRaycast : MonoBehaviour
         if (debugOnCompra)
             Debug.Log($"[VentaInputRaycast] Ray origin={ray.origin}, dir={ray.direction}, maxDist={maxRayDistance}, layerMask={vendedorLayers.value}", this);
 
-        if (Physics.Raycast(ray, out RaycastHit hit3D, maxRayDistance, vendedorLayers, QueryTriggerInteraction.Collide))
+        if (TryGetBestVendedorFromRay(ray, out Vendedor bestVendedor))
         {
             if (debugOnCompra)
-                Debug.Log($"[VentaInputRaycast] 3D hit collider={hit3D.collider.name}, point={hit3D.point}", hit3D.collider);
+                Debug.Log($"[VentaInputRaycast] Best vendedor selected: {bestVendedor.name}. Calling TryHandleVenta.", bestVendedor);
 
-            Vendedor vendedor3D = hit3D.collider.GetComponentInParent<Vendedor>();
-            if (vendedor3D != null)
-            {
-                if (debugOnCompra)
-                    Debug.Log($"[VentaInputRaycast] 3D vendedor found: {vendedor3D.name}. Calling TryHandleVenta.", vendedor3D);
-                ventaManager.TryHandleVenta(vendedor3D);
-                return;
-            }
-
-            if (debugOnCompra)
-                Debug.Log("[VentaInputRaycast] 3D collider hit but no Vendedor in parents.", hit3D.collider);
-        }
-        else if (debugOnCompra)
-        {
-            Debug.Log("[VentaInputRaycast] No 3D hit.", this);
-        }
-
-        RaycastHit2D hit2D = Physics2D.GetRayIntersection(ray, maxRayDistance, vendedorLayers);
-        if (hit2D.collider != null)
-        {
-            if (debugOnCompra)
-                Debug.Log($"[VentaInputRaycast] 2D hit collider={hit2D.collider.name}, point={hit2D.point}", hit2D.collider);
-
-            Vendedor vendedor2D = hit2D.collider.GetComponentInParent<Vendedor>();
-            if (vendedor2D != null)
-            {
-                if (debugOnCompra)
-                    Debug.Log($"[VentaInputRaycast] 2D vendedor found: {vendedor2D.name}. Calling TryHandleVenta.", vendedor2D);
-                ventaManager.TryHandleVenta(vendedor2D);
-                return;
-            }
-
-            if (debugOnCompra)
-                Debug.Log("[VentaInputRaycast] 2D collider hit but no Vendedor in parents.", hit2D.collider);
-        }
-        else if (debugOnCompra)
-        {
-            Debug.Log("[VentaInputRaycast] No 2D hit.", this);
+            ventaManager.TryHandleVenta(bestVendedor);
+            return;
         }
 
         if (debugOnCompra)
@@ -148,5 +112,86 @@ public class VentaInputRaycast : MonoBehaviour
         }
 
         return false;
+    }
+
+    private bool TryGetBestVendedorFromRay(Ray ray, out Vendedor bestVendedor)
+    {
+        bestVendedor = null;
+        int bestSortingOrder = int.MinValue;
+        float bestDistance = float.MaxValue;
+
+        RaycastHit[] hits3D = Physics.RaycastAll(ray, maxRayDistance, vendedorLayers, QueryTriggerInteraction.Collide);
+        for (int i = 0; i < hits3D.Length; i++)
+        {
+            Collider collider = hits3D[i].collider;
+            if (collider == null) continue;
+
+            Vendedor vendedor = collider.GetComponentInParent<Vendedor>();
+            if (vendedor == null) continue;
+
+            int sortingOrder = GetHighestSortingOrder(vendedor);
+            float distance = hits3D[i].distance;
+
+            if (IsBetterHitCandidate(sortingOrder, distance, bestSortingOrder, bestDistance))
+            {
+                bestVendedor = vendedor;
+                bestSortingOrder = sortingOrder;
+                bestDistance = distance;
+            }
+        }
+
+        RaycastHit2D[] hits2D = Physics2D.GetRayIntersectionAll(ray, maxRayDistance, vendedorLayers);
+        for (int i = 0; i < hits2D.Length; i++)
+        {
+            Collider2D collider = hits2D[i].collider;
+            if (collider == null) continue;
+
+            Vendedor vendedor = collider.GetComponentInParent<Vendedor>();
+            if (vendedor == null) continue;
+
+            int sortingOrder = GetHighestSortingOrder(vendedor);
+            float distance = hits2D[i].distance;
+
+            if (IsBetterHitCandidate(sortingOrder, distance, bestSortingOrder, bestDistance))
+            {
+                bestVendedor = vendedor;
+                bestSortingOrder = sortingOrder;
+                bestDistance = distance;
+            }
+        }
+
+        return bestVendedor != null;
+    }
+
+    private static bool IsBetterHitCandidate(int candidateSortingOrder, float candidateDistance, int currentBestSortingOrder, float currentBestDistance)
+    {
+        if (candidateSortingOrder > currentBestSortingOrder)
+            return true;
+
+        if (candidateSortingOrder < currentBestSortingOrder)
+            return false;
+
+        return candidateDistance < currentBestDistance;
+    }
+
+    private static int GetHighestSortingOrder(Vendedor vendedor)
+    {
+        if (vendedor == null)
+            return int.MinValue;
+
+        SpriteRenderer[] renderers = vendedor.GetComponentsInChildren<SpriteRenderer>(true);
+        int maxSortingOrder = int.MinValue;
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            SpriteRenderer renderer = renderers[i];
+            if (renderer == null)
+                continue;
+
+            if (renderer.sortingOrder > maxSortingOrder)
+                maxSortingOrder = renderer.sortingOrder;
+        }
+
+        return maxSortingOrder == int.MinValue ? 0 : maxSortingOrder;
     }
 }

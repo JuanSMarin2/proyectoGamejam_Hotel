@@ -139,6 +139,24 @@ public class Vendedor : MonoBehaviour
         }
     }
 
+    public void AddSortingOrderOffsetRecursive(int offset)
+    {
+        if (offset == 0)
+            return;
+
+        if (cachedRenderers == null || cachedRenderers.Length == 0)
+            cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        if (cachedRenderers == null || cachedRenderers.Length == 0)
+            return;
+
+        for (int i = 0; i < cachedRenderers.Length; i++)
+        {
+            if (cachedRenderers[i] == null) continue;
+            cachedRenderers[i].sortingOrder += offset;
+        }
+    }
+
     private void Awake()
     {
         if (signRenderer == null)
