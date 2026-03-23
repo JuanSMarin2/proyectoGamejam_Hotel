@@ -726,11 +726,11 @@ MonoBehaviour:
   characterNecesidad: {fileID: 483335910}
   guaranteeMatchingVendorOnNeedStart: 1
   ignoreMaxAliveForGuaranteedSpawn: 1
-  includeMasajesInRandomVendorNeed: 1
   guaranteedNeedSpeedMultiplier: 2
-  minSpawnInterval: 0.1
-  maxSpawnInterval: 1
-  maxAliveVendedores: 20
+  debugLogs: 0
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 3
+  maxAliveVendedores: 10
   minSpeed: 1.7
   maxSpeed: 1.8
   initialSortingOrder: 0
