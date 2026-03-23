@@ -7,7 +7,7 @@ public class CharacterNecesidad : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private float minWaitBetweenNeeds = 2f;
     [SerializeField] private float maxWaitBetweenNeeds = 4f;
-    [SerializeField] private float solveTime = 4f;
+    [SerializeField] private float solveTime = 6f;
 
     [SerializeField] private bool autoStart = true;
 

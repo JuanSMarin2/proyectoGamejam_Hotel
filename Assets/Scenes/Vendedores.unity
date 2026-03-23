@@ -586,7 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minWaitBetweenNeeds: 1
   maxWaitBetweenNeeds: 2
-  solveTime: 5
+  solveTime: 6
   autoStart: 1
 --- !u!114 &483335911
 MonoBehaviour:
