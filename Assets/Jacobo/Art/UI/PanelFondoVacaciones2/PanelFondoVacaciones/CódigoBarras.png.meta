@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 52a6372f90e43cf43b75edb4d1f6b2ca
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6548514633950229878
+    second: "C\xF3digoBarras_0"
+  - first:
+      213: -2303122751113027542
+    second: "C\xF3digoBarras_1"
+  - first:
+      213: -6903695001510635021
+    second: "C\xF3digoBarras_2"
+  - first:
+      213: 3169010979268068091
+    second: "C\xF3digoBarras_3"
+  - first:
+      213: -5981268679160093350
+    second: "C\xF3digoBarras_4"
+  - first:
+      213: -3870644735946243168
+    second: "C\xF3digoBarras_5"
+  - first:
+      213: -971351732656295500
+    second: "C\xF3digoBarras_6"
+  - first:
+      213: -5698313078389271588
+    second: "C\xF3digoBarras_7"
+  - first:
+      213: 7793216869779375230
+    second: "C\xF3digoBarras_8"
+  - first:
+      213: -2003802205353171260
+    second: "C\xF3digoBarras_9"
+  - first:
+      213: 2622440685270225657
+    second: "C\xF3digoBarras_10"
+  - first:
+      213: 2432293749644770048
+    second: "C\xF3digoBarras_11"
+  - first:
+      213: 7366679064029584296
+    second: "C\xF3digoBarras_12"
+  - first:
+      213: -2257458723732119200
+    second: "C\xF3digoBarras_13"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_0"
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 258
+        width: 80
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 675fc033d5ff0ea50800000000000000
+      internalID: 6548514633950229878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_1"
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 258
+        width: 79
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a20a9c17f0aa900e0800000000000000
+      internalID: -2303122751113027542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_2"
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 258
+        width: 41
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f9915539f52130a0800000000000000
+      internalID: -6903695001510635021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_3"
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 258
+        width: 79
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2069c02b69afb20800000000000000
+      internalID: 3169010979268068091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_4"
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 258
+        width: 118
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a552e7093d34efca0800000000000000
+      internalID: -5981268679160093350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_5"
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 258
+        width: 41
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a34036ce15b84ac0800000000000000
+      internalID: -3870644735946243168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_6"
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 258
+        width: 118
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b1bf0fdeb01582f0800000000000000
+      internalID: -971351732656295500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_7"
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 258
+        width: 80
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd315a732768be0b0800000000000000
+      internalID: -5698313078389271588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_8"
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 258
+        width: 79
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7408cce371172c60800000000000000
+      internalID: 7793216869779375230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_9"
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 258
+        width: 41
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c6a7c5c2801134e0800000000000000
+      internalID: -2003802205353171260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_10"
+      rect:
+        serializedVersion: 2
+        x: 1396
+        y: 258
+        width: 79
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f25012b8e7c46420800000000000000
+      internalID: 2622440685270225657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_11"
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 258
+        width: 118
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00bbaf8474e31c120800000000000000
+      internalID: 2432293749644770048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_12"
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 258
+        width: 41
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ab5ac11493bb3660800000000000000
+      internalID: 7366679064029584296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "C\xF3digoBarras_13"
+      rect:
+        serializedVersion: 2
+        x: 1781
+        y: 258
+        width: 118
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06127d45045eba0e0800000000000000
+      internalID: -2257458723732119200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "C\xF3digoBarras_0": 6548514633950229878
+      "C\xF3digoBarras_1": -2303122751113027542
+      "C\xF3digoBarras_10": 2622440685270225657
+      "C\xF3digoBarras_11": 2432293749644770048
+      "C\xF3digoBarras_12": 7366679064029584296
+      "C\xF3digoBarras_13": -2257458723732119200
+      "C\xF3digoBarras_2": -6903695001510635021
+      "C\xF3digoBarras_3": 3169010979268068091
+      "C\xF3digoBarras_4": -5981268679160093350
+      "C\xF3digoBarras_5": -3870644735946243168
+      "C\xF3digoBarras_6": -971351732656295500
+      "C\xF3digoBarras_7": -5698313078389271588
+      "C\xF3digoBarras_8": 7793216869779375230
+      "C\xF3digoBarras_9": -2003802205353171260
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

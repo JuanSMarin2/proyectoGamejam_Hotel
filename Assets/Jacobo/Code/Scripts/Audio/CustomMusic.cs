@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CustomMusic : MonoBehaviour
@@ -9,19 +8,18 @@ public class CustomMusic : MonoBehaviour
     [Header("Custom Music")]
     [SerializeField] private bool playMusic = true;
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private string musicSoundId = "MenuMusic";
+    [SerializeField] private SoundType musicSoundType = SoundType.MusicaGeneral;
     [SerializeField] private float musicAssignedVolume = 1f;
     [SerializeField] private bool musicLoop = true;
 
     [Header("Optional Ambience")]
     [SerializeField] private bool playAmbience = false;
     [SerializeField] private AudioSource ambienceSource;
-    [SerializeField] private string ambienceSoundId = "AmbientMusic";
+    [SerializeField] private SoundType ambienceSoundType = SoundType.AmbPlaya;
     [SerializeField] private float ambienceAssignedVolume = 1f;
     [SerializeField] private bool ambienceLoop = true;
 
     [Header("Volume Channel")]
-    [SerializeField] private bool useMusicChannelForMusic = true;
     [SerializeField] private bool useMusicChannelForAmbience = true;
 
     [Header("Debug")]
@@ -56,10 +54,10 @@ public class CustomMusic : MonoBehaviour
     private void PlayConfigured()
     {
         if (playMusic)
-            ConfigureAndPlay(musicSource, musicSoundId, musicLoop, musicAssignedVolume, useMusicChannelForMusic);
+            ConfigureAndPlay(musicSource, musicSoundType, musicLoop, musicAssignedVolume, true);
 
         if (playAmbience)
-            ConfigureAndPlay(ambienceSource, ambienceSoundId, ambienceLoop, ambienceAssignedVolume, useMusicChannelForAmbience);
+            ConfigureAndPlay(ambienceSource, ambienceSoundType, ambienceLoop, ambienceAssignedVolume, useMusicChannelForAmbience);
 
         RefreshActiveVolumes();
     }
@@ -75,41 +73,41 @@ public class CustomMusic : MonoBehaviour
     private void RefreshActiveVolumes()
     {
         if (playMusic)
-            RefreshSourceVolume(musicSource, musicSoundId, musicAssignedVolume, useMusicChannelForMusic);
+            RefreshSourceVolume(musicSource, musicSoundType, musicAssignedVolume, true);
 
         if (playAmbience)
-            RefreshSourceVolume(ambienceSource, ambienceSoundId, ambienceAssignedVolume, useMusicChannelForAmbience);
+            RefreshSourceVolume(ambienceSource, ambienceSoundType, ambienceAssignedVolume, useMusicChannelForAmbience);
     }
 
-    private void RefreshSourceVolume(AudioSource source, string soundId, float assignedVolume, bool useMusicChannel)
+    private void RefreshSourceVolume(AudioSource source, SoundType soundType, float assignedVolume, bool useMusicChannel)
     {
         if (source == null)
             return;
 
-        if (!TryGetSoundEntry(soundId, out SoundList entry))
+        if (!TryGetSoundEntry(soundType, out SoundList entry))
             return;
 
         source.volume = SoundManager.ComposeFinalVolume(entry.volume, assignedVolume, useMusicChannel);
 
         if (debugLogs)
-            Debug.Log($"[CustomMusic] Refreshed volume -> source='{source.name}', id='{soundId}', finalVolume={source.volume:F3}", this);
+            Debug.Log($"[CustomMusic] Refreshed volume -> source='{source.name}', soundType='{soundType}', finalVolume={source.volume:F3}", this);
     }
 
-    private void ConfigureAndPlay(AudioSource source, string soundId, bool loop, float assignedVolume, bool useMusicChannel)
+    private void ConfigureAndPlay(AudioSource source, SoundType soundType, bool loop, float assignedVolume, bool useMusicChannel)
     {
         if (source == null)
             return;
 
-        if (!TryGetSoundEntry(soundId, out SoundList entry))
+        if (!TryGetSoundEntry(soundType, out SoundList entry))
         {
-            Debug.LogWarning($"[CustomMusic] Sound ID not found in SoundsSO: {soundId}", this);
+            Debug.LogWarning($"[CustomMusic] SoundType not found in SoundsSO: {soundType}", this);
             return;
         }
 
         AudioClip clip = GetFirstValidClip(entry.sounds);
         if (clip == null)
         {
-            Debug.LogWarning($"[CustomMusic] No valid clip for sound ID: {soundId}", this);
+            Debug.LogWarning($"[CustomMusic] No valid clip for SoundType: {soundType}", this);
             return;
         }
 
@@ -124,24 +122,21 @@ public class CustomMusic : MonoBehaviour
         if (debugLogs)
         {
             string clipName = source.clip != null ? source.clip.name : "(null clip)";
-            Debug.Log($"[CustomMusic] Playing -> source='{source.name}', id='{soundId}', clip='{clipName}', loop={loop}, finalVolume={source.volume:F3}", this);
+            Debug.Log($"[CustomMusic] Playing -> source='{source.name}', soundType='{soundType}', clip='{clipName}', loop={loop}, finalVolume={source.volume:F3}", this);
         }
     }
 
-    private bool TryGetSoundEntry(string soundId, out SoundList entry)
+    private bool TryGetSoundEntry(SoundType soundType, out SoundList entry)
     {
         entry = default;
 
-        if (soundsSO == null || soundsSO.sounds == null || string.IsNullOrWhiteSpace(soundId))
+        if (soundsSO == null || soundsSO.sounds == null)
             return false;
 
         for (int i = 0; i < soundsSO.sounds.Count; i++)
         {
             SoundList candidate = soundsSO.sounds[i];
-            if (string.IsNullOrWhiteSpace(candidate.id))
-                continue;
-
-            if (string.Equals(candidate.id, soundId, StringComparison.OrdinalIgnoreCase))
+            if (candidate.soundType == soundType)
             {
                 entry = candidate;
                 return true;

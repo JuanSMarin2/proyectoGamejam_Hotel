@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GeneralMusicAmbienceOnStart : MonoBehaviour
@@ -8,14 +7,14 @@ public class GeneralMusicAmbienceOnStart : MonoBehaviour
 
     [Header("Music")]
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private string musicSoundId = "MenuMusic";
+    [SerializeField] private SoundType musicSoundType = SoundType.MusicaGeneral;
     [SerializeField] private bool playMusicOnStart = true;
     [SerializeField] private bool musicLoop = true;
     [SerializeField] private float musicAssignedVolume = 1f;
 
     [Header("Ambience")]
     [SerializeField] private AudioSource ambienceSource;
-    [SerializeField] private string ambienceSoundId = "AmbientMusic";
+    [SerializeField] private SoundType ambienceSoundType = SoundType.AmbPlaya;
     [SerializeField] private bool playAmbienceOnStart = true;
     [SerializeField] private bool ambienceLoop = true;
     [SerializeField] private float ambienceAssignedVolume = 1f;
@@ -38,10 +37,10 @@ public class GeneralMusicAmbienceOnStart : MonoBehaviour
         SoundManager.VolumeSettingsChanged += HandleVolumeSettingsChanged;
 
         if (playMusicOnStart)
-            ConfigureAndPlay(musicSource, musicSoundId, musicLoop, useMusicVolumeForMusic, musicAssignedVolume);
+            ConfigureAndPlay(musicSource, musicSoundType, musicLoop, useMusicVolumeForMusic, musicAssignedVolume);
 
         if (playAmbienceOnStart)
-            ConfigureAndPlay(ambienceSource, ambienceSoundId, ambienceLoop, useMusicVolumeForAmbience, ambienceAssignedVolume);
+            ConfigureAndPlay(ambienceSource, ambienceSoundType, ambienceLoop, useMusicVolumeForAmbience, ambienceAssignedVolume);
 
         RefreshActiveVolumes();
     }
@@ -51,21 +50,21 @@ public class GeneralMusicAmbienceOnStart : MonoBehaviour
         SoundManager.VolumeSettingsChanged -= HandleVolumeSettingsChanged;
     }
 
-    private void ConfigureAndPlay(AudioSource source, string soundId, bool loop, bool useMusicVolume, float assignedVolume)
+    private void ConfigureAndPlay(AudioSource source, SoundType soundType, bool loop, bool useMusicVolume, float assignedVolume)
     {
         if (source == null)
             return;
 
-        if (!TryGetSoundEntry(soundId, out SoundList entry))
+        if (!TryGetSoundEntry(soundType, out SoundList entry))
         {
-            Debug.LogWarning($"[GeneralMusicAmbienceOnStart] Sound ID not found in SoundsSO: {soundId}", this);
+            Debug.LogWarning($"[GeneralMusicAmbienceOnStart] SoundType not found in SoundsSO: {soundType}", this);
             return;
         }
 
         AudioClip clip = GetFirstValidClip(entry.sounds);
         if (clip == null)
         {
-            Debug.LogWarning($"[GeneralMusicAmbienceOnStart] No valid clip for sound ID: {soundId}", this);
+            Debug.LogWarning($"[GeneralMusicAmbienceOnStart] No valid clip for SoundType: {soundType}", this);
             return;
         }
 
@@ -79,20 +78,17 @@ public class GeneralMusicAmbienceOnStart : MonoBehaviour
         source.Play();
     }
 
-    private bool TryGetSoundEntry(string soundId, out SoundList entry)
+    private bool TryGetSoundEntry(SoundType soundType, out SoundList entry)
     {
         entry = default;
 
-        if (soundsSO == null || soundsSO.sounds == null || string.IsNullOrWhiteSpace(soundId))
+        if (soundsSO == null || soundsSO.sounds == null)
             return false;
 
         for (int i = 0; i < soundsSO.sounds.Count; i++)
         {
             SoundList candidate = soundsSO.sounds[i];
-            if (string.IsNullOrWhiteSpace(candidate.id))
-                continue;
-
-            if (string.Equals(candidate.id, soundId, StringComparison.OrdinalIgnoreCase))
+            if (candidate.soundType == soundType)
             {
                 entry = candidate;
                 return true;
@@ -124,18 +120,18 @@ public class GeneralMusicAmbienceOnStart : MonoBehaviour
     private void RefreshActiveVolumes()
     {
         if (playMusicOnStart)
-            RefreshSourceVolume(musicSource, musicSoundId, musicAssignedVolume, useMusicVolumeForMusic);
+            RefreshSourceVolume(musicSource, musicSoundType, musicAssignedVolume, useMusicVolumeForMusic);
 
         if (playAmbienceOnStart)
-            RefreshSourceVolume(ambienceSource, ambienceSoundId, ambienceAssignedVolume, useMusicVolumeForAmbience);
+            RefreshSourceVolume(ambienceSource, ambienceSoundType, ambienceAssignedVolume, useMusicVolumeForAmbience);
     }
 
-    private void RefreshSourceVolume(AudioSource source, string soundId, float assignedVolume, bool useMusicChannel)
+    private void RefreshSourceVolume(AudioSource source, SoundType soundType, float assignedVolume, bool useMusicChannel)
     {
         if (source == null)
             return;
 
-        if (!TryGetSoundEntry(soundId, out SoundList entry))
+        if (!TryGetSoundEntry(soundType, out SoundList entry))
             return;
 
         source.volume = SoundManager.ComposeFinalVolume(entry.volume, assignedVolume, useMusicChannel);

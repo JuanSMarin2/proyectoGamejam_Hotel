@@ -40,7 +40,7 @@ public class ShopManager : MonoBehaviour
         sectionPanel.SetActive(true);
         shopPanel.SetActive(false);
 
-        EnsureShopMusic();
+        
         UpdateEquippedVisual();
     }
 
@@ -168,18 +168,7 @@ public class ShopManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void EnsureShopMusic()
-    {
-        shopMusicSource = GetComponent<AudioSource>();
-        if (shopMusicSource == null)
-        {
-            shopMusicSource = gameObject.AddComponent<AudioSource>();
-        }
-
-        shopMusicSource.playOnAwake = false;
-
-        SoundManager.PlayLoopedSound(ShopMusicId, shopMusicSource);
-    }
+    
 
     // ===== UI =====
 

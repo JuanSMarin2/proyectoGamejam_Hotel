@@ -6,7 +6,7 @@ public class VendedorSignSpriteLibrary : MonoBehaviour
     [SerializeField] private Sprite[] sedSprites;
     [SerializeField] private Sprite[] solSprites;
     [SerializeField] private Sprite[] diversionSprites;
-    [SerializeField] private Sprite[] masajesSprites;
+
 
     public bool TryGetRandomSprite(Necesidad necesidad, out Sprite sprite)
     {
@@ -55,8 +55,7 @@ public class VendedorSignSpriteLibrary : MonoBehaviour
                 return solSprites;
             case Necesidad.Diversion:
                 return diversionSprites;
-            case Necesidad.Masajes:
-                return masajesSprites;
+       
             default:
                 return null;
         }

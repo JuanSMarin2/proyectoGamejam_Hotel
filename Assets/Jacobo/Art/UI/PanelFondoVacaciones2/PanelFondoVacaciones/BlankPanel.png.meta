@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: f0618908ff3e3494a93e544ecbe34ccc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1683711062311609663
+    second: BlankPanel_0
+  - first:
+      213: -5518933562535133339
+    second: BlankPanel_1
+  - first:
+      213: 2441388103815390970
+    second: BlankPanel_2
+  - first:
+      213: 8498064412443232339
+    second: BlankPanel_3
+  - first:
+      213: -5505801536695030169
+    second: BlankPanel_4
+  - first:
+      213: 3598093670678554863
+    second: BlankPanel_5
+  - first:
+      213: 8052830971726391825
+    second: BlankPanel_6
+  - first:
+      213: -5033902935655742342
+    second: BlankPanel_7
+  - first:
+      213: 3412488613522244796
+    second: BlankPanel_8
+  - first:
+      213: -3147797666599305425
+    second: BlankPanel_9
+  - first:
+      213: -6333582648693167168
+    second: BlankPanel_10
+  - first:
+      213: -114843239580144542
+    second: BlankPanel_11
+  - first:
+      213: -4060058362226375024
+    second: BlankPanel_12
+  - first:
+      213: -3802024513201311257
+    second: BlankPanel_13
+  - first:
+      213: -3546263057055663732
+    second: BlankPanel_14
+  - first:
+      213: -2198051448618297367
+    second: BlankPanel_15
+  - first:
+      213: -8046125540600882133
+    second: BlankPanel_16
+  - first:
+      213: -3561260766109339929
+    second: BlankPanel_17
+  - first:
+      213: 8037306894821272363
+    second: BlankPanel_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BlankPanel_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 13
+        width: 4271
+        height: 6935
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ca5582a5b142a8e0800000000000000
+      internalID: -1683711062311609663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_1
+      rect:
+        serializedVersion: 2
+        x: 3187
+        y: 6927
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56fbc1a5a2fc863b0800000000000000
+      internalID: -5518933562535133339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_2
+      rect:
+        serializedVersion: 2
+        x: 4147
+        y: 6933
+        width: 40
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af6e7ce9b8d81e120800000000000000
+      internalID: 2441388103815390970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_3
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 6915
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3584116fe803fe570800000000000000
+      internalID: 8498064412443232339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_4
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 6901
+        width: 78
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76e2e716ca67793b0800000000000000
+      internalID: -5505801536695030169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_5
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 6879
+        width: 20
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe86065412ffee130800000000000000
+      internalID: 3598093670678554863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_6
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 6893
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11ae3026a1761cf60800000000000000
+      internalID: 8052830971726391825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_7
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 6894
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a74817663fbf32ab0800000000000000
+      internalID: -5033902935655742342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_8
+      rect:
+        serializedVersion: 2
+        x: 1996
+        y: 6877
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb40f0950589b5f20800000000000000
+      internalID: 3412488613522244796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_9
+      rect:
+        serializedVersion: 2
+        x: 4274
+        y: 6187
+        width: 6
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f7b8133b6c054d0800000000000000
+      internalID: -3147797666599305425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_10
+      rect:
+        serializedVersion: 2
+        x: 4266
+        y: 4671
+        width: 11
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cbe01543289a18a0800000000000000
+      internalID: -6333582648693167168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_11
+      rect:
+        serializedVersion: 2
+        x: 4263
+        y: 4611
+        width: 12
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26c68fb9eaef76ef0800000000000000
+      internalID: -114843239580144542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_12
+      rect:
+        serializedVersion: 2
+        x: 4261
+        y: 4332
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09684204e66c7a7c0800000000000000
+      internalID: -4060058362226375024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_13
+      rect:
+        serializedVersion: 2
+        x: 4258
+        y: 3958
+        width: 13
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e1fe4769de7c3bc0800000000000000
+      internalID: -3802024513201311257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_14
+      rect:
+        serializedVersion: 2
+        x: 4253
+        y: 3112
+        width: 14
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c893b1cd98429cec0800000000000000
+      internalID: -3546263057055663732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_15
+      rect:
+        serializedVersion: 2
+        x: 4250
+        y: 2748
+        width: 11
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e7d21f6ad3fe71e0800000000000000
+      internalID: -2198051448618297367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_16
+      rect:
+        serializedVersion: 2
+        x: 4246
+        y: 1962
+        width: 8
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2c5946737b665090800000000000000
+      internalID: -8046125540600882133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_17
+      rect:
+        serializedVersion: 2
+        x: 4243
+        y: 1607
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ee648b933cd39ec0800000000000000
+      internalID: -3561260766109339929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlankPanel_18
+      rect:
+        serializedVersion: 2
+        x: 1674
+        y: 10
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2bae9099004a8f60800000000000000
+      internalID: 8037306894821272363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BlankPanel_0: -1683711062311609663
+      BlankPanel_1: -5518933562535133339
+      BlankPanel_10: -6333582648693167168
+      BlankPanel_11: -114843239580144542
+      BlankPanel_12: -4060058362226375024
+      BlankPanel_13: -3802024513201311257
+      BlankPanel_14: -3546263057055663732
+      BlankPanel_15: -2198051448618297367
+      BlankPanel_16: -8046125540600882133
+      BlankPanel_17: -3561260766109339929
+      BlankPanel_18: 8037306894821272363
+      BlankPanel_2: 2441388103815390970
+      BlankPanel_3: 8498064412443232339
+      BlankPanel_4: -5505801536695030169
+      BlankPanel_5: 3598093670678554863
+      BlankPanel_6: 8052830971726391825
+      BlankPanel_7: -5033902935655742342
+      BlankPanel_8: 3412488613522244796
+      BlankPanel_9: -3147797666599305425
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

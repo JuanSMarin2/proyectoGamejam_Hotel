@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MinigameResultsUI : MonoBehaviour
 {
@@ -12,10 +13,20 @@ public class MinigameResultsUI : MonoBehaviour
     [Header("Character")]
     [SerializeField] private HeadFixer headFixer;
 
+    [Header("Money Icons (ordered: first, second, third)")]
+    [SerializeField] private GameObject[] moneyLeftImages = new GameObject[3];
+
+    [Header("Sound")]
+    [SerializeField] private bool playTickOnMoneyTextChange = false;
+    [SerializeField] private SoundType tickMoneySoundType = SoundType.TickMoney;
+    [SerializeField] private float tickMoneyVolume = 1f;
+
     [Header("Animation")]
     [SerializeField] private float lerpDuration = 1.5f;
     [SerializeField] private float pulseScale = 1.2f;
     [SerializeField] private float pulseDuration = 0.3f;
+    [SerializeField] private float imageDisappearDuration = 0.25f;
+    [SerializeField] private float imageDisappearScale = 0.75f;
 
     [Header("Timing")]
     [SerializeField] private float startDelay = 0.5f;
@@ -29,12 +40,21 @@ public class MinigameResultsUI : MonoBehaviour
 
     private IEnumerator AnimateMoney()
     {
+        if (RoundData.instance == null)
+            yield break;
+
         int startMoney = RoundData.instance.PreviousMoney;
         int finalMoney = RoundData.instance.Money;
         int change = RoundData.instance.LastMoneyChange;
+        int startMoneyCap = Mathf.Max(1, RoundData.instance.StartMoney);
+        int loseMoneyStep = Mathf.Max(1, RoundData.instance.LoseMoney);
+
+        int lossesBeforeCurrentResult = Mathf.Clamp((startMoneyCap - startMoney) / loseMoneyStep, 0, moneyLeftImages.Length);
+        int lossesAfterCurrentResult = Mathf.Clamp((startMoneyCap - finalMoney) / loseMoneyStep, 0, moneyLeftImages.Length);
 
         ApplyResultFace(change);
         StartCoroutine(PlayResultSoundDelayed(change));
+        ApplyImagesState(lossesBeforeCurrentResult);
 
         if (!RoundData.instance.IsStoryMode && completedText != null)
         {
@@ -60,6 +80,7 @@ public class MinigameResultsUI : MonoBehaviour
 
      
         float elapsed = 0f;
+        int lastDisplayedMoney = startMoney;
 
         while (elapsed < lerpDuration)
         {
@@ -67,12 +88,20 @@ public class MinigameResultsUI : MonoBehaviour
             float t = elapsed / lerpDuration;
 
             int currentMoney = Mathf.RoundToInt(Mathf.Lerp(startMoney, finalMoney, t));
+
+            if (playTickOnMoneyTextChange && currentMoney != lastDisplayedMoney)
+                SoundManager.PlaySound(tickMoneySoundType, null, tickMoneyVolume);
+
             moneyText.text = currentMoney.ToString();
+            lastDisplayedMoney = currentMoney;
 
             yield return null;
         }
 
         moneyText.text = finalMoney.ToString();
+
+        if (change < 0)
+            yield return StartCoroutine(AnimateLostMoneyImages(lossesBeforeCurrentResult, lossesAfterCurrentResult));
 
     
         yield return new WaitForSeconds(endDelay);
@@ -91,11 +120,11 @@ public class MinigameResultsUI : MonoBehaviour
     {
         if (change < 0)
         {
-            SoundManager.PlaySound("PjEnojado");
+            SoundManager.PlaySound(SoundType.NegativeResultMinijuego);
             return;
         }
 
-        SoundManager.PlaySound("PjRiendo");
+        SoundManager.PlaySound(SoundType.PositiveResultMinijuego);
     }
 
     private void ApplyResultFace(int change)
@@ -144,5 +173,95 @@ public class MinigameResultsUI : MonoBehaviour
         }
 
         target.localScale = originalScale;
+    }
+
+    private void ApplyImagesState(int hiddenCount)
+    {
+        if (moneyLeftImages == null || moneyLeftImages.Length == 0)
+            return;
+
+        int clampedHidden = Mathf.Clamp(hiddenCount, 0, moneyLeftImages.Length);
+
+        for (int i = 0; i < moneyLeftImages.Length; i++)
+        {
+            GameObject go = moneyLeftImages[i];
+            if (go == null)
+                continue;
+
+            bool shouldBeVisible = i >= clampedHidden;
+            if (go.activeSelf != shouldBeVisible)
+                go.SetActive(shouldBeVisible);
+
+            if (shouldBeVisible)
+                go.transform.localScale = Vector3.one;
+        }
+    }
+
+    private IEnumerator AnimateLostMoneyImages(int hiddenBefore, int hiddenAfter)
+    {
+        if (moneyLeftImages == null || moneyLeftImages.Length == 0)
+            yield break;
+
+        int from = Mathf.Clamp(hiddenBefore, 0, moneyLeftImages.Length);
+        int to = Mathf.Clamp(hiddenAfter, 0, moneyLeftImages.Length);
+
+        for (int hideIndex = from; hideIndex < to; hideIndex++)
+        {
+            if (hideIndex < 0 || hideIndex >= moneyLeftImages.Length)
+                continue;
+
+            GameObject go = moneyLeftImages[hideIndex];
+            if (go == null || !go.activeSelf)
+                continue;
+
+            SoundManager.PlaySound(SoundType.VidaPerdida);
+            yield return StartCoroutine(AnimateAndHideImage(go));
+        }
+    }
+
+    private IEnumerator AnimateAndHideImage(GameObject target)
+    {
+        if (target == null)
+            yield break;
+
+        Transform imageTransform = target.transform;
+        Vector3 startScale = imageTransform.localScale;
+        Vector3 endScale = startScale * Mathf.Max(0f, imageDisappearScale);
+
+        Graphic graphic = target.GetComponent<Graphic>();
+        Color startColor = Color.white;
+        bool hasGraphic = graphic != null;
+
+        if (hasGraphic)
+            startColor = graphic.color;
+
+        float duration = Mathf.Max(0.01f, imageDisappearDuration);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            imageTransform.localScale = Vector3.Lerp(startScale, endScale, t);
+
+            if (hasGraphic)
+            {
+                Color c = startColor;
+                c.a = Mathf.Lerp(startColor.a, 0f, t);
+                graphic.color = c;
+            }
+
+            yield return null;
+        }
+
+        if (hasGraphic)
+        {
+            Color reset = startColor;
+            graphic.color = reset;
+        }
+
+        imageTransform.localScale = startScale;
+        target.SetActive(false);
     }
 }

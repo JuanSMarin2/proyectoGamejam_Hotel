@@ -79,6 +79,12 @@ public class Vendedor : MonoBehaviour
 
     public void SetNecesidad(Necesidad newNecesidad)
     {
+        if (!System.Enum.IsDefined(typeof(Necesidad), newNecesidad))
+        {
+            Debug.LogWarning($"[Vendedor] Invalid necesidad assigned: {newNecesidad}. Fallback to {Necesidad.Sed}.", this);
+            newNecesidad = Necesidad.Sed;
+        }
+
         necesidadVenta = newNecesidad;
         ApplySignSprite();
     }
