@@ -709,6 +709,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4901357062278893909, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
+      propertyPath: startFace
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901357062278893909, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
       propertyPath: UseBackwardsHead
       value: 0
       objectReference: {fileID: 0}
