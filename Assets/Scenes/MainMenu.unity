@@ -3546,6 +3546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigameOrder:
+  - sceneName: Foto
   - sceneName: Carritos
   - sceneName: Aeropuerto
   - sceneName: Maletas

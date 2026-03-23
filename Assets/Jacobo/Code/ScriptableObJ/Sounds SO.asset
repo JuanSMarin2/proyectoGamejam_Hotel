@@ -278,3 +278,13 @@ MonoBehaviour:
     maxPitch: 1.17
     sounds:
     - {fileID: 8300000, guid: bc9405daa31c23c4a88d0fb17001f6da, type: 3}
+  - id: Foto
+    category: Default
+    volume: 0.64
+    mixer: {fileID: 0}
+    randomVolumeMin: 2
+    randomVolumeMax: 2
+    minPitch: 1.57
+    maxPitch: 2.06
+    sounds:
+    - {fileID: 8300000, guid: b6e87f114f5314e409b97e57b474e203, type: 3}

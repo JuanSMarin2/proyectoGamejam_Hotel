@@ -40,6 +40,13 @@ public class PhotoEnemyGenerator : MonoBehaviour
     [SerializeField] private float minLifeTime = 3f;
     [SerializeField] private float maxLifeTime = 6f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource photoAudioSource;
+    [SerializeField] private string footstepLoopSoundId = "FootStepSounds";
+    [SerializeField] private string photoShotSoundId = "Foto";
+    [SerializeField] private float footstepLoopVolume = 1f;
+    [SerializeField] private float photoShotVolume = 1f;
+
     [SerializeField] private SunCollider sunCollider;
 
     private MinigameManager minigameManager;
@@ -65,6 +72,8 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
     private IEnumerator Start()
     {
+        EnsureAudioSource();
+
         int waitFrames = 10;
         while (waitFrames > 0 && (MinigameManager.instance == null || FindObjectOfType<TimeManager>() == null))
         {
@@ -81,7 +90,14 @@ public class PhotoEnemyGenerator : MonoBehaviour
         safeWindowDuration = GetInterpolatedSafeWindowDuration(speedMultiplier, roundDuration);
         safeWindowInitialized = false;
 
+        StartFootstepLoop();
+
         yield return StartCoroutine(SpawnRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopFootstepLoop();
     }
 
     private void Update()
@@ -104,6 +120,8 @@ public class PhotoEnemyGenerator : MonoBehaviour
         }
 
         photoTaken = true;
+        StopFootstepLoop();
+        PlayPhotoShotSound();
         StartCoroutine(TakePhotoRoutine());
     }
 
@@ -127,6 +145,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
         if (blocked)
         {
+            SoundManager.PlaySound("PjEnojado");
             ResultManager.instance.LoseMinigame();
         }
         else
@@ -466,6 +485,52 @@ public class PhotoEnemyGenerator : MonoBehaviour
                 activeEnemies.RemoveAt(i);
             }
         }
+    }
+
+    private void EnsureAudioSource()
+    {
+        if (photoAudioSource != null)
+        {
+            return;
+        }
+
+        photoAudioSource = GetComponent<AudioSource>();
+        if (photoAudioSource == null)
+        {
+            photoAudioSource = gameObject.AddComponent<AudioSource>();
+            photoAudioSource.playOnAwake = false;
+        }
+    }
+
+    private void StartFootstepLoop()
+    {
+        if (string.IsNullOrWhiteSpace(footstepLoopSoundId))
+        {
+            return;
+        }
+
+        EnsureAudioSource();
+        SoundManager.PlayLoopedSound(footstepLoopSoundId, photoAudioSource, footstepLoopVolume);
+    }
+
+    private void StopFootstepLoop()
+    {
+        if (photoAudioSource == null)
+        {
+            return;
+        }
+
+        SoundManager.StopSound(photoAudioSource);
+    }
+
+    private void PlayPhotoShotSound()
+    {
+        if (string.IsNullOrWhiteSpace(photoShotSoundId))
+        {
+            return;
+        }
+
+        SoundManager.PlaySound(photoShotSoundId, null, photoShotVolume);
     }
 }
 

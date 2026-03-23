@@ -69,7 +69,7 @@ public class ReceptionistController : MonoBehaviour
     #region Input Handling
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             OnSpacePressed();
         }
@@ -172,9 +172,9 @@ public class ReceptionistController : MonoBehaviour
 
     private void InitializePlayingState()
     {
-        // Generar número aleatorio entre 5 y 10
-        requiredClicksPlaying = Random.Range(5, 8);
-        playingTimeLimit = 3.5f;
+        // Generar número aleatorio entre 3 y 5
+        requiredClicksPlaying = Random.Range(3, 6);
+        playingTimeLimit = 4.5f;
     }
 
     private void InitializeAngryState()

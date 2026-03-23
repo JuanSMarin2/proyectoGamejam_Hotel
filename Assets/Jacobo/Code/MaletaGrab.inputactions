@@ -38,6 +38,17 @@
                     "action": "GrabMaleta",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25270c6e-8645-429e-81e4-1e7f5a7d3609",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabMaleta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
