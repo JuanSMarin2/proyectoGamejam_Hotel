@@ -315,8 +315,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 43b50f7982b4b654399c8293b92e8944, type: 3}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.06
   m_Pitch: 1
   Loop: 0
@@ -3699,17 +3699,16 @@ MonoBehaviour:
   soundsSO: {fileID: 0}
   playMusic: 0
   musicSource: {fileID: 0}
-  musicSoundId: MenuMusic
+  musicSoundType: 15
   musicAssignedVolume: 1
   musicLoop: 1
   playAmbience: 1
   ambienceSource: {fileID: 0}
-  ambienceSoundId: AmbientMusic
-  ambienceAssignedVolume: 1
+  ambienceSoundType: 1
+  ambienceAssignedVolume: 0.3
   ambienceLoop: 1
-  useMusicChannelForMusic: 1
   useMusicChannelForAmbience: 1
-  pauseGeneralMusicWhileActive: 1
+  debugLogs: 0
 --- !u!4 &956398114
 Transform:
   m_ObjectHideFlags: 0
@@ -6872,8 +6871,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 7b23374e4b7988a4ebd87e295729affd, type: 3}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.17
   m_Pitch: 1
   Loop: 0

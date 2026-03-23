@@ -112,7 +112,11 @@ public class CharacterNecesidad : MonoBehaviour
 
     private Necesidad PickRandomNeed()
     {
-        int randomNoMasajes = UnityEngine.Random.Range(0, 3);
-        return (Necesidad)randomNoMasajes;
+        Array values = Enum.GetValues(typeof(Necesidad));
+        if (values == null || values.Length == 0)
+            return default;
+
+        int random = UnityEngine.Random.Range(0, values.Length);
+        return (Necesidad)values.GetValue(random);
     }
 }

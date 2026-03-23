@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class SpawnerVendedor : MonoBehaviour
 {
@@ -26,8 +28,10 @@ public class SpawnerVendedor : MonoBehaviour
     [SerializeField] private CharacterNecesidad characterNecesidad;
     [SerializeField] private bool guaranteeMatchingVendorOnNeedStart = true;
     [SerializeField] private bool ignoreMaxAliveForGuaranteedSpawn = true;
-    [SerializeField] private bool includeMasajesInRandomVendorNeed = true;
     [SerializeField] private float guaranteedNeedSpeedMultiplier = 2f;
+
+    [Header("Debug")]
+    [SerializeField] private bool debugLogs = false;
 
     [Header("Spawn")]
     [SerializeField] private float minSpawnInterval = 0.8f;
@@ -95,7 +99,11 @@ public class SpawnerVendedor : MonoBehaviour
 
         Vendedor instance = Instantiate(prefab, spawnPos, prefab.transform.rotation);
 
-        instance.SetNecesidad(GetRandomNecesidadVenta());
+        Necesidad spawnedNeed = GetRandomNecesidadVenta();
+        instance.SetNecesidad(spawnedNeed);
+
+        if (debugLogs)
+            Debug.Log($"[SpawnerVendedor] SpawnOne => prefab={prefab.name}, necesidad={spawnedNeed}", this);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
         instance.Initialize(direction, speed, despawnX,
@@ -177,6 +185,9 @@ public class SpawnerVendedor : MonoBehaviour
         Vendedor instance = Instantiate(prefab, spawnPos, prefab.transform.rotation);
         instance.SetNecesidad(need);
 
+        if (debugLogs)
+            Debug.Log($"[SpawnerVendedor] SpawnOneWithNeed => prefab={prefab.name}, necesidad={need}", this);
+
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
         speed *= Mathf.Max(1f, guaranteedNeedSpeedMultiplier);
         instance.Initialize(direction, speed, despawnX,
@@ -192,14 +203,12 @@ public class SpawnerVendedor : MonoBehaviour
 
     private Necesidad GetRandomNecesidadVenta()
     {
-        if (includeMasajesInRandomVendorNeed)
-        {
-            int random = Random.Range(0, 4);
-            return (Necesidad)random;
-        }
+        Array values = Enum.GetValues(typeof(Necesidad));
+        if (values == null || values.Length == 0)
+            return default;
 
-        int randomNoMasajes = Random.Range(0, 3);
-        return (Necesidad)randomNoMasajes;
+        int random = Random.Range(0, values.Length);
+        return (Necesidad)values.GetValue(random);
     }
 
     private void CleanupNulls()

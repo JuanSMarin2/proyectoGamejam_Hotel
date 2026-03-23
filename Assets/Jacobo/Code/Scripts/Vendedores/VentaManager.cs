@@ -49,10 +49,12 @@ public class VentaManager : MonoBehaviour
 
         if (success)
             vendedor.PlayBoughtAndFadeOut();
+            SoundManager.PlaySound(SoundType.PjRiendo);
 
         if (!success && loseOnWrongVendedor)
         {
             gameEnded = true;
+            SoundManager.PlaySound(SoundType.PjEnojado);
             ResultManager.instance.LoseMinigame();
         }
     }

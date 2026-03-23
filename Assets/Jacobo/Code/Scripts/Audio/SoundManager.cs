@@ -326,6 +326,11 @@ using UnityEngine.SceneManagement;
             PlayResolvedSound(soundList, source, volume, false, sound.ToString());
         }
 
+        public static void PlayUiClick(float volume = 1f)
+        {
+            PlaySound(SoundType.UiBoton, null, volume);
+        }
+
         public static bool PlayLoopedSound(SoundType sound, AudioSource source, float volume = 1f)
         {
             if (source == null)
@@ -407,6 +412,23 @@ using UnityEngine.SceneManagement;
             }
 
             PlayResolvedSound(soundList, source, volume, false, soundId);
+        }
+
+        // Inspector-friendly proxies.
+        public void PlayUiClickFromEvent()
+        {
+            PlayUiClick();
+        }
+
+        public void PlaySoundByInt(int soundTypeIndex)
+        {
+            if (!Enum.IsDefined(typeof(SoundType), soundTypeIndex))
+            {
+                Debug.LogWarning("[SoundManager] Invalid SoundType index: " + soundTypeIndex);
+                return;
+            }
+
+            PlaySound((SoundType)soundTypeIndex);
         }
 
         private static bool PlayResolvedSound(SoundList soundList, AudioSource source, float volume, bool looped, string debugId)

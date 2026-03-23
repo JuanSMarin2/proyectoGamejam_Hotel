@@ -15,7 +15,7 @@ public class CustomMusic : MonoBehaviour
     [Header("Optional Ambience")]
     [SerializeField] private bool playAmbience = false;
     [SerializeField] private AudioSource ambienceSource;
-    [SerializeField] private SoundType ambienceSoundType = SoundType.AmbientMusic;
+    [SerializeField] private SoundType ambienceSoundType = SoundType.AmbPlaya;
     [SerializeField] private float ambienceAssignedVolume = 1f;
     [SerializeField] private bool ambienceLoop = true;
 

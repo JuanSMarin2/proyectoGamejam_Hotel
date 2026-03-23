@@ -16,7 +16,15 @@ public class ConfigPanel : MonoBehaviour
     [SerializeField] private Image sfxIconImage;
     [SerializeField] private Image musicIconImage;
 
-    [Header("Icon Sprites")]
+    [Header("Icon Sprites (SFX)")]
+    [SerializeField] private Sprite sfxUnmutedSprite;
+    [SerializeField] private Sprite sfxMutedSprite;
+
+    [Header("Icon Sprites (Music)")]
+    [SerializeField] private Sprite musicUnmutedSprite;
+    [SerializeField] private Sprite musicMutedSprite;
+
+    [Header("Legacy Shared Fallback")]
     [SerializeField] private Sprite unmutedSprite;
     [SerializeField] private Sprite mutedSprite;
 
@@ -78,15 +86,9 @@ public class ConfigPanel : MonoBehaviour
         float current = SoundManager.GetSfxVolume();
 
         if (current <= MutedThreshold)
-            SoundManager.UnmuteSfxRestore();
+            UnmuteSfx();
         else
-            SoundManager.MuteSfx();
-
-        float newValue = SoundManager.GetSfxVolume();
-        if (sfxSlider != null)
-            sfxSlider.SetValueWithoutNotify(newValue);
-
-        RefreshSfxUI(newValue);
+            MuteSfx();
     }
 
     public void ToggleMusicMute()
@@ -94,10 +96,47 @@ public class ConfigPanel : MonoBehaviour
         float current = SoundManager.GetMusicVolume();
 
         if (current <= MutedThreshold)
-            SoundManager.UnmuteMusicRestore();
+            UnmuteMusic();
         else
-            SoundManager.MuteMusic();
+            MuteMusic();
+    }
 
+    // Explicit channel controls (useful for separate buttons/actions)
+    public void MuteSfx()
+    {
+        SoundManager.MuteSfx();
+        SyncSfxUIFromSystem();
+    }
+
+    public void UnmuteSfx()
+    {
+        SoundManager.UnmuteSfxRestore();
+        SyncSfxUIFromSystem();
+    }
+
+    public void MuteMusic()
+    {
+        SoundManager.MuteMusic();
+        SyncMusicUIFromSystem();
+    }
+
+    public void UnmuteMusic()
+    {
+        SoundManager.UnmuteMusicRestore();
+        SyncMusicUIFromSystem();
+    }
+
+    private void SyncSfxUIFromSystem()
+    {
+        float newValue = SoundManager.GetSfxVolume();
+        if (sfxSlider != null)
+            sfxSlider.SetValueWithoutNotify(newValue);
+
+        RefreshSfxUI(newValue);
+    }
+
+    private void SyncMusicUIFromSystem()
+    {
         float newValue = SoundManager.GetMusicVolume();
         if (musicSlider != null)
             musicSlider.SetValueWithoutNotify(newValue);
@@ -117,7 +156,11 @@ public class ConfigPanel : MonoBehaviour
             sfxValueText.text = ToPercentText(value);
 
         if (sfxIconImage != null)
-            sfxIconImage.sprite = value <= MutedThreshold ? mutedSprite : unmutedSprite;
+        {
+            Sprite muted = sfxMutedSprite != null ? sfxMutedSprite : mutedSprite;
+            Sprite unmuted = sfxUnmutedSprite != null ? sfxUnmutedSprite : unmutedSprite;
+            sfxIconImage.sprite = value <= MutedThreshold ? muted : unmuted;
+        }
     }
 
     private void RefreshMusicUI(float value)
@@ -126,7 +169,11 @@ public class ConfigPanel : MonoBehaviour
             musicValueText.text = ToPercentText(value);
 
         if (musicIconImage != null)
-            musicIconImage.sprite = value <= MutedThreshold ? mutedSprite : unmutedSprite;
+        {
+            Sprite muted = musicMutedSprite != null ? musicMutedSprite : mutedSprite;
+            Sprite unmuted = musicUnmutedSprite != null ? musicUnmutedSprite : unmutedSprite;
+            musicIconImage.sprite = value <= MutedThreshold ? muted : unmuted;
+        }
     }
 
     private static string ToPercentText(float value)

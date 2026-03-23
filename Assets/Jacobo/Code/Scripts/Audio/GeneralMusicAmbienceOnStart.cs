@@ -14,7 +14,7 @@ public class GeneralMusicAmbienceOnStart : MonoBehaviour
 
     [Header("Ambience")]
     [SerializeField] private AudioSource ambienceSource;
-    [SerializeField] private SoundType ambienceSoundType = SoundType.AmbientMusic;
+    [SerializeField] private SoundType ambienceSoundType = SoundType.AmbPlaya;
     [SerializeField] private bool playAmbienceOnStart = true;
     [SerializeField] private bool ambienceLoop = true;
     [SerializeField] private float ambienceAssignedVolume = 1f;
