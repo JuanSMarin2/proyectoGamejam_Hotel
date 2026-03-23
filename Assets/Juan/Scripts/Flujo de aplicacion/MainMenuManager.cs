@@ -29,4 +29,9 @@ public class MainMenuManager : MonoBehaviour
     public void LoadShopScene(){
         SceneManager.LoadScene("Shop");
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

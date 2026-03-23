@@ -3177,16 +3177,15 @@ MonoBehaviour:
   soundsSO: {fileID: 11400000, guid: 2cb596b99e57efa459f5d6d93b94e68d, type: 2}
   playMusic: 1
   musicSource: {fileID: 660351012}
-  musicSoundId: BeachMusic
+  musicSoundType: 16
   musicAssignedVolume: 0.7
   musicLoop: 1
   playAmbience: 0
   ambienceSource: {fileID: 660351012}
-  ambienceSoundId: AmbGente
+  ambienceSoundType: 3
   ambienceAssignedVolume: 0.3
   ambienceLoop: 1
-  useMusicChannelForMusic: 1
-  useMusicChannelForAmbience: 1
+  useMusicChannelForAmbience: 0
   debugLogs: 0
 --- !u!4 &660351014
 Transform:

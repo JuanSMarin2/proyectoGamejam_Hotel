@@ -3730,7 +3730,11 @@ MonoBehaviour:
   - sceneName: Maletas
   - sceneName: CheckIn
   - sceneName: Vendedores
+  - sceneName: Foto
   - sceneName: Buceo
+  - sceneName: Carritos
+  - sceneName: Aeropuerto
+  - sceneName: Maletas
 --- !u!4 &1276838708
 Transform:
   m_ObjectHideFlags: 0
@@ -3963,7 +3967,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1303918273}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 171076692}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1314925921
 GameObject:
   m_ObjectHideFlags: 0
