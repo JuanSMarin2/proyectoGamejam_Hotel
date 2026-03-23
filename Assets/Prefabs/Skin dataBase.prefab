@@ -60,8 +60,8 @@ MonoBehaviour:
   - id: 1
     category: 0
     label: Naranja
-    price: 2000
+    price: 1500
   - id: 500
     category: 1
     label: Naranja
-    price: 1000
+    price: 900
