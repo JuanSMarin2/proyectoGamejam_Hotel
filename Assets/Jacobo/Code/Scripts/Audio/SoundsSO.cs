@@ -13,6 +13,7 @@ public class SoundsSO : ScriptableObject
 public struct SoundList
 {
     [Header("Identity")]
+    public SoundType soundType;
     public string id;
     public string category;
 

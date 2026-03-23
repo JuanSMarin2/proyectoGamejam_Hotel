@@ -35,6 +35,7 @@ using UnityEngine.SceneManagement;
         [SerializeField] private bool debugSceneAudioSync = false;
 
         private readonly List<AudioSource> sfxPool = new List<AudioSource>();
+        private readonly Dictionary<SoundType, SoundList> soundTypeLookup = new Dictionary<SoundType, SoundList>();
         private readonly Dictionary<string, SoundList> soundLookup = new Dictionary<string, SoundList>(StringComparer.OrdinalIgnoreCase);
         private int stealIndex;
         private SceneAudioSourceVolumeSync sceneAudioSourceVolumeSync;
@@ -310,12 +311,52 @@ using UnityEngine.SceneManagement;
 
         public static void PlaySound(SoundType sound, AudioSource source = null, float volume = 1)
         {
-            PlaySound(sound.ToString(), source, volume);
+            if (instance == null)
+            {
+                Debug.LogWarning("[SoundManager] No instance in scene. Cannot play sound: " + sound);
+                return;
+            }
+
+            if (!instance.TryGetSound(sound, out SoundList soundList))
+            {
+                Debug.LogWarning("[SoundManager] Sound enum not found: " + sound);
+                return;
+            }
+
+            PlayResolvedSound(soundList, source, volume, false, sound.ToString());
         }
 
         public static bool PlayLoopedSound(SoundType sound, AudioSource source, float volume = 1f)
         {
-            return PlayLoopedSound(sound.ToString(), source, volume);
+            if (source == null)
+            {
+                Debug.LogWarning("[SoundManager] Source is null. Cannot play looped sound: " + sound);
+                return false;
+            }
+
+            if (instance == null)
+            {
+                Debug.LogWarning("[SoundManager] No instance in scene. Cannot play looped sound: " + sound);
+                return false;
+            }
+
+            if (!instance.TryGetSound(sound, out SoundList soundList))
+            {
+                Debug.LogWarning("[SoundManager] Sound enum not found: " + sound);
+                return false;
+            }
+
+            return PlayResolvedSound(soundList, source, volume, true, sound.ToString());
+        }
+
+        public static bool TryGetSoundData(SoundType soundType, out SoundList soundList)
+        {
+            soundList = default;
+
+            if (instance == null)
+                return false;
+
+            return instance.TryGetSound(soundType, out soundList);
         }
 
         public static bool PlayLoopedSound(string soundId, AudioSource source, float volume = 1f)
@@ -338,28 +379,7 @@ using UnityEngine.SceneManagement;
                 return false;
             }
 
-            AudioClip randomClip = GetRandomValidClip(soundList.sounds);
-            if (randomClip == null)
-            {
-                Debug.LogWarning("[SoundManager] No valid clips assigned for sound: " + soundId);
-                return false;
-            }
-
-            float randomizedVolumeMultiplier = UnityEngine.Random.Range(
-                Mathf.Min(soundList.randomVolumeMin, soundList.randomVolumeMax),
-                Mathf.Max(soundList.randomVolumeMin, soundList.randomVolumeMax));
-
-            float randomizedPitch = UnityEngine.Random.Range(
-                Mathf.Min(soundList.minPitch, soundList.maxPitch),
-                Mathf.Max(soundList.minPitch, soundList.maxPitch));
-
-            source.outputAudioMixerGroup = soundList.mixer;
-            source.volume = volume * soundList.volume * randomizedVolumeMultiplier * GetEffectiveMusicVolume();
-            source.pitch = randomizedPitch;
-            source.loop = true;
-            source.clip = randomClip;
-            source.Play();
-            return true;
+            return PlayResolvedSound(soundList, source, volume, true, soundId);
         }
 
         public static void StopSound(AudioSource source)
@@ -386,11 +406,16 @@ using UnityEngine.SceneManagement;
                 return;
             }
 
+            PlayResolvedSound(soundList, source, volume, false, soundId);
+        }
+
+        private static bool PlayResolvedSound(SoundList soundList, AudioSource source, float volume, bool looped, string debugId)
+        {
             AudioClip randomClip = GetRandomValidClip(soundList.sounds);
             if (randomClip == null)
             {
-                Debug.LogWarning("[SoundManager] No valid clips assigned for sound: " + soundId);
-                return;
+                Debug.LogWarning("[SoundManager] No valid clips assigned for sound: " + debugId);
+                return false;
             }
 
             float randomizedVolumeMultiplier = UnityEngine.Random.Range(
@@ -401,26 +426,41 @@ using UnityEngine.SceneManagement;
                 Mathf.Min(soundList.minPitch, soundList.maxPitch),
                 Mathf.Max(soundList.minPitch, soundList.maxPitch));
 
-            if(source)
+            if (source)
             {
                 source.outputAudioMixerGroup = soundList.mixer;
-                source.volume = ComposeFinalVolume(soundList.volume, volume * randomizedVolumeMultiplier, false);
+                source.volume = ComposeFinalVolume(soundList.volume, volume * randomizedVolumeMultiplier, looped);
                 source.pitch = randomizedPitch;
+
+                if (looped)
+                {
+                    source.loop = true;
+                    source.clip = randomClip;
+                    source.Play();
+                    return true;
+                }
 
                 // Permite solapar sonidos en el mismo AudioSource.
                 source.PlayOneShot(randomClip);
+                return true;
             }
-            else
-            {
-                AudioSource sfx = instance.GetSfxSource();
-                if (sfx == null) return;
 
-                sfx.outputAudioMixerGroup = soundList.mixer;
-                sfx.volume = ComposeFinalVolume(soundList.volume, volume * randomizedVolumeMultiplier, false);
-                sfx.pitch = randomizedPitch;
-                sfx.clip = randomClip;
-                sfx.Play();
+            if (looped)
+            {
+                Debug.LogWarning("[SoundManager] Looped playback requires a target AudioSource: " + debugId);
+                return false;
             }
+
+            AudioSource sfx = instance.GetSfxSource();
+            if (sfx == null)
+                return false;
+
+            sfx.outputAudioMixerGroup = soundList.mixer;
+            sfx.volume = ComposeFinalVolume(soundList.volume, volume * randomizedVolumeMultiplier, false);
+            sfx.pitch = randomizedPitch;
+            sfx.clip = randomClip;
+            sfx.Play();
+            return true;
         }
 
         public static float ComposeFinalVolume(float soCustomVolume, float assignedVolume = 1f, bool useMusicChannel = false)
@@ -438,6 +478,7 @@ using UnityEngine.SceneManagement;
 
         private void BuildSoundLookup()
         {
+            soundTypeLookup.Clear();
             soundLookup.Clear();
 
             if (SO == null || SO.sounds == null)
@@ -446,8 +487,15 @@ using UnityEngine.SceneManagement;
             for (int i = 0; i < SO.sounds.Count; i++)
             {
                 SoundList entry = SO.sounds[i];
+
+                SoundType resolvedType = entry.soundType;
+                if (!string.IsNullOrWhiteSpace(entry.id) && Enum.TryParse(entry.id, true, out SoundType parsedType))
+                    resolvedType = parsedType;
+
+                entry.soundType = resolvedType;
+
                 if (string.IsNullOrWhiteSpace(entry.id))
-                    continue;
+                    entry.id = resolvedType.ToString();
 
                 if (entry.volume <= 0f)
                     entry.volume = 1f;
@@ -464,6 +512,16 @@ using UnityEngine.SceneManagement;
                     entry.maxPitch = 1f;
                 }
 
+                if (soundTypeLookup.ContainsKey(resolvedType))
+                {
+                    Debug.LogWarning("[SoundManager] Duplicate SoundType found. Last one wins: " + resolvedType);
+                    soundTypeLookup[resolvedType] = entry;
+                }
+                else
+                {
+                    soundTypeLookup.Add(resolvedType, entry);
+                }
+
                 if (soundLookup.ContainsKey(entry.id))
                 {
                     Debug.LogWarning("[SoundManager] Duplicate sound id found. Last one wins: " + entry.id);
@@ -473,7 +531,16 @@ using UnityEngine.SceneManagement;
                 {
                     soundLookup.Add(entry.id, entry);
                 }
+
+                string enumKey = resolvedType.ToString();
+                if (!soundLookup.ContainsKey(enumKey))
+                    soundLookup.Add(enumKey, entry);
             }
+        }
+
+        private bool TryGetSound(SoundType soundType, out SoundList sound)
+        {
+            return soundTypeLookup.TryGetValue(soundType, out sound);
         }
 
         private bool TryGetSound(string soundId, out SoundList sound)
