@@ -174,7 +174,7 @@ MonoBehaviour:
   - soundType: 14
     id: MusicaFinalYCreditos
     category: Default
-    volume: 1
+    volume: 0.689
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1
@@ -196,7 +196,7 @@ MonoBehaviour:
   - soundType: 16
     id: MusicaMainMenu
     category: Default
-    volume: 0.5
+    volume: 0.759
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1
@@ -207,12 +207,12 @@ MonoBehaviour:
   - soundType: 17
     id: MusicaTienda
     category: Default
-    volume: 0.53
+    volume: 0.385
     mixer: {fileID: 0}
     randomVolumeMin: 0.37
-    randomVolumeMax: 0.66
-    minPitch: 0.7
-    maxPitch: 1.3
+    randomVolumeMax: 0.64
+    minPitch: 0.84
+    maxPitch: 1.16
     sounds:
     - {fileID: 8300000, guid: e1350579344da54489cb4fc82e760b05, type: 3}
   - soundType: 18
@@ -228,7 +228,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6c42922f86f8adc47866d06ac1813a42, type: 3}
     - {fileID: 8300000, guid: f9a6220c9db843648b28e03194826a84, type: 3}
   - soundType: 19
-    id: NegativeReusltMinijuego
+    id: NegativeResultMinijuego
     category: Default
     volume: 1
     mixer: {fileID: 0}
@@ -277,7 +277,7 @@ MonoBehaviour:
     sounds:
     - {fileID: 8300000, guid: a80d4fdac23c5894d87a211b680d275a, type: 3}
   - soundType: 23
-    id: PositiveReusltMinijuego
+    id: PositiveResultMinijuego
     category: Default
     volume: 0.481
     mixer: {fileID: 0}
@@ -379,7 +379,7 @@ MonoBehaviour:
   - soundType: 32
     id: Crucero
     category: Default
-    volume: 0.688
+    volume: 0.508
     mixer: {fileID: 0}
     randomVolumeMin: 0.54
     randomVolumeMax: 0.734
@@ -431,3 +431,36 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 85db2dc16ca4a024d868c03041c00b3c, type: 3}
+  - soundType: 37
+    id: VidaPerdida
+    category: Default
+    volume: 0.677
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 0.85
+    maxPitch: 1.17
+    sounds:
+    - {fileID: 8300000, guid: d85068ff4153f024298685a25ffa29d5, type: 3}
+  - soundType: 38
+    id: AeropuertoCall
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: f3ad523f9212547449294fdb61d7b4eb, type: 3}
+  - soundType: 39
+    id: TickMoney
+    category: Default
+    volume: 0.45
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 0.8
+    maxPitch: 0.8
+    sounds:
+    - {fileID: 8300000, guid: b5858395f83c72f46a11ba208ff29167, type: 3}

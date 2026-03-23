@@ -3702,14 +3702,14 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   musicSoundType: 15
   musicAssignedVolume: 1
-  musicLoop: 1
+  musicLoop: 0
   playAmbience: 1
   ambienceSource: {fileID: 956398115}
   ambienceSoundType: 1
   ambienceAssignedVolume: 0.3
   ambienceLoop: 1
   useMusicChannelForAmbience: 1
-  debugLogs: 0
+  debugLogs: 1
 --- !u!4 &956398114
 Transform:
   m_ObjectHideFlags: 0
@@ -3897,63 +3897,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990325347}
   m_CullTransparentMesh: 1
---- !u!1001 &990482730
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.2117403
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.7474906
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.04827141
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609389607545827998, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
 --- !u!1 &1028707461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,7 +3981,7 @@ SpriteRenderer:
   m_SortingLayerID: 2142460785
   m_SortingLayer: 3
   m_SortingOrder: 6
-  m_Sprite: {fileID: -6822335356429837456, guid: 7c7869d81ce430c41b0a703e994fc328, type: 3}
+  m_Sprite: {fileID: 4686237616758959331, guid: 39a5329beaf5a9c4ea32801d1c5c6faa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4230,7 +4173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &1068975608
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -6661,7 +6604,7 @@ SpriteRenderer:
   m_SortingLayerID: 2142460785
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: -6822335356429837456, guid: 6204cf314d2e06540a508fe0fda50920, type: 3}
+  m_Sprite: {fileID: 239114554858803795, guid: 6497a653d43532e4c857ba64cb49b653, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6797,7 +6740,7 @@ MonoBehaviour:
   winDirectors:
   - {fileID: 1068975607}
   loseDirectors:
-  - {fileID: 2119860204}
+  - {fileID: 1763995176}
   winDirectorIndex: 0
   loseDirectorIndex: 0
   loseDelay: 0
@@ -8080,4 +8023,3 @@ SceneRoots:
   - {fileID: 956398114}
   - {fileID: 204146049}
   - {fileID: 1853335054}
-  - {fileID: 990482730}

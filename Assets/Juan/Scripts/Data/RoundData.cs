@@ -20,6 +20,7 @@ public class RoundData : MonoBehaviour
     [SerializeField] private string infiniteFinalSceneName = "FinalScene";
 
     public int StartMoney => startMoney;
+    public int LoseMoney => loseMoney;
 
     private int money;
 

@@ -251,7 +251,7 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   musicSoundType: 15
   musicAssignedVolume: 1
-  musicLoop: 1
+  musicLoop: 0
   playAmbience: 1
   ambienceSource: {fileID: 77085788}
   ambienceSoundType: 2
@@ -1209,67 +1209,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1250773285692965286, guid: cfe6d23257defae4c8043df9c23e0ab7, type: 3}
   m_PrefabInstance: {fileID: 1301121512}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &596386875
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.2117403
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.7474906
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.04827141
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528325831171847647, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3286066135476215043, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: generalLoopedMusicType
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609389607545827998, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e78b5bbd73e6fd64da14813a9fca19a0, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,7 +2705,7 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   musicSoundType: 15
   musicAssignedVolume: 1
-  musicLoop: 1
+  musicLoop: 0
   playAmbience: 1
   ambienceSource: {fileID: 1662202674}
   ambienceSoundType: 0
@@ -3593,7 +3532,6 @@ SceneRoots:
   - {fileID: 182523305}
   - {fileID: 1741394532}
   - {fileID: 899968445}
-  - {fileID: 596386875}
   - {fileID: 194975439}
   - {fileID: 1662202676}
   - {fileID: 77085790}

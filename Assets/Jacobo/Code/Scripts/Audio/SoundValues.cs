@@ -19,11 +19,11 @@
     MusicaMainMenu,
     MusicaTienda,
     Nadando,
-    NegativeReusltMinijuego,
+    NegativeResultMinijuego,
     PjEnojado,
     PjRiendo,
     PjTriste,
-    PositiveReusltMinijuego,
+    PositiveResultMinijuego,
     Saltando,
     Scan,
     ScanerBien,
@@ -36,5 +36,8 @@
     CamaraFoto,
     Wink,
     Mosca,
-    UiBoton
+    UiBoton,
+    VidaPerdida,
+    AeropuertoCall,
+    TickMoney
 }
