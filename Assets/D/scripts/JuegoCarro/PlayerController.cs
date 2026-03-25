@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private float baseSpriteZ;
     private float currentTiltVelocity;
     private bool wasMovingForward;
+    private float forwardHoldTime;
 
     #endregion
 
@@ -110,12 +111,23 @@ public class PlayerController : MonoBehaviour
 
     private void CheckBrakeSound()
     {
-        bool isMovingForward = moveInput.y > forwardThreshold;
-        bool isMovingBackward = moveInput.y < -forwardThreshold;
+        float velocityY = rb != null ? rb.linearVelocity.y : 0f;
+        bool isMovingForward = velocityY > forwardThreshold;
+        bool isMovingBackward = velocityY < -forwardThreshold;
 
-        if (wasMovingForward && isMovingBackward)
+        if (isMovingForward)
+        {
+            forwardHoldTime += Time.deltaTime;
+        }
+
+        if (wasMovingForward && isMovingBackward && forwardHoldTime >= 0.5f)
         {
             SoundManager.PlaySound(SoundType.Frenado, null, frenadoVolume);
+        }
+
+        if (!isMovingForward)
+        {
+            forwardHoldTime = 0f;
         }
 
         wasMovingForward = isMovingForward;

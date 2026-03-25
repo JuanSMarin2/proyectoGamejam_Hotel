@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 582e99099a93036469c0fd78ec687c32
+guid: b2077989fb1ab0f489027c76b4a9531a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4298338183044479577
-    second: PALMERITA FRENTE_0
+      213: 7152823398686056359
+    second: AMARILLO FRENTE_0
   - first:
-      213: -5775101506959928490
-    second: PALMERITA FRENTE_1
+      213: -6765623430830395024
+    second: AMARILLO FRENTE_1
   - first:
-      213: -5028490020115818362
-    second: PALMERITA FRENTE_2
+      213: -2836866906426687856
+    second: AMARILLO FRENTE_2
   - first:
-      213: 8470141797773228620
-    second: PALMERITA FRENTE_3
+      213: 4037213384181774391
+    second: AMARILLO FRENTE_3
   - first:
-      213: -4284410102600339009
-    second: PALMERITA FRENTE_4
+      213: 2024278566576663304
+    second: AMARILLO FRENTE_4
   - first:
-      213: 2494562432067781831
-    second: PALMERITA FRENTE_5
+      213: 695375189341745766
+    second: AMARILLO FRENTE_5
   - first:
-      213: -5291642699253740140
-    second: PALMERITA FRENTE_6
+      213: -1336800576429701316
+    second: AMARILLO FRENTE_6
   - first:
-      213: 3285202860027273117
-    second: PALMERITA FRENTE_7
+      213: -5859485253511901413
+    second: AMARILLO FRENTE_7
   - first:
-      213: -8207135889293911325
-    second: PALMERITA FRENTE_8
+      213: -4311369712386529006
+    second: AMARILLO FRENTE_8
   - first:
-      213: -5388942993915023744
-    second: PALMERITA FRENTE_9
+      213: -6804809777418776994
+    second: AMARILLO FRENTE_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -153,7 +153,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PALMERITA FRENTE_0
+      name: AMARILLO FRENTE_0
       rect:
         serializedVersion: 2
         x: 421
@@ -168,8 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95a3ddccdc3c6ab30800000000000000
-      internalID: 4298338183044479577
+      spriteID: 7afd8cbdbfee34360800000000000000
+      internalID: 7152823398686056359
       vertices:
       - {x: 108.928, y: 1.3450012}
       - {x: 134.047, y: 8.031998}
@@ -455,7 +455,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_1
+      name: AMARILLO FRENTE_1
       rect:
         serializedVersion: 2
         x: 159
@@ -479,8 +479,8 @@ TextureImporter:
         color:
           serializedVersion: 2
           rgba: 4278190335
-      spriteID: 65394d7f6c7badfa0800000000000000
-      internalID: -5775101506959928490
+      spriteID: 0717b41e55dab12a0800000000000000
+      internalID: -6765623430830395024
       vertices:
       - {x: 17.771, y: 1.4029999}
       - {x: 25.793, y: 5.3670006}
@@ -2346,7 +2346,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_2
+      name: AMARILLO FRENTE_2
       rect:
         serializedVersion: 2
         x: 396
@@ -2388,8 +2388,8 @@ TextureImporter:
         color:
           serializedVersion: 2
           rgba: 4278255360
-      spriteID: 688566208f6373ab0800000000000000
-      internalID: -5028490020115818362
+      spriteID: 09e3067349c61a8d0800000000000000
+      internalID: -2836866906426687856
       vertices:
       - {x: 123.826, y: 1.8439941}
       - {x: 152.548, y: 12.7859955}
@@ -3250,7 +3250,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_3
+      name: AMARILLO FRENTE_3
       rect:
         serializedVersion: 2
         x: 730
@@ -3274,8 +3274,8 @@ TextureImporter:
         color:
           serializedVersion: 2
           rgba: 4278190335
-      spriteID: c4a367d961dfb8570800000000000000
-      internalID: 8470141797773228620
+      spriteID: 7387b9ece20170830800000000000000
+      internalID: 4037213384181774391
       vertices:
       - {x: 137.38501, y: 0.48199844}
       - {x: 141, y: 5}
@@ -4962,7 +4962,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_4
+      name: AMARILLO FRENTE_4
       rect:
         serializedVersion: 2
         x: 95
@@ -4977,8 +4977,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fb1796226b7ba84c0800000000000000
-      internalID: -4284410102600339009
+      spriteID: 80b2d3791aea71c10800000000000000
+      internalID: 2024278566576663304
       vertices:
       - {x: 34.02, y: 1.8180008}
       - {x: 34.794, y: 2.2190018}
@@ -5234,7 +5234,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_5
+      name: AMARILLO FRENTE_5
       rect:
         serializedVersion: 2
         x: 413
@@ -5258,8 +5258,8 @@ TextureImporter:
         color:
           serializedVersion: 2
           rgba: 4278190335
-      spriteID: 7c44f61b0577e9220800000000000000
-      internalID: 2494562432067781831
+      spriteID: 662b55aec0876a900800000000000000
+      internalID: 695375189341745766
       vertices:
       - {x: 46.876, y: 0.034000397}
       - {x: 56.972, y: 0.33599854}
@@ -5876,7 +5876,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_6
+      name: AMARILLO FRENTE_6
       rect:
         serializedVersion: 2
         x: 537
@@ -5900,8 +5900,8 @@ TextureImporter:
         color:
           serializedVersion: 2
           rgba: 4278190335
-      spriteID: 49d01b8500f4096b0800000000000000
-      internalID: -5291642699253740140
+      spriteID: c37ce5a55fab27de0800000000000000
+      internalID: -1336800576429701316
       vertices:
       - {x: 52.968, y: 0.027999878}
       - {x: 62.833, y: 0.2709999}
@@ -6545,7 +6545,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_7
+      name: AMARILLO FRENTE_7
       rect:
         serializedVersion: 2
         x: 875
@@ -6560,8 +6560,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d9fd50f6892679d20800000000000000
-      internalID: 3285202860027273117
+      spriteID: b1f88c1f43deeaea0800000000000000
+      internalID: -5859485253511901413
       vertices:
       - {x: 39, y: 1}
       - {x: 53.933, y: 15.847}
@@ -6807,7 +6807,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_8
+      name: AMARILLO FRENTE_8
       rect:
         serializedVersion: 2
         x: 418
@@ -6822,8 +6822,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ead64754656a1e80800000000000000
-      internalID: -8207135889293911325
+      spriteID: 219a2d5d610fa24c0800000000000000
+      internalID: -4311369712386529006
       vertices:
       - {x: 51.231003, y: 0.314003}
       - {x: 56, y: 1}
@@ -7089,7 +7089,7 @@ TextureImporter:
         'boneIndex[2]': 0
         'boneIndex[3]': 0
     - serializedVersion: 2
-      name: PALMERITA FRENTE_9
+      name: AMARILLO FRENTE_9
       rect:
         serializedVersion: 2
         x: 541
@@ -7104,8 +7104,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08e6ddc16e0a635b0800000000000000
-      internalID: -5388942993915023744
+      spriteID: e5e49d49f857091a0800000000000000
+      internalID: -6804809777418776994
       vertices:
       - {x: 43.022, y: 0.33200073}
       - {x: 47, y: 1}
@@ -7374,7 +7374,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9750d95822ba6d54e9ff8574a1b68b65
+    spriteID: e14c63509b07fe74aa86c12c3c4a715c
     internalID: 0
     vertices: []
     indices: 
@@ -7384,16 +7384,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PALMERITA FRENTE_0: 4298338183044479577
-      PALMERITA FRENTE_1: -5775101506959928490
-      PALMERITA FRENTE_2: -5028490020115818362
-      PALMERITA FRENTE_3: 8470141797773228620
-      PALMERITA FRENTE_4: -4284410102600339009
-      PALMERITA FRENTE_5: 2494562432067781831
-      PALMERITA FRENTE_6: -5291642699253740140
-      PALMERITA FRENTE_7: 3285202860027273117
-      PALMERITA FRENTE_8: -8207135889293911325
-      PALMERITA FRENTE_9: -5388942993915023744
+      AMARILLO FRENTE_0: 7152823398686056359
+      AMARILLO FRENTE_1: -6765623430830395024
+      AMARILLO FRENTE_2: -2836866906426687856
+      AMARILLO FRENTE_3: 4037213384181774391
+      AMARILLO FRENTE_4: 2024278566576663304
+      AMARILLO FRENTE_5: 695375189341745766
+      AMARILLO FRENTE_6: -1336800576429701316
+      AMARILLO FRENTE_7: -5859485253511901413
+      AMARILLO FRENTE_8: -4311369712386529006
+      AMARILLO FRENTE_9: -6804809777418776994
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

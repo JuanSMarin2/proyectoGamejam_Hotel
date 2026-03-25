@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 6eeee4ab10067a041b002539a857091a
+guid: f5b2c4285ce241942a9651e42b31aab2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7311520930354207399
-    second: Marco camara_0
-  - first:
-      213: -7010706795462524520
-    second: Marco camara_1
-  - first:
-      213: 950038158076928700
-    second: Marco camara_2
-  - first:
-      213: 6750626188680389290
-    second: Marco camara_3
-  - first:
-      213: 8431242714990383958
-    second: Marco camara_4
+      213: 1609785104830575406
+    second: Nombre3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,6 +85,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -125,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Marco camara_0
+      name: Nombre3_0
       rect:
         serializedVersion: 2
-        x: 74
-        y: 836
-        width: 348
-        height: 189
+        x: 0
+        y: 0
+        width: 630
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9556762b372488a90800000000000000
-      internalID: -7311520930354207399
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Marco camara_1
-      rect:
-        serializedVersion: 2
-        x: 1532
-        y: 851
-        width: 314
-        height: 174
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8910a085057f4be90800000000000000
-      internalID: -7010706795462524520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Marco camara_2
-      rect:
-        serializedVersion: 2
-        x: 861
-        y: 416
-        width: 207
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cb2ed37dba63f2d00800000000000000
-      internalID: 950038158076928700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Marco camara_3
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 66
-        width: 360
-        height: 183
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aa26eb390ca0fad50800000000000000
-      internalID: 6750626188680389290
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Marco camara_4
-      rect:
-        serializedVersion: 2
-        x: 1512
-        y: 69
-        width: 334
-        height: 164
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6531a12249ac10570800000000000000
-      internalID: 8431242714990383958
+      spriteID: e23342a160b175610800000000000000
+      internalID: 1609785104830575406
       vertices: []
       indices: 
       edges: []
@@ -238,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -248,11 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Marco camara_0: -7311520930354207399
-      Marco camara_1: -7010706795462524520
-      Marco camara_2: 950038158076928700
-      Marco camara_3: 6750626188680389290
-      Marco camara_4: 8431242714990383958
+      Nombre3_0: 1609785104830575406
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
