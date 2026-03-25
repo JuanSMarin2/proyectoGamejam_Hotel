@@ -1928,8 +1928,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704194ea519f50043a47ad5172ac5344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useManualOccurrence: 1
-  currentOccurrence: 3
+  useManualOccurrence: 0
+  currentOccurrence: 1
   vendorSpeedIncreasePerOccurrence: 0.22
   stopChanceReductionPerOccurrence: 0.22
   stopAttemptIntervalIncreasePerOccurrence: 0.25

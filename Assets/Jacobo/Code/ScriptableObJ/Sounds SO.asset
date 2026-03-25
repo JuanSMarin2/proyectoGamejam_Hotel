@@ -185,7 +185,7 @@ MonoBehaviour:
   - soundType: 15
     id: MusicaGeneral
     category: Musica
-    volume: 0.65
+    volume: 0.62
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1
