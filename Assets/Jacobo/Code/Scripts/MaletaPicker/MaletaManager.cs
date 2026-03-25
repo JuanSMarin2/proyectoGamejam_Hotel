@@ -5,6 +5,18 @@ using UnityEngine;
 
 public class MaletaManager : MonoBehaviour
 {
+    private struct WinnerRespawnPenalty
+    {
+        public int PoolId;
+        public int RemainingSpawns;
+
+        public WinnerRespawnPenalty(int poolId, int remainingSpawns)
+        {
+            PoolId = poolId;
+            RemainingSpawns = remainingSpawns;
+        }
+    }
+
     [Serializable]
     public struct WinnerTarget
     {
@@ -37,6 +49,7 @@ public class MaletaManager : MonoBehaviour
     [SerializeField] private bool loseOnWrongPick = true;
     [SerializeField] private float winDelay = 0.5f;
     [SerializeField] private float successfulPickFadeDuration = 0.2f;
+    [SerializeField, Min(0)] private int winnerRespawnPunishSpawns = 2;
 
     private readonly List<Maleta> aliveMaletas = new List<Maleta>();
     private readonly Dictionary<int, Queue<Maleta>> pooledByPoolId = new Dictionary<int, Queue<Maleta>>();
@@ -46,6 +59,7 @@ public class MaletaManager : MonoBehaviour
     private readonly Dictionary<Maleta.MaletaType, Queue<Sprite>> forcedSimilarByType = new Dictionary<Maleta.MaletaType, Queue<Sprite>>();
     private readonly List<int> activeSpawnPoolIds = new List<int>();
     private readonly HashSet<int> pendingWinnerPoolIds = new HashSet<int>();
+    private readonly List<WinnerRespawnPenalty> winnerRespawnPenaltyQueue = new List<WinnerRespawnPenalty>();
 
     private float spawnTimer;
     private int poolCursor;
@@ -68,6 +82,7 @@ public class MaletaManager : MonoBehaviour
         ApplyDifficultySettings();
         BuildWinners();
         ResetPendingWinnerSpawns();
+        winnerRespawnPenaltyQueue.Clear();
         PrepareForcedSimilarSprites();
         BuildSpawnPoolIds();
         PrewarmPool();
@@ -209,11 +224,15 @@ public class MaletaManager : MonoBehaviour
         );
 
         aliveMaletas.Add(instance);
+        AdvanceWinnerRespawnPenalties();
     }
 
     private void HandleMaletaReachedEnd(Maleta maleta)
     {
         if (maleta == null) return;
+
+        if (!gameEnded && maleta.Winner && !maleta.IsPicked)
+            QueueWinnerRespawnPenalty(maleta.PoolId);
 
         aliveMaletas.Remove(maleta);
         ReturnToPool(maleta);
@@ -297,6 +316,49 @@ public class MaletaManager : MonoBehaviour
 
         for (int i = 0; i < winnerTargets.Count; i++)
             pendingWinnerPoolIds.Add(winnerTargets[i].PoolId);
+    }
+
+    private void QueueWinnerRespawnPenalty(int poolId)
+    {
+        if (poolId < 0 || poolId >= maletaPool.Count)
+            return;
+
+        for (int i = 0; i < winnerRespawnPenaltyQueue.Count; i++)
+        {
+            if (winnerRespawnPenaltyQueue[i].PoolId == poolId)
+                return;
+        }
+
+        int remaining = Mathf.Max(0, winnerRespawnPunishSpawns);
+        if (remaining == 0)
+        {
+            pendingWinnerPoolIds.Add(poolId);
+            return;
+        }
+
+        winnerRespawnPenaltyQueue.Add(new WinnerRespawnPenalty(poolId, remaining));
+    }
+
+    private void AdvanceWinnerRespawnPenalties()
+    {
+        if (winnerRespawnPenaltyQueue.Count == 0)
+            return;
+
+        for (int i = winnerRespawnPenaltyQueue.Count - 1; i >= 0; i--)
+        {
+            WinnerRespawnPenalty entry = winnerRespawnPenaltyQueue[i];
+            entry.RemainingSpawns--;
+
+            if (entry.RemainingSpawns <= 0)
+            {
+                pendingWinnerPoolIds.Add(entry.PoolId);
+                winnerRespawnPenaltyQueue.RemoveAt(i);
+            }
+            else
+            {
+                winnerRespawnPenaltyQueue[i] = entry;
+            }
+        }
     }
 
     private IEnumerator WinAfterDelay()
