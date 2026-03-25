@@ -8,6 +8,15 @@ public class SpriteSelector : MonoBehaviour
     [SerializeField] private Sprite[] mediumSprites;
     [SerializeField] private Sprite[] smallSprites;
 
+    [Header("Similar Sprites by Type (index paired)")]
+    [SerializeField] private Sprite[] largeSimilarSprites;
+    [SerializeField] private Sprite[] mediumSimilarSprites;
+    [SerializeField] private Sprite[] smallSimilarSprites;
+
+    [Header("Similar Variant")]
+    [SerializeField] private bool useSimilarVariants = false;
+    [SerializeField, Range(0f, 1f)] private float similarVariantChance = 0.5f;
+
     private readonly Dictionary<Maleta.MaletaType, List<Sprite>> winnerAvailableByType = new Dictionary<Maleta.MaletaType, List<Sprite>>();
     private readonly HashSet<Sprite> winnerReservedSprites = new HashSet<Sprite>();
 
@@ -64,11 +73,47 @@ public class SpriteSelector : MonoBehaviour
         if (candidates.Count > 0)
         {
             int randomCandidate = Random.Range(0, candidates.Count);
-            return candidates[randomCandidate];
+            return ResolveVariantSprite(type, candidates[randomCandidate]);
         }
 
         int randomIndex = Random.Range(0, source.Length);
-        return source[randomIndex];
+        return ResolveVariantSprite(type, source[randomIndex]);
+    }
+
+    public bool TryGetSimilarSprite(Maleta.MaletaType type, Sprite baseSprite, out Sprite similarSprite)
+    {
+        similarSprite = null;
+        if (baseSprite == null)
+            return false;
+
+        Sprite[] baseArray = GetArrayByType(type);
+        Sprite[] similarArray = GetSimilarArrayByType(type);
+
+        if (baseArray == null || similarArray == null)
+            return false;
+
+        int index = IndexOfSprite(baseArray, baseSprite);
+        if (index < 0 || index >= similarArray.Length)
+            return false;
+
+        similarSprite = similarArray[index];
+        return similarSprite != null;
+    }
+
+    public Sprite GetBaseOrSimilarByIndex(Maleta.MaletaType type, int index, bool returnSimilar)
+    {
+        Sprite[] baseArray = GetArrayByType(type);
+        if (baseArray == null || index < 0 || index >= baseArray.Length)
+            return null;
+
+        if (!returnSimilar)
+            return baseArray[index];
+
+        Sprite[] similarArray = GetSimilarArrayByType(type);
+        if (similarArray == null || index >= similarArray.Length)
+            return baseArray[index];
+
+        return similarArray[index] != null ? similarArray[index] : baseArray[index];
     }
 
     public Sprite GetAnyPreviewSprite()
@@ -93,6 +138,47 @@ public class SpriteSelector : MonoBehaviour
             default:
                 return mediumSprites;
         }
+    }
+
+    private Sprite[] GetSimilarArrayByType(Maleta.MaletaType type)
+    {
+        switch (type)
+        {
+            case Maleta.MaletaType.Large:
+                return largeSimilarSprites;
+            case Maleta.MaletaType.Small:
+                return smallSimilarSprites;
+            default:
+                return mediumSimilarSprites;
+        }
+    }
+
+    private Sprite ResolveVariantSprite(Maleta.MaletaType type, Sprite baseSprite)
+    {
+        if (!useSimilarVariants || baseSprite == null)
+            return baseSprite;
+
+        if (Random.value > Mathf.Clamp01(similarVariantChance))
+            return baseSprite;
+
+        if (TryGetSimilarSprite(type, baseSprite, out Sprite similarSprite))
+            return similarSprite;
+
+        return baseSprite;
+    }
+
+    private static int IndexOfSprite(Sprite[] source, Sprite target)
+    {
+        if (source == null || source.Length == 0 || target == null)
+            return -1;
+
+        for (int i = 0; i < source.Length; i++)
+        {
+            if (source[i] == target)
+                return i;
+        }
+
+        return -1;
     }
 
     private Sprite FirstValid(Sprite[] sprites)

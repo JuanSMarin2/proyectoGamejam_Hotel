@@ -67,8 +67,8 @@ public class MinigameResultsUI : MonoBehaviour
         }
 
     
-        moneyText.text = startMoney.ToString();
-        changeText.text = change == 0 ? "-0" : change.ToString();
+        moneyText.text = FormatMoney(startMoney);
+        changeText.text = FormatMoney(change == 0 ? 0 : change);
 
         changeText.color = change < 0 ? Color.red : Color.green;
 
@@ -92,13 +92,13 @@ public class MinigameResultsUI : MonoBehaviour
             if (playTickOnMoneyTextChange && currentMoney != lastDisplayedMoney)
                 SoundManager.PlaySound(tickMoneySoundType, null, tickMoneyVolume);
 
-            moneyText.text = currentMoney.ToString();
+            moneyText.text = FormatMoney(currentMoney);
             lastDisplayedMoney = currentMoney;
 
             yield return null;
         }
 
-        moneyText.text = finalMoney.ToString();
+        moneyText.text = FormatMoney(finalMoney);
 
         if (change < 0)
             yield return StartCoroutine(AnimateLostMoneyImages(lossesBeforeCurrentResult, lossesAfterCurrentResult));
@@ -133,7 +133,7 @@ public class MinigameResultsUI : MonoBehaviour
 
         if (headFixer == null)
         {
-            headFixer = FindObjectOfType<HeadFixer>();
+            headFixer = FindFirstObjectByType<HeadFixer>();
         }
 
         if (headFixer == null)
@@ -263,5 +263,10 @@ public class MinigameResultsUI : MonoBehaviour
 
         imageTransform.localScale = startScale;
         target.SetActive(false);
+    }
+
+    private static string FormatMoney(int value)
+    {
+        return "$" + value;
     }
 }
