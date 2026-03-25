@@ -170,7 +170,7 @@ MonoBehaviour:
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: b35887a370fd3e44f88fc2daab0ebd86, type: 3}
+    - {fileID: 8300000, guid: 1c6ffa274e564ac43bbffd205a22732a, type: 3}
   - soundType: 14
     id: MusicaFinalYCreditos
     category: Default
@@ -196,7 +196,7 @@ MonoBehaviour:
   - soundType: 16
     id: MusicaMainMenu
     category: Default
-    volume: 0.759
+    volume: 0.8
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1

@@ -93,7 +93,16 @@ public class FinalSceneManager : MonoBehaviour
         shopButton.SetActive(true);
     }
 
- 
+    public void PlayAgain()
+    {
+        RoundData.ResetForMainMenu();
+
+        var order = GameOrderManager.instance.GetSceneOrder();
+        RoundData.instance.SetGameOrder(order);
+        RoundData.instance.SetStoryMode(false);
+
+        SceneManager.LoadScene("IntroScene");
+    }
     public void LoadScene(string sceneName)
     {
         if (sceneName == "MainMenu")
