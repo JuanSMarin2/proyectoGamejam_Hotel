@@ -100,6 +100,41 @@ public class SpriteSelector : MonoBehaviour
         return similarSprite != null;
     }
 
+    public bool TryGetPairedVariant(Maleta.MaletaType type, Sprite sprite, out Sprite pairedSprite)
+    {
+        pairedSprite = null;
+        if (sprite == null)
+            return false;
+
+        Sprite[] baseArray = GetArrayByType(type);
+        Sprite[] similarArray = GetSimilarArrayByType(type);
+
+        if (baseArray == null)
+            return false;
+
+        int baseIndex = IndexOfSprite(baseArray, sprite);
+        if (baseIndex >= 0)
+        {
+            if (similarArray != null && baseIndex < similarArray.Length && similarArray[baseIndex] != null)
+            {
+                pairedSprite = similarArray[baseIndex];
+                return true;
+            }
+
+            return false;
+        }
+
+        if (similarArray == null)
+            return false;
+
+        int similarIndex = IndexOfSprite(similarArray, sprite);
+        if (similarIndex < 0 || similarIndex >= baseArray.Length)
+            return false;
+
+        pairedSprite = baseArray[similarIndex];
+        return pairedSprite != null;
+    }
+
     public Sprite GetBaseOrSimilarByIndex(Maleta.MaletaType type, int index, bool returnSimilar)
     {
         Sprite[] baseArray = GetArrayByType(type);

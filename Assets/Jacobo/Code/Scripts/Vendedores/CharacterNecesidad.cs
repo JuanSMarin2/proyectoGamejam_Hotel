@@ -14,12 +14,19 @@ public class CharacterNecesidad : MonoBehaviour
     [SerializeField] private float solveTime = 6f;
 
     [SerializeField] private bool autoStart = true;
+    [SerializeField] private VendedoresDifficultyManager difficultyManager;
 
     private Coroutine loopRoutine;
+    private float runtimeMinWaitBetweenNeeds;
+    private float runtimeMaxWaitBetweenNeeds;
+    private float runtimeSolveTime;
 
     public bool HasActiveNeed { get; private set; }
     public Necesidad CurrentNeed { get; private set; }
-    public float SolveTime => solveTime;
+    public float SolveTime => runtimeSolveTime;
+    public float BaseSolveTime => solveTime;
+    public float BaseMinWaitBetweenNeeds => minWaitBetweenNeeds;
+    public float BaseMaxWaitBetweenNeeds => maxWaitBetweenNeeds;
 
     public event Action<Necesidad> NeedStarted;
     public event Action NeedResolved;
@@ -27,6 +34,7 @@ public class CharacterNecesidad : MonoBehaviour
 
     private void Start()
     {
+        ApplyDifficultySettings();
         ApplyPlayerChildrenSortingOffset();
 
         if (autoStart)
@@ -86,7 +94,9 @@ public class CharacterNecesidad : MonoBehaviour
     {
         while (true)
         {
-            float waitTime = UnityEngine.Random.Range(Mathf.Min(minWaitBetweenNeeds, maxWaitBetweenNeeds), Mathf.Max(minWaitBetweenNeeds, maxWaitBetweenNeeds));
+            float waitTime = UnityEngine.Random.Range(
+                Mathf.Min(runtimeMinWaitBetweenNeeds, runtimeMaxWaitBetweenNeeds),
+                Mathf.Max(runtimeMinWaitBetweenNeeds, runtimeMaxWaitBetweenNeeds));
             yield return new WaitForSeconds(waitTime);
 
             CurrentNeed = PickRandomNeed();
@@ -94,7 +104,7 @@ public class CharacterNecesidad : MonoBehaviour
 
             NeedStarted?.Invoke(CurrentNeed);
 
-            float timer = solveTime;
+            float timer = runtimeSolveTime;
             while (HasActiveNeed && timer > 0f)
             {
                 timer -= Time.deltaTime;
@@ -118,5 +128,21 @@ public class CharacterNecesidad : MonoBehaviour
 
         int random = UnityEngine.Random.Range(0, values.Length);
         return (Necesidad)values.GetValue(random);
+    }
+
+    private void ApplyDifficultySettings()
+    {
+        runtimeMinWaitBetweenNeeds = Mathf.Max(0.01f, minWaitBetweenNeeds);
+        runtimeMaxWaitBetweenNeeds = Mathf.Max(runtimeMinWaitBetweenNeeds, maxWaitBetweenNeeds);
+        runtimeSolveTime = Mathf.Max(0.01f, solveTime);
+
+        if (difficultyManager == null)
+            return;
+
+        VendedoresDifficultySettings settings = difficultyManager.ResolveDifficulty(solveTime, minWaitBetweenNeeds, maxWaitBetweenNeeds);
+
+        runtimeMinWaitBetweenNeeds = Mathf.Max(0.01f, settings.minWaitBetweenNeeds);
+        runtimeMaxWaitBetweenNeeds = Mathf.Max(runtimeMinWaitBetweenNeeds, settings.maxWaitBetweenNeeds);
+        runtimeSolveTime = Mathf.Max(0.01f, settings.solveTime);
     }
 }

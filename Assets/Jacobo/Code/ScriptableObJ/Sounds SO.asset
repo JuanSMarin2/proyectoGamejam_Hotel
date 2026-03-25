@@ -464,3 +464,25 @@ MonoBehaviour:
     maxPitch: 0.8
     sounds:
     - {fileID: 8300000, guid: b5858395f83c72f46a11ba208ff29167, type: 3}
+  - soundType: 40
+    id: Cortina
+    category: Default
+    volume: 0.86
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: b532104259d72304d90e49b3b7a1d5e9, type: 3}
+  - soundType: 41
+    id: SelloPasaporte
+    category: Default
+    volume: 0.71
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+    sounds:
+    - {fileID: 8300000, guid: 73bf9d19131e19b4d8504e25b9d26cbb, type: 3}

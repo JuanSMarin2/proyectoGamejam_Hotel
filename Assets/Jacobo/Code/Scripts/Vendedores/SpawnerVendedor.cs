@@ -26,6 +26,7 @@ public class SpawnerVendedor : MonoBehaviour
 
     [Header("Need Guarantee")]
     [SerializeField] private CharacterNecesidad characterNecesidad;
+    [SerializeField] private VendedoresDifficultyManager difficultyManager;
     [SerializeField] private bool guaranteeMatchingVendorOnNeedStart = true;
     [SerializeField] private bool ignoreMaxAliveForGuaranteedSpawn = true;
     [SerializeField] private float guaranteedNeedSpeedMultiplier = 2f;
@@ -51,6 +52,14 @@ public class SpawnerVendedor : MonoBehaviour
     private readonly List<Vendedor> candidatePrefabs = new List<Vendedor>();
     private float spawnTimer;
     private int nextSortingOrder;
+    private int runtimeMaxAliveVendedores;
+    private float runtimeSpeedMultiplier = 1f;
+    private float runtimeStopChanceMultiplier = 1f;
+    private float runtimeStopAttemptIntervalMultiplier = 1f;
+
+    public float BaseMinSpeed => minSpeed;
+    public float BaseMaxSpeed => maxSpeed;
+    public int BaseMaxAliveVendedores => maxAliveVendedores;
 
     private void OnEnable()
     {
@@ -66,6 +75,7 @@ public class SpawnerVendedor : MonoBehaviour
 
     private void Start()
     {
+        ResolveDifficulty();
         spawnTimer = GetRandomSpawnInterval();
         nextSortingOrder = initialSortingOrder;
     }
@@ -74,7 +84,7 @@ public class SpawnerVendedor : MonoBehaviour
     {
         CleanupNulls();
 
-        if (aliveVendedores.Count >= Mathf.Max(1, maxAliveVendedores)) return;
+        if (aliveVendedores.Count >= Mathf.Max(1, runtimeMaxAliveVendedores)) return;
         if (backSpawnPoint == null || frontSpawnPoint == null) return;
         if (vendedorPrefabs.Count == 0) return;
 
@@ -106,8 +116,10 @@ public class SpawnerVendedor : MonoBehaviour
             Debug.Log($"[SpawnerVendedor] SpawnOne => prefab={prefab.name}, necesidad={spawnedNeed}", this);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
+        speed *= Mathf.Max(0.01f, runtimeSpeedMultiplier);
         instance.Initialize(direction, speed, despawnX,
             backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
+        instance.ApplyDifficultyStopTuning(runtimeStopChanceMultiplier, runtimeStopAttemptIntervalMultiplier);
         instance.SetSortingOrderRecursive(Mathf.Max(0, guaranteedNeedSortingOrder));
         if (!backToFront)
             instance.AddSortingOrderOffsetRecursive(rightToLeftSortingOffset);
@@ -164,7 +176,7 @@ public class SpawnerVendedor : MonoBehaviour
 
         CleanupNulls();
 
-        if (!ignoreMaxAliveForGuaranteedSpawn && aliveVendedores.Count >= Mathf.Max(1, maxAliveVendedores))
+        if (!ignoreMaxAliveForGuaranteedSpawn && aliveVendedores.Count >= Mathf.Max(1, runtimeMaxAliveVendedores))
             return;
 
         SpawnOneWithNeed(need);
@@ -189,9 +201,11 @@ public class SpawnerVendedor : MonoBehaviour
             Debug.Log($"[SpawnerVendedor] SpawnOneWithNeed => prefab={prefab.name}, necesidad={need}", this);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
+        speed *= Mathf.Max(0.01f, runtimeSpeedMultiplier);
         speed *= Mathf.Max(1f, guaranteedNeedSpeedMultiplier);
         instance.Initialize(direction, speed, despawnX,
             backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
+        instance.ApplyDifficultyStopTuning(runtimeStopChanceMultiplier, runtimeStopAttemptIntervalMultiplier);
         instance.SetSortingOrderRecursive(nextSortingOrder);
         if (!backToFront)
             instance.AddSortingOrderOffsetRecursive(rightToLeftSortingOffset);
@@ -218,5 +232,27 @@ public class SpawnerVendedor : MonoBehaviour
             if (aliveVendedores[i] == null)
                 aliveVendedores.RemoveAt(i);
         }
+    }
+
+    private void ResolveDifficulty()
+    {
+        runtimeMaxAliveVendedores = Mathf.Max(1, maxAliveVendedores);
+        runtimeSpeedMultiplier = 1f;
+        runtimeStopChanceMultiplier = 1f;
+        runtimeStopAttemptIntervalMultiplier = 1f;
+
+        if (difficultyManager == null)
+            return;
+
+        float baseSolve = characterNecesidad != null ? characterNecesidad.BaseSolveTime : 6f;
+        float baseMinWait = characterNecesidad != null ? characterNecesidad.BaseMinWaitBetweenNeeds : 2f;
+        float baseMaxWait = characterNecesidad != null ? characterNecesidad.BaseMaxWaitBetweenNeeds : 4f;
+
+        VendedoresDifficultySettings settings = difficultyManager.ResolveDifficulty(baseSolve, baseMinWait, baseMaxWait);
+
+        runtimeMaxAliveVendedores = Mathf.Max(1, maxAliveVendedores + Mathf.Max(0, settings.extraMaxAliveVendedores));
+        runtimeSpeedMultiplier = Mathf.Max(0.01f, settings.vendorSpeedMultiplier);
+        runtimeStopChanceMultiplier = Mathf.Clamp01(settings.stopChanceMultiplier);
+        runtimeStopAttemptIntervalMultiplier = Mathf.Max(1f, settings.stopAttemptIntervalMultiplier);
     }
 }

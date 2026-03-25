@@ -20,6 +20,8 @@ public class FinalSceneManager : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private int coinSoundStep = 10;
+    [SerializeField] private SoundType transferTickSoundType = SoundType.TickMoney;
+    [SerializeField] private float transferTickVolume = 1f;
 
     private void Start()
     {
@@ -67,7 +69,7 @@ public class FinalSceneManager : MonoBehaviour
             while (lastCoinStepPlayed < currentCoinStep)
             {
                 lastCoinStepPlayed++;
-                SoundManager.PlaySound("Moneda");
+                SoundManager.PlaySound(transferTickSoundType, null, transferTickVolume);
             }
 
             yield return null;
