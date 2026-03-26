@@ -750,7 +750,6 @@ MonoBehaviour:
   maletaManager: {fileID: 346053600}
   grabTriggerName: grab
   grabCooldown: 0.1
-  allowAnyKeyboardKey: 1
 --- !u!114 &249174475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,6 +1004,7 @@ MonoBehaviour:
   loseOnWrongPick: 1
   winDelay: 0.5
   successfulPickFadeDuration: 0.2
+  winnerRespawnPunishSpawns: 2
 --- !u!4 &346053602
 Transform:
   m_ObjectHideFlags: 0
@@ -3595,7 +3595,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
