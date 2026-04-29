@@ -64,4 +64,24 @@ MonoBehaviour:
   - id: 500
     category: 1
     label: Naranja
-    price: 900
+    price: 100
+  - id: 2
+    category: 1
+    label: Rojo
+    price: 300
+  - id: 3
+    category: 1
+    label: Amarillo
+    price: 400
+  - id: 5
+    category: 1
+    label: Fea
+    price: 100
+  - id: 2
+    category: 1
+    label: Verde
+    price: 300
+  - id: 2
+    category: 1
+    label: Palma
+    price: 500
