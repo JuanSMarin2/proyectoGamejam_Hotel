@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class Maleta : MonoBehaviour
     [SerializeField] private float waypointReachDistance = 0.08f;
     [SerializeField] private float rotationLerpSpeed = 10f;
 
+    [Header("Pick Success Fade")]
+    [SerializeField] private float defaultFadeDuration = 0.2f;
+
     private IReadOnlyList<Transform> waypoints;
     private float movementSpeed;
     private int targetWaypointIndex;
@@ -28,6 +32,8 @@ public class Maleta : MonoBehaviour
 
     private Action<Maleta> onPicked;
     private Action<Maleta> onRouteCompleted;
+    private Coroutine fadeRoutine;
+    private SpriteRenderer[] cachedRenderers;
 
     public MaletaType Type => type;
     public bool Winner => winner;
@@ -130,6 +136,14 @@ public class Maleta : MonoBehaviour
         canMove = false;
     }
 
+    public void PlaySuccessFadeOut(Action onCompleted, float durationOverride = -1f)
+    {
+        if (fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        fadeRoutine = StartCoroutine(SuccessFadeRoutine(onCompleted, durationOverride));
+    }
+
     public void TryPick()
     {
         if (isPicked) return;
@@ -156,5 +170,57 @@ public class Maleta : MonoBehaviour
         routeCompleted = true;
         canMove = false;
         onRouteCompleted?.Invoke(this);
+    }
+
+    private IEnumerator SuccessFadeRoutine(Action onCompleted, float durationOverride)
+    {
+        if (cachedRenderers == null || cachedRenderers.Length == 0)
+            cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        if (cachedRenderers == null || cachedRenderers.Length == 0)
+        {
+            onCompleted?.Invoke();
+            yield break;
+        }
+
+        float duration = durationOverride > 0f ? durationOverride : defaultFadeDuration;
+        duration = Mathf.Max(0.01f, duration);
+
+        Color[] startColors = new Color[cachedRenderers.Length];
+        for (int i = 0; i < cachedRenderers.Length; i++)
+        {
+            if (cachedRenderers[i] != null)
+                startColors[i] = cachedRenderers[i].color;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            for (int i = 0; i < cachedRenderers.Length; i++)
+            {
+                if (cachedRenderers[i] == null)
+                    continue;
+
+                Color c = startColors[i];
+                c.a = Mathf.Lerp(startColors[i].a, 0f, t);
+                cachedRenderers[i].color = c;
+            }
+
+            yield return null;
+        }
+
+        for (int i = 0; i < cachedRenderers.Length; i++)
+        {
+            if (cachedRenderers[i] == null)
+                continue;
+
+            cachedRenderers[i].color = startColors[i];
+        }
+
+        fadeRoutine = null;
+        onCompleted?.Invoke();
     }
 }

@@ -20,6 +20,8 @@ public class FinalSceneManager : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private int coinSoundStep = 10;
+    [SerializeField] private SoundType transferTickSoundType = SoundType.TickMoney;
+    [SerializeField] private float transferTickVolume = 1f;
 
     private void Start()
     {
@@ -67,7 +69,7 @@ public class FinalSceneManager : MonoBehaviour
             while (lastCoinStepPlayed < currentCoinStep)
             {
                 lastCoinStepPlayed++;
-                SoundManager.PlaySound("Moneda");
+                SoundManager.PlaySound(transferTickSoundType, null, transferTickVolume);
             }
 
             yield return null;
@@ -91,7 +93,16 @@ public class FinalSceneManager : MonoBehaviour
         shopButton.SetActive(true);
     }
 
- 
+    public void PlayAgain()
+    {
+        RoundData.ResetForMainMenu();
+
+        var order = GameOrderManager.instance.GetSceneOrder();
+        RoundData.instance.SetGameOrder(order);
+        RoundData.instance.SetStoryMode(false);
+
+        SceneManager.LoadScene("IntroScene");
+    }
     public void LoadScene(string sceneName)
     {
         if (sceneName == "MainMenu")

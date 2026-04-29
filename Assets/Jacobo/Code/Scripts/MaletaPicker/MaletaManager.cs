@@ -5,6 +5,18 @@ using UnityEngine;
 
 public class MaletaManager : MonoBehaviour
 {
+    private struct WinnerRespawnPenalty
+    {
+        public int PoolId;
+        public int RemainingSpawns;
+
+        public WinnerRespawnPenalty(int poolId, int remainingSpawns)
+        {
+            PoolId = poolId;
+            RemainingSpawns = remainingSpawns;
+        }
+    }
+
     [Serializable]
     public struct WinnerTarget
     {
@@ -21,6 +33,7 @@ public class MaletaManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private CintaMovement cintaMovement;
     [SerializeField] private SpriteSelector spriteSelector;
+    [SerializeField] private MaletaDifficultyManager difficultyManager;
     [SerializeField] private Transform spawnPoint;
 
     [Header("Maletas Pool")]
@@ -35,16 +48,28 @@ public class MaletaManager : MonoBehaviour
     [SerializeField, Range(1, 3)] private int winners = 1;
     [SerializeField] private bool loseOnWrongPick = true;
     [SerializeField] private float winDelay = 0.5f;
+    [SerializeField] private float successfulPickFadeDuration = 0.2f;
+    [SerializeField, Min(0)] private int winnerRespawnPunishSpawns = 2;
 
     private readonly List<Maleta> aliveMaletas = new List<Maleta>();
     private readonly Dictionary<int, Queue<Maleta>> pooledByPoolId = new Dictionary<int, Queue<Maleta>>();
     private readonly List<WinnerTarget> winnerTargets = new List<WinnerTarget>();
     private readonly HashSet<int> collectedWinners = new HashSet<int>();
     private readonly Dictionary<int, Sprite> winnerSpriteByPoolId = new Dictionary<int, Sprite>();
+    private readonly Dictionary<Maleta.MaletaType, Queue<Sprite>> forcedSimilarByType = new Dictionary<Maleta.MaletaType, Queue<Sprite>>();
+    private readonly List<int> activeSpawnPoolIds = new List<int>();
+    private readonly HashSet<int> pendingWinnerPoolIds = new HashSet<int>();
+    private readonly List<WinnerRespawnPenalty> winnerRespawnPenaltyQueue = new List<WinnerRespawnPenalty>();
 
     private float spawnTimer;
     private int poolCursor;
     private bool gameEnded;
+    private bool firstSpawnEmitted;
+    private bool firstSpawnWinnerRuleApplied;
+    private MaletaDifficultySettings difficultySettings;
+    private int runtimeMaxAliveMaletas;
+    private int runtimePrewarmPerPrefab;
+    private float runtimeMovementSpeed;
 
     public event Action<IReadOnlyList<WinnerTarget>> WinnersAssigned;
     public event Action<Maleta, bool, int, int> MaletaPicked;
@@ -54,7 +79,12 @@ public class MaletaManager : MonoBehaviour
 
     private void Start()
     {
+        ApplyDifficultySettings();
         BuildWinners();
+        ResetPendingWinnerSpawns();
+        winnerRespawnPenaltyQueue.Clear();
+        PrepareForcedSimilarSprites();
+        BuildSpawnPoolIds();
         PrewarmPool();
         spawnTimer = spawnInterval;
 
@@ -78,35 +108,89 @@ public class MaletaManager : MonoBehaviour
 
         if (maletaPool.Count == 0) return;
 
-        int maxWinners = Mathf.Min(winners, Mathf.Min(3, maletaPool.Count));
+        int targetWinners = Mathf.Max(1, difficultySettings.winnerSlots > 0 ? difficultySettings.winnerSlots : winners);
+        int maxWinners = Mathf.Min(targetWinners, Mathf.Min(3, maletaPool.Count));
         List<int> availableIndices = new List<int>(maletaPool.Count);
 
         for (int i = 0; i < maletaPool.Count; i++)
             availableIndices.Add(i);
 
+        if (difficultySettings.requireDistinctWinnerTypes)
+        {
+            AssignDistinctTypeWinners(maxWinners, availableIndices);
+            maxWinners -= winnerTargets.Count;
+        }
+
         for (int i = 0; i < maxWinners; i++)
         {
+            if (availableIndices.Count == 0)
+                break;
+
             int randomIndex = UnityEngine.Random.Range(0, availableIndices.Count);
             int poolIndex = availableIndices[randomIndex];
             availableIndices.RemoveAt(randomIndex);
 
-            Sprite winnerSprite = null;
-            Maleta prefab = maletaPool[poolIndex];
+            AssignWinnerForPoolIndex(poolIndex);
+        }
+    }
 
-            if (spriteSelector != null && prefab != null)
+    private void AssignDistinctTypeWinners(int maxWinners, List<int> availableIndices)
+    {
+        if (maxWinners <= 0 || availableIndices == null || availableIndices.Count == 0)
+            return;
+
+        Dictionary<Maleta.MaletaType, List<int>> byType = new Dictionary<Maleta.MaletaType, List<int>>();
+
+        for (int i = 0; i < availableIndices.Count; i++)
+        {
+            int poolIndex = availableIndices[i];
+            Maleta prefab = poolIndex >= 0 && poolIndex < maletaPool.Count ? maletaPool[poolIndex] : null;
+            if (prefab == null)
+                continue;
+
+            if (!byType.TryGetValue(prefab.Type, out List<int> list))
             {
-                winnerSprite = spriteSelector.TakeWinnerUniqueSprite(prefab.Type);
+                list = new List<int>();
+                byType[prefab.Type] = list;
             }
 
-            winnerSpriteByPoolId[poolIndex] = winnerSprite;
-            winnerTargets.Add(new WinnerTarget(poolIndex, winnerSprite));
+            list.Add(poolIndex);
         }
+
+        List<Maleta.MaletaType> types = new List<Maleta.MaletaType>(byType.Keys);
+        Shuffle(types);
+
+        int winnersToTake = Mathf.Min(maxWinners, types.Count);
+        for (int i = 0; i < winnersToTake; i++)
+        {
+            Maleta.MaletaType type = types[i];
+            if (!byType.TryGetValue(type, out List<int> candidates) || candidates == null || candidates.Count == 0)
+                continue;
+
+            int selectedIndex = UnityEngine.Random.Range(0, candidates.Count);
+            int poolIndex = candidates[selectedIndex];
+
+            availableIndices.Remove(poolIndex);
+            AssignWinnerForPoolIndex(poolIndex);
+        }
+    }
+
+    private void AssignWinnerForPoolIndex(int poolIndex)
+    {
+        Sprite winnerSprite = null;
+        Maleta prefab = poolIndex >= 0 && poolIndex < maletaPool.Count ? maletaPool[poolIndex] : null;
+
+        if (spriteSelector != null && prefab != null)
+            winnerSprite = spriteSelector.TakeWinnerUniqueSprite(prefab.Type);
+
+        winnerSpriteByPoolId[poolIndex] = winnerSprite;
+        winnerTargets.Add(new WinnerTarget(poolIndex, winnerSprite));
     }
 
     private void HandleSpawn()
     {
         if (cintaMovement == null || spawnPoint == null || maletaPool.Count == 0) return;
-        if (aliveMaletas.Count >= Mathf.Max(1, maxAliveMaletas)) return;
+        if (aliveMaletas.Count >= Mathf.Max(1, runtimeMaxAliveMaletas)) return;
 
         spawnTimer -= Time.deltaTime;
         if (spawnTimer > 0f) return;
@@ -117,8 +201,9 @@ public class MaletaManager : MonoBehaviour
 
     private void SpawnMaleta()
     {
-        int spawnPoolIndex = poolCursor;
-        poolCursor = (poolCursor + 1) % maletaPool.Count;
+        int spawnPoolIndex = GetNextSpawnPoolId();
+        if (spawnPoolIndex < 0)
+            return;
 
         Maleta instance = GetFromPool(spawnPoolIndex);
         if (instance == null) return;
@@ -126,12 +211,12 @@ public class MaletaManager : MonoBehaviour
         instance.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
         instance.gameObject.SetActive(true);
 
-        bool isWinner = IsWinnerPoolId(spawnPoolIndex);
+        bool isWinner = DecideSpawnWinner(spawnPoolIndex);
         AssignSpawnSprite(instance, spawnPoolIndex, isWinner);
 
         instance.Initialize(
             cintaMovement.Waypoints,
-            cintaMovement.MovementSpeed,
+            runtimeMovementSpeed,
             isWinner,
             spawnPoolIndex,
             HandleMaletaPicked,
@@ -139,11 +224,15 @@ public class MaletaManager : MonoBehaviour
         );
 
         aliveMaletas.Add(instance);
+        AdvanceWinnerRespawnPenalties();
     }
 
     private void HandleMaletaReachedEnd(Maleta maleta)
     {
         if (maleta == null) return;
+
+        if (!gameEnded && maleta.Winner && !maleta.IsPicked)
+            QueueWinnerRespawnPenalty(maleta.PoolId);
 
         aliveMaletas.Remove(maleta);
         ReturnToPool(maleta);
@@ -159,6 +248,9 @@ public class MaletaManager : MonoBehaviour
 
         if (maleta.Winner)
         {
+            TryPlaySoundIfManagerExists(SoundType.SelloPasaporte);
+            maleta.PlaySuccessFadeOut(() => HandleMaletaReachedEnd(maleta), successfulPickFadeDuration);
+
             countedAsWinner = collectedWinners.Add(maleta.PoolId);
             Debug.Log($"[MaletaManager] Winner counted={countedAsWinner}. Progress: {collectedWinners.Count}/{winnerTargets.Count}");
 
@@ -178,6 +270,7 @@ public class MaletaManager : MonoBehaviour
         }
         else if (loseOnWrongPick)
         {
+            TryPlaySoundIfManagerExists(SoundType.VidaPerdida);
             gameEnded = true;
             ResultManager.instance.LoseMinigame();
         }
@@ -202,10 +295,243 @@ public class MaletaManager : MonoBehaviour
         return false;
     }
 
+    private bool DecideSpawnWinner(int poolId)
+    {
+        if (!firstSpawnWinnerRuleApplied)
+        {
+            firstSpawnWinnerRuleApplied = true;
+            return false;
+        }
+
+        if (!pendingWinnerPoolIds.Contains(poolId))
+            return false;
+
+        pendingWinnerPoolIds.Remove(poolId);
+        return true;
+    }
+
+    private void ResetPendingWinnerSpawns()
+    {
+        pendingWinnerPoolIds.Clear();
+
+        for (int i = 0; i < winnerTargets.Count; i++)
+            pendingWinnerPoolIds.Add(winnerTargets[i].PoolId);
+    }
+
+    private void QueueWinnerRespawnPenalty(int poolId)
+    {
+        if (poolId < 0 || poolId >= maletaPool.Count)
+            return;
+
+        for (int i = 0; i < winnerRespawnPenaltyQueue.Count; i++)
+        {
+            if (winnerRespawnPenaltyQueue[i].PoolId == poolId)
+                return;
+        }
+
+        int remaining = Mathf.Max(0, winnerRespawnPunishSpawns);
+        if (remaining == 0)
+        {
+            pendingWinnerPoolIds.Add(poolId);
+            return;
+        }
+
+        winnerRespawnPenaltyQueue.Add(new WinnerRespawnPenalty(poolId, remaining));
+    }
+
+    private void AdvanceWinnerRespawnPenalties()
+    {
+        if (winnerRespawnPenaltyQueue.Count == 0)
+            return;
+
+        for (int i = winnerRespawnPenaltyQueue.Count - 1; i >= 0; i--)
+        {
+            WinnerRespawnPenalty entry = winnerRespawnPenaltyQueue[i];
+            entry.RemainingSpawns--;
+
+            if (entry.RemainingSpawns <= 0)
+            {
+                pendingWinnerPoolIds.Add(entry.PoolId);
+                winnerRespawnPenaltyQueue.RemoveAt(i);
+            }
+            else
+            {
+                winnerRespawnPenaltyQueue[i] = entry;
+            }
+        }
+    }
+
     private IEnumerator WinAfterDelay()
     {
         yield return new WaitForSeconds(winDelay);
         ResultManager.instance.WinMinigame();
+    }
+
+    private void ApplyDifficultySettings()
+    {
+        if (difficultyManager != null)
+            difficultySettings = difficultyManager.ResolveDifficulty();
+        else
+        {
+            difficultySettings = new MaletaDifficultySettings
+            {
+                occurrence = 1,
+                winnerSlots = winners,
+                requireDistinctWinnerTypes = false,
+                winnerCanSpawnFirst = false,
+                minSimilarPerWinner = 1,
+                movementSpeedMultiplier = 1f,
+                extraMaxAlive = 0,
+                extraPrewarmPerPrefab = 0,
+                extraSpawnPoolEntries = 0
+            };
+        }
+
+        float runSpeed = 1f;
+        if (MinigameManager.instance != null)
+            runSpeed = Mathf.Max(0.01f, MinigameManager.instance.Speed);
+        else if (RoundData.instance != null)
+            runSpeed = Mathf.Max(0.01f, RoundData.instance.GetCurrentMinigameSpeed());
+
+        float levelMultiplier = Mathf.Max(0.01f, difficultySettings.movementSpeedMultiplier);
+        runtimeMovementSpeed = Mathf.Max(0.01f, cintaMovement != null ? cintaMovement.MovementSpeed * runSpeed * levelMultiplier : runSpeed * levelMultiplier);
+
+        runtimeMaxAliveMaletas = Mathf.Max(1, maxAliveMaletas + Mathf.Max(0, difficultySettings.extraMaxAlive));
+        runtimePrewarmPerPrefab = Mathf.Max(1, prewarmPerPrefab + Mathf.Max(0, difficultySettings.extraPrewarmPerPrefab));
+    }
+
+    private void PrepareForcedSimilarSprites()
+    {
+        forcedSimilarByType.Clear();
+
+        if (spriteSelector == null)
+            return;
+
+        int amountPerWinner = Mathf.Max(0, difficultySettings.minSimilarPerWinner);
+        if (amountPerWinner <= 0)
+            return;
+
+        for (int i = 0; i < winnerTargets.Count; i++)
+        {
+            WinnerTarget target = winnerTargets[i];
+            if (target.PoolId < 0 || target.PoolId >= maletaPool.Count)
+                continue;
+
+            Maleta prefab = maletaPool[target.PoolId];
+            if (prefab == null || target.Sprite == null)
+                continue;
+
+            if (!spriteSelector.TryGetPairedVariant(prefab.Type, target.Sprite, out Sprite paired))
+                continue;
+
+            if (paired == null)
+                continue;
+
+            if (!forcedSimilarByType.TryGetValue(prefab.Type, out Queue<Sprite> queue) || queue == null)
+            {
+                queue = new Queue<Sprite>();
+                forcedSimilarByType[prefab.Type] = queue;
+            }
+
+            for (int c = 0; c < amountPerWinner; c++)
+                queue.Enqueue(paired);
+        }
+    }
+
+    private void BuildSpawnPoolIds()
+    {
+        activeSpawnPoolIds.Clear();
+
+        for (int i = 0; i < maletaPool.Count; i++)
+            activeSpawnPoolIds.Add(i);
+
+        int extraEntries = Mathf.Max(0, difficultySettings.extraSpawnPoolEntries);
+        for (int i = 0; i < extraEntries; i++)
+        {
+            if (maletaPool.Count == 0)
+                break;
+
+            activeSpawnPoolIds.Add(UnityEngine.Random.Range(0, maletaPool.Count));
+        }
+
+        Shuffle(activeSpawnPoolIds);
+        TrySwapFirstSpawnToNonWinner();
+
+        poolCursor = 0;
+        firstSpawnEmitted = false;
+        firstSpawnWinnerRuleApplied = false;
+    }
+
+    private int GetNextSpawnPoolId()
+    {
+        if (activeSpawnPoolIds.Count == 0)
+            return -1;
+
+        int count = activeSpawnPoolIds.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            int index = poolCursor;
+            poolCursor = (poolCursor + 1) % count;
+
+            int poolId = activeSpawnPoolIds[index];
+            bool canBeFirstWinner = difficultySettings.winnerCanSpawnFirst;
+
+            if (!firstSpawnEmitted && !canBeFirstWinner && IsWinnerPoolId(poolId))
+                continue;
+
+            firstSpawnEmitted = true;
+            return poolId;
+        }
+
+        int fallback = activeSpawnPoolIds[poolCursor];
+        poolCursor = (poolCursor + 1) % count;
+        firstSpawnEmitted = true;
+        return fallback;
+    }
+
+    private void TrySwapFirstSpawnToNonWinner()
+    {
+        if (difficultySettings.winnerCanSpawnFirst)
+            return;
+
+        if (activeSpawnPoolIds.Count <= 1)
+            return;
+
+        if (!IsWinnerPoolId(activeSpawnPoolIds[0]))
+            return;
+
+        for (int i = 1; i < activeSpawnPoolIds.Count; i++)
+        {
+            if (IsWinnerPoolId(activeSpawnPoolIds[i]))
+                continue;
+
+            int temp = activeSpawnPoolIds[0];
+            activeSpawnPoolIds[0] = activeSpawnPoolIds[i];
+            activeSpawnPoolIds[i] = temp;
+            return;
+        }
+    }
+
+    private static void Shuffle<T>(List<T> list)
+    {
+        if (list == null || list.Count <= 1)
+            return;
+
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, i + 1);
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+        }
+    }
+
+    private static void TryPlaySoundIfManagerExists(SoundType soundType)
+    {
+        if (FindAnyObjectByType<SoundManager>() == null)
+            return;
+
+        SoundManager.PlaySound(soundType);
+        
     }
 
     private void PrewarmPool()
@@ -214,7 +540,7 @@ public class MaletaManager : MonoBehaviour
 
         if (maletaPool.Count == 0) return;
 
-        int instancesPerPrefab = Mathf.Max(1, prewarmPerPrefab);
+        int instancesPerPrefab = Mathf.Max(1, runtimePrewarmPerPrefab);
         Vector3 prewarmPosition = spawnPoint != null ? spawnPoint.position : Vector3.zero;
         Quaternion prewarmRotation = spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
 
@@ -292,7 +618,11 @@ public class MaletaManager : MonoBehaviour
         }
         else
         {
-            selected = spriteSelector.GetRandomReusableSprite(instance.Type);
+            if (forcedSimilarByType.TryGetValue(instance.Type, out Queue<Sprite> queue) && queue != null && queue.Count > 0)
+                selected = queue.Dequeue();
+
+            if (selected == null)
+                selected = spriteSelector.GetRandomReusableSprite(instance.Type);
         }
 
         if (selected == null)

@@ -30,7 +30,7 @@ public class ReceptionistController : MonoBehaviour
     #endregion
 
     #region State Management
-    private ReceptionistState currentState = ReceptionistState.Working;
+    private ReceptionistState currentState = ReceptionistState.Mixed;
     private bool hasLastHeadFixerFace;
     private HeadFixer.Face lastHeadFixerFace;
     #endregion
@@ -48,7 +48,7 @@ public class ReceptionistController : MonoBehaviour
     #region Unity Lifecycle
     private void Start()
     {
-        SetState(ReceptionistState.Working);
+        SetState(ReceptionistState.Mixed);
     }
 
     private void Update()

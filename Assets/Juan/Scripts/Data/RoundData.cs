@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
+using System;
 
 public class RoundData : MonoBehaviour
 {
@@ -29,6 +31,7 @@ public class RoundData : MonoBehaviour
     private int currentIndex = 0;
     private List<string> infiniteShuffledOrder = new List<string>();
     private int infiniteOrderIndex = 0;
+    private readonly Dictionary<string, int> minigameAppearanceCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
     [SerializeField] private float startSpeed = 1f;
     [SerializeField] private float speedIncreasePerMinigame = 0.2f;
@@ -87,6 +90,28 @@ public class RoundData : MonoBehaviour
         completedMinigames = 0;
         infiniteShuffledOrder.Clear();
         infiniteOrderIndex = 0;
+        minigameAppearanceCounts.Clear();
+    }
+
+    public int RegisterMinigameAppearance(string sceneName)
+    {
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return 0;
+
+        if (!minigameAppearanceCounts.TryGetValue(sceneName, out int count))
+            count = 0;
+
+        count++;
+        minigameAppearanceCounts[sceneName] = count;
+        return count;
+    }
+
+    public int GetMinigameAppearanceCount(string sceneName)
+    {
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return 0;
+
+        return minigameAppearanceCounts.TryGetValue(sceneName, out int count) ? count : 0;
     }
 
     public void SetStoryMode(bool value)

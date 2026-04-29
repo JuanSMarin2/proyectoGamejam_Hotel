@@ -95,6 +95,16 @@ public class Vendedor : MonoBehaviour
         UpdateAnimatorHorizontalSpeed(0f);
     }
 
+    public void ApplyDifficultyStopTuning(float stopChanceMultiplier, float stopAttemptIntervalMultiplier)
+    {
+        float chanceMult = Mathf.Clamp01(stopChanceMultiplier);
+        float attemptMult = Mathf.Max(1f, stopAttemptIntervalMultiplier);
+
+        stopChancePerAttempt = Mathf.Clamp01(stopChancePerAttempt * chanceMult);
+        minTimeBetweenStopAttempts = Mathf.Max(0.05f, minTimeBetweenStopAttempts * attemptMult);
+        maxTimeBetweenStopAttempts = Mathf.Max(minTimeBetweenStopAttempts, maxTimeBetweenStopAttempts * attemptMult);
+    }
+
     public void HandleCompraAttemptVisualState()
     {
         StopMovement();

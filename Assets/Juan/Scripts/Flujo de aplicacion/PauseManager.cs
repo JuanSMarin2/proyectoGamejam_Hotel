@@ -43,7 +43,7 @@ public class PauseManager : MonoBehaviour
                 return;
             }
 
-            if (!HasMinigameManagerInScene())
+            if (!CanPauseInCurrentScene())
             {
                 return;
             }
@@ -59,7 +59,7 @@ public class PauseManager : MonoBehaviour
             return;
         }
 
-        if (!HasMinigameManagerInScene())
+        if (!CanPauseInCurrentScene())
         {
             return;
         }
@@ -108,8 +108,9 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
-    private bool HasMinigameManagerInScene()
+    private bool CanPauseInCurrentScene()
     {
-        return FindObjectOfType<MinigameManager>() != null;
+        return FindObjectOfType<MinigameManager>() != null
+            || FindObjectOfType<MinigameResultsUI>() != null;
     }
 }

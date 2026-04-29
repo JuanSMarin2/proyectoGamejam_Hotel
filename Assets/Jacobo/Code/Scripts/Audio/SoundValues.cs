@@ -39,5 +39,7 @@
     UiBoton,
     VidaPerdida,
     AeropuertoCall,
-    TickMoney
+    TickMoney,
+    Cortina,
+    SelloPasaporte
 }

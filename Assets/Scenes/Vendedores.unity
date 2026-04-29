@@ -724,6 +724,7 @@ MonoBehaviour:
   randomDirection: 1
   spawnBackToFront: 1
   characterNecesidad: {fileID: 483335910}
+  difficultyManager: {fileID: 1080247231}
   guaranteeMatchingVendorOnNeedStart: 1
   ignoreMaxAliveForGuaranteedSpawn: 1
   guaranteedNeedSpeedMultiplier: 2
@@ -873,10 +874,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 483335908}
   playerChildrenSortingOffset: 35
-  minWaitBetweenNeeds: 1
-  maxWaitBetweenNeeds: 2
+  minWaitBetweenNeeds: 1.5
+  maxWaitBetweenNeeds: 2.5
   solveTime: 6
   autoStart: 1
+  difficultyManager: {fileID: 1080247231}
 --- !u!114 &483335911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,7 +897,7 @@ MonoBehaviour:
   needRenderer: {fileID: 2137702307}
   spriteSed: {fileID: 21300000, guid: 6e5fb31f2412bf849b767ed59f49813d, type: 3}
   spriteSol: {fileID: 21300000, guid: 66aeb51f8f557b34287bdf15a6854c7b, type: 3}
-  spriteDiversion: {fileID: 21300000, guid: 893f3c85f034c674bb3b92ee7cf169ec, type: 3}
+  spriteDiversion: {fileID: -165737362202436952, guid: 1fb6a3ab5c6db7b45b4b9f3ee77ee0a9, type: 3}
   verticalMaskDriver: {fileID: 623634122}
   maskFullLocalPosition: {x: 0, y: 0, z: 0}
   maskEmptyLocalPosition: {x: 0, y: -8.01, z: 0}
@@ -1852,6 +1854,7 @@ GameObject:
   - component: {fileID: 1080247229}
   - component: {fileID: 1080247228}
   - component: {fileID: 1080247230}
+  - component: {fileID: 1080247231}
   m_Layer: 0
   m_Name: VentaManager
   m_TagString: Untagged
@@ -1910,9 +1913,32 @@ MonoBehaviour:
   - {fileID: 6365738839838718620, guid: 436c43d321903614cb8a6dec065cae67, type: 3}
   - {fileID: 3864017203719355072, guid: c92cdde4b9242e740833ae4409e696dd, type: 3}
   diversionSprites:
-  - {fileID: -5982897155308058361, guid: 30a8d10d933eb164ea8c95f0f627a13d, type: 3}
-  - {fileID: 960893417727127527, guid: 69f57cd16df048a4a8918a23e17cc4c4, type: 3}
-  - {fileID: -597577465434027430, guid: 994856dd3f9f8b845b3362905346a802, type: 3}
+  - {fileID: 3377851306596656404, guid: a79984c8e126da94da190cda31ecc3c5, type: 3}
+  - {fileID: 4545010446303685672, guid: b12b23221368a8f42957198fa9cee27e, type: 3}
+  - {fileID: 139586532587624167, guid: f036c43d7493f21418825587620646c3, type: 3}
+--- !u!114 &1080247231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080247227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704194ea519f50043a47ad5172ac5344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useManualOccurrence: 0
+  currentOccurrence: 1
+  vendorSpeedIncreasePerOccurrence: 0.22
+  stopChanceReductionPerOccurrence: 0.22
+  stopAttemptIntervalIncreasePerOccurrence: 0.25
+  maxAliveIncreasePerOccurrence: 3
+  solveTimeReductionPerOccurrence: 1.8
+  waitBetweenNeedsReductionPerOccurrence: 0.5
+  minSolveTime: 2.4
+  minWaitBetweenNeeds: 0.2
+  debugLogs: 0
 --- !u!1 &1103142992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,10 +2786,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 839992063}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 132.99997}
-  m_SizeDelta: {x: 416.7598, y: 92.0893}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 61}
+  m_SizeDelta: {x: 581.8, y: 92.089294}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1701768465
 MonoBehaviour:
@@ -2794,8 +2820,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4280835966
+  m_fontColor: {r: 0.4943396, g: 0.37207603, b: 0.15576358, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2820,7 +2846,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -2851,7 +2877,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -171.86862, y: 0, z: -173.94022, w: 0}
+  m_margin: {x: -1.0349274, y: 0, z: -0.13575746, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3437,7 +3463,7 @@ SpriteRenderer:
   m_SortingLayerID: 2142460785
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 893f3c85f034c674bb3b92ee7cf169ec, type: 3}
+  m_Sprite: {fileID: -165737362202436952, guid: 1fb6a3ab5c6db7b45b4b9f3ee77ee0a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

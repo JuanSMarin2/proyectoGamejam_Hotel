@@ -21,6 +21,10 @@ public class MinigameResultsUI : MonoBehaviour
     [SerializeField] private SoundType tickMoneySoundType = SoundType.TickMoney;
     [SerializeField] private float tickMoneyVolume = 1f;
 
+    [Header("Colors")]
+    [SerializeField] private Color positiveChangeColor = Color.green;
+    [SerializeField] private Color negativeChangeColor = Color.red;
+
     [Header("Animation")]
     [SerializeField] private float lerpDuration = 1.5f;
     [SerializeField] private float pulseScale = 1.2f;
@@ -70,7 +74,7 @@ public class MinigameResultsUI : MonoBehaviour
         moneyText.text = FormatMoney(startMoney);
         changeText.text = FormatMoney(change == 0 ? 0 : change);
 
-        changeText.color = change < 0 ? Color.red : Color.green;
+        changeText.color = change < 0 ? negativeChangeColor : positiveChangeColor;
 
        
         yield return new WaitForSeconds(startDelay);
