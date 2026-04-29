@@ -18,6 +18,17 @@ public class SwimController : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private float GetSpeedMultiplier()
+    {
+        float speed = MinigameManager.instance != null ? MinigameManager.instance.Speed : 1f;
+
+        if (speed <= 1.9f)
+            return 1f;
+
+        float t = Mathf.InverseLerp(1.9f, 2.5f, speed);
+        return Mathf.Lerp(1f, 1.12f, t);
+    }
+
     public static bool IsSwimSceneActive()
     {
         return FindObjectOfType<SwimController>() != null;
@@ -31,7 +42,7 @@ public class SwimController : MonoBehaviour
 
     private void Start()
     {
-        rb.gravityScale = waterGravityScale;
+        rb.gravityScale = waterGravityScale * GetSpeedMultiplier();
         animator.SetTrigger("SwimIdle");
     }
 
@@ -63,11 +74,12 @@ public class SwimController : MonoBehaviour
     private void Swim()
     {
         Vector2 velocity = rb.linearVelocity;
+        float speedMultiplier = GetSpeedMultiplier();
 
         if (velocity.y > maxVerticalSpeed)
             velocity.y = maxVerticalSpeed;
 
-        velocity.y = swimForce;
+        velocity.y = swimForce * speedMultiplier;
 
         rb.linearVelocity = velocity;
     }

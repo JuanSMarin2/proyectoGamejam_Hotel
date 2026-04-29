@@ -83,8 +83,33 @@ MonoBehaviour:
       m_Sprite: {fileID: 11680776800346025, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 11680776800346025, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+    - m_Name: Rojo
+      m_Hash: 30698444
+      m_Sprite: {fileID: 3174423615527523628, guid: bb0d8e4b814eebf42bd4b398974105a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3174423615527523628, guid: bb0d8e4b814eebf42bd4b398974105a7, type: 3}
+    - m_Name: Amarillo
+      m_Hash: 963153344
+      m_Sprite: {fileID: -2836866906426687856, guid: b2077989fb1ab0f489027c76b4a9531a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2836866906426687856, guid: b2077989fb1ab0f489027c76b4a9531a, type: 3}
+    - m_Name: Fea
+      m_Hash: 694806092
+      m_Sprite: {fileID: 2364908770872504801, guid: 371c536ba354abb4d84530ac465af6ed, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2364908770872504801, guid: 371c536ba354abb4d84530ac465af6ed, type: 3}
+    - m_Name: Verde
+      m_Hash: 380980493
+      m_Sprite: {fileID: -9005949096950953128, guid: ca8a913eedabedf439e0e145ec839ceb, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -9005949096950953128, guid: ca8a913eedabedf439e0e145ec839ceb, type: 3}
+    - m_Name: Palma
+      m_Hash: 377544400
+      m_Sprite: {fileID: -5028490020115818362, guid: 582e99099a93036469c0fd78ec687c32, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5028490020115818362, guid: 582e99099a93036469c0fd78ec687c32, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 4
+    m_EntryOverrideCount: 9
   - m_Name: derarm
     m_Hash: 358406979
     m_CategoryList: []
@@ -173,8 +198,33 @@ MonoBehaviour:
       m_Sprite: {fileID: 2192533073038832300, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 2192533073038832300, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+    - m_Name: Rojo
+      m_Hash: 30698444
+      m_Sprite: {fileID: -4698946274427404673, guid: bb0d8e4b814eebf42bd4b398974105a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4698946274427404673, guid: bb0d8e4b814eebf42bd4b398974105a7, type: 3}
+    - m_Name: Amarillo
+      m_Hash: 963153344
+      m_Sprite: {fileID: 695375189341745766, guid: b2077989fb1ab0f489027c76b4a9531a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 695375189341745766, guid: b2077989fb1ab0f489027c76b4a9531a, type: 3}
+    - m_Name: Fea
+      m_Hash: 694806092
+      m_Sprite: {fileID: -4564276242237476608, guid: 371c536ba354abb4d84530ac465af6ed, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4564276242237476608, guid: 371c536ba354abb4d84530ac465af6ed, type: 3}
+    - m_Name: Verde
+      m_Hash: 380980493
+      m_Sprite: {fileID: 572708693786287397, guid: ca8a913eedabedf439e0e145ec839ceb, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 572708693786287397, guid: ca8a913eedabedf439e0e145ec839ceb, type: 3}
+    - m_Name: Palma
+      m_Hash: 377544400
+      m_Sprite: {fileID: 2494562432067781831, guid: 582e99099a93036469c0fd78ec687c32, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2494562432067781831, guid: 582e99099a93036469c0fd78ec687c32, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 4
+    m_EntryOverrideCount: 9
   - m_Name: izqfoot
     m_Hash: 92460831
     m_CategoryList: []
@@ -215,8 +265,33 @@ MonoBehaviour:
       m_Sprite: {fileID: 8492852987160986086, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 8492852987160986086, guid: 7afcf4819a65cf74dba430cc3a7c2580, type: 3}
+    - m_Name: Rojo
+      m_Hash: 30698444
+      m_Sprite: {fileID: -8290660143427398464, guid: bb0d8e4b814eebf42bd4b398974105a7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8290660143427398464, guid: bb0d8e4b814eebf42bd4b398974105a7, type: 3}
+    - m_Name: Amarillo
+      m_Hash: 963153344
+      m_Sprite: {fileID: -1336800576429701316, guid: b2077989fb1ab0f489027c76b4a9531a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1336800576429701316, guid: b2077989fb1ab0f489027c76b4a9531a, type: 3}
+    - m_Name: Fea
+      m_Hash: 694806092
+      m_Sprite: {fileID: 2832583350120419761, guid: 371c536ba354abb4d84530ac465af6ed, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2832583350120419761, guid: 371c536ba354abb4d84530ac465af6ed, type: 3}
+    - m_Name: Verde
+      m_Hash: 380980493
+      m_Sprite: {fileID: -403354913887000178, guid: ca8a913eedabedf439e0e145ec839ceb, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -403354913887000178, guid: ca8a913eedabedf439e0e145ec839ceb, type: 3}
+    - m_Name: Palma
+      m_Hash: 377544400
+      m_Sprite: {fileID: -5291642699253740140, guid: 582e99099a93036469c0fd78ec687c32, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5291642699253740140, guid: 582e99099a93036469c0fd78ec687c32, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 4
+    m_EntryOverrideCount: 9
   - m_Name: derfoot
     m_Hash: 292912193
     m_CategoryList: []
@@ -234,5 +309,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639097041371584970
+  m_ModificationHash: 639130741610475515
   m_Version: 1
