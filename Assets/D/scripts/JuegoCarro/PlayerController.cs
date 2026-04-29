@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sidewaysThreshold = 0.1f; // Umbral para considerar giro izquierda/derecha
 
     [Header("Audio")]
-    [SerializeField] private float motoresVolume = 1f;
+    [SerializeField] private AudioCarro audioCarro;
     [SerializeField] private float choqueVolume = 1f;
     [SerializeField] private float frenadoVolume = 50f;
 
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
+    private bool brakeInputHeld;
     private float targetTiltZ;
     private float baseSpriteZ;
     private float currentTiltVelocity;
@@ -51,12 +52,21 @@ public class PlayerController : MonoBehaviour
         if (spriteTransform == null)
             spriteTransform = transform;
 
+        if (audioCarro == null)
+            audioCarro = GetComponent<AudioCarro>();
+
+        if (audioCarro == null)
+            audioCarro = GetComponentInChildren<AudioCarro>();
+
         baseSpriteZ = spriteTransform.localEulerAngles.z;
     }
 
     public void Start()
     {
-        SoundManager.PlaySound(SoundType.Motores, null, motoresVolume);
+        if (audioCarro != null)
+            audioCarro.StartEngine();
+        else
+            SoundManager.PlaySound(SoundType.Motores);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -77,6 +87,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         ReadInput();
+        if (audioCarro != null)
+            audioCarro.SetThrottleInput(moveInput);
         CheckBrakeSound();
         UpdateTargetTilt();
     }
@@ -111,11 +123,15 @@ public class PlayerController : MonoBehaviour
     private void ReadDesktopInput()
     {
         moveInput = Vector2.zero;
+        brakeInputHeld = false;
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             moveInput.y += 1;
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
             moveInput.y -= 1;
+            brakeInputHeld = true;
+        }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             moveInput.x += 1;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -128,6 +144,8 @@ public class PlayerController : MonoBehaviour
     /// <summary>Lee el input táctil para móviles usando un swipe invisible.</summary>
     private void ReadMobileInput()
     {
+        brakeInputHeld = false;
+
         if (rb == null)
         {
             moveInput = Vector2.zero;
@@ -151,6 +169,7 @@ public class PlayerController : MonoBehaviour
             case TouchPhase.Moved:
             case TouchPhase.Stationary:
                 moveInput = CalculateMobileInput(touch);
+                brakeInputHeld = moveInput.y < -forwardThreshold;
                 break;
 
             case TouchPhase.Ended:
@@ -175,9 +194,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckBrakeSound()
     {
-        float velocityY = rb != null ? rb.linearVelocity.y : 0f;
-        bool isMovingForward = velocityY > forwardThreshold;
-        bool isMovingBackward = velocityY < -forwardThreshold;
+        bool isMovingForward = moveInput.y > forwardThreshold;
+        bool isMovingBackward = brakeInputHeld;
 
         if (isMovingForward)
         {
@@ -186,7 +204,10 @@ public class PlayerController : MonoBehaviour
 
         if (wasMovingForward && isMovingBackward && forwardHoldTime >= 0.5f)
         {
-            SoundManager.PlaySound(SoundType.Frenado, null, frenadoVolume);
+            if (audioCarro != null)
+                audioCarro.PlayBrakeOneShot();
+            else
+                SoundManager.PlaySound(SoundType.Frenado, null, frenadoVolume);
         }
 
         if (!isMovingForward)

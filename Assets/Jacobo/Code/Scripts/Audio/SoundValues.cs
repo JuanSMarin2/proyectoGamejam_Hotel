@@ -41,5 +41,6 @@
     AeropuertoCall,
     TickMoney,
     Cortina,
-    SelloPasaporte
+    SelloPasaporte,
+    AcelerandoCarro
 }

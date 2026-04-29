@@ -159,7 +159,7 @@ MonoBehaviour:
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: 31bddcd0541f99a45925531fafaf4a1e, type: 3}
+    - {fileID: 8300000, guid: 157f66f9143405a4ea2ffdb6c4d995d4, type: 3}
   - soundType: 13
     id: MusicaBajoelagua
     category: Default
@@ -486,3 +486,17 @@ MonoBehaviour:
     maxPitch: 1.05
     sounds:
     - {fileID: 8300000, guid: 73bf9d19131e19b4d8504e25b9d26cbb, type: 3}
+  - soundType: 42
+    id: AcelerandoCarro
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.8
+    randomVolumeMax: 0.64
+    minPitch: 0.91
+    maxPitch: 1.03
+    sounds:
+    - {fileID: 8300000, guid: abdf08d5f9da06f469ded0f58f7beaa6, type: 3}
+    - {fileID: 8300000, guid: d301083713240ca4499244a0fa6cec60, type: 3}
+    - {fileID: 8300000, guid: 7f837e3fc2e2c614587d28e4589507e0, type: 3}
+    - {fileID: 8300000, guid: 1bfc0a619c15d47458f905d76e144fa6, type: 3}
