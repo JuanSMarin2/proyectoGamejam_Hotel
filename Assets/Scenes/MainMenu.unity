@@ -925,8 +925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1434a98e0801c4743bb34afc4499cf58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickVolume: 0.44
-  includeInactiveButtons: 0
+  clickVolume: 0.25
+  includeInactiveButtons: 1
   rescanRuntimeButtons: 1
   rescanInterval: 15
 --- !u!1 &312001193
