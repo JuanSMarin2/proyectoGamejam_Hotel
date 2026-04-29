@@ -8,9 +8,13 @@ public class ReceptionistBalanceController : MonoBehaviour
     [SerializeField] private float velocity = 0f;
 
     [Header("Forces")]
-    [SerializeField] private float gravityForce = -2.4f;
-    [SerializeField] private float inputForce = 0.95f;
-    [SerializeField, Range(0.8f, 0.999f)] private float damping = 0.965f;
+    [SerializeField] private float inputForceAtMinSpeed = 1f;
+    [SerializeField] private float inputForceAtMaxSpeed = 5f;
+    [SerializeField] private float gravityAtMinSpeed = 1f;
+    [SerializeField] private float gravityAtMaxSpeed = 3f;
+    [SerializeField] private float velocityReturnRate = 6.5f;
+    [SerializeField] private float maxRiseSpeed = 0.8f;
+    [SerializeField] private float maxFallSpeed = 1.1f;
 
     [Header("UI")]
     [SerializeField] private Slider balanceSlider;
@@ -60,8 +64,8 @@ public class ReceptionistBalanceController : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
 
-        ApplyGravity();
-        velocity *= GetEffectiveDamping();
+        ApplyGravity(deltaTime);
+        velocity = Mathf.Clamp(velocity, -GetEffectiveMaxFallSpeed(), GetEffectiveMaxRiseSpeed());
         balanceValue += velocity * deltaTime;
 
         if (balanceValue > 1f)
@@ -74,14 +78,17 @@ public class ReceptionistBalanceController : MonoBehaviour
         }
     }
 
-    private void ApplyGravity()
+    private void ApplyGravity(float deltaTime)
     {
-        velocity += GetEffectiveGravityForce() * Time.deltaTime;
+        float targetFallVelocity = GetEffectiveGravityForce();
+        float returnStep = GetEffectiveVelocityReturnRate() * deltaTime;
+        velocity = Mathf.MoveTowards(velocity, targetFallVelocity, returnStep);
     }
 
     private void ApplyInput()
     {
         velocity += GetEffectiveInputForce();
+        velocity = Mathf.Clamp(velocity, -GetEffectiveMaxFallSpeed(), GetEffectiveMaxRiseSpeed());
     }
 
     private void CheckLoseCondition()
@@ -112,18 +119,36 @@ public class ReceptionistBalanceController : MonoBehaviour
 
     private float GetEffectiveInputForce()
     {
-        float t = Mathf.Clamp01(DifficultySpeed - 1f);
-        return inputForce / Mathf.Lerp(1f, 1.35f, t);
+        float t = GetDifficultyT();
+        return Mathf.Lerp(inputForceAtMinSpeed, inputForceAtMaxSpeed, t);
     }
 
     private float GetEffectiveGravityForce()
     {
-        return (gravityForce * DifficultySpeed)+0.5f;
+        float t = GetDifficultyT();
+        return -Mathf.Lerp(gravityAtMinSpeed, gravityAtMaxSpeed, t);
     }
 
-    private float GetEffectiveDamping()
+    private float GetEffectiveVelocityReturnRate()
     {
-        float extraLoss = Mathf.Clamp01((DifficultySpeed - 1f) * 0.15f);
-        return Mathf.Clamp(damping - extraLoss, 0.8f, 0.999f);
+        float t = GetDifficultyT();
+        return Mathf.Lerp(velocityReturnRate, velocityReturnRate * 1.35f, t);
+    }
+
+    private float GetEffectiveMaxRiseSpeed()
+    {
+        float t = GetDifficultyT();
+        return Mathf.Lerp(maxRiseSpeed, maxRiseSpeed * 1.35f, t);
+    }
+
+    private float GetEffectiveMaxFallSpeed()
+    {
+        float t = GetDifficultyT();
+        return Mathf.Lerp(maxFallSpeed, maxFallSpeed * 1.45f, t);
+    }
+
+    private float GetDifficultyT()
+    {
+        return Mathf.InverseLerp(1f, 3f, DifficultySpeed);
     }
 }
