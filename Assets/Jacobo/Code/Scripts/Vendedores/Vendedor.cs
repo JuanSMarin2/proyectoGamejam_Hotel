@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Vendedor : MonoBehaviour
 {
@@ -40,8 +41,19 @@ public class Vendedor : MonoBehaviour
     [SerializeField] private float minStopDuration = 0.2f;
     [SerializeField] private float maxStopDuration = 0.7f;
 
+    [Header("Vendor Separation")]
+    [SerializeField] private bool enableVendorSeparation = true;
+    [SerializeField] private float separationColliderScale = 1.1f;
+    [SerializeField] private Collider2D separationTrigger2D;
+    [SerializeField] private bool autoCreateSeparationTrigger = true;
+    [SerializeField] private bool addKinematicRigidbody2DForTriggers = true;
+    [SerializeField] private float separationSpeedBoost = 0.05f;
+    [SerializeField] private float separationSpeedReturnDuration = 0.35f;
+    [SerializeField] private bool debugVendorSeparation = false;
+
     private Vector3 movementDirection;
     private float speed;
+    private float baseSpeed;
     private float despawnX;
     private bool moving;
     private bool temporarilyStopped;
@@ -51,6 +63,11 @@ public class Vendedor : MonoBehaviour
     private Collider[] cachedColliders3D;
     private Collider2D[] cachedColliders2D;
     private SpawnPointPreference currentSpawnSide = SpawnPointPreference.Any;
+    private Rigidbody2D cachedRigidbody2D;
+    private readonly HashSet<int> separationContactIds = new HashSet<int>();
+    private bool returningToBaseSpeed;
+    private float returnSpeedElapsed;
+    private float returnSpeedStart;
 
     public Necesidad NecesidadVenta => necesidadVenta;
     public SpawnPointPreference SpawnPreference => spawnPreference;
@@ -64,6 +81,7 @@ public class Vendedor : MonoBehaviour
     {
         movementDirection = direction.normalized;
         speed = Mathf.Max(0f, moveSpeed);
+        baseSpeed = speed;
         despawnX = despawnLimitX;
         moving = true;
         temporarilyStopped = false;
@@ -191,11 +209,14 @@ public class Vendedor : MonoBehaviour
         cachedColliders3D = GetComponentsInChildren<Collider>(true);
         cachedColliders2D = GetComponentsInChildren<Collider2D>(true);
 
+        SetupSeparationTrigger();
+
         ApplySignSprite();
     }
 
     private void Update()
     {
+        UpdateSpeedReturn();
         float horizontalSpeedThisFrame = 0f;
 
         if (moving)
@@ -206,6 +227,21 @@ public class Vendedor : MonoBehaviour
         }
 
         UpdateAnimatorHorizontalSpeed(horizontalSpeedThisFrame);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        HandleVendorSeparationTrigger(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        HandleVendorSeparationTrigger(other);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        HandleVendorSeparationExit(other);
     }
 
     private float Move()
@@ -313,6 +349,262 @@ public class Vendedor : MonoBehaviour
                 if (nestedRenderers[j] == null) continue;
                 nestedRenderers[j].sortingLayerName = layerName;
             }
+        }
+    }
+
+    private void SetupSeparationTrigger()
+    {
+        if (!enableVendorSeparation)
+            return;
+
+        if (separationTrigger2D == null && autoCreateSeparationTrigger)
+        {
+            Collider2D referenceCollider = null;
+            if (cachedColliders2D != null)
+            {
+                for (int i = 0; i < cachedColliders2D.Length; i++)
+                {
+                    if (cachedColliders2D[i] == null) continue;
+                    if (cachedColliders2D[i].isTrigger) continue;
+                    referenceCollider = cachedColliders2D[i];
+                    break;
+                }
+            }
+
+            if (referenceCollider != null)
+            {
+                GameObject triggerObject = new GameObject("VendorSeparationTrigger");
+                triggerObject.transform.SetParent(transform, false);
+                triggerObject.layer = gameObject.layer;
+
+                BoxCollider2D box = triggerObject.AddComponent<BoxCollider2D>();
+                Vector3 boundsSize = referenceCollider.bounds.size;
+                Vector3 localSize = transform.lossyScale.x == 0f || transform.lossyScale.y == 0f
+                    ? boundsSize
+                    : new Vector3(boundsSize.x / transform.lossyScale.x, boundsSize.y / transform.lossyScale.y, 1f);
+
+                float scale = Mathf.Max(1f, separationColliderScale);
+                box.size = new Vector2(localSize.x * scale, localSize.y * scale);
+                box.isTrigger = true;
+                separationTrigger2D = box;
+            }
+        }
+
+        if (separationTrigger2D != null)
+            separationTrigger2D.isTrigger = true;
+
+        if (addKinematicRigidbody2DForTriggers)
+        {
+            cachedRigidbody2D = GetComponent<Rigidbody2D>();
+            if (cachedRigidbody2D == null)
+            {
+                cachedRigidbody2D = gameObject.AddComponent<Rigidbody2D>();
+                cachedRigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                cachedRigidbody2D.gravityScale = 0f;
+            }
+        }
+    }
+
+    private void HandleVendorSeparationTrigger(Collider2D other)
+    {
+        if (!enableVendorSeparation)
+            return;
+
+        if (other == null)
+            return;
+
+        if (other.transform == transform || other.transform.IsChildOf(transform))
+            return;
+
+        Vendedor otherVendor = other.GetComponentInParent<Vendedor>();
+        if (otherVendor == null || otherVendor == this)
+            return;
+
+        if (!TryGetFrontAndBackVendor(otherVendor, out Vendedor frontVendor, out Vendedor backVendor))
+            return;
+
+        if (frontVendor != this)
+            return;
+
+        RegisterSeparationContact(backVendor);
+
+        float previousSpeed = speed;
+        float targetSpeed = backVendor.speed + Mathf.Max(0f, separationSpeedBoost);
+        MatchOrExceedSpeed(targetSpeed);
+
+        if (debugVendorSeparation)
+        {
+            Debug.Log(
+            $"[Vendedor] Separation: front={name} back={backVendor.name} backSpeed={backVendor.speed:F2} targetSpeed={targetSpeed:F2} prevSpeed={previousSpeed:F2} newSpeed={speed:F2}",
+                this);
+        }
+    }
+
+    private void HandleVendorSeparationExit(Collider2D other)
+    {
+        if (!enableVendorSeparation)
+            return;
+
+        if (other == null)
+            return;
+
+        if (other.transform == transform || other.transform.IsChildOf(transform))
+            return;
+
+        Vendedor otherVendor = other.GetComponentInParent<Vendedor>();
+        if (otherVendor == null || otherVendor == this)
+            return;
+
+        UnregisterSeparationContact(otherVendor);
+    }
+
+    private bool AreMovingSameDirection(Vendedor otherVendor)
+    {
+        if (otherVendor == null)
+            return false;
+
+        if (Mathf.Approximately(movementDirection.x, 0f) || Mathf.Approximately(otherVendor.movementDirection.x, 0f))
+            return false;
+
+        return Mathf.Sign(movementDirection.x) == Mathf.Sign(otherVendor.movementDirection.x);
+    }
+
+    private bool TryGetFrontAndBackVendor(Vendedor otherVendor, out Vendedor frontVendor, out Vendedor backVendor)
+    {
+        frontVendor = null;
+        backVendor = null;
+
+        if (otherVendor == null)
+            return false;
+
+        if (!AreMovingSameDirection(otherVendor))
+            return false;
+
+        bool movingRight = movementDirection.x > 0f;
+
+        if (movingRight)
+        {
+            if (transform.position.x >= otherVendor.transform.position.x)
+            {
+                frontVendor = this;
+                backVendor = otherVendor;
+            }
+            else
+            {
+                frontVendor = otherVendor;
+                backVendor = this;
+            }
+        }
+        else
+        {
+            if (transform.position.x <= otherVendor.transform.position.x)
+            {
+                frontVendor = this;
+                backVendor = otherVendor;
+            }
+            else
+            {
+                frontVendor = otherVendor;
+                backVendor = this;
+            }
+        }
+
+        return frontVendor != null && backVendor != null;
+    }
+
+    public void MatchOrExceedSpeed(float targetSpeed)
+    {
+        float desiredSpeed = Mathf.Max(speed, Mathf.Max(0f, targetSpeed));
+        if (desiredSpeed > speed)
+            speed = desiredSpeed;
+
+        returningToBaseSpeed = false;
+
+        if (!moving || temporarilyStopped)
+        {
+            moving = true;
+            temporarilyStopped = false;
+            stopDurationTimer = 0f;
+            stopAttemptTimer = GetRandomStopAttemptInterval();
+            UpdateAnimatorHorizontalSpeed(0f);
+        }
+    }
+
+    private void RegisterSeparationContact(Vendedor otherVendor)
+    {
+        if (otherVendor == null)
+            return;
+
+        int id = otherVendor.GetInstanceID();
+        if (separationContactIds.Add(id))
+        {
+            if (debugVendorSeparation)
+                Debug.Log($"[Vendedor] Separation contact added => {name} with {otherVendor.name}", this);
+        }
+
+        returningToBaseSpeed = false;
+    }
+
+    private void UnregisterSeparationContact(Vendedor otherVendor)
+    {
+        if (otherVendor == null)
+            return;
+
+        int id = otherVendor.GetInstanceID();
+        if (!separationContactIds.Remove(id))
+            return;
+
+        if (debugVendorSeparation)
+            Debug.Log($"[Vendedor] Separation contact removed => {name} with {otherVendor.name}", this);
+
+        if (separationContactIds.Count == 0)
+            BeginReturnToBaseSpeed();
+    }
+
+    private void BeginReturnToBaseSpeed()
+    {
+        if (!enableVendorSeparation)
+            return;
+
+        returningToBaseSpeed = true;
+        returnSpeedElapsed = 0f;
+        returnSpeedStart = speed;
+    }
+
+    private void UpdateSpeedReturn()
+    {
+        if (!returningToBaseSpeed)
+            return;
+
+        if (separationContactIds.Count > 0)
+        {
+            returningToBaseSpeed = false;
+            return;
+        }
+
+        if (Mathf.Approximately(speed, baseSpeed))
+        {
+            speed = baseSpeed;
+            returningToBaseSpeed = false;
+            return;
+        }
+
+        float duration = Mathf.Max(0f, separationSpeedReturnDuration);
+        if (duration <= 0f)
+        {
+            speed = baseSpeed;
+            returningToBaseSpeed = false;
+            return;
+        }
+
+        returnSpeedElapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(returnSpeedElapsed / duration);
+        speed = Mathf.Lerp(returnSpeedStart, baseSpeed, t);
+
+        if (t >= 1f)
+        {
+            speed = baseSpeed;
+            returningToBaseSpeed = false;
         }
     }
 

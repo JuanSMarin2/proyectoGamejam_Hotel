@@ -1,5 +1,103 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4108471217102924554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1545899594498713740}
+  - component: {fileID: 3728776836048793854}
+  m_Layer: 17
+  m_Name: ColliderAntichoque
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1545899594498713740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108471217102924554}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8917192607276178535}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &3728776836048793854
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108471217102924554}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.16, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.498022, y: 2.121521}
+      - {x: 2.2109306, y: 2.4263754}
+      - {x: 1.2274681, y: 1.8904344}
+      - {x: 1.102142, y: 0.50075054}
+      - {x: -0.08245081, y: -0.5765066}
+      - {x: -0.5032753, y: -1.330934}
+      - {x: -0.5301121, y: -2.7921877}
+      - {x: 0.27488616, y: -3.121735}
+      - {x: 0.7339169, y: -3.819828}
+      - {x: 1.2615759, y: -3.8380234}
+      - {x: 1.7078854, y: -3.8130782}
+      - {x: 2.1070557, y: -3.9024441}
+      - {x: 2.7002416, y: -3.288211}
+      - {x: 3.5051582, y: -3.1300359}
+      - {x: 4.3833556, y: -2.540013}
+      - {x: 4.440239, y: -0.47138897}
+      - {x: 3.691002, y: 0.029136777}
+      - {x: 3.3866513, y: 0.11329761}
+      - {x: 3.3778596, y: 1.2126693}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6796373206817478715
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +439,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5382223639089860544, guid: e020acf67b24e3744ba401aad447d533, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1510125170701640327}
+    - targetCorrespondingSourceObject: {fileID: 5382223639089860544, guid: e020acf67b24e3744ba401aad447d533, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1545899594498713740}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6159930407291501970, guid: e020acf67b24e3744ba401aad447d533, type: 3}
       insertIndex: -1
@@ -390,7 +491,15 @@ MonoBehaviour:
   minTimeBetweenStopAttempts: 1.2
   maxTimeBetweenStopAttempts: 2.8
   minStopDuration: 0.2
-  maxStopDuration: 0.7
+  maxStopDuration: 0.5
+  enableVendorSeparation: 1
+  separationColliderScale: 0.95
+  separationTrigger2D: {fileID: 3728776836048793854}
+  autoCreateSeparationTrigger: 1
+  addKinematicRigidbody2DForTriggers: 1
+  separationSpeedBoost: 1.3
+  separationSpeedReturnDuration: 0.5
+  debugVendorSeparation: 1
 --- !u!60 &-2601300481244209516
 PolygonCollider2D:
   m_ObjectHideFlags: 0

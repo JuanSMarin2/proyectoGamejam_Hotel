@@ -13,6 +13,31 @@ MonoBehaviour:
   m_Name: Sounds SO
   m_EditorClassIdentifier: 
   sounds:
+  - soundType: 42
+    id: AcelerandoCarro
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.8
+    randomVolumeMax: 0.64
+    minPitch: 0.91
+    maxPitch: 1.03
+    sounds:
+    - {fileID: 8300000, guid: abdf08d5f9da06f469ded0f58f7beaa6, type: 3}
+    - {fileID: 8300000, guid: d301083713240ca4499244a0fa6cec60, type: 3}
+    - {fileID: 8300000, guid: 7f837e3fc2e2c614587d28e4589507e0, type: 3}
+    - {fileID: 8300000, guid: 1bfc0a619c15d47458f905d76e144fa6, type: 3}
+  - soundType: 38
+    id: AeropuertoCall
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: f3ad523f9212547449294fdb61d7b4eb, type: 3}
   - soundType: 0
     id: AmbGente
     category: Default
@@ -57,6 +82,17 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 228b686bc773596489e36ada8f13a82d, type: 3}
+  - soundType: 33
+    id: CamaraFoto
+    category: Default
+    volume: 0.803
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: 3b0f8fbc1f1a6d847b0facf73ab3b59e, type: 3}
   - soundType: 4
     id: Campana
     category: Default
@@ -90,6 +126,28 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: b77c4f560e4dc8d4697002aa9658fc89, type: 3}
+  - soundType: 40
+    id: Cortina
+    category: Default
+    volume: 0.86
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: b532104259d72304d90e49b3b7a1d5e9, type: 3}
+  - soundType: 32
+    id: Crucero
+    category: Default
+    volume: 0.508
+    mixer: {fileID: 0}
+    randomVolumeMin: 0.54
+    randomVolumeMax: 0.734
+    minPitch: 0.86
+    maxPitch: 0.91
+    sounds:
+    - {fileID: 8300000, guid: f79e12ef548b97242890c3b25323023f, type: 3}
   - soundType: 7
     id: Electrocutandose
     category: Default
@@ -149,6 +207,17 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 17926b8f040075644ae0a70b9bc4e293, type: 3}
+  - soundType: 35
+    id: Mosca
+    category: Default
+    volume: 0.75
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 0.67
+    maxPitch: 0.82
+    sounds:
+    - {fileID: 8300000, guid: 79a79510ce11ace408f3527d8f8899d9, type: 3}
   - soundType: 12
     id: Motores
     category: Default
@@ -298,6 +367,17 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
+  - soundType: 25
+    id: Scan
+    category: Default
+    volume: 1
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 1
+    maxPitch: 1
+    sounds:
+    - {fileID: 8300000, guid: 56e4f0803a342f34aa3cf4368fe39209, type: 3}
   - soundType: 26
     id: ScanerBien
     category: Default
@@ -320,6 +400,17 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 43b50f7982b4b654399c8293b92e8944, type: 3}
+  - soundType: 41
+    id: SelloPasaporte
+    category: Default
+    volume: 0.71
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+    sounds:
+    - {fileID: 8300000, guid: 73bf9d19131e19b4d8504e25b9d26cbb, type: 3}
   - soundType: 28
     id: Tecleo
     category: Default
@@ -331,6 +422,17 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: e54cc24865ee32146a9a449c01c9ac31, type: 3}
+  - soundType: 39
+    id: TickMoney
+    category: Default
+    volume: 0.45
+    mixer: {fileID: 0}
+    randomVolumeMin: 1
+    randomVolumeMax: 1
+    minPitch: 0.8
+    maxPitch: 0.8
+    sounds:
+    - {fileID: 8300000, guid: b5858395f83c72f46a11ba208ff29167, type: 3}
   - soundType: 29
     id: TimerTicking
     category: Default
@@ -353,73 +455,6 @@ MonoBehaviour:
     maxPitch: 1
     sounds:
     - {fileID: 8300000, guid: 5dd0f0bce58999c4c94ac22296b490d2, type: 3}
-  - soundType: 31
-    id: Wooshes
-    category: Default
-    volume: 0.384
-    mixer: {fileID: 0}
-    randomVolumeMin: 0.38
-    randomVolumeMax: 0.46
-    minPitch: 0.84
-    maxPitch: 1.15
-    sounds:
-    - {fileID: 8300000, guid: b4f80e0019e4a1f47b8f67efb35cba4f, type: 3}
-    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}
-  - soundType: 25
-    id: Scan
-    category: Default
-    volume: 1
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds:
-    - {fileID: 8300000, guid: 56e4f0803a342f34aa3cf4368fe39209, type: 3}
-  - soundType: 32
-    id: Crucero
-    category: Default
-    volume: 0.508
-    mixer: {fileID: 0}
-    randomVolumeMin: 0.54
-    randomVolumeMax: 0.734
-    minPitch: 0.86
-    maxPitch: 0.91
-    sounds:
-    - {fileID: 8300000, guid: f79e12ef548b97242890c3b25323023f, type: 3}
-  - soundType: 33
-    id: CamaraFoto
-    category: Default
-    volume: 0.803
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds:
-    - {fileID: 8300000, guid: 3b0f8fbc1f1a6d847b0facf73ab3b59e, type: 3}
-  - soundType: 34
-    id: Wink
-    category: Default
-    volume: 0.941
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds:
-    - {fileID: 8300000, guid: 26e14d7c4eed14c44b395debb8c6bdba, type: 3}
-  - soundType: 35
-    id: Mosca
-    category: Default
-    volume: 0.75
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 0.67
-    maxPitch: 0.82
-    sounds:
-    - {fileID: 8300000, guid: 79a79510ce11ace408f3527d8f8899d9, type: 3}
   - soundType: 36
     id: UiBoton
     category: Default
@@ -442,61 +477,26 @@ MonoBehaviour:
     maxPitch: 1.17
     sounds:
     - {fileID: 8300000, guid: d85068ff4153f024298685a25ffa29d5, type: 3}
-  - soundType: 38
-    id: AeropuertoCall
+  - soundType: 34
+    id: Wink
     category: Default
-    volume: 1
+    volume: 0.941
     mixer: {fileID: 0}
     randomVolumeMin: 1
     randomVolumeMax: 1
     minPitch: 1
     maxPitch: 1
     sounds:
-    - {fileID: 8300000, guid: f3ad523f9212547449294fdb61d7b4eb, type: 3}
-  - soundType: 39
-    id: TickMoney
+    - {fileID: 8300000, guid: 26e14d7c4eed14c44b395debb8c6bdba, type: 3}
+  - soundType: 31
+    id: Wooshes
     category: Default
-    volume: 0.45
+    volume: 0.384
     mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 0.8
-    maxPitch: 0.8
+    randomVolumeMin: 0.38
+    randomVolumeMax: 0.46
+    minPitch: 0.84
+    maxPitch: 1.15
     sounds:
-    - {fileID: 8300000, guid: b5858395f83c72f46a11ba208ff29167, type: 3}
-  - soundType: 40
-    id: Cortina
-    category: Default
-    volume: 0.86
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 1
-    maxPitch: 1
-    sounds:
-    - {fileID: 8300000, guid: b532104259d72304d90e49b3b7a1d5e9, type: 3}
-  - soundType: 41
-    id: SelloPasaporte
-    category: Default
-    volume: 0.71
-    mixer: {fileID: 0}
-    randomVolumeMin: 1
-    randomVolumeMax: 1
-    minPitch: 0.95
-    maxPitch: 1.05
-    sounds:
-    - {fileID: 8300000, guid: 73bf9d19131e19b4d8504e25b9d26cbb, type: 3}
-  - soundType: 42
-    id: AcelerandoCarro
-    category: Default
-    volume: 1
-    mixer: {fileID: 0}
-    randomVolumeMin: 0.8
-    randomVolumeMax: 0.64
-    minPitch: 0.91
-    maxPitch: 1.03
-    sounds:
-    - {fileID: 8300000, guid: abdf08d5f9da06f469ded0f58f7beaa6, type: 3}
-    - {fileID: 8300000, guid: d301083713240ca4499244a0fa6cec60, type: 3}
-    - {fileID: 8300000, guid: 7f837e3fc2e2c614587d28e4589507e0, type: 3}
-    - {fileID: 8300000, guid: 1bfc0a619c15d47458f905d76e144fa6, type: 3}
+    - {fileID: 8300000, guid: b4f80e0019e4a1f47b8f67efb35cba4f, type: 3}
+    - {fileID: 8300000, guid: 9ddef1ab0a097874398c98b147ce3431, type: 3}

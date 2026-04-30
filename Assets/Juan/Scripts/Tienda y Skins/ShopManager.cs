@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private CharacterVisual characterVisual;
     [SerializeField] private Animator characterAnimator;
 
+    [Header("Transition")]
+    [SerializeField] private ScriptCortina cortina;
+    [SerializeField] private Button[] sectionButtons;
+
     private const string EquiparBool = "Equipar";
     private const string ModelarBool = "Modelar";
     private const string ShopMusicId = "MusicaTienda";
@@ -30,6 +35,7 @@ public class ShopManager : MonoBehaviour
     private int currentIndex;
     private SkinCategory currentCategory;
     private AudioSource shopMusicSource;
+    private bool isSectionTransitioning;
 
     private void Start()
     {
@@ -80,12 +86,20 @@ public class ShopManager : MonoBehaviour
 
     public void SelectHead()
     {
-        OpenSection(SkinCategory.Head);
+        StartSectionTransition(SkinCategory.Head);
     }
 
     public void SelectChest()
     {
-        OpenSection(SkinCategory.Chest);
+        StartSectionTransition(SkinCategory.Chest);
+    }
+
+    private void StartSectionTransition(SkinCategory category)
+    {
+        if (isSectionTransitioning)
+            return;
+
+        OpenSection(category);
     }
 
     private void OpenSection(SkinCategory category)
@@ -120,26 +134,120 @@ public class ShopManager : MonoBehaviour
         UpdateEquippedVisual();
     }
 
+    private void SetSectionButtonsInteractable(bool interactable)
+    {
+        if (sectionButtons == null)
+            return;
+
+        for (int i = 0; i < sectionButtons.Length; i++)
+        {
+            if (sectionButtons[i] != null)
+                sectionButtons[i].interactable = interactable;
+        }
+    }
+
+    private void SetActionButtonInteractable(bool interactable)
+    {
+        if (actionButton == null)
+            return;
+
+        actionButton.interactable = interactable;
+    }
+
     // ===== NAVEGACIÓN =====
 
     public void Next()
     {
-        currentIndex = (currentIndex + 1) % currentSkins.Count;
-        SetAnimatorBool(ModelarBool, true);
-        UpdateUI();
+        if (currentSkins == null || currentSkins.Count == 0)
+            return;
+
+        if (isSectionTransitioning)
+            return;
+
+        if (cortina == null)
+        {
+            PerformNextImmediate();
+            UpdateUI();
+            return;
+        }
+
+        isSectionTransitioning = true;
+        SetActionButtonInteractable(false);
+        StartCoroutine(PerformNextWithCurtain());
     }
 
     public void Previous()
     {
+        if (currentSkins == null || currentSkins.Count == 0)
+            return;
+
+        if (isSectionTransitioning)
+            return;
+
+        if (cortina == null)
+        {
+            PerformPreviousImmediate();
+            UpdateUI();
+            return;
+        }
+
+        isSectionTransitioning = true;
+        SetActionButtonInteractable(false);
+        StartCoroutine(PerformPreviousWithCurtain());
+    }
+
+    private IEnumerator PerformNextWithCurtain()
+    {
+        yield return StartCoroutine(cortina.PlayCurtainRoutine(() =>
+        {
+            PerformNextImmediate();
+            UpdateUI();
+        }));
+
+        SetActionButtonInteractable(true);
+        isSectionTransitioning = false;
+    }
+
+    private IEnumerator PerformPreviousWithCurtain()
+    {
+        yield return StartCoroutine(cortina.PlayCurtainRoutine(() =>
+        {
+            PerformPreviousImmediate();
+            UpdateUI();
+        }));
+
+        SetActionButtonInteractable(true);
+        isSectionTransitioning = false;
+    }
+
+    private void PerformNextImmediate()
+    {
+        currentIndex = (currentIndex + 1) % currentSkins.Count;
+        SetAnimatorBool(ModelarBool, true);
+    }
+
+    private void PerformPreviousImmediate()
+    {
         currentIndex--;
         if (currentIndex < 0) currentIndex = currentSkins.Count - 1;
         SetAnimatorBool(ModelarBool, true);
-        UpdateUI();
     }
 
     // ===== ACCIÓN =====
 
     public void OnAction()
+    {
+        if (currentSkins == null || currentSkins.Count == 0)
+            return;
+
+        if (isSectionTransitioning)
+            return;
+
+        PerformActionImmediate();
+        UpdateUI();
+    }
+
+    private void PerformActionImmediate()
     {
         Skin skin = GetSelectedSkin();
         bool wasOwned = GameData.instance.IsOwned(skin.id);
@@ -164,8 +272,6 @@ public class ShopManager : MonoBehaviour
                 SetAnimatorBool(EquiparBool, true);
             }
         }
-
-        UpdateUI();
     }
 
     
