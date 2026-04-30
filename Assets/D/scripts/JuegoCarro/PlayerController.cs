@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float choqueVolume = 1f;
     [SerializeField] private float frenadoVolume = 50f;
 
+    [Header("Móvil")]
+    [SerializeField] private float swipeSensitivity = 1f;
+    [SerializeField] private float swipeDeadZone = 5f;
+
     #endregion
 
     #region Private Fields
@@ -94,6 +98,18 @@ public class PlayerController : MonoBehaviour
     /// <summary>Lee el input del jugador (W/A/S/D)</summary>
     private void ReadInput()
     {
+        if (Application.isMobilePlatform)
+        {
+            ReadMobileInput();
+            return;
+        }
+
+        ReadDesktopInput();
+    }
+
+    /// <summary>Lee el input clásico de PC (W/A/S/D)</summary>
+    private void ReadDesktopInput()
+    {
         moveInput = Vector2.zero;
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
@@ -107,6 +123,54 @@ public class PlayerController : MonoBehaviour
 
         // Normalizar para evitar movimiento diagonal más rápido
         moveInput = moveInput.normalized;
+    }
+
+    /// <summary>Lee el input táctil para móviles usando un swipe invisible.</summary>
+    private void ReadMobileInput()
+    {
+        if (rb == null)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
+
+        if (Input.touchCount <= 0)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
+
+        Touch touch = Input.GetTouch(0);
+
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:
+                moveInput = Vector2.zero;
+                break;
+
+            case TouchPhase.Moved:
+            case TouchPhase.Stationary:
+                moveInput = CalculateMobileInput(touch);
+                break;
+
+            case TouchPhase.Ended:
+            case TouchPhase.Canceled:
+                moveInput = Vector2.zero;
+                break;
+        }
+    }
+
+    /// <summary>Convierte el delta táctil en un vector normalizado para movimiento 2D.</summary>
+    private Vector2 CalculateMobileInput(Touch touch)
+    {
+        Vector2 rawInput = touch.deltaPosition * swipeSensitivity;
+
+        if (rawInput.sqrMagnitude < swipeDeadZone * swipeDeadZone)
+        {
+            return Vector2.zero;
+        }
+
+        return rawInput.normalized;
     }
 
     private void CheckBrakeSound()
