@@ -57,14 +57,14 @@ public class MainMenuManager : MonoBehaviour
     public void OpenRegisterPanel()
     {
         SetPanelActive(registerPanel, true);
-        ClearStatus(registerStatusText);
+        SetStatus(registerStatusText, "Ingresa Tu nombre:");
         SetInputText(registerNameInput, string.Empty);
     }
 
     public void OpenChangeUserPanel()
     {
         SetPanelActive(changeUserPanel, true);
-        ClearStatus(changeUserStatusText);
+        SetStatus(changeUserStatusText, "Ingresa Tu nombre:");
         SetInputText(changeUserNameInput, string.Empty);
     }
 
@@ -103,7 +103,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (userName.Length > 8)
         {
-            SetStatus(statusText, "Maximo 8 caracteres.");
+            SetStatusWithColor(statusText, "Maximo 8 caracteres.", "B64636");
             return;
         }
 
@@ -150,6 +150,18 @@ public class MainMenuManager : MonoBehaviour
         if (statusText != null)
         {
             statusText.text = message;
+        }
+    }
+
+    private void SetStatusWithColor(TMP_Text statusText, string message, string hexColor)
+    {
+        if (statusText != null)
+        {
+            statusText.text = message;
+            if (ColorUtility.TryParseHtmlString("#" + hexColor, out Color color))
+            {
+                statusText.color = color;
+            }
         }
     }
 
