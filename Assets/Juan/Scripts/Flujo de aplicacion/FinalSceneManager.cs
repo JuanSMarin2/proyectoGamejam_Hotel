@@ -2,9 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using System;
+using Unity.Services.Leaderboards;
 
 public class FinalSceneManager : MonoBehaviour
 {
+    [Header("Leaderboards")]
+    [SerializeField] private string infiniteLeaderboardId = "PerfectTouristLeaderboard";
+
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI currentMoneyText;
     [SerializeField] private TextMeshProUGUI globalMoneyText;
@@ -23,9 +28,40 @@ public class FinalSceneManager : MonoBehaviour
     [SerializeField] private SoundType transferTickSoundType = SoundType.TickMoney;
     [SerializeField] private float transferTickVolume = 1f;
 
+    private bool leaderboardSubmitted;
+
     private void Start()
     {
         StartCoroutine(TransferMoney());
+
+        if (!RoundData.instance.IsStoryMode)
+        {
+            SubmitInfiniteLeaderboardScore();
+        }
+    }
+
+    private async void SubmitInfiniteLeaderboardScore()
+    {
+        if (leaderboardSubmitted)
+            return;
+
+        leaderboardSubmitted = true;
+
+        if (CurrentUser.Instance == null)
+            return;
+
+        try
+        {
+            await CurrentUser.Instance.EnsureServicesReadyAsync();
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(infiniteLeaderboardId, RoundData.instance.CompletedMinigames);
+        }
+        catch (Exception exception)
+        {
+            Debug.LogWarning("FinalSceneManager: no se pudo enviar la puntuacion al leaderboard. " + exception.Message);
+        }
+    }
+   public void LoadLeaderboardScene(){
+        SceneManager.LoadScene("Leaderboard");
     }
 
     private IEnumerator TransferMoney()
@@ -105,10 +141,9 @@ public class FinalSceneManager : MonoBehaviour
     }
     public void LoadScene(string sceneName)
     {
-        if (sceneName == "MainMenu")
-        {
+     
             RoundData.ResetForMainMenu();
-        }
+        
 
         SceneManager.LoadScene(sceneName);
     }
