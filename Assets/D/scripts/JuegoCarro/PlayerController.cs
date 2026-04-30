@@ -12,6 +12,15 @@ public class PlayerController : MonoBehaviour
     [Header("Velocidad de Movimiento")]
     [SerializeField] private float moveSpeed = 5f;
 
+    [Header("Escalado Minijuego")]
+    [Tooltip("Velocidad del jugador cuando MinigameManager.Speed = 1")]
+    [SerializeField] private float minigameSpeedAtOne = 5f;
+    [Tooltip("Velocidad del jugador cuando MinigameManager.Speed = 3")]
+    [SerializeField] private float minigameSpeedAtThree = 7f;
+    [Tooltip("Tiempo de suavizado al cambiar la velocidad por dificultad")]
+    [Min(0.001f)]
+    [SerializeField] private float speedSmoothTime = 0.25f;
+
     [Header("Rotación del Sprite")]
     [SerializeField] private float rotationSmoothing = 10f; // Velocidad de suavizado de rotación
     [SerializeField] private float maxRotationAngle = 22f; // Ángulo máximo de rotación en grados
@@ -40,6 +49,10 @@ public class PlayerController : MonoBehaviour
     private float currentTiltVelocity;
     private bool wasMovingForward;
     private float forwardHoldTime;
+
+    // Para el multiplicador de velocidad basado en MinigameManager
+    private float currentSpeedMultiplier = 1f;
+    private float speedMultiplierVelocity = 0f;
 
     #endregion
 
@@ -100,6 +113,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        UpdateSpeedMultiplier();
         ApplyMovement();
     }
 
@@ -222,10 +236,42 @@ public class PlayerController : MonoBehaviour
 
     #region Movement Application
 
-    /// <summary>Aplica el movimiento al Rigidbody2D</summary>
+    /// <summary>Actualiza el multiplicador de velocidad basado en MinigameManager.Speed con suavizado</summary>
+    private void UpdateSpeedMultiplier()
+    {
+        float targetMultiplier = GetMinigameSpeedMultiplier();
+        currentSpeedMultiplier = Mathf.SmoothDamp(
+            currentSpeedMultiplier,
+            targetMultiplier,
+            ref speedMultiplierVelocity,
+            speedSmoothTime,
+            Mathf.Infinity,
+            Time.fixedDeltaTime
+        );
+    }
+
+    /// <summary>
+    /// Calcula el multiplicador de velocidad basado en MinigameManager.Speed.
+    /// Interpola linealmente entre minigameSpeedAtOne (Speed=1) y minigameSpeedAtThree (Speed=3).
+    /// </summary>
+    private float GetMinigameSpeedMultiplier()
+    {
+        if (MinigameManager.instance == null)
+            return 1f;
+
+        float speed = MinigameManager.instance.Speed;
+        
+        // Interpolación lineal: cuando Speed=1 → 1.0, cuando Speed=3 → 1.4 (7/5)
+        // Fórmula: multiplier = (minigameSpeedAtThree / minigameSpeedAtOne) * ((speed - 1) * 0.5 + 1)
+        // Simplificado: multiplier = minigameSpeedAtOne + (speed - 1) * (minigameSpeedAtThree - minigameSpeedAtOne) / 2
+        float targetSpeed = minigameSpeedAtOne + (speed - 1f) * (minigameSpeedAtThree - minigameSpeedAtOne) / 2f;
+        return Mathf.Clamp(targetSpeed / moveSpeed, 0f, Mathf.Infinity);
+    }
+
+    /// <summary>Aplica el movimiento al Rigidbody2D con el multiplicador de velocidad</summary>
     private void ApplyMovement()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = moveInput * moveSpeed * currentSpeedMultiplier;
     }
 
     /// <summary>

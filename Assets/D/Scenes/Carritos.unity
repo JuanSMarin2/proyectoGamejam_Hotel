@@ -852,8 +852,8 @@ Transform:
   m_GameObject: {fileID: 654448752}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.92, y: 6.59, z: 0.079265185}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 12.2418, y: 6.7771, z: 0.079265185}
+  m_LocalScale: {x: 0.9665, y: 0.9654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1526119588}
@@ -2478,6 +2478,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  minigameSpeedAtOne: 5
+  minigameSpeedAtThree: 7
+  speedSmoothTime: 0.25
   rotationSmoothing: 10
   maxRotationAngle: -22
   spriteTransform: {fileID: 1518598931}
@@ -2552,7 +2555,7 @@ Transform:
   m_GameObject: {fileID: 1518598927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 2.6, z: -3.46}
+  m_LocalPosition: {x: 0.06, y: 1.88, z: -3.46}
   m_LocalScale: {x: 0.25446883, y: 0.25446883, z: 0.25446883}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2986,7 +2989,7 @@ MonoBehaviour:
   gameDescriptionText: {fileID: 793076425}
   gameDescription: Mueve para esquivar los autos y llegar al aeropuerto
   gameDescriptionTime: 3
-  speed: 1
+  speed: 3
   losesWithTime: 0
 --- !u!4 &1621023154
 Transform:
