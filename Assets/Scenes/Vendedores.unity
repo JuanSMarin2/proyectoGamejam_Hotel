@@ -727,12 +727,12 @@ MonoBehaviour:
   difficultyManager: {fileID: 1080247231}
   guaranteeMatchingVendorOnNeedStart: 1
   ignoreMaxAliveForGuaranteedSpawn: 1
-  guaranteedNeedSpeedMultiplier: 2
+  guaranteedNeedSpeedMultiplier: 1.1
   debugLogs: 0
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 3
+  minSpawnInterval: 2.3
+  maxSpawnInterval: 4
   maxAliveVendedores: 10
-  minSpeed: 1.7
+  minSpeed: 1.75
   maxSpeed: 1.8
   initialSortingOrder: 0
   sortingOrderStep: 1
@@ -1928,13 +1928,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704194ea519f50043a47ad5172ac5344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useManualOccurrence: 0
-  currentOccurrence: 1
-  vendorSpeedIncreasePerOccurrence: 0.22
-  stopChanceReductionPerOccurrence: 0.22
-  stopAttemptIntervalIncreasePerOccurrence: 0.25
-  maxAliveIncreasePerOccurrence: 3
-  solveTimeReductionPerOccurrence: 1.8
+  useManualOccurrence: 1
+  currentOccurrence: 2
+  vendorSpeedIncreasePerOccurrence: 0
+  stopChanceReductionPerOccurrence: 0.05
+  stopAttemptIntervalIncreasePerOccurrence: 0
+  maxAliveIncreasePerOccurrence: 4
+  solveTimeReductionPerOccurrence: 1.7
   waitBetweenNeedsReductionPerOccurrence: 0.5
   minSolveTime: 2.4
   minWaitBetweenNeeds: 0.2
