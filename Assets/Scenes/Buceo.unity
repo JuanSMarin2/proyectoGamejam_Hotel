@@ -912,9 +912,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1604774881}
-  swimForce: 7
   maxVerticalSpeed: 6
   waterGravityScale: 1.25
+  waterGravityScaleAtMaxDifficulty: 1
+  minDifficultySpeed: 1
+  maxDifficultySpeed: 2.5
+  swimForceAtMinDifficulty: 8
+  swimForceAtMaxDifficulty: 6
   cam: {fileID: 519420032}
   cameraXOffset: 4
 --- !u!61 &204612400
@@ -5519,8 +5523,8 @@ Transform:
   m_GameObject: {fileID: 1250765886}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.7668, y: -8.1231, z: 0}
-  m_LocalScale: {x: 204.85428, y: 6.219786, z: 1}
+  m_LocalPosition: {x: 124.4369, y: -14.5466, z: 0}
+  m_LocalScale: {x: 376.1807, y: 19.066755, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1349951748}
@@ -5649,7 +5653,8 @@ MonoBehaviour:
   minSpeed: 1
   maxSpeed: 2.5
   enemiesAtMinSpeed: 30
-  enemiesAtMaxSpeed: 15
+  enemiesAtMaxSpeed: 20
+  minDistanceAtMaxSpeed: 10
   underWater: 1
   waterList: []
   groundList: []
@@ -6004,6 +6009,7 @@ MonoBehaviour:
   maxSpeed: 2.5
   enemiesAtMinSpeed: 10
   enemiesAtMaxSpeed: 8
+  minDistanceAtMaxSpeed: 10
   underWater: 1
   waterList: []
   groundList: []
@@ -7678,8 +7684,8 @@ Transform:
   m_GameObject: {fileID: 1769012106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.354, y: 8.26, z: 0}
-  m_LocalScale: {x: 204.04716, y: 6.623, z: 1}
+  m_LocalPosition: {x: 123.6825, y: 22.216, z: 0}
+  m_LocalScale: {x: 372.71255, y: 34.53465, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1349951748}
@@ -8706,7 +8712,7 @@ MonoBehaviour:
   gameDescriptionText: {fileID: 1672216632}
   gameDescription: Nada y esquiva las medusas
   gameDescriptionTime: 2
-  speed: 5
+  speed: 2.5
   losesWithTime: 0
 --- !u!4 &2119860206
 Transform:

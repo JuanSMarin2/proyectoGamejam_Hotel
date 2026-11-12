@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Rotación del Sprite")]
     [SerializeField] private float rotationSmoothing = 10f; // Velocidad de suavizado de rotación
     [SerializeField] private float maxRotationAngle = 22f; // Ángulo máximo de rotación en grados
-    [SerializeField] private Transform spriteTransform; // Asigna el SpriteRenderer (o su GameObject) si es hijo
+    [SerializeField] private Transform spriteTransform; // Opcional: hijo visual. Si está vacío, el tilt se aplica al Rigidbody2D
     [SerializeField] private float forwardThreshold = 0.1f; // Umbral para considerar que va "hacia adelante" (W)
     [SerializeField] private float sidewaysThreshold = 0.1f; // Umbral para considerar giro izquierda/derecha
 
@@ -37,9 +37,11 @@ public class PlayerController : MonoBehaviour
     private bool brakeInputHeld;
     private float targetTiltZ;
     private float baseSpriteZ;
+    private float currentTiltZ;      // Ángulo suavizado actual (relativo a baseSpriteZ)
     private float currentTiltVelocity;
     private bool wasMovingForward;
     private float forwardHoldTime;
+    private bool tiltOnRigidbody;    // true = el tilt se aplica al Rigidbody2D (sin hijo visual)
 
     #endregion
 
@@ -49,16 +51,22 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        if (spriteTransform == null)
-            spriteTransform = transform;
+        // Clave: la física NUNCA rota el carro. Solo este script controla la rotación,
+        // por eso el tilt siempre regresa a su estado base después de chocar.
+        rb.freezeRotation = true;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        // Si no hay hijo visual asignado, el tilt se aplica al propio Rigidbody2D
+        tiltOnRigidbody = (spriteTransform == null || spriteTransform == transform);
+
+        baseSpriteZ = tiltOnRigidbody ? rb.rotation : spriteTransform.localEulerAngles.z;
+        currentTiltZ = 0f;
 
         if (audioCarro == null)
             audioCarro = GetComponent<AudioCarro>();
 
         if (audioCarro == null)
             audioCarro = GetComponentInChildren<AudioCarro>();
-
-        baseSpriteZ = spriteTransform.localEulerAngles.z;
     }
 
     public void Start()
@@ -81,7 +89,6 @@ public class PlayerController : MonoBehaviour
             SoundManager.PlaySound(SoundType.ChoqueCarro, null, choqueVolume);
             ResultManager.instance.LoseMinigame();
         }
-        
     }
 
     private void Update()
@@ -91,16 +98,24 @@ public class PlayerController : MonoBehaviour
             audioCarro.SetThrottleInput(moveInput);
         CheckBrakeSound();
         UpdateTargetTilt();
+        SmoothTilt();
     }
 
     private void LateUpdate()
     {
-        ApplySpriteTilt();
+        // Solo se escribe el transform del hijo aquí; el Rigidbody2D se rota en FixedUpdate
+        if (!tiltOnRigidbody)
+            ApplySpriteTiltToChild();
     }
 
     private void FixedUpdate()
     {
         ApplyMovement();
+
+        // El tilt sobre el Rigidbody2D se aplica con MoveRotation:
+        // es la forma correcta de rotar un cuerpo físico sin pelear con el motor de física
+        if (tiltOnRigidbody)
+            rb.MoveRotation(baseSpriteZ + currentTiltZ);
     }
 
     #endregion
@@ -248,37 +263,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ApplySpriteTilt()
+    /// <summary>
+    /// Suaviza el ángulo actual hacia el objetivo. Se calcula sobre un float propio
+    /// (no leyendo el transform), así nunca acumula rotación residual de la física.
+    /// </summary>
+    private void SmoothTilt()
     {
-        if (spriteTransform == null)
-        {
-            return;
-        }
-
-        float currentZ = spriteTransform.localEulerAngles.z;
-        float desiredZ = baseSpriteZ + targetTiltZ;
-
-        if (float.IsNaN(currentZ) || float.IsNaN(desiredZ) || float.IsNaN(currentTiltVelocity) ||
+        if (float.IsNaN(currentTiltZ) || float.IsNaN(currentTiltVelocity) ||
             float.IsInfinity(currentTiltVelocity))
         {
+            currentTiltZ = 0f;
             currentTiltVelocity = 0f;
-            Vector3 resetEuler = spriteTransform.localEulerAngles;
-            resetEuler.z = baseSpriteZ;
-            spriteTransform.localEulerAngles = resetEuler;
             return;
         }
 
-        float newZ = Mathf.SmoothDampAngle(
-            currentZ,
-            desiredZ,
+        currentTiltZ = Mathf.SmoothDampAngle(
+            currentTiltZ,
+            targetTiltZ,
             ref currentTiltVelocity,
             1f / Mathf.Max(0.0001f, rotationSmoothing),
             Mathf.Infinity,
             Time.deltaTime
         );
+    }
+
+    /// <summary>Aplica el tilt al hijo visual (solo cuando spriteTransform es un hijo).</summary>
+    private void ApplySpriteTiltToChild()
+    {
+        if (spriteTransform == null)
+            return;
 
         Vector3 euler = spriteTransform.localEulerAngles;
-        euler.z = newZ;
+        euler.z = baseSpriteZ + currentTiltZ;
         spriteTransform.localEulerAngles = euler;
     }
 

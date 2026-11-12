@@ -345,10 +345,10 @@ MonoBehaviour:
   - soundType: 30
     id: Tropezandose
     category: Default
-    volume: 0.533
+    volume: 1
     mixer: {fileID: 0}
-    randomVolumeMin: 0.51
-    randomVolumeMax: 0.78
+    randomVolumeMin: 1.684
+    randomVolumeMax: 2
     minPitch: 1
     maxPitch: 1
     sounds:

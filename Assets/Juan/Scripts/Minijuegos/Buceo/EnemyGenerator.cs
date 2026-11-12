@@ -10,6 +10,7 @@ public class EnemyGenerator : MonoBehaviour
     [Header("Spawn Settings")]
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Vector2 spawnRangeSize = new Vector2(10f, 10f);
+    [Tooltip("Distancia minima entre enemigos en dificultad MINIMA (el valor actual)")]
     [SerializeField] private float minDistanceBetweenEnemies = 1.5f;
     [SerializeField] private int maxAttemptsPerEnemy = 30;
     [SerializeField] private bool generateOnStart = true;
@@ -19,6 +20,10 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private float maxSpeed = 2.5f;
     [SerializeField] private int enemiesAtMinSpeed = 30;
     [SerializeField] private int enemiesAtMaxSpeed = 15;
+
+    [Header("Distance By Speed")]
+    [Tooltip("Distancia minima entre enemigos al llegar a la dificultad MAXIMA (mayor = mas separados). Interpola desde minDistanceBetweenEnemies.")]
+    [SerializeField] private float minDistanceAtMaxSpeed = 3f;
 
     [Header("Sprite Variants")]
     [SerializeField] private bool underWater = true;
@@ -61,10 +66,11 @@ public class EnemyGenerator : MonoBehaviour
         generatedPositions.Clear();
 
         int enemyCount = GetEnemyCountForCurrentSpeed();
+        float effectiveMinDistance = GetEffectiveMinDistance();
 
         for (int enemyIndex = 0; enemyIndex < enemyCount; enemyIndex++)
         {
-            bool positionFound = TryGetValidPosition(out Vector3 spawnPosition);
+            bool positionFound = TryGetValidPosition(effectiveMinDistance, out Vector3 spawnPosition);
 
             if (!positionFound)
             {
@@ -90,7 +96,10 @@ public class EnemyGenerator : MonoBehaviour
         spriteRenderer.sprite = selectedList[randomIndex];
     }
 
-    private int GetEnemyCountForCurrentSpeed()
+    /// <summary>
+    /// t de dificultad: 0 en minSpeed, 1 en maxSpeed (2.5).
+    /// </summary>
+    private float GetDifficultyT()
     {
         float currentSpeed = minSpeed;
         if (MinigameManager.instance != null)
@@ -99,13 +108,29 @@ public class EnemyGenerator : MonoBehaviour
         }
 
         float clampedSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);
-        float t = Mathf.InverseLerp(minSpeed, maxSpeed, clampedSpeed);
+        return Mathf.InverseLerp(minSpeed, maxSpeed, clampedSpeed);
+    }
+
+    private int GetEnemyCountForCurrentSpeed()
+    {
+        float t = GetDifficultyT();
         float countValue = Mathf.Lerp(enemiesAtMinSpeed, enemiesAtMaxSpeed, t);
 
         return Mathf.Max(1, Mathf.RoundToInt(countValue));
     }
 
-    private bool TryGetValidPosition(out Vector3 validPosition)
+    /// <summary>
+    /// Distancia minima entre enemigos efectiva: en dificultad minima usa
+    /// minDistanceBetweenEnemies (el valor actual) y AUMENTA hasta
+    /// minDistanceAtMaxSpeed. A mayor dificultad, mas separados entre si.
+    /// </summary>
+    private float GetEffectiveMinDistance()
+    {
+        float t = GetDifficultyT();
+        return Mathf.Lerp(minDistanceBetweenEnemies, minDistanceAtMaxSpeed, t);
+    }
+
+    private bool TryGetValidPosition(float effectiveMinDistance, out Vector3 validPosition)
     {
         for (int attempt = 0; attempt < maxAttemptsPerEnemy; attempt++)
         {
@@ -117,7 +142,7 @@ public class EnemyGenerator : MonoBehaviour
             );
             Vector3 candidatePosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
 
-            if (IsFarEnoughFromOthers(candidatePosition))
+            if (IsFarEnoughFromOthers(candidatePosition, effectiveMinDistance))
             {
                 validPosition = candidatePosition;
                 return true;
@@ -128,11 +153,11 @@ public class EnemyGenerator : MonoBehaviour
         return false;
     }
 
-    private bool IsFarEnoughFromOthers(Vector3 candidatePosition)
+    private bool IsFarEnoughFromOthers(Vector3 candidatePosition, float effectiveMinDistance)
     {
         for (int i = 0; i < generatedPositions.Count; i++)
         {
-            if (Vector3.Distance(candidatePosition, generatedPositions[i]) < minDistanceBetweenEnemies)
+            if (Vector3.Distance(candidatePosition, generatedPositions[i]) < effectiveMinDistance)
             {
                 return false;
             }

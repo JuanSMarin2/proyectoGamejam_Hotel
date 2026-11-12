@@ -373,11 +373,11 @@ MonoBehaviour:
   signSpriteLibrary: {fileID: 0}
   animator: {fileID: 4126979137488447638}
   horizontalSpeedParameter: speedX
-  backScale: {x: 0.54, y: 0.54, z: 0.54}
-  frontScale: {x: 0.7, y: 0.7, z: 0.7}
   mirrorFrontOnYAxis: 1
   backSortingLayerName: MidGround
   frontSortingLayerName: Foreground
+  minScale: {x: 0.55, y: 0.55, z: 0.55}
+  maxScale: {x: 0.7, y: 0.7, z: 0.7}
   boughtTriggerName: bought
   boughtDelayBeforeFade: 0.15
   boughtFadeDuration: 0.35

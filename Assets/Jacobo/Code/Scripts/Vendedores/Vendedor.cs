@@ -21,11 +21,15 @@ public class Vendedor : MonoBehaviour
     [SerializeField] private string horizontalSpeedParameter = "speedX";
 
     [Header("Front/Back Visuals")]
-    [SerializeField] private Vector3 backScale = Vector3.one;
-    [SerializeField] private Vector3 frontScale = Vector3.one;
     [SerializeField] private bool mirrorFrontOnYAxis = true;
     [SerializeField] private string backSortingLayerName = "Background";
     [SerializeField] private string frontSortingLayerName = "Foreground";
+
+    [Header("Size por Order in Layer")]
+    [Tooltip("Escala base del modelo (la del prefab) en el punto con order in layer MAS BAJO")]
+    [SerializeField] private Vector3 minScale = Vector3.one;
+    [Tooltip("Escala en el punto con order in layer MAS ALTO")]
+    [SerializeField] private Vector3 maxScale = Vector3.one;
 
     [Header("Bought Visual")]
     [SerializeField] private string boughtTriggerName = "bought";
@@ -77,6 +81,23 @@ public class Vendedor : MonoBehaviour
         ApplySignSprite();
     }
 
+    /// <summary>
+    /// El spawner llama esto DESPUES de Initialize con el factor de profundidad
+    /// del punto de spawn (0 = order mas bajo, 1 = order mas alto).
+    /// La escala interpola entre minScale y maxScale, propias de ESTE modelo.
+    /// Mantiene el flip en X para los que salen del lado Front (derecha).
+    /// </summary>
+    public void SetSpawnScale(float depthFactor)
+    {
+        Vector3 scale = Vector3.Lerp(minScale, maxScale, Mathf.Clamp01(depthFactor));
+
+        bool isFront = currentSpawnSide == SpawnPointPreference.Front;
+        if (isFront && mirrorFrontOnYAxis)
+            scale.x = -Mathf.Abs(scale.x);
+
+        transform.localScale = scale;
+    }
+
     public void SetNecesidad(Necesidad newNecesidad)
     {
         if (!System.Enum.IsDefined(typeof(Necesidad), newNecesidad))
@@ -112,7 +133,6 @@ public class Vendedor : MonoBehaviour
         stopDurationTimer = 0f;
         UpdateAnimatorHorizontalSpeed(0f);
 
-        SetSortingOrderRecursive(0);
 
         if (cachedColliders3D == null)
             cachedColliders3D = GetComponentsInChildren<Collider>(true);
@@ -287,13 +307,8 @@ public class Vendedor : MonoBehaviour
     {
         bool isFront = spawnSide == SpawnPointPreference.Front;
 
-        Vector3 targetScale = isFront ? frontScale : backScale;
-
-        // Reflect on Y-axis (horizontal flip) for front spawns when enabled.
-        if (isFront && mirrorFrontOnYAxis)
-            targetScale.x = -Mathf.Abs(targetScale.x);
-
-        transform.localScale = targetScale;
+        // La escala ya NO se decide aqui: la asigna el spawner con SetSpawnScale
+        // segun el order in layer del punto de spawn.
 
         // Force refresh so newly added/activated children are always included.
         cachedRenderers = GetComponentsInChildren<SpriteRenderer>(true);

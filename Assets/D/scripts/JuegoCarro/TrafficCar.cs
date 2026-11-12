@@ -149,6 +149,14 @@ public class TrafficCar : MonoBehaviour
     private float leadSpeedAlongForward;
     private Rigidbody2D leadRb;
 
+    // Tuning en codigo: factor global de velocidad de los carros.
+    // 0.8 = todos los carros van 20% mas lentos (sin volverlo muy facil).
+    private const float CodeCarSpeedFactor = 0.8f;
+
+    // Multiplicador forzado por el spawner (ej. primer batch a velocidad minima).
+    // Valor negativo = sin override, se usa MinigameManager.Speed.
+    private float forcedSpeedMultiplier = -1f;
+
     #endregion
 
     #region Unity Lifecycle
@@ -581,11 +589,15 @@ public class TrafficCar : MonoBehaviour
     /// </summary>
     protected virtual void ApplyMovement(Vector2 finalDirection)
     {
-        rb.linearVelocity = finalDirection * currentSpeed * GetMinigameSpeedMultiplier();
+        rb.linearVelocity = finalDirection * currentSpeed * GetMinigameSpeedMultiplier() * CodeCarSpeedFactor;
     }
 
     private float GetMinigameSpeedMultiplier()
     {
+        // El override del spawner tiene prioridad sobre el multiplicador global
+        if (forcedSpeedMultiplier >= 0f)
+            return forcedSpeedMultiplier;
+
         if (MinigameManager.instance == null)
             return 1f;
 
@@ -633,6 +645,18 @@ public class TrafficCar : MonoBehaviour
     public float GetCurrentSpeed() => currentSpeed;
 
     public float GetMaxMinigameSpeedMultiplier() => maxMinigameSpeedMultiplier;
+
+    /// <summary>Fuerza el multiplicador de velocidad (ignora MinigameManager.Speed).</summary>
+    public void SetForcedSpeedMultiplier(float multiplier)
+    {
+        forcedSpeedMultiplier = Mathf.Max(0f, multiplier);
+    }
+
+    /// <summary>Quita el override y vuelve a usar MinigameManager.Speed.</summary>
+    public void ClearForcedSpeedMultiplier()
+    {
+        forcedSpeedMultiplier = -1f;
+    }
 
     #endregion
 

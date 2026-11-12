@@ -233,15 +233,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5382223639089860544, guid: e020acf67b24e3744ba401aad447d533, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 5382223639089860544, guid: e020acf67b24e3744ba401aad447d533, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 5382223639089860544, guid: e020acf67b24e3744ba401aad447d533, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 5382223639089860544, guid: e020acf67b24e3744ba401aad447d533, type: 3}
       propertyPath: m_LocalPosition.x
@@ -377,11 +377,11 @@ MonoBehaviour:
   signSpriteLibrary: {fileID: 0}
   animator: {fileID: 3085601368003034104}
   horizontalSpeedParameter: speedX
-  backScale: {x: 0.8, y: 0.8, z: 0.8}
-  frontScale: {x: 1, y: 1, z: 1}
   mirrorFrontOnYAxis: 1
   backSortingLayerName: MidGround
   frontSortingLayerName: Foreground
+  minScale: {x: 0.71, y: 0.71, z: 0.71}
+  maxScale: {x: 0.85, y: 0.85, z: 0.85}
   boughtTriggerName: bought
   boughtDelayBeforeFade: 0.15
   boughtFadeDuration: 0.35

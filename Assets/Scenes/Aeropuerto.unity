@@ -3949,6 +3949,8 @@ MonoBehaviour:
   jumpForce: 10
   groundRecheckDelayFrames: 4
   jumpInputBufferTime: 0.12
+  fastFallExtraPercent: 300
+  autoFastFallAtApex: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048

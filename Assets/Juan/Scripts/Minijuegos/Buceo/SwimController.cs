@@ -6,10 +6,24 @@ public class SwimController : MonoBehaviour
      [Header("Animation")]
      [SerializeField] private Animator animator;
     [Header("Swim Settings")]
-    
-    [SerializeField] private float swimForce = 8f;
+
     [SerializeField] private float maxVerticalSpeed = 6f;
+    [Tooltip("Gravedad de caida en dificultad MINIMA (el valor actual)")]
     [SerializeField] private float waterGravityScale = 0.5f;
+
+    [Header("Caida por Dificultad")]
+    [Tooltip("Gravedad de caida al llegar a la dificultad MAXIMA. Interpola desde waterGravityScale.")]
+    [SerializeField] private float waterGravityScaleAtMaxDifficulty = 1f;
+    [Tooltip("Velocidad MINIMA que entrega MinigameManager.Speed")]
+    [SerializeField] private float minDifficultySpeed = 1f;
+    [Tooltip("Velocidad MAXIMA real que entrega MinigameManager.Speed")]
+    [SerializeField] private float maxDifficultySpeed = 2.5f;
+
+    [Header("Brazada por Dificultad")]
+    [Tooltip("Fuerza de la brazada en dificultad MINIMA (el valor actual)")]
+    [SerializeField] private float swimForceAtMinDifficulty = 8f;
+    [Tooltip("Fuerza de la brazada al llegar a la dificultad MAXIMA (menor = se eleva menos por brazada)")]
+    [SerializeField] private float swimForceAtMaxDifficulty = 6f;
     private bool _losed = false;
 
     [Header("Camera")]
@@ -18,15 +32,29 @@ public class SwimController : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private float GetSpeedMultiplier()
+    /// <summary>
+    /// Fuerza de la brazada efectiva: en dificultad minima usa
+    /// swimForceAtMinDifficulty (el valor actual) y DISMINUYE hasta
+    /// swimForceAtMaxDifficulty. A mayor dificultad, el jugador se eleva
+    /// menos por brazada.
+    /// </summary>
+    private float GetEffectiveSwimForce()
     {
-        float speed = MinigameManager.instance != null ? MinigameManager.instance.Speed : 1f;
+        float speed = MinigameManager.instance != null ? MinigameManager.instance.Speed : minDifficultySpeed;
+        float t = Mathf.InverseLerp(minDifficultySpeed, maxDifficultySpeed, speed);
+        return Mathf.Lerp(swimForceAtMinDifficulty, swimForceAtMaxDifficulty, t);
+    }
 
-        if (speed <= 1.9f)
-            return 1f;
-
-        float t = Mathf.InverseLerp(1.9f, 2.5f, speed);
-        return Mathf.Lerp(1f, 1.12f, t);
+    /// <summary>
+    /// Gravedad de caida efectiva: en dificultad minima usa waterGravityScale
+    /// (el valor actual) y aumenta hasta waterGravityScaleAtMaxDifficulty al
+    /// llegar a la dificultad maxima.
+    /// </summary>
+    private float GetEffectiveWaterGravityScale()
+    {
+        float speed = MinigameManager.instance != null ? MinigameManager.instance.Speed : minDifficultySpeed;
+        float t = Mathf.InverseLerp(minDifficultySpeed, maxDifficultySpeed, speed);
+        return Mathf.Lerp(waterGravityScale, waterGravityScaleAtMaxDifficulty, t);
     }
 
     public static bool IsSwimSceneActive()
@@ -42,7 +70,7 @@ public class SwimController : MonoBehaviour
 
     private void Start()
     {
-        rb.gravityScale = waterGravityScale * GetSpeedMultiplier();
+        rb.gravityScale = GetEffectiveWaterGravityScale();
         animator.SetTrigger("SwimIdle");
     }
 
@@ -74,12 +102,11 @@ public class SwimController : MonoBehaviour
     private void Swim()
     {
         Vector2 velocity = rb.linearVelocity;
-        float speedMultiplier = GetSpeedMultiplier();
 
         if (velocity.y > maxVerticalSpeed)
             velocity.y = maxVerticalSpeed;
 
-        velocity.y = swimForce * speedMultiplier;
+        velocity.y = GetEffectiveSwimForce();
 
         rb.linearVelocity = velocity;
     }

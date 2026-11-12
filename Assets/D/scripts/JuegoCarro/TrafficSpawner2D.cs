@@ -7,6 +7,8 @@ using UnityEngine;
 /// - Spawn por tiempo deterministico (sin probabilidad, burst ni jitter)
 /// - Batch de tamano variable por ciclo (minCarsPerSpawn..maxCarsPerSpawn)
 /// - Validacion de distancia minima para evitar solapamientos
+/// - El PRIMER batch siempre spawnea a velocidad minima
+/// - targetActiveVehicles y maxCarsPerSpawn reciben un bonus segun la dificultad recibida
 /// </summary>
 [DisallowMultipleComponent]
 public class TrafficSpawner2D : MonoBehaviour
@@ -32,10 +34,29 @@ public class TrafficSpawner2D : MonoBehaviour
     [Min(0)]
     [SerializeField] private int targetActiveVehicles = 12;
 
+    [Header("Dificultad (bonus de vehiculos)")]
+    [Tooltip("Velocidad MINIMA que entrega MinigameManager.Speed.")]
+    [SerializeField] private float minDifficultySpeed = 1f;
+
+    [Tooltip("Velocidad MAXIMA real que entrega MinigameManager.Speed.")]
+    [SerializeField] private float maxDifficultySpeed = 2.5f;
+
+    [Tooltip("Bonus de vehiculos al llegar a la dificultad maxima (+N en targetActiveVehicles y en maxCarsPerSpawn).")]
+    [Min(0)]
+    [SerializeField] private int maxDifficultyVehicleBonus = 2;
+
+    [Tooltip("Que tan lento sale el PRIMER grupo respecto a la dificultad actual. 0 = velocidad minima absoluta, 0.5 = punto medio, 1 = velocidad normal de esa dificultad.")]
+    [Range(0f, 1f)]
+    [SerializeField] private float firstBatchSpeedFactor = 0.5f;
+
     [Header("Spawn Fijo")]
-    [Tooltip("Intervalo fijo entre ciclos de spawn.")]
+    [Tooltip("Intervalo entre ciclos de spawn en dificultad MINIMA.")]
     [Min(0.01f)]
-    [SerializeField] private float spawnInterval = 0.6f;
+    [SerializeField] private float spawnInterval = 3f;
+
+    [Tooltip("Intervalo entre ciclos de spawn al llegar a la dificultad MAXIMA (interpola desde spawnInterval).")]
+    [Min(0.01f)]
+    [SerializeField] private float spawnIntervalAtMaxDifficulty = 2.5f;
 
     [Tooltip("Minimo de carros por ciclo.")]
     [Min(1)]
@@ -108,6 +129,16 @@ public class TrafficSpawner2D : MonoBehaviour
 
     #endregion
 
+    #region Code Tuning (ignora el Inspector)
+
+    // Tuning configurado EN CODIGO: estos valores se imponen en Awake y los
+    // campos serializados de intervalo NO tienen efecto.
+    // Spawn mas espaciado que antes: 1.5s en dificultad minima, 1.0s en la maxima.
+    private const float CodeSpawnIntervalMinDifficulty = 1.5f;
+    private const float CodeSpawnIntervalMaxDifficulty = 1.0f;
+
+    #endregion
+
     #region Private Fields
 
     private readonly List<TrafficCar> activeVehicles = new List<TrafficCar>(64);
@@ -121,6 +152,9 @@ public class TrafficSpawner2D : MonoBehaviour
 
     private Coroutine spawnRoutine;
 
+    // El primer batch (carro o grupo) SIEMPRE aparece a velocidad minima
+    private bool firstBatchSpawned;
+
     #endregion
 
     #region Unity Lifecycle
@@ -132,6 +166,10 @@ public class TrafficSpawner2D : MonoBehaviour
 
         if (spawnArea == null)
             spawnArea = GetComponent<BoxCollider2D>();
+
+        // Tuning en codigo: los valores del Inspector para intervalos se ignoran
+        spawnInterval = 1.5f;
+        spawnIntervalAtMaxDifficulty = 2.5f;
 
         BuildPools();
         Prewarm();
@@ -184,6 +222,7 @@ public class TrafficSpawner2D : MonoBehaviour
             maxX = minX;
 
         spawnInterval = Mathf.Max(0.01f, spawnInterval);
+        spawnIntervalAtMaxDifficulty = Mathf.Max(0.01f, spawnIntervalAtMaxDifficulty);
         minSpawnDistance = Mathf.Max(0.01f, minSpawnDistance);
         batchSpacingX = Mathf.Max(0.01f, batchSpacingX);
 
@@ -192,6 +231,10 @@ public class TrafficSpawner2D : MonoBehaviour
 
         stuckMinMoveDelta = Mathf.Max(0f, stuckMinMoveDelta);
         stuckTimeToRecycle = Mathf.Max(0.1f, stuckTimeToRecycle);
+
+        minDifficultySpeed = Mathf.Max(0.01f, minDifficultySpeed);
+        maxDifficultySpeed = Mathf.Max(minDifficultySpeed + 0.01f, maxDifficultySpeed);
+        maxDifficultyVehicleBonus = Mathf.Max(0, maxDifficultyVehicleBonus);
 
         if (spawnArea == null)
             spawnArea = GetComponent<BoxCollider2D>();
@@ -203,28 +246,35 @@ public class TrafficSpawner2D : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
-        yield return null;
+        // El primer grupo de carros (el lento) sale INMEDIATAMENTE al empezar
+        // el minijuego, sin esperar el primer intervalo
+        CleanupActiveList();
+        if (activeVehicles.Count < GetEffectiveTargetActiveVehicles())
+            yield return SpawnBatch();
 
         while (enabled)
         {
+            yield return new WaitForSeconds(GetEffectiveSpawnInterval());
+
             CleanupActiveList();
 
-            if (activeVehicles.Count < targetActiveVehicles)
+            if (activeVehicles.Count < GetEffectiveTargetActiveVehicles())
                 yield return SpawnBatch();
-
-            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
     private IEnumerator SpawnBatch()
     {
-        int availableSlots = Mathf.Max(0, targetActiveVehicles - activeVehicles.Count);
+        int availableSlots = Mathf.Max(0, GetEffectiveTargetActiveVehicles() - activeVehicles.Count);
         if (availableSlots <= 0)
             yield break;
 
         int spawnCount = Mathf.Min(GetSpawnCount(), availableSlots);
         if (spawnCount <= 0)
             yield break;
+
+        // Si aun no sale el primer batch, este sera el primero (velocidad minima)
+        bool isFirstBatch = !firstBatchSpawned;
 
         List<Vector2> spawnedInBatch = new List<Vector2>(spawnCount);
 
@@ -242,7 +292,7 @@ public class TrafficSpawner2D : MonoBehaviour
             if (!IsSpawnValid(pos, spawnedInBatch))
                 continue;
 
-            if (SpawnVehicle(pos))
+            if (SpawnVehicle(pos, isFirstBatch))
                 spawnedInBatch.Add(pos);
 
             if (useBatchSpawnDelay && i < spawnCount - 1)
@@ -252,6 +302,10 @@ public class TrafficSpawner2D : MonoBehaviour
                     yield return new WaitForSeconds(delay);
             }
         }
+
+        // Solo se marca cuando realmente salio al menos un vehiculo
+        if (spawnedInBatch.Count > 0)
+            firstBatchSpawned = true;
     }
 
     private int GetSpawnCount()
@@ -266,7 +320,56 @@ public class TrafficSpawner2D : MonoBehaviour
         float speed = GetLevelTrafficSpeed();
         float carsToSubtract = Mathf.Max(0f, speed - 1f);
         int adjustedMaxCars = maxCarsPerSpawn - Mathf.FloorToInt(carsToSubtract);
+
+        // Bonus por dificultad: hasta +maxDifficultyVehicleBonus al llegar a maxDifficultySpeed
+        adjustedMaxCars += GetDifficultyVehicleBonus();
+
         return Mathf.Max(1, adjustedMaxCars);
+    }
+
+    /// <summary>
+    /// t de dificultad: 0 en la velocidad minima, 1 en la maxima (2.5).
+    /// </summary>
+    private float GetDifficultyT()
+    {
+        float speed = MinigameManager.instance != null ? MinigameManager.instance.Speed : minDifficultySpeed;
+        return Mathf.InverseLerp(minDifficultySpeed, maxDifficultySpeed, speed);
+    }
+
+    /// <summary>
+    /// Multiplicador del primer batch: lento EN RELACION a la dificultad actual.
+    /// Interpola entre minDifficultySpeed y la velocidad recibida segun
+    /// firstBatchSpeedFactor (0 = minima absoluta, 1 = normal de esa dificultad).
+    /// </summary>
+    private float GetFirstBatchSpeedMultiplier()
+    {
+        float currentSpeed = MinigameManager.instance != null ? MinigameManager.instance.Speed : minDifficultySpeed;
+        currentSpeed = Mathf.Max(minDifficultySpeed, currentSpeed);
+        return Mathf.Lerp(minDifficultySpeed, currentSpeed, Mathf.Clamp01(firstBatchSpeedFactor));
+    }
+
+    /// <summary>
+    /// Intervalo efectivo entre ciclos: interpola de spawnInterval (dificultad
+    /// minima) a spawnIntervalAtMaxDifficulty (dificultad maxima, 2.5).
+    /// </summary>
+    private float GetEffectiveSpawnInterval()
+    {
+        float interval = Mathf.Lerp(spawnInterval, spawnIntervalAtMaxDifficulty, GetDifficultyT());
+        return Mathf.Max(0.01f, interval);
+    }
+
+    /// <summary>
+    /// Bonus de vehiculos segun la dificultad recibida: 0 en la velocidad
+    /// minima, maxDifficultyVehicleBonus (+2 por defecto) en la maxima (2.5).
+    /// </summary>
+    private int GetDifficultyVehicleBonus()
+    {
+        return Mathf.RoundToInt(GetDifficultyT() * maxDifficultyVehicleBonus);
+    }
+
+    private int GetEffectiveTargetActiveVehicles()
+    {
+        return Mathf.Max(0, targetActiveVehicles + GetDifficultyVehicleBonus());
     }
 
     private float GetLevelTrafficSpeed()
@@ -365,7 +468,7 @@ public class TrafficSpawner2D : MonoBehaviour
         return true;
     }
 
-    private bool SpawnVehicle(Vector2 position)
+    private bool SpawnVehicle(Vector2 position, bool forceMinSpeed = false)
     {
         if (vehiclePrefabs == null || vehiclePrefabs.Length == 0)
             return false;
@@ -381,6 +484,20 @@ public class TrafficSpawner2D : MonoBehaviour
 
         if (!vehicle.gameObject.activeSelf)
             vehicle.gameObject.SetActive(true);
+
+        // El primer batch sale LENTO EN RELACION a la dificultad actual (no
+        // siempre x1): su multiplicador interpola entre la velocidad minima y
+        // la de esta dificultad segun firstBatchSpeedFactor. Se aplica DESPUES
+        // de SetActive para que el reroll de OnEnable no lo sobrescriba.
+        if (forceMinSpeed)
+        {
+            vehicle.SetBaseSpeed(vehicle.GetBaseSpeedMin());
+            vehicle.SetForcedSpeedMultiplier(GetFirstBatchSpeedMultiplier());
+        }
+        else
+        {
+            vehicle.ClearForcedSpeedMultiplier();
+        }
 
         Rigidbody2D rb = vehicle.GetComponent<Rigidbody2D>();
         if (rb != null)
