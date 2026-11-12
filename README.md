@@ -1,7 +1,9 @@
 # Game Jam Colombia 5.0 - 2026
-### Inserte nombre epico del juego
+### Bienvenidos a perfect tourist
+<img width="315" height="250" alt="image" src="https://github.com/user-attachments/assets/b9157319-cc3a-40e7-a86e-73eb8762123a" />
 
-#### Creado por: Inserte nombre épico del equipo
+
+#### Creado por: OP studios
 Juan S Marin
 Daniel Betancourt
 Nicole Livingston
