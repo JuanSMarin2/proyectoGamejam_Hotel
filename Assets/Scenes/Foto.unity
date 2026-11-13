@@ -2783,7 +2783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDescriptionText: {fileID: 1527992365}
-  gameDescription: Toma una foto despejada del sol
+  gameDescription: Toma una foto despejada del sol sin que nadie estorbe
   gameDescriptionTime: 3
   speed: 1
   losesWithTime: 1
