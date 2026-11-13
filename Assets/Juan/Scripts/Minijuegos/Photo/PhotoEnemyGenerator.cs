@@ -27,6 +27,13 @@ public class PhotoEnemyGenerator : MonoBehaviour
     [SerializeField] private string blockerSpeedParameter = "SpeedX";
     [SerializeField] private string blockerMoveTrigger = "bought";
 
+    [Header("Blocker 2 (Direccion contraria)")]
+    [SerializeField] private Transform blocker2;
+    [SerializeField] private float blocker2MoveSpeed = 3f;
+    [SerializeField] private Animator blocker2Animator;
+    [SerializeField] private string blocker2SpeedParameter = "SpeedX";
+    [SerializeField] private string blocker2MoveTrigger = "bought";
+
     [Header("Spawn By Speed")]
     [SerializeField] private float minSpawnInterval = 0.7f;
     [SerializeField] private float maxSpawnInterval = 1.4f;
@@ -436,6 +443,12 @@ public class PhotoEnemyGenerator : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(blocker.position, 0.25f);
         }
+
+        if (blocker2 != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(blocker2.position, 0.25f);
+        }
     }
 
     private Vector3 GetPhotoAreaCenter()
@@ -445,7 +458,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
     private void UpdateBlockerBehavior()
     {
-        if (blocker == null)
+        if (blocker == null && blocker2 == null)
         {
             return;
         }
@@ -472,8 +485,17 @@ public class PhotoEnemyGenerator : MonoBehaviour
             return;
         }
 
-        // El blocker SIEMPRE se mueve a la izquierda
-        blocker.position += Vector3.left * (blockerMoveSpeed * Time.deltaTime);
+        // El blocker principal se mueve a la izquierda
+        if (blocker != null)
+        {
+            blocker.position += Vector3.left * (blockerMoveSpeed * Time.deltaTime);
+        }
+
+        // El segundo blocker se mueve en direccion contraria (derecha)
+        if (blocker2 != null)
+        {
+            blocker2.position += Vector3.right * (blocker2MoveSpeed * Time.deltaTime);
+        }
     }
 
     private void InitializeBlockerAnimator()
@@ -483,13 +505,21 @@ public class PhotoEnemyGenerator : MonoBehaviour
             blockerAnimator = blocker.GetComponentInChildren<Animator>();
         }
 
-        if (blockerAnimator == null || string.IsNullOrWhiteSpace(blockerSpeedParameter))
+        if (blockerAnimator != null && !string.IsNullOrWhiteSpace(blockerSpeedParameter))
         {
-            return;
+            // El blocker empieza quieto: SpeedX en 0
+            blockerAnimator.SetFloat(blockerSpeedParameter, 0f);
         }
 
-        // El blocker empieza quieto: SpeedX en 0
-        blockerAnimator.SetFloat(blockerSpeedParameter, 0f);
+        if (blocker2Animator == null && blocker2 != null)
+        {
+            blocker2Animator = blocker2.GetComponentInChildren<Animator>();
+        }
+
+        if (blocker2Animator != null && !string.IsNullOrWhiteSpace(blocker2SpeedParameter))
+        {
+            blocker2Animator.SetFloat(blocker2SpeedParameter, 0f);
+        }
     }
 
     private void StartBlockerMovement()
@@ -501,20 +531,31 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
         blockerAnimatorStarted = true;
 
-        if (blockerAnimator == null)
+        if (blockerAnimator != null)
         {
-            return;
+            // Pasa a "bought" al empezar a moverse y reporta su velocidad
+            if (!string.IsNullOrWhiteSpace(blockerMoveTrigger))
+            {
+                blockerAnimator.SetTrigger(blockerMoveTrigger);
+            }
+
+            if (!string.IsNullOrWhiteSpace(blockerSpeedParameter))
+            {
+                blockerAnimator.SetFloat(blockerSpeedParameter, Mathf.Abs(blockerMoveSpeed));
+            }
         }
 
-        // Pasa a "bought" al empezar a moverse y reporta su velocidad
-        if (!string.IsNullOrWhiteSpace(blockerMoveTrigger))
+        if (blocker2Animator != null)
         {
-            blockerAnimator.SetTrigger(blockerMoveTrigger);
-        }
+            if (!string.IsNullOrWhiteSpace(blocker2MoveTrigger))
+            {
+                blocker2Animator.SetTrigger(blocker2MoveTrigger);
+            }
 
-        if (!string.IsNullOrWhiteSpace(blockerSpeedParameter))
-        {
-            blockerAnimator.SetFloat(blockerSpeedParameter, Mathf.Abs(blockerMoveSpeed));
+            if (!string.IsNullOrWhiteSpace(blocker2SpeedParameter))
+            {
+                blocker2Animator.SetFloat(blocker2SpeedParameter, Mathf.Abs(blocker2MoveSpeed));
+            }
         }
     }
 
