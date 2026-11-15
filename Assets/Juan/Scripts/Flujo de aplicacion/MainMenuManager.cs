@@ -15,6 +15,14 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField changeUserNameInput;
     [SerializeField] private TMP_Text changeUserStatusText;
 
+    [Header("User Flow")]
+    [Tooltip("Si esta activo, el modo infinito SIEMPRE pide usuario (reemplaza al anterior) aunque ya haya uno registrado")]
+    [SerializeField] private bool changeUserEveryTime = false;
+
+    // Bloquea segundas solicitudes mientras una confirmacion esta en curso.
+    // Solo se libera cuando la solicitud termina (error o exito).
+    private bool isConfirmingUser;
+
     public void StoryMode()
     {
         var order = GameOrderManager.instance.GetSceneOrder();
@@ -30,7 +38,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void InfiniteMode()
     {
-        if (!CurrentUser.Instance.HasUserName)
+        // Con changeUserEveryTime activo, SIEMPRE se pide usuario:
+        // el nuevo registro reemplaza al anterior (mismo flujo de registro)
+        if (changeUserEveryTime || !CurrentUser.Instance.HasUserName)
         {
             OpenRegisterPanel();
             return;
@@ -93,6 +103,10 @@ public class MainMenuManager : MonoBehaviour
 
     private async System.Threading.Tasks.Task ConfirmUserNameAsync(TMP_InputField inputField, TMP_Text statusText, bool startInfiniteMode)
     {
+        // Si ya hay una solicitud en curso, ignorar esta llamada
+        if (isConfirmingUser)
+            return;
+
         string userName = inputField != null ? inputField.text.Trim() : string.Empty;
 
         if (string.IsNullOrWhiteSpace(userName))
@@ -107,14 +121,25 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
+        isConfirmingUser = true;
+
         try
         {
+            SetStatus(statusText, "Registrando...");
             await CurrentUser.Instance.SetUserNameAsync(userName);
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            // Log del error real para diagnosticar fallos intermitentes de sign-in
+            Debug.LogWarning("MainMenuManager: fallo el registro de usuario. " + exception);
             SetStatus(statusText, "No se pudo cambiar de usuario.");
             return;
+        }
+        finally
+        {
+            // Siempre se libera el estado, haya error o exito.
+            // Si hubo exito con cambio de escena, este objeto se destruye de todos modos.
+            isConfirmingUser = false;
         }
 
         if (startInfiniteMode)

@@ -49,6 +49,28 @@
                     "action": "GrabMaleta",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2e78784-2764-453f-8960-af8c0b4e0ab8",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabMaleta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f1557c0-0b7d-46fb-ad53-16ee77fea780",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabMaleta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

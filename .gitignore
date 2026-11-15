@@ -97,3 +97,18 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Archivos demasiado grandes para GitHub
+/Nueva carpeta/Perfect Tourist_Data/sharedassets11.assets.resS
+/Nueva carpeta/Perfect Tourist_Data/sharedassets0.assets.resS
+/PT_DebugBuild/Perfect Tourist_Data/sharedassets0.assets.resS
+
+# Compilaciones del proyecto
+/Nueva carpeta/
+/PT_DebugBuild/
+/PT_GameFestBuild_1/
+/WebBuild/
+
+# Comprimidos de compilaciones
+/PT_DebugBuild.zip
+/PT_GameFestBuild_1.zip

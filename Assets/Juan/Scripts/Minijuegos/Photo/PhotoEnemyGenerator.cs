@@ -14,9 +14,25 @@ public class PhotoEnemyGenerator : MonoBehaviour
     [SerializeField] private Vector2 photoAreaSize = new Vector2(6f, 3f);
     [SerializeField] private Vector2 photoSpaceSize = new Vector2(14f, 6f);
 
+    [Header("Sorting por Profundidad")]
+    [Tooltip("Offset maximo de order in layer que se SUMA al enemigo que aparece mas abajo")]
+    [SerializeField] private int maxDepthSortingOffset = 300;
+    [Tooltip("Tamano del salto entre niveles de profundidad")]
+    [SerializeField] private int depthSortingStep = 10;
+
     [Header("Blocker")]
     [SerializeField] private Transform blocker;
     [SerializeField] private float blockerMoveSpeed = 3f;
+    [SerializeField] private Animator blockerAnimator;
+    [SerializeField] private string blockerSpeedParameter = "SpeedX";
+    [SerializeField] private string blockerMoveTrigger = "bought";
+
+    [Header("Blocker 2 (Direccion contraria)")]
+    [SerializeField] private Transform blocker2;
+    [SerializeField] private float blocker2MoveSpeed = 3f;
+    [SerializeField] private Animator blocker2Animator;
+    [SerializeField] private string blocker2SpeedParameter = "SpeedX";
+    [SerializeField] private string blocker2MoveTrigger = "bought";
 
     [Header("Spawn By Speed")]
     [SerializeField] private float minSpawnInterval = 0.7f;
@@ -61,7 +77,8 @@ public class PhotoEnemyGenerator : MonoBehaviour
     private float safeWindowDuration;
     private readonly List<PhotoEnemyMover> activeEnemies = new List<PhotoEnemyMover>();
     private bool blockerTriggered;
-    private int blockerDirection;
+    private bool blockerAnimatorStarted;
+    private bool firstEnemySpawned;
     private bool photoTaken;
     private Coroutine footstepRoutine;
 
@@ -74,6 +91,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
     private IEnumerator Start()
     {
         EnsureAudioSource();
+        InitializeBlockerAnimator();
 
         int waitFrames = 10;
         while (waitFrames > 0 && (MinigameManager.instance == null || FindObjectOfType<TimeManager>() == null))
@@ -223,10 +241,18 @@ public class PhotoEnemyGenerator : MonoBehaviour
                 continue;
             }
 
-            bool fromRightSpawn = Random.value > 0.5f;
+            // El PRIMER enemigo siempre viene desde la izquierda (se mueve a la
+            // derecha), porque el blocker SIEMPRE se mueve a la izquierda
+            bool fromRightSpawn = firstEnemySpawned ? Random.value > 0.5f : false;
 
             if (CrossesSafeWindow(spawnTime, enemySpeed, fromRightSpawn))
             {
+                // El primer enemigo no puede cambiar de lado: debe venir de la izquierda
+                if (!firstEnemySpawned)
+                {
+                    continue;
+                }
+
                 fromRightSpawn = !fromRightSpawn;
                 if (CrossesSafeWindow(spawnTime, enemySpeed, fromRightSpawn))
                 {
@@ -245,6 +271,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
             }
 
             SpawnEnemy(enemySpeed, fromRightSpawn);
+            firstEnemySpawned = true;
             return;
         }
     }
@@ -324,6 +351,8 @@ public class PhotoEnemyGenerator : MonoBehaviour
             FlipSprite(enemy);
         }
 
+        ApplyDepthSortingOffset(enemy, randomY);
+
         PhotoEnemyMover mover = enemy.GetComponent<PhotoEnemyMover>();
         if (mover == null)
         {
@@ -332,6 +361,41 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
         mover.Initialize(direction, enemySpeed, lifeTime);
         activeEnemies.Add(mover);
+    }
+
+    /// <summary>
+    /// SUMA (no reemplaza) un offset de order in layer al SpriteRenderer del
+    /// enemigo y a todos sus hijos, segun que tan abajo aparecio:
+    /// abajo del todo = offset maximo, arriba del todo = 0.
+    /// El offset va en saltos fijos (ej. 0, 10, 20... 300).
+    /// </summary>
+    private void ApplyDepthSortingOffset(GameObject enemy, float spawnY)
+    {
+        int step = Mathf.Max(1, depthSortingStep);
+        int maxOffset = Mathf.Max(0, maxDepthSortingOffset);
+
+        // 0 = aparecio arriba del todo, 1 = abajo del todo
+        float depthFactor = Mathf.InverseLerp(SpaceMaxY, SpaceMinY, spawnY);
+
+        int maxSteps = Mathf.Max(1, maxOffset / step);
+        int offset = Mathf.RoundToInt(depthFactor * maxSteps) * step;
+        offset = Mathf.Min(offset, maxOffset);
+
+        if (offset == 0)
+        {
+            return;
+        }
+
+        SpriteRenderer[] renderers = enemy.GetComponentsInChildren<SpriteRenderer>(true);
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            if (renderers[i] == null)
+            {
+                continue;
+            }
+
+            renderers[i].sortingOrder += offset;
+        }
     }
 
     private void FlipSprite(GameObject enemy)
@@ -379,6 +443,12 @@ public class PhotoEnemyGenerator : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(blocker.position, 0.25f);
         }
+
+        if (blocker2 != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(blocker2.position, 0.25f);
+        }
     }
 
     private Vector3 GetPhotoAreaCenter()
@@ -388,7 +458,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
 
     private void UpdateBlockerBehavior()
     {
-        if (blocker == null)
+        if (blocker == null && blocker2 == null)
         {
             return;
         }
@@ -406,7 +476,7 @@ public class PhotoEnemyGenerator : MonoBehaviour
                 if (IsEnemyTouchingPhotoArea(enemyMover))
                 {
                     blockerTriggered = true;
-                    blockerDirection = -enemyMover.MoveDirection;
+                    StartBlockerMovement();
                     InitializeSafeWindowAfterBlocker();
                     break;
                 }
@@ -415,7 +485,78 @@ public class PhotoEnemyGenerator : MonoBehaviour
             return;
         }
 
-        blocker.position += Vector3.right * (blockerDirection * blockerMoveSpeed * Time.deltaTime);
+        // El blocker principal se mueve a la izquierda
+        if (blocker != null)
+        {
+            blocker.position += Vector3.left * (blockerMoveSpeed * Time.deltaTime);
+        }
+
+        // El segundo blocker se mueve en direccion contraria (derecha)
+        if (blocker2 != null)
+        {
+            blocker2.position += Vector3.right * (blocker2MoveSpeed * Time.deltaTime);
+        }
+    }
+
+    private void InitializeBlockerAnimator()
+    {
+        if (blockerAnimator == null && blocker != null)
+        {
+            blockerAnimator = blocker.GetComponentInChildren<Animator>();
+        }
+
+        if (blockerAnimator != null && !string.IsNullOrWhiteSpace(blockerSpeedParameter))
+        {
+            // El blocker empieza quieto: SpeedX en 0
+            blockerAnimator.SetFloat(blockerSpeedParameter, 0f);
+        }
+
+        if (blocker2Animator == null && blocker2 != null)
+        {
+            blocker2Animator = blocker2.GetComponentInChildren<Animator>();
+        }
+
+        if (blocker2Animator != null && !string.IsNullOrWhiteSpace(blocker2SpeedParameter))
+        {
+            blocker2Animator.SetFloat(blocker2SpeedParameter, 0f);
+        }
+    }
+
+    private void StartBlockerMovement()
+    {
+        if (blockerAnimatorStarted)
+        {
+            return;
+        }
+
+        blockerAnimatorStarted = true;
+
+        if (blockerAnimator != null)
+        {
+            // Pasa a "bought" al empezar a moverse y reporta su velocidad
+            if (!string.IsNullOrWhiteSpace(blockerMoveTrigger))
+            {
+                blockerAnimator.SetTrigger(blockerMoveTrigger);
+            }
+
+            if (!string.IsNullOrWhiteSpace(blockerSpeedParameter))
+            {
+                blockerAnimator.SetFloat(blockerSpeedParameter, Mathf.Abs(blockerMoveSpeed));
+            }
+        }
+
+        if (blocker2Animator != null)
+        {
+            if (!string.IsNullOrWhiteSpace(blocker2MoveTrigger))
+            {
+                blocker2Animator.SetTrigger(blocker2MoveTrigger);
+            }
+
+            if (!string.IsNullOrWhiteSpace(blocker2SpeedParameter))
+            {
+                blocker2Animator.SetFloat(blocker2SpeedParameter, Mathf.Abs(blocker2MoveSpeed));
+            }
+        }
     }
 
     private void InitializeSafeWindowAfterBlocker()

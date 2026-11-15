@@ -3,13 +3,9 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
 using System;
-using Unity.Services.Leaderboards;
 
 public class FinalSceneManager : MonoBehaviour
 {
-    [Header("Leaderboards")]
-    [SerializeField] private string infiniteLeaderboardId = "PerfectTouristLeaderboard";
-
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI currentMoneyText;
     [SerializeField] private TextMeshProUGUI globalMoneyText;
@@ -47,19 +43,17 @@ public class FinalSceneManager : MonoBehaviour
 
         leaderboardSubmitted = true;
 
-        if (CurrentUser.Instance == null)
-            return;
-
         try
         {
-            await CurrentUser.Instance.EnsureServicesReadyAsync();
-            await LeaderboardsService.Instance.AddPlayerScoreAsync(infiniteLeaderboardId, RoundData.instance.CompletedMinigames);
+            // CurrentUser se encarga de guardar solo el mejor puntaje (new best)
+            await CurrentUser.Instance.SubmitInfiniteModeScoreAsync(RoundData.instance.CompletedMinigames);
         }
         catch (Exception exception)
         {
             Debug.LogWarning("FinalSceneManager: no se pudo enviar la puntuacion al leaderboard. " + exception.Message);
         }
     }
+
    public void LoadLeaderboardScene(){
         SceneManager.LoadScene("Leaderboard");
     }
@@ -83,7 +77,7 @@ public class FinalSceneManager : MonoBehaviour
         shopButton.SetActive(false);
         resultText.gameObject.SetActive(false);
 
-   
+
         yield return new WaitForSeconds(startDelay);
 
         float elapsed = 0f;
@@ -111,20 +105,20 @@ public class FinalSceneManager : MonoBehaviour
             yield return null;
         }
 
- 
+
         currentMoneyText.text = "0";
         globalMoneyText.text = (startGlobalMoney + startRoundMoney).ToString();
 
- 
+
         GameData.instance.Money += startRoundMoney;
 
-    
+
         resultText.gameObject.SetActive(true);
         resultText.text = RoundData.instance.IsStoryMode
             ? "Conservaste " + startRoundMoney + "$"
             : "Conseguiste " + startRoundMoney + "$ por completar " + RoundData.instance.CompletedMinigames + " minijuegos!";
 
-   
+
         homeButton.SetActive(true);
         shopButton.SetActive(true);
     }
@@ -141,9 +135,9 @@ public class FinalSceneManager : MonoBehaviour
     }
     public void LoadScene(string sceneName)
     {
-     
+
             RoundData.ResetForMainMenu();
-        
+
 
         SceneManager.LoadScene(sceneName);
     }

@@ -1,28 +1,31 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class SpawnerVendedor : MonoBehaviour
 {
-    private enum SpawnStartPoint
+    /// <summary>
+    /// Punto de spawn individual. Cada punto tiene su PROPIO order in layer:
+    /// la capa de renderizado depende del punto especifico, no de la lista.
+    /// </summary>
+    [Serializable]
+    public class SpawnPointData
     {
-        Back,
-        Front
+        public Transform point;
+        [Tooltip("Order in layer de los vendedores que salen de este punto")]
+        public int sortingOrder;
     }
 
     [Header("Prefabs")]
     [SerializeField] private List<Vendedor> vendedorPrefabs = new List<Vendedor>();
 
-    [Header("Route")]
-    [FormerlySerializedAs("leftSpawnPoint")]
-    [SerializeField] private Transform backSpawnPoint;
-    [FormerlySerializedAs("rightSpawnPoint")]
-    [SerializeField] private Transform frontSpawnPoint;
+    [Header("Spawn Points")]
+    [SerializeField] private List<SpawnPointData> leftSpawnPoints = new List<SpawnPointData>();
+    [SerializeField] private List<SpawnPointData> rightSpawnPoints = new List<SpawnPointData>();
     [SerializeField] private bool randomDirection = true;
-    [FormerlySerializedAs("spawnLeftToRight")]
-    [SerializeField] private bool spawnBackToFront = true;
+    [Tooltip("Solo aplica si randomDirection = false")]
+    [SerializeField] private bool spawnFromLeft = true;
 
     [Header("Need Guarantee")]
     [SerializeField] private CharacterNecesidad characterNecesidad;
@@ -42,16 +45,18 @@ public class SpawnerVendedor : MonoBehaviour
     [SerializeField] private float maxSpeed = 2.2f;
 
     [Header("Sorting")]
-    [SerializeField] private int initialSortingOrder = 0;
-    [SerializeField] private int sortingOrderStep = 1;
-    [SerializeField] private int guaranteedNeedSortingOrder = 100;
-    [SerializeField] private int rightToLeftSortingOffset = 39;
-    [SerializeField] private int guaranteedNeedAdditionalSortingOffset = 1;
+    [Tooltip("Offset de order in layer del vendedor garantizado respecto a SU punto de spawn (delante de sus compañeros, no de todos)")]
+    [SerializeField] private int guaranteedNeedSortingOffset = 5;
 
     private readonly List<Vendedor> aliveVendedores = new List<Vendedor>();
     private readonly List<Vendedor> candidatePrefabs = new List<Vendedor>();
+
+    // Bolsas barajadas: indices de cada lista que aun no han salido.
+    // Se agotan por completo antes de permitir repeticiones.
+    private readonly List<int> leftBag = new List<int>();
+    private readonly List<int> rightBag = new List<int>();
+
     private float spawnTimer;
-    private int nextSortingOrder;
     private int runtimeMaxAliveVendedores;
     private float runtimeSpeedMultiplier = 1f;
     private float runtimeStopChanceMultiplier = 1f;
@@ -77,7 +82,6 @@ public class SpawnerVendedor : MonoBehaviour
     {
         ResolveDifficulty();
         spawnTimer = GetRandomSpawnInterval();
-        nextSortingOrder = initialSortingOrder;
     }
 
     private void Update()
@@ -85,7 +89,7 @@ public class SpawnerVendedor : MonoBehaviour
         CleanupNulls();
 
         if (aliveVendedores.Count >= Mathf.Max(1, runtimeMaxAliveVendedores)) return;
-        if (backSpawnPoint == null || frontSpawnPoint == null) return;
+        if (!HasAnyValidPoint(leftSpawnPoints) || !HasAnyValidPoint(rightSpawnPoints)) return;
         if (vendedorPrefabs.Count == 0) return;
 
         spawnTimer -= Time.deltaTime;
@@ -97,14 +101,16 @@ public class SpawnerVendedor : MonoBehaviour
 
     private void SpawnOne()
     {
-        bool backToFront = randomDirection ? Random.value > 0.5f : spawnBackToFront;
-        SpawnStartPoint startPoint = backToFront ? SpawnStartPoint.Back : SpawnStartPoint.Front;
+        bool fromLeft = randomDirection ? Random.value > 0.5f : spawnFromLeft;
 
-        Vector3 spawnPos = backToFront ? backSpawnPoint.position : frontSpawnPoint.position;
-        Vector3 direction = backToFront ? Vector3.right : Vector3.left;
-        float despawnX = backToFront ? frontSpawnPoint.position.x : backSpawnPoint.position.x;
+        SpawnPointData spawnPoint = DrawSpawnPoint(fromLeft);
+        if (spawnPoint == null) return;
 
-        Vendedor prefab = PickRandomPrefabForStart(startPoint);
+        Vector3 spawnPos = spawnPoint.point.position;
+        Vector3 direction = fromLeft ? Vector3.right : Vector3.left;
+        float despawnX = GetOppositeDespawnX(fromLeft);
+
+        Vendedor prefab = PickRandomPrefabForStart(fromLeft);
         if (prefab == null) return;
 
         Vendedor instance = Instantiate(prefab, spawnPos, prefab.transform.rotation);
@@ -113,18 +119,105 @@ public class SpawnerVendedor : MonoBehaviour
         instance.SetNecesidad(spawnedNeed);
 
         if (debugLogs)
-            Debug.Log($"[SpawnerVendedor] SpawnOne => prefab={prefab.name}, necesidad={spawnedNeed}", this);
+            Debug.Log($"[SpawnerVendedor] SpawnOne => prefab={prefab.name}, punto={spawnPoint.point.name}, necesidad={spawnedNeed}", this);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
         speed *= Mathf.Max(0.01f, runtimeSpeedMultiplier);
         instance.Initialize(direction, speed, despawnX,
-            backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
+            fromLeft ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
         instance.ApplyDifficultyStopTuning(runtimeStopChanceMultiplier, runtimeStopAttemptIntervalMultiplier);
-        instance.SetSortingOrderRecursive(Mathf.Max(0, guaranteedNeedSortingOrder));
-        if (!backToFront)
-            instance.AddSortingOrderOffsetRecursive(rightToLeftSortingOffset);
+
+        // El order in layer viene del PUNTO ESPECIFICO, no de la lista.
+        // El factor de profundidad (0-1) se aplica DESPUES de Initialize;
+        // cada Vendedor interpola su propia escala min/max segun ese factor.
+        instance.SetSortingOrderRecursive(spawnPoint.sortingOrder);
+        instance.SetSpawnScale(ComputeDepthFactor(spawnPoint));
 
         aliveVendedores.Add(instance);
+    }
+
+    /// <summary>
+    /// Saca un punto de la bolsa barajada del lado indicado.
+    /// La bolsa se agota por completo (sin repeticiones) antes de rellenarse.
+    /// </summary>
+    private SpawnPointData DrawSpawnPoint(bool fromLeft)
+    {
+        List<SpawnPointData> points = fromLeft ? leftSpawnPoints : rightSpawnPoints;
+        List<int> bag = fromLeft ? leftBag : rightBag;
+
+        // Limpiar indices invalidos (lista editada o puntos destruidos en runtime)
+        for (int i = bag.Count - 1; i >= 0; i--)
+        {
+            int index = bag[i];
+            if (index < 0 || index >= points.Count || !IsValidPoint(points[index]))
+                bag.RemoveAt(i);
+        }
+
+        // Bolsa agotada: rellenar con todos los puntos validos y barajar
+        if (bag.Count == 0)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (IsValidPoint(points[i]))
+                    bag.Add(i);
+            }
+
+            Shuffle(bag);
+        }
+
+        if (bag.Count == 0) return null;
+
+        int lastIndex = bag.Count - 1;
+        int pointIndex = bag[lastIndex];
+        bag.RemoveAt(lastIndex);
+
+        return points[pointIndex];
+    }
+
+    private void Shuffle(List<int> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
+
+    private bool IsValidPoint(SpawnPointData data)
+    {
+        return data != null && data.point != null;
+    }
+
+    private bool HasAnyValidPoint(List<SpawnPointData> points)
+    {
+        for (int i = 0; i < points.Count; i++)
+        {
+            if (IsValidPoint(points[i]))
+                return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// X de despawn: el punto mas lejano del lado opuesto, para garantizar
+    /// que el vendedor cruza toda la pantalla sin importar de que punto salio.
+    /// </summary>
+    private float GetOppositeDespawnX(bool fromLeft)
+    {
+        List<SpawnPointData> opposite = fromLeft ? rightSpawnPoints : leftSpawnPoints;
+        float best = fromLeft ? float.NegativeInfinity : float.PositiveInfinity;
+        bool found = false;
+
+        for (int i = 0; i < opposite.Count; i++)
+        {
+            if (!IsValidPoint(opposite[i])) continue;
+
+            float x = opposite[i].point.position.x;
+            best = fromLeft ? Mathf.Max(best, x) : Mathf.Min(best, x);
+            found = true;
+        }
+
+        return found ? best : transform.position.x;
     }
 
     private float GetRandomSpawnInterval()
@@ -134,7 +227,7 @@ public class SpawnerVendedor : MonoBehaviour
         return Random.Range(min, max);
     }
 
-    private Vendedor PickRandomPrefabForStart(SpawnStartPoint startPoint)
+    private Vendedor PickRandomPrefabForStart(bool fromLeft)
     {
         candidatePrefabs.Clear();
 
@@ -143,9 +236,10 @@ public class SpawnerVendedor : MonoBehaviour
             Vendedor prefab = vendedorPrefabs[i];
             if (prefab == null) continue;
 
+            // Back/Front son nombres heredados del Vendedor: Back = sale de la izquierda, Front = de la derecha
             bool valid = prefab.SpawnPreference == Vendedor.SpawnPointPreference.Any ||
-                         (startPoint == SpawnStartPoint.Back && prefab.SpawnPreference == Vendedor.SpawnPointPreference.Back) ||
-                         (startPoint == SpawnStartPoint.Front && prefab.SpawnPreference == Vendedor.SpawnPointPreference.Front);
+                         (fromLeft && prefab.SpawnPreference == Vendedor.SpawnPointPreference.Back) ||
+                         (!fromLeft && prefab.SpawnPreference == Vendedor.SpawnPointPreference.Front);
 
             if (valid)
                 candidatePrefabs.Add(prefab);
@@ -153,7 +247,7 @@ public class SpawnerVendedor : MonoBehaviour
 
         if (candidatePrefabs.Count == 0)
         {
-            Debug.LogWarning($"SpawnerVendedor: no prefab matches start point {startPoint}. Falling back to full list.");
+            Debug.LogWarning($"SpawnerVendedor: no prefab matches side {(fromLeft ? "Left" : "Right")}. Falling back to full list.");
 
             for (int i = 0; i < vendedorPrefabs.Count; i++)
             {
@@ -171,7 +265,7 @@ public class SpawnerVendedor : MonoBehaviour
     private void HandleNeedStarted(Necesidad need)
     {
         if (!guaranteeMatchingVendorOnNeedStart) return;
-        if (backSpawnPoint == null || frontSpawnPoint == null) return;
+        if (!HasAnyValidPoint(leftSpawnPoints) || !HasAnyValidPoint(rightSpawnPoints)) return;
         if (vendedorPrefabs.Count == 0) return;
 
         CleanupNulls();
@@ -184,35 +278,84 @@ public class SpawnerVendedor : MonoBehaviour
 
     private void SpawnOneWithNeed(Necesidad need)
     {
-        bool backToFront = randomDirection ? Random.value > 0.5f : spawnBackToFront;
-        SpawnStartPoint startPoint = backToFront ? SpawnStartPoint.Back : SpawnStartPoint.Front;
+        bool fromLeft = randomDirection ? Random.value > 0.5f : spawnFromLeft;
 
-        Vector3 spawnPos = backToFront ? backSpawnPoint.position : frontSpawnPoint.position;
-        Vector3 direction = backToFront ? Vector3.right : Vector3.left;
-        float despawnX = backToFront ? frontSpawnPoint.position.x : backSpawnPoint.position.x;
+        SpawnPointData spawnPoint = DrawSpawnPoint(fromLeft);
+        if (spawnPoint == null) return;
 
-        Vendedor prefab = PickRandomPrefabForStart(startPoint);
+        Vector3 spawnPos = spawnPoint.point.position;
+        Vector3 direction = fromLeft ? Vector3.right : Vector3.left;
+        float despawnX = GetOppositeDespawnX(fromLeft);
+
+        Vendedor prefab = PickRandomPrefabForStart(fromLeft);
         if (prefab == null) return;
 
         Vendedor instance = Instantiate(prefab, spawnPos, prefab.transform.rotation);
         instance.SetNecesidad(need);
 
         if (debugLogs)
-            Debug.Log($"[SpawnerVendedor] SpawnOneWithNeed => prefab={prefab.name}, necesidad={need}", this);
+            Debug.Log($"[SpawnerVendedor] SpawnOneWithNeed => prefab={prefab.name}, punto={spawnPoint.point.name}, necesidad={need}", this);
 
         float speed = Random.Range(Mathf.Min(minSpeed, maxSpeed), Mathf.Max(minSpeed, maxSpeed));
         speed *= Mathf.Max(0.01f, runtimeSpeedMultiplier);
         speed *= Mathf.Max(1f, guaranteedNeedSpeedMultiplier);
         instance.Initialize(direction, speed, despawnX,
-            backToFront ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
+            fromLeft ? Vendedor.SpawnPointPreference.Back : Vendedor.SpawnPointPreference.Front);
         instance.ApplyDifficultyStopTuning(runtimeStopChanceMultiplier, runtimeStopAttemptIntervalMultiplier);
-        instance.SetSortingOrderRecursive(nextSortingOrder);
-        if (!backToFront)
-            instance.AddSortingOrderOffsetRecursive(rightToLeftSortingOffset);
-        instance.AddSortingOrderOffsetRecursive(guaranteedNeedAdditionalSortingOffset);
-        nextSortingOrder += Mathf.Max(1, sortingOrderStep);
+
+        // Mismo tamaño que sus compañeros del punto (mismo factor de profundidad),
+        // pero +offset de order in layer: delante de sus compañeros, no de todos
+        instance.SetSortingOrderRecursive(spawnPoint.sortingOrder + guaranteedNeedSortingOffset);
+        instance.SetSpawnScale(ComputeDepthFactor(spawnPoint));
 
         aliveVendedores.Add(instance);
+    }
+
+    /// <summary>
+    /// Factor de profundidad del punto segun su order in layer:
+    /// 0 = order MAS BAJO de todos los puntos, 1 = el MAS ALTO,
+    /// interpolacion lineal para los intermedios. El Vendedor usa este
+    /// factor para interpolar entre su propia minScale y maxScale.
+    /// Si todos los puntos tienen el mismo order, el factor es 0.5.
+    /// </summary>
+    private float ComputeDepthFactor(SpawnPointData spawnPoint)
+    {
+        int minOrder;
+        int maxOrder;
+        GetGlobalOrderRange(out minOrder, out maxOrder);
+
+        int range = maxOrder - minOrder;
+        if (range <= 0)
+            return 0.5f;
+
+        return Mathf.InverseLerp(minOrder, maxOrder, spawnPoint.sortingOrder);
+    }
+
+    /// <summary>Order in layer minimo y maximo entre TODOS los puntos validos (ambos lados).</summary>
+    private void GetGlobalOrderRange(out int minOrder, out int maxOrder)
+    {
+        minOrder = int.MaxValue;
+        maxOrder = int.MinValue;
+
+        AccumulateOrderRange(leftSpawnPoints, ref minOrder, ref maxOrder);
+        AccumulateOrderRange(rightSpawnPoints, ref minOrder, ref maxOrder);
+
+        if (minOrder == int.MaxValue)
+        {
+            minOrder = 0;
+            maxOrder = 0;
+        }
+    }
+
+    private void AccumulateOrderRange(List<SpawnPointData> points, ref int minOrder, ref int maxOrder)
+    {
+        for (int i = 0; i < points.Count; i++)
+        {
+            if (!IsValidPoint(points[i])) continue;
+
+            minOrder = Mathf.Min(minOrder, points[i].sortingOrder);
+            maxOrder = Mathf.Max(maxOrder, points[i].sortingOrder);
+        }
     }
 
     private Necesidad GetRandomNecesidadVenta()

@@ -53,14 +53,26 @@ public class CurrentUser : MonoBehaviour
 
     public async Task SetUserNameAsync(string userName)
     {
+        string previousUserName = currentUserName;
         currentUserName = userName == null ? string.Empty : userName.Trim();
 
         if (!HasUserName)
             return;
 
-        await EnsureServicesReadyAsync();
-        await EnsureSignedInWithCurrentUserProfileAsync();
-        await SyncAuthenticationPlayerNameAsync();
+        try
+        {
+            await EnsureServicesReadyAsync();
+            await EnsureSignedInWithCurrentUserProfileAsync();
+            await SyncAuthenticationPlayerNameAsync();
+        }
+        catch
+        {
+            // ROLLBACK: si el registro falla, el nombre NO queda guardado.
+            // Sin esto, HasUserName quedaba en true y el juego trataba al
+            // usuario como registrado aunque el sign-in hubiera fallado.
+            currentUserName = previousUserName;
+            throw;
+        }
     }
 
     public async Task EnsureServicesReadyAsync()
@@ -84,6 +96,14 @@ public class CurrentUser : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Envia el puntaje del modo infinito al leaderboard guardando SOLO el mejor
+    /// resultado (new best). Si el puntaje nuevo no supera al registrado, no se envia.
+    ///
+    /// Nota: esta version del SDK solo tiene AddPlayerScoreAsync, que SUMA al score
+    /// existente. Por eso se envia solo la DIFERENCIA entre el nuevo mejor puntaje
+    /// y el registrado, de modo que el total quede igual al new best.
+    /// </summary>
     public async Task SubmitInfiniteModeScoreAsync(int completedMinigames)
     {
         if (completedMinigames < 0)
@@ -94,7 +114,36 @@ public class CurrentUser : MonoBehaviour
         if (!AuthenticationService.Instance.IsSignedIn)
             return;
 
-        await LeaderboardsService.Instance.AddPlayerScoreAsync("PerfectTouristLeaderboard", completedMinigames);
+        double currentBest = 0;
+        bool hasPreviousScore = false;
+
+        try
+        {
+            var entry = await LeaderboardsService.Instance.GetPlayerScoreAsync("PerfectTouristLeaderboard");
+
+            if (entry != null)
+            {
+                currentBest = entry.Score;
+                hasPreviousScore = true;
+            }
+        }
+        catch (Exception)
+        {
+            // El jugador aun no tiene score en el leaderboard
+            hasPreviousScore = false;
+        }
+
+        // Solo se envia si es un nuevo mejor puntaje
+        if (hasPreviousScore && completedMinigames <= currentBest)
+            return;
+
+        // AddPlayerScoreAsync suma: enviamos solo la diferencia para que
+        // el total quede exactamente en el nuevo mejor puntaje
+        double delta = hasPreviousScore
+            ? completedMinigames - currentBest
+            : completedMinigames;
+
+        await LeaderboardsService.Instance.AddPlayerScoreAsync("PerfectTouristLeaderboard", delta);
     }
 
     private async Task InitializeServicesAsync()
