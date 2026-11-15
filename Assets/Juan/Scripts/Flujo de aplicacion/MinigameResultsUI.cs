@@ -37,9 +37,109 @@ public class MinigameResultsUI : MonoBehaviour
     [SerializeField] private float endDelay = 1.0f;
     [SerializeField] private float resultSoundDelay = 0.5f;
 
+    [Header("Skip results")]
+    [Tooltip("Optional. If it is not assigned, the message is created automatically on the scene Canvas.")]
+    [SerializeField] private TextMeshProUGUI skipPromptText;
+    [SerializeField, Min(0.1f)] private float skipConfirmationDuration = 3f;
+    [SerializeField] private string skipPromptMessage = "Pulsa una vez más para saltar";
+
+    private Coroutine animationCoroutine;
+    private bool waitingForSkipConfirmation;
+    private float skipConfirmationEndsAt;
+    private bool loadingNextMinigame;
+
     private void Start()
     {
-        StartCoroutine(AnimateMoney());
+        SetSkipPromptVisible(false);
+        animationCoroutine = StartCoroutine(AnimateMoney());
+    }
+
+    private void Update()
+    {
+        if (loadingNextMinigame)
+            return;
+
+        if (waitingForSkipConfirmation && Time.unscaledTime >= skipConfirmationEndsAt)
+        {
+            CancelSkipConfirmation();
+            return;
+        }
+
+        if (!SkipClickPressed())
+            return;
+
+        if (waitingForSkipConfirmation)
+        {
+            SkipResults();
+            return;
+        }
+
+        waitingForSkipConfirmation = true;
+        skipConfirmationEndsAt = Time.unscaledTime + skipConfirmationDuration;
+        SetSkipPromptVisible(true);
+    }
+
+    private static bool SkipClickPressed()
+    {
+        if (Input.GetMouseButtonDown(0))
+            return true;
+
+        return Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
+    }
+
+    private void CancelSkipConfirmation()
+    {
+        waitingForSkipConfirmation = false;
+        SetSkipPromptVisible(false);
+    }
+
+    private void SkipResults()
+    {
+        loadingNextMinigame = true;
+        CancelSkipConfirmation();
+
+        if (animationCoroutine != null)
+            StopCoroutine(animationCoroutine);
+
+        RoundData.instance.NextMinigame();
+    }
+
+    private void SetSkipPromptVisible(bool visible)
+    {
+        if (skipPromptText == null && visible)
+            CreateSkipPrompt();
+
+        if (skipPromptText == null)
+            return;
+
+        skipPromptText.text = skipPromptMessage;
+        skipPromptText.gameObject.SetActive(visible);
+    }
+
+    private void CreateSkipPrompt()
+    {
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+        if (canvas == null)
+        {
+            Debug.LogWarning("MinigameResultsUI: No Canvas found to display the skip message.", this);
+            return;
+        }
+
+        GameObject promptObject = new GameObject("Skip Confirmation Text", typeof(RectTransform));
+        promptObject.transform.SetParent(canvas.transform, false);
+
+        RectTransform rectTransform = promptObject.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(0.5f, 0.12f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.12f);
+        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        rectTransform.sizeDelta = new Vector2(700f, 70f);
+
+        skipPromptText = promptObject.AddComponent<TextMeshProUGUI>();
+        skipPromptText.font = TMP_Settings.defaultFontAsset;
+        skipPromptText.alignment = TextAlignmentOptions.Center;
+        skipPromptText.fontSize = 28f;
+        skipPromptText.color = Color.white;
+        skipPromptText.raycastTarget = false;
     }
 
     private IEnumerator AnimateMoney()
@@ -111,6 +211,15 @@ public class MinigameResultsUI : MonoBehaviour
         yield return new WaitForSeconds(endDelay);
 
     
+        LoadNextMinigameWhenAnimationFinishes();
+    }
+
+    private void LoadNextMinigameWhenAnimationFinishes()
+    {
+        if (loadingNextMinigame)
+            return;
+
+        loadingNextMinigame = true;
         RoundData.instance.NextMinigame();
     }
 
