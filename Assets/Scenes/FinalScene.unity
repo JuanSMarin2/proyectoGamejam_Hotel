@@ -1042,7 +1042,7 @@ MonoBehaviour:
   resultText: {fileID: 1708092334}
   homeButton: {fileID: 1652075482}
   shopButton: {fileID: 585205552}
-  replayButton: {fileID: 0}
+  replayButton: {fileID: 207554614}
   startDelay: 0.5
   transferDuration: 2
   coinSoundStep: 10
