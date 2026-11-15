@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
 using System;
 
@@ -22,6 +23,89 @@ public class MainMenuManager : MonoBehaviour
     // Bloquea segundas solicitudes mientras una confirmacion esta en curso.
     // Solo se libera cuando la solicitud termina (error o exito).
     private bool isConfirmingUser;
+
+    // Input que debe recibir el foco en el proximo Update (al abrir un panel)
+    private TMP_InputField pendingFocusInput;
+
+    // Frame en el que un input dejo de editarse. Evita que el mismo Enter
+    // que cierra la edicion la vuelva a abrir en ese frame.
+    private int lastEndEditFrame = -1;
+
+    private void Awake()
+    {
+        SetupNameInput(registerNameInput);
+        SetupNameInput(changeUserNameInput);
+    }
+
+    private void OnDestroy()
+    {
+        if (registerNameInput != null)
+            registerNameInput.onEndEdit.RemoveListener(OnNameInputEndEdit);
+
+        if (changeUserNameInput != null)
+            changeUserNameInput.onEndEdit.RemoveListener(OnNameInputEndEdit);
+    }
+
+    private void Update()
+    {
+        // Foco automatico al abrir el panel: se escribe sin dar click
+        if (pendingFocusInput != null)
+        {
+            if (pendingFocusInput.gameObject.activeInHierarchy)
+            {
+                FocusInput(pendingFocusInput);
+                pendingFocusInput = null;
+            }
+
+            return;
+        }
+
+        // Enter vuelve a entrar al input si se habia dejado de escribir
+        if (!Input.GetKeyDown(KeyCode.Return) && !Input.GetKeyDown(KeyCode.KeypadEnter))
+            return;
+
+        TMP_InputField openInput = GetOpenNameInput();
+
+        if (openInput == null || openInput.isFocused || Time.frameCount == lastEndEditFrame)
+            return;
+
+        FocusInput(openInput);
+    }
+
+    private void SetupNameInput(TMP_InputField inputField)
+    {
+        if (inputField == null)
+            return;
+
+        // Al volver a entrar el cursor queda al final, sin seleccionar todo el texto
+        inputField.onFocusSelectAll = false;
+        inputField.onEndEdit.AddListener(OnNameInputEndEdit);
+    }
+
+    private void OnNameInputEndEdit(string _)
+    {
+        lastEndEditFrame = Time.frameCount;
+    }
+
+    private TMP_InputField GetOpenNameInput()
+    {
+        if (registerNameInput != null && registerNameInput.gameObject.activeInHierarchy)
+            return registerNameInput;
+
+        if (changeUserNameInput != null && changeUserNameInput.gameObject.activeInHierarchy)
+            return changeUserNameInput;
+
+        return null;
+    }
+
+    private void FocusInput(TMP_InputField inputField)
+    {
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(inputField.gameObject);
+
+        inputField.ActivateInputField();
+        inputField.MoveTextEnd(false);
+    }
 
     public void StoryMode()
     {
@@ -69,6 +153,7 @@ public class MainMenuManager : MonoBehaviour
         SetPanelActive(registerPanel, true);
         SetStatus(registerStatusText, "Ingresa Tu nombre:");
         SetInputText(registerNameInput, string.Empty);
+        pendingFocusInput = registerNameInput;
     }
 
     public void OpenChangeUserPanel()
@@ -76,6 +161,7 @@ public class MainMenuManager : MonoBehaviour
         SetPanelActive(changeUserPanel, true);
         SetStatus(changeUserStatusText, "Ingresa Tu nombre:");
         SetInputText(changeUserNameInput, string.Empty);
+        pendingFocusInput = changeUserNameInput;
     }
 
     public async void ConfirmRegisterUser()

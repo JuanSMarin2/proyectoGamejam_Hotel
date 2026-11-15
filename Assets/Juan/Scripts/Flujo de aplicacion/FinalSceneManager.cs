@@ -14,6 +14,8 @@ public class FinalSceneManager : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private GameObject homeButton;
     [SerializeField] private GameObject shopButton;
+    [Tooltip("Boton para volver a jugar el modo infinito con el mismo usuario (opcional)")]
+    [SerializeField] private GameObject replayButton;
 
     [Header("Timing")]
     [SerializeField] private float startDelay = 0.5f;
@@ -25,6 +27,7 @@ public class FinalSceneManager : MonoBehaviour
     [SerializeField] private float transferTickVolume = 1f;
 
     private bool leaderboardSubmitted;
+    private bool transferFinished;
 
     private void Start()
     {
@@ -75,6 +78,8 @@ public class FinalSceneManager : MonoBehaviour
 
         homeButton.SetActive(false);
         shopButton.SetActive(false);
+        if (replayButton != null)
+            replayButton.SetActive(false);
         resultText.gameObject.SetActive(false);
 
 
@@ -119,17 +124,28 @@ public class FinalSceneManager : MonoBehaviour
             : "Conseguiste " + startRoundMoney + "$ por completar " + RoundData.instance.CompletedMinigames + " minijuegos!";
 
 
+        transferFinished = true;
+
         homeButton.SetActive(true);
         shopButton.SetActive(true);
+
+        // El replay solo aplica al modo infinito
+        if (replayButton != null)
+            replayButton.SetActive(!RoundData.instance.IsStoryMode);
     }
 
+    // Boton de replay: vuelve a jugar el modo infinito con el mismo usuario,
+    // sin pasar por el menu principal.
     public void PlayAgain()
     {
-        RoundData.ResetForMainMenu();
+        // El dinero de la ronda se suma al terminar la transferencia;
+        // no se permite reintentar antes para no perderlo.
+        if (!transferFinished)
+            return;
 
-        var order = GameOrderManager.instance.GetSceneOrder();
-        RoundData.instance.SetGameOrder(order);
-        RoundData.instance.SetStoryMode(false);
+        // No se destruye RoundData: conserva la lista de minijuegos.
+        // CurrentUser persiste entre escenas, asi que el usuario sigue siendo el mismo.
+        RoundData.instance.RestartInfiniteRun();
 
         SceneManager.LoadScene("IntroScene");
     }

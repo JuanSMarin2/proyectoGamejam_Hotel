@@ -28,11 +28,16 @@ public class ConfigPanel : MonoBehaviour
     [SerializeField] private Sprite unmutedSprite;
     [SerializeField] private Sprite mutedSprite;
 
+    [Header("Mute Buttons")]
+    [Tooltip("Volumen que se aplica al pulsar el boton cuando el canal esta muteado.")]
+    [SerializeField, Range(0.01f, 1f)] private float unmuteVolume = 0.5f;
+
     private const float MutedThreshold = 0.0001f;
 
     private void OnEnable()
     {
         BindSliderEvents(true);
+        SoundManager.VolumeSettingsChanged += HandleVolumeSettingsChanged;
         PullValuesFromAudioSystem();
         RefreshUI();
     }
@@ -40,6 +45,15 @@ public class ConfigPanel : MonoBehaviour
     private void OnDisable()
     {
         BindSliderEvents(false);
+        SoundManager.VolumeSettingsChanged -= HandleVolumeSettingsChanged;
+    }
+
+    // Mantiene sliders, textos e iconos al dia sin importar quien cambie el volumen
+    // (otro panel de opciones, un boton de mute, etc.).
+    private void HandleVolumeSettingsChanged()
+    {
+        PullValuesFromAudioSystem();
+        RefreshUI();
     }
 
     private void BindSliderEvents(bool bind)
@@ -110,7 +124,9 @@ public class ConfigPanel : MonoBehaviour
 
     public void UnmuteSfx()
     {
-        SoundManager.UnmuteSfxRestore();
+        if (SoundManager.GetSfxVolume() <= MutedThreshold)
+            SoundManager.SetSfxVolume(unmuteVolume);
+
         SyncSfxUIFromSystem();
     }
 
@@ -122,7 +138,9 @@ public class ConfigPanel : MonoBehaviour
 
     public void UnmuteMusic()
     {
-        SoundManager.UnmuteMusicRestore();
+        if (SoundManager.GetMusicVolume() <= MutedThreshold)
+            SoundManager.SetMusicVolume(unmuteVolume);
+
         SyncMusicUIFromSystem();
     }
 

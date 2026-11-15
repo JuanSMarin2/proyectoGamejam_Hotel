@@ -11,6 +11,29 @@ public class CheckInPlayer : MonoBehaviour
 
     private bool isPlayingCampana;
 
+    public bool IsPlayingCampana => isPlayingCampana;
+
+    /// <summary>
+    /// Reproduce la animacion de campana desde el inicio (sin sonido).
+    /// IsPlayingCampana vuelve a false cuando la animacion termina.
+    /// </summary>
+    public void PlayCampanaAnimation()
+    {
+        if (animator == null)
+        {
+            return;
+        }
+
+        isPlayingCampana = true;
+        animator.SetBool(campanaBoolName, true);
+        animator.SetBool(idleBoolName, false);
+
+        if (!string.IsNullOrEmpty(campanaStateName))
+        {
+            animator.Play(campanaStateName, campanaLayer, 0f);
+        }
+    }
+
     private void Start()
     {
         if (animator == null)

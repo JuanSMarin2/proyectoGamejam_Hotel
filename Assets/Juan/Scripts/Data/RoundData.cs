@@ -93,6 +93,18 @@ public class RoundData : MonoBehaviour
         minigameAppearanceCounts.Clear();
     }
 
+    // Reinicia la partida de modo infinito reutilizando la misma lista de
+    // minijuegos, sin pasar por el menu principal (GameOrderManager solo existe alli).
+    public void RestartInfiniteRun()
+    {
+        SetGameOrder(sceneOrder);
+        SetStoryMode(false);
+
+        money = startMoney;
+        previousMoney = startMoney;
+        lastMoneyChange = 0;
+    }
+
     public int RegisterMinigameAppearance(string sceneName)
     {
         if (string.IsNullOrWhiteSpace(sceneName))
