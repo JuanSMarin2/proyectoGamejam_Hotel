@@ -138,6 +138,11 @@ public class PhotoEnemyGenerator : MonoBehaviour
             return;
         }
 
+        if (sunCollider != null && !sunCollider.CanTakePhoto)
+        {
+            return;
+        }
+
         photoTaken = true;
         StopFootstepLoop();
         PlayPhotoShotSound();

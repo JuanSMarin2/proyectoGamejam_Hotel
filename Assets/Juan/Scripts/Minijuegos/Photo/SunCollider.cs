@@ -6,21 +6,45 @@ public class SunCollider : MonoBehaviour
 {
 
     public bool isBlocked = false;
+    public bool CanTakePhoto => photoEnabled;
     [SerializeField] private Image backlighting;
     [SerializeField] private float fadeDuration = 0.25f;
 
     private const float MaxBacklightingAlpha = 175f / 255f;
+    private const float PhotoUnlockBlockedDuration = 2f;
 
     private readonly HashSet<Collider2D> collidersInside = new HashSet<Collider2D>();
     private readonly Dictionary<PhotoParticleActiver, int> activersInside = new Dictionary<PhotoParticleActiver, int>();
     private Coroutine backlightingFadeCoroutine;
+    private float blockedDuration;
+    private bool photoEnabled;
 
     private void Awake()
     {
         SetBacklightingAlpha(0f);
     }
 
- private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
+    {
+        if (photoEnabled)
+        {
+            return;
+        }
+
+        if (!isBlocked)
+        {
+            photoEnabled = true;
+            return;
+        }
+
+        blockedDuration += Time.deltaTime;
+        if (blockedDuration >= PhotoUnlockBlockedDuration)
+        {
+            photoEnabled = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other == null)
             return;
@@ -48,6 +72,11 @@ public class SunCollider : MonoBehaviour
 
         collidersInside.Remove(other);
         isBlocked = collidersInside.Count > 0;
+        if (!isBlocked)
+        {
+            blockedDuration = 0f;
+            photoEnabled = true;
+        }
 
         PhotoParticleActiver activer = other.GetComponentInParent<PhotoParticleActiver>();
         if (activer != null && activersInside.TryGetValue(activer, out int count))
