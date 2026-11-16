@@ -14,6 +14,20 @@ public class CheckInPlayer : MonoBehaviour
     public bool IsPlayingCampana => isPlayingCampana;
 
     /// <summary>
+    /// Input unico del minijuego: lo que toca la campana es lo mismo que detiene el slider
+    /// (Espacio, click o cualquier flecha).
+    /// </summary>
+    public static bool BellPressedThisFrame()
+    {
+        return Input.GetKeyDown(KeyCode.Space)
+            || Input.GetMouseButtonDown(0)
+            || Input.GetKeyDown(KeyCode.UpArrow)
+            || Input.GetKeyDown(KeyCode.DownArrow)
+            || Input.GetKeyDown(KeyCode.LeftArrow)
+            || Input.GetKeyDown(KeyCode.RightArrow);
+    }
+
+    /// <summary>
     /// Reproduce la animacion de campana desde el inicio (sin sonido).
     /// IsPlayingCampana vuelve a false cuando la animacion termina.
     /// </summary>
@@ -62,7 +76,7 @@ public class CheckInPlayer : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (BellPressedThisFrame())
         {
             if (!isPlayingCampana)
             {

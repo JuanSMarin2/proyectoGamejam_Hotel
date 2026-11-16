@@ -6,13 +6,13 @@ using UnityEngine.UI;
 /// <summary>
 /// Minijuego del recepcionista (CheckIn).
 /// El handle del slider sube y baja solo. Se eligen al azar una o dos areas verdes
-/// y el jugador debe detener el handle (Espacio o click) dentro de ellas.
+/// y el jugador debe detener el handle (Espacio, click o flechas) dentro de ellas.
 /// - Acierta la ultima area verde: gana.
 /// - Presiona en zona roja: pierde.
 /// - Se acaba el tiempo sin terminar: pierde.
 /// - Al ganar, primero se reproduce la animacion de campana y luego la secuencia de victoria.
 /// La dificultad sale de MinigameManager.instance.Speed: a mas velocidad, area mas pequeña y handle mas rapido. Cuando el area baja del
-/// umbral (35% del slider) pasan a ser dos areas que se aciertan una tras otra.
+/// umbral (35% del slider) pasan a ser dos areas que se aciertan una tras otra, y con velocidad mayor a 3.5 son tres.
 /// </summary>
 public class ReceptionistBalanceController : MonoBehaviour
 {
@@ -43,22 +43,24 @@ public class ReceptionistBalanceController : MonoBehaviour
     [Tooltip("Velocidad de MinigameManager con la que el juego esta en su punto MAS FACIL")]
     [SerializeField] private float lowerSpeedLimit = 1f;
     [Tooltip("Velocidad de MinigameManager con la que el juego llega a su punto MAS DIFICIL")]
-    [SerializeField] private float upperSpeedLimit = 2.5f;
+    [SerializeField] private float upperSpeedLimit = 4f;
     [Tooltip("Tamaño del area verde (fraccion del slider) en la dificultad mas facil")]
     [SerializeField, Range(0.05f, 1f)] private float areaSizeEasy = 0.55f;
     [Tooltip("Tamaño del area verde (fraccion del slider) en la dificultad mas dificil")]
     [SerializeField, Range(0.05f, 1f)] private float areaSizeHard = 0.15f;
     [Tooltip("Si el area es menor a este valor, el juego pasa a tener DOS areas verdes")]
     [SerializeField, Range(0f, 1f)] private float twoAreasThreshold = 0.35f;
-    [Tooltip("Separacion minima entre las dos areas verdes (fraccion del slider)")]
+    [Tooltip("Si la velocidad de MinigameManager es MAYOR a este valor, el juego pasa a tener TRES areas verdes")]
+    [SerializeField] private float threeAreasSpeed = 3.5f;
+    [Tooltip("Separacion minima entre las areas verdes (fraccion del slider)")]
     [SerializeField, Range(0f, 0.5f)] private float minGapBetweenAreas = 0.08f;
     [Tooltip("Velocidad del handle (recorridos completos del slider por segundo) en la dificultad mas facil")]
     [SerializeField] private float handleSpeedEasy = 0.6f;
     [Tooltip("Velocidad del handle en la dificultad mas dificil")]
-    [SerializeField] private float handleSpeedHard = 1.4f;
+    [SerializeField] private float handleSpeedHard = 2.2f;
 
     [Header("Ritmo")]
-    [Tooltip("Segundos que el handle queda detenido al acertar la primera de dos areas")]
+    [Tooltip("Segundos que el handle queda detenido al acertar un area cuando aun quedan mas")]
     [SerializeField] private float pauseAfterHit = 1f;
     [SerializeField] private float fallbackRoundDuration = 10f;
 
@@ -141,7 +143,7 @@ public class ReceptionistBalanceController : MonoBehaviour
         MoveHandle();
         UpdateUI();
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (CheckInPlayer.BellPressedThisFrame())
         {
             TryStop();
         }
@@ -222,27 +224,35 @@ public class ReceptionistBalanceController : MonoBehaviour
         handleSpeed = Mathf.Lerp(handleSpeedEasy, handleSpeedHard, t);
 
         float size = Mathf.Lerp(areaSizeEasy, areaSizeHard, t);
-        bool twoAreas = size < twoAreasThreshold;
-
-        zones.Clear();
-
-        if (!twoAreas)
+        int areaCount = 1;
+        if (GetGameSpeed() > threeAreasSpeed)
         {
-            float start = Random.Range(0f, 1f - size);
-            zones.Add(new Vector2(start, start + size));
-            return;
+            areaCount = 3;
+        }
+        else if (size < twoAreasThreshold)
+        {
+            areaCount = 2;
         }
 
-        // Dos areas del mismo tamaño, sin solaparse y con una separacion minima
-        size = Mathf.Min(size, (1f - minGapBetweenAreas) * 0.5f);
-        float free = 1f - (2f * size) - minGapBetweenAreas;
-        float a = Random.Range(0f, free);
-        float b = Random.Range(0f, free);
-        float first = Mathf.Min(a, b);
-        float second = Mathf.Max(a, b) + size + minGapBetweenAreas;
+        // Areas del mismo tamaño, sin solaparse y con una separacion minima entre ellas
+        float totalGap = (areaCount - 1) * minGapBetweenAreas;
+        size = Mathf.Min(size, (1f - totalGap) / areaCount);
+        float free = Mathf.Max(0f, 1f - (areaCount * size) - totalGap);
 
-        zones.Add(new Vector2(first, first + size));
-        zones.Add(new Vector2(second, second + size));
+        // Se reparte al azar el espacio libre: cada area se desplaza lo suyo mas lo que ocupan las anteriores
+        List<float> offsets = new List<float>(areaCount);
+        for (int i = 0; i < areaCount; i++)
+        {
+            offsets.Add(Random.Range(0f, free));
+        }
+        offsets.Sort();
+
+        zones.Clear();
+        for (int i = 0; i < areaCount; i++)
+        {
+            float start = offsets[i] + i * (size + minGapBetweenAreas);
+            zones.Add(new Vector2(start, start + size));
+        }
     }
 
     private float GetGameSpeed()
