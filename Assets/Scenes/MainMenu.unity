@@ -349,7 +349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &62600014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2930,7 +2930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -13.4609375, y: -6.409424}
+  m_AnchoredPosition: {x: -13.460999, y: -6.409424}
   m_SizeDelta: {x: -729.5866, y: -402.81763}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &441578212
@@ -3732,7 +3732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -13.4609375, y: -6.409424}
+  m_AnchoredPosition: {x: -13.460999, y: -6.409424}
   m_SizeDelta: {x: -729.5866, y: -402.81763}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &516297775
@@ -8247,7 +8247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Juega los minijuegso en orden, tratando de completar las vacaciones deseadas
+  m_text: "Juega los minijuegos en orden y completa las vacaciones de tus sue\xF1os"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c5b50eb751191d04ab200dae4d0e530b, type: 2}
   m_sharedMaterial: {fileID: 341321257110148476, guid: c5b50eb751191d04ab200dae4d0e530b, type: 2}
@@ -8274,7 +8274,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.65
+  m_fontSize: 10.75
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10937,7 +10937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Demuestra quien es el numero uno ahorrando dinero para tener las vacaciones
+  m_text: Demuestra que eres el mejor ahorrando dinero para disfrutar de unas vacaciones
     perfectas
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c5b50eb751191d04ab200dae4d0e530b, type: 2}
@@ -10965,7 +10965,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.65
+  m_fontSize: 9.6
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14473,7 +14473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.872009, y: -11.290955}
+  m_AnchoredPosition: {x: 9.872009, y: -11.290985}
   m_SizeDelta: {x: 398.206, y: 299.506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1744340670

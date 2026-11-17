@@ -1372,7 +1372,7 @@ MonoBehaviour:
   gameDescription: Presiona "Espacio" para llamar al recepcionista y evitar que se
     distraiga
   gameDescriptionTime: 3
-  speed: 1
+  speed: 4
   losesWithTime: 1
 --- !u!4 &385304222
 Transform:
@@ -1871,13 +1871,14 @@ MonoBehaviour:
   redIcon: {fileID: -1936200370657917214, guid: f6b247013253e4b4eac58589d96252b3, type: 3}
   iconScale: 0.8
   lowerSpeedLimit: 1
-  upperSpeedLimit: 2.5
+  upperSpeedLimit: 4
   areaSizeEasy: 0.55
   areaSizeHard: 0.15
   twoAreasThreshold: 0.35
+  threeAreasSpeed: 3.5
   minGapBetweenAreas: 0.08
   handleSpeedEasy: 0.6
-  handleSpeedHard: 1.4
+  handleSpeedHard: 1.6
   pauseAfterHit: 1
   fallbackRoundDuration: 10
   checkInPlayer: {fileID: 0}

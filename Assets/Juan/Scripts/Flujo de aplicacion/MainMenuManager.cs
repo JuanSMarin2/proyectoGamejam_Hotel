@@ -35,15 +35,38 @@ public class MainMenuManager : MonoBehaviour
     {
         SetupNameInput(registerNameInput);
         SetupNameInput(changeUserNameInput);
+
+        // Enter mientras se escribe equivale a dar click al boton de confirmar
+        if (registerNameInput != null)
+            registerNameInput.onSubmit.AddListener(OnRegisterNameSubmit);
+
+        if (changeUserNameInput != null)
+            changeUserNameInput.onSubmit.AddListener(OnChangeUserNameSubmit);
     }
 
     private void OnDestroy()
     {
         if (registerNameInput != null)
+        {
             registerNameInput.onEndEdit.RemoveListener(OnNameInputEndEdit);
+            registerNameInput.onSubmit.RemoveListener(OnRegisterNameSubmit);
+        }
 
         if (changeUserNameInput != null)
+        {
             changeUserNameInput.onEndEdit.RemoveListener(OnNameInputEndEdit);
+            changeUserNameInput.onSubmit.RemoveListener(OnChangeUserNameSubmit);
+        }
+    }
+
+    private void OnRegisterNameSubmit(string _)
+    {
+        ConfirmRegisterUser();
+    }
+
+    private void OnChangeUserNameSubmit(string _)
+    {
+        ConfirmChangeUser();
     }
 
     private void Update()
@@ -201,12 +224,14 @@ public void ExitGame()
         if (string.IsNullOrWhiteSpace(userName))
         {
             SetStatus(statusText, "Ingresa un nombre.");
+            pendingFocusInput = inputField; // sigue escribiendo sin dar click
             return;
         }
 
         if (userName.Length > 8)
         {
             SetStatusWithColor(statusText, "Maximo 8 caracteres.", "B64636");
+            pendingFocusInput = inputField;
             return;
         }
 
@@ -222,6 +247,7 @@ public void ExitGame()
             // Log del error real para diagnosticar fallos intermitentes de sign-in
             Debug.LogWarning("MainMenuManager: fallo el registro de usuario. " + exception);
             SetStatus(statusText, "No se pudo cambiar de usuario.");
+            pendingFocusInput = inputField;
             return;
         }
         finally
