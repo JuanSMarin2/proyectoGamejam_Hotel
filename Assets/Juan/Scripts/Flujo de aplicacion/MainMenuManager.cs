@@ -182,10 +182,13 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("Leaderboard");
     }
 
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
+public void ExitGame()
+{
+    if (Application.platform == RuntimePlatform.WebGLPlayer)
+        return;
+
+    Application.Quit();
+}
 
     private async System.Threading.Tasks.Task ConfirmUserNameAsync(TMP_InputField inputField, TMP_Text statusText, bool startInfiniteMode)
     {
